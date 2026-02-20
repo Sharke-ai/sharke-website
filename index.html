@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sharke.ai - Verification-First Grant Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-primary: #FFFFFF;
+      --text-secondary: #D1D5DB;
+      --text-muted: #9CA3AF;
+      --bg-primary: #0a0f1a;
+      --bg-secondary: #0f1520;
+      --bg-card: #111827;
+      --border-subtle: #1F2937;
+      --border-light: #374151;
+      --accent: #4AE3A0;
+      --accent-muted: rgba(74, 227, 160, 0.15);
+      --warm: #FBBF24;
+      --warm-muted: rgba(251, 191, 36, 0.12);
+      --cool: #7DD3FC;
+      --cool-muted: rgba(125, 211, 252, 0.12);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    
+    a { text-decoration: none; color: inherit; }
+    
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 0;
+      background: transparent;
+      transition: background 0.3s ease;
+    }
+    
+    .nav.scrolled {
+      background: rgba(10, 15, 26, 0.95);
+      backdrop-filter: blur(8px);
+    }
+    
+    .nav-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo { display: flex; align-items: center; gap: 10px; }
+    
+    .logo-mark {
+      width: 28px; height: 28px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .logo-s { color: var(--bg-primary); font-size: 16px; font-weight: 600; }
+    .logo-text { font-size: 17px; font-weight: 500; color: var(--text-primary); }
+    
+    .login-link {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      transition: border-color 0.2s ease;
+    }
+    
+    .login-link:hover { border-color: var(--border-light); }
+    
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 120px 40px 80px;
+    }
+    
+    .hero-content {
+      max-width: 720px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 36px;
+      padding: 8px 14px;
+      background: rgba(31, 41, 55, 0.5);
+      border-radius: 4px;
+      border: 1px solid var(--border-subtle);
+    }
+    
+    .hero-tag-text {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+    
+    .hero-title {
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.18;
+      margin-bottom: 28px;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+    
+    .hero-title-line { display: block; }
+    
+    .hero-subtitle {
+      font-size: 19px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto 36px;
+      font-weight: 400;
+    }
+    
+    .hero-subtitle-break { display: block; margin-top: 8px; }
+    
+    .audience-line {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+    }
+    
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .cta-button:hover { opacity: 0.9; }
+    .cta-button svg { margin-left: 8px; }
+    
+    .cta-primary-large {
+      padding: 18px 36px;
+      font-size: 16px;
+      box-shadow: 0 4px 14px rgba(62, 207, 142, 0.3);
+    }
+    
+    .cta-primary-large:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(62, 207, 142, 0.4);
+    }
+    
+    .cta-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 32px 0 24px;
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    .cta-divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-subtle);
+    }
+    
+    .cta-divider-text {
+      font-size: 14px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    
+    .cta-text-link {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    
+    .cta-text-link:hover {
+      color: var(--accent);
+    }
+    
+    .cta-outline-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    
+    .cta-outline-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    
+    .cta-secondary {
+      display: block;
+      margin-top: 8px;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+    
+    .dashboard-preview {
+      margin-top: 80px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      transition: transform 0.3s ease;
+    }
+    
+    .preview-label {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    .preview-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    
+    .preview-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border-subtle);
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    
+    .preview-dot:hover {
+      transform: scale(1.2);
+    }
+    
+    .preview-dot.active {
+      background: var(--accent);
+    }
+    
+    .dashboard-card {
+      transition: opacity 0.3s ease;
+    }
+    
+    .dashboard-card.fade-out {
+      opacity: 0;
+    }
+    
+    .dashboard-preview:hover {
+      transform: translateY(-4px);
+    }
+    
+    .browser-frame {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      transition: box-shadow 0.3s ease;
+    }
+    
+    .dashboard-preview:hover .browser-frame {
+      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.2);
+    }
+    
+    .browser-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: rgba(31, 41, 55, 0.5);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .browser-dots { display: flex; gap: 6px; }
+    
+    .browser-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--border-light);
+    }
+    
+    .browser-dot.red, .browser-dot.yellow, .browser-dot.green { background: #6B7280; }
+    
+    .browser-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
+    }
+    
+    .browser-spacer { width: 52px; }
+    
+    .dashboard-card {
+      background: var(--bg-card);
+      padding: 24px;
+      position: relative;
+    }
+    
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .dashboard-score { display: flex; align-items: center; gap: 12px; }
+    
+    .score-badge {
+      width: 52px; height: 52px;
+      background: var(--accent-muted);
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .score-number {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+    }
+    
+    .score-label-small {
+      font-size: 10px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .score-text { text-align: left; }
+    
+    .score-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .score-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    
+    .dashboard-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      background: var(--accent-muted);
+      border-radius: 4px;
+    }
+    
+    .status-dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(62, 207, 142, 0.4); }
+      50% { opacity: 0.8; box-shadow: 0 0 0 4px rgba(62, 207, 142, 0); }
+    }
+    
+    .status-text { font-size: 13px; font-weight: 500; color: var(--accent); }
+    
+    .dashboard-funder {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .funder-name {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    
+    .funder-details { font-size: 15px; color: var(--text-muted); }
+    
+    .dashboard-insight {
+      background: var(--warm-muted);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+    
+    .insight-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--warm);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    
+    .insight-text { font-size: 15px; color: var(--text-primary); line-height: 1.5; }
+    .insight-highlight { color: var(--warm); font-weight: 500; }
+    
+    .dashboard-verification {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--accent);
+      padding-top: 12px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .verification-icon { width: 16px; height: 16px; }
+    
+    .hero-stat-callout {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      background: rgba(31, 41, 55, 0.4);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      margin-top: 48px;
+    }
+    
+    .hero-stat-number {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    .hero-stat-text {
+      font-size: 15px;
+      color: var(--text-muted);
+      text-align: left;
+      line-height: 1.4;
+    }
+    
+    /* Modern Section Dividers */
+    .section-divider {
+      position: relative;
+      height: 1px;
+      margin: 0;
+      overflow: visible;
+    }
+    
+    .section-divider::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(600px, 80%);
+      height: 1px;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(74, 227, 160, 0.3) 20%,
+        rgba(74, 227, 160, 0.5) 50%,
+        rgba(74, 227, 160, 0.3) 80%,
+        transparent 100%
+      );
+    }
+    
+    .section-divider::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(74, 227, 160, 0.5), 0 0 24px rgba(74, 227, 160, 0.2);
+    }
+    
+    .section-divider.warm::before {
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(251, 191, 36, 0.25) 20%,
+        rgba(251, 191, 36, 0.4) 50%,
+        rgba(251, 191, 36, 0.25) 80%,
+        transparent 100%
+      );
+    }
+    
+    .section-divider.warm::after {
+      background: var(--warm);
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.5), 0 0 24px rgba(251, 191, 36, 0.2);
+    }
+    
+    .section-divider.subtle::before {
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(156, 163, 175, 0.2) 20%,
+        rgba(156, 163, 175, 0.35) 50%,
+        rgba(156, 163, 175, 0.2) 80%,
+        transparent 100%
+      );
+    }
+    
+    .section-divider.subtle::after {
+      background: var(--text-muted);
+      box-shadow: 0 0 8px rgba(156, 163, 175, 0.3);
+      width: 6px;
+      height: 6px;
+    }
+
+    .section-spacer { height: 24px; }
+    
+    .section-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    
+    .section-label {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    
+    .section-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      line-height: 1.25;
+      letter-spacing: -0.3px;
+    }
+    
+    .problem-section { padding: 80px 0; background: var(--bg-primary); }
+    
+    .problem-stat-hero {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 40px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    .problem-stat-primary {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .problem-stat-prefix {
+      font-size: 16px;
+      font-style: italic;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    
+    .problem-stat-number {
+      font-size: 56px;
+      font-weight: 600;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+    }
+    
+    .problem-stat-label {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 400px;
+    }
+    
+    .problem-stat-secondary {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    
+    .problem-stat-secondary strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 40px;
+      margin-top: 36px;
+    }
+    
+    .problem-lead {
+      font-size: 20px;
+      line-height: 1.4;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+    
+    .problem-body { font-size: 15px; line-height: 1.7; color: var(--text-secondary); }
+    
+    .problem-categories { display: flex; flex-direction: column; gap: 24px; }
+    .problem-category { display: flex; flex-direction: column; gap: 8px; }
+    
+    .problem-category-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    
+    .problem-category-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    
+    .problem-category-stat {
+      font-size: 13px;
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    .problem-category-label.access, .problem-category-stat.access { color: var(--cool); }
+    .problem-category-label.timing, .problem-category-stat.timing { color: var(--warm); }
+    .problem-category-label.accuracy, .problem-category-stat.accuracy { color: #A78BFA; }
+    
+    .problem-list { display: flex; flex-direction: column; gap: 6px; }
+    
+    .problem-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+    
+    .problem-icon { color: var(--border-light); font-size: 10px; margin-top: 4px; }
+    .problem-icon.access { color: var(--cool); }
+    .problem-icon.timing { color: var(--warm); }
+    .problem-icon.accuracy { color: #A78BFA; }
+    
+    .problem-conclusion {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      padding-top: 32px;
+      margin-top: 32px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .conclusion-highlight {
+      color: var(--text-primary);
+      font-weight: 500;
+      margin-top: 12px;
+      display: block;
+    }
+    
+    .problem-cost {
+      margin-top: 36px;
+      padding: 18px 24px;
+      background: rgba(31, 41, 55, 0.3);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    
+    .features-section { padding: 80px 0; background: var(--bg-secondary); }
+    
+    .features-intro {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin-bottom: 48px;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+    
+    .feature-card {
+      padding: 28px 24px;
+      background: rgba(17, 24, 39, 0.5);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+    }
+    
+    .feature-icon { margin-bottom: 14px; color: var(--warm); }
+    .feature-icon svg { display: block; }
+    
+    .feature-role {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: var(--warm);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    
+    .feature-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    
+    .feature-description { font-size: 15px; line-height: 1.6; color: var(--text-secondary); }
+    
+    .feature-proof {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    
+    .verification-badge {
+      margin-top: 48px;
+      padding: 20px 24px;
+      background: var(--accent-muted);
+      border: 1px solid rgba(62, 207, 142, 0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    
+    .verification-badge-icon {
+      width: 40px; height: 40px;
+      background: rgba(62, 207, 142, 0.15);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .verification-badge-icon svg { width: 20px; height: 20px; color: var(--accent); }
+    .verification-badge-text { font-size: 14px; line-height: 1.6; color: var(--text-secondary); }
+    .verification-badge-text strong { color: var(--text-primary); font-weight: 500; }
+    .verification-badge-text em { color: var(--accent); font-style: normal; }
+    
+    .access-section { padding: 80px 0; background: var(--bg-primary); }
+    .access-content { max-width: 620px; }
+    
+    .access-title {
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+      letter-spacing: -0.3px;
+    }
+    
+    .access-text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+    }
+    
+    .access-text.short { max-width: 480px; }
+    
+    .intermediary-callout {
+      margin-top: 40px;
+      padding: 24px;
+      background: rgba(31, 41, 55, 0.3);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+    }
+    
+    .intermediary-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    
+    .intermediary-text { font-size: 15px; line-height: 1.65; color: var(--text-secondary); }
+    
+    .closing-section { padding: 100px 0; background: var(--bg-secondary); }
+    
+    .closing-content {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 24px;
+    }
+    
+    .closing-text {
+      font-size: 21px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+    
+    .closing-highlight {
+      font-size: 24px;
+      color: var(--text-primary);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    
+    .closing-subtext {
+      font-size: 15px;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+    
+    .closing-mission { font-size: 17px; color: var(--accent); font-weight: 500; }
+    
+    .footer {
+      padding: 32px 0;
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border-subtle);
+    }
+    
+    .footer-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .footer-logo { display: flex; align-items: center; gap: 8px; }
+    
+    .footer-logo-mark {
+      width: 20px; height: 20px;
+      background: var(--border-light);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .footer-logo-s { color: var(--text-muted); font-size: 12px; font-weight: 600; }
+    .footer-logo-text { font-size: 14px; font-weight: 500; color: var(--text-muted); }
+    .footer-email { color: var(--text-muted); font-size: 15px; }
+    .footer-copyright { font-size: 14px; color: var(--text-muted); }
+    
+    .fade-section {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    @media (max-width: 1024px) {
+      .hero-title { font-size: 36px; }
+      .section-title { font-size: 24px; }
+      .features-grid { grid-template-columns: 1fr; gap: 16px; }
+      .problem-grid { grid-template-columns: 1fr; gap: 32px; }
+      .dashboard-preview { max-width: 100%; }
+      .problem-stat-hero { gap: 12px; }
+      .problem-stat-number { font-size: 48px; }
+      .problem-stat-label { font-size: 18px; }
+    }
+    
+    @media (max-width: 768px) {
+      :root {
+        --text-muted: #B8C4CE;
+      }
+      .nav-content { padding: 0 20px; }
+      .hero { padding: 100px 20px 60px; min-height: auto; }
+      .hero-content { max-width: 100%; }
+      .hero-tag { margin-bottom: 24px; padding: 6px 12px; }
+      .hero-tag-text { font-size: 14px; letter-spacing: 1px; }
+      .hero-title { font-size: 32px; line-height: 1.25; margin-bottom: 20px; }
+      .hero-title-line { display: inline; }
+      .hero-subtitle { font-size: 18px; line-height: 1.6; margin-bottom: 24px; }
+      .hero-subtitle-break { display: inline; }
+      .audience-line { font-size: 16px; margin-bottom: 28px; }
+      .cta-button { width: 100%; justify-content: center; padding: 16px 24px; font-size: 17px; }
+      .cta-primary-large { padding: 18px 24px; font-size: 17px; }
+      .cta-secondary { font-size: 16px; }
+      .cta-divider { max-width: 100%; margin: 24px 0 20px; }
+      .cta-divider-text { font-size: 15px; }
+      .cta-text-link { font-size: 16px; }
+      .cta-outline-link { width: 100%; justify-content: center; padding: 14px 20px; font-size: 16px; }
+      .preview-headline { font-size: 17px; text-align: center; }
+      .preview-label { text-align: center; font-size: 14px; }
+      .preview-description { text-align: center; font-size: 16px; }
+      .dashboard-preview { margin-top: 40px; }
+      .dashboard-card { padding: 20px; }
+      .dashboard-header { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .score-badge { width: 48px; height: 48px; }
+      .score-number { font-size: 20px; }
+      .score-label-small { font-size: 11px; }
+      .score-title { font-size: 14px; }
+      .score-subtitle { font-size: 13px; }
+      .funder-name { font-size: 18px; }
+      .funder-details { font-size: 16px; }
+      .dashboard-insight { padding: 12px 14px; }
+      .insight-label { font-size: 14px; }
+      .insight-text { font-size: 16px; }
+      .dashboard-verification { font-size: 15px; flex-wrap: wrap; }
+      .preview-indicators { margin-top: 14px; }
+      .preview-dot { width: 10px; height: 10px; }
+      .hero-stat-callout { flex-direction: column; text-align: center; gap: 8px; margin-top: 32px; padding: 16px 20px; }
+      .hero-stat-number { font-size: 24px; }
+      .hero-stat-text { text-align: center; font-size: 16px; }
+      .section-content { padding: 0 20px; }
+      .section-spacer { height: 16px; }
+      .section-label { font-size: 14px; margin-bottom: 10px; }
+      .section-title { font-size: 26px; margin-bottom: 16px; }
+      .problem-section, .features-section, .access-section { padding: 48px 0; }
+      .problem-stat-hero { flex-direction: column; gap: 12px; padding: 20px 0; }
+      .problem-stat-primary { gap: 8px; }
+      .problem-stat-prefix { font-size: 16px; }
+      .problem-stat-number { font-size: 46px; }
+      .problem-stat-label { font-size: 18px; max-width: 100%; }
+      .problem-stat-secondary { font-size: 17px; }
+      .problem-lead { font-size: 20px; margin-bottom: 12px; }
+      .problem-body { font-size: 17px; line-height: 1.65; }
+      .problem-categories { gap: 20px; }
+      .problem-category-label { font-size: 14px; }
+      .problem-category-stat { font-size: 14px; }
+      .problem-category-header { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .problem-item { font-size: 16px; }
+      .problem-cost { margin-top: 28px; padding: 16px 20px; font-size: 16px; }
+      .problem-conclusion { padding-top: 24px; margin-top: 24px; font-size: 17px; }
+      .conclusion-highlight { font-size: 17px; margin-top: 10px; }
+      .features-intro { font-size: 17px; margin-bottom: 32px; }
+      .features-grid { margin-top: 28px; }
+      .feature-card { padding: 22px 18px; }
+      .feature-icon { font-size: 16px; margin-bottom: 12px; }
+      .feature-role { font-size: 14px; }
+      .feature-title { font-size: 18px; margin-bottom: 8px; }
+      .feature-description { font-size: 16px; line-height: 1.6; }
+      .feature-proof { margin-top: 12px; padding-top: 10px; font-size: 15px; }
+      .verification-badge { flex-direction: column; text-align: center; align-items: center; gap: 14px; margin-top: 32px; padding: 18px 20px; }
+      .verification-badge-icon { width: 36px; height: 36px; }
+      .verification-badge-icon svg { width: 18px; height: 18px; }
+      .verification-badge-text { font-size: 16px; }
+      .access-title { font-size: 26px; margin-bottom: 20px; }
+      .access-text { font-size: 17px; }
+      .access-text.short { max-width: 100%; }
+      .intermediary-callout { margin-top: 28px; padding: 18px; }
+      .intermediary-label { font-size: 14px; }
+      .intermediary-text { font-size: 16px; }
+      .closing-section { padding: 60px 0; }
+      .closing-content { padding: 0 20px; }
+      .closing-text { font-size: 20px; margin-bottom: 24px; line-height: 1.45; }
+      .closing-highlight { font-size: 24px; margin-bottom: 12px; }
+      .closing-subtext { font-size: 17px; margin-bottom: 24px; }
+      .closing-mission { font-size: 17px; }
+      .footer { padding: 28px 0; }
+      .footer-content { flex-direction: column; gap: 16px; text-align: center; padding: 0 20px; }
+      .footer-logo-text { font-size: 16px; }
+      .footer-email { font-size: 16px; }
+      .footer-copyright { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" id="nav">
+    <div class="nav-content">
+      <div class="logo">
+        <div class="logo-mark"><span class="logo-s">S</span></div>
+        <span class="logo-text">Sharke.ai</span>
+      </div>
+      <a href="https://sharke-app.netlify.app/login" class="login-link">Login</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="hero-tag-text">Founding Member access · Limited spots</span>
+      </div>
+      
+      <h1 class="hero-title">
+        <span class="hero-title-line" style="color: var(--accent);">Turn your team's limited time</span>
+        <span class="hero-title-line"><span style="color: var(--accent);">into funding,</span> not wasted applications.</span>
+      </h1>
+      
+      <p class="hero-subtitle">
+        Sharke stops your team from chasing grants that were never viable and surfaces funders most small nonprofits never see.
+      </p>
+      
+      <p class="hero-subtitle-secondary" style="font-size: 17px; color: var(--text-muted); max-width: 520px; margin: -16px auto 32px; font-weight: 400; line-height: 1.55;">
+        It evaluates tens of thousands of opportunities to find the few worth pursuing, tells you whether to apply, build relationships first, or move on, and supports drafting LOIs and full applications when it makes sense.
+      </p>
+      
+      <div class="audience-line">
+        Built for nonprofits with $50K to $2M in annual grant funding.
+      </div>
+      
+      <div class="cta-group">
+        <a href="https://api.leadconnectorhq.com/widget/form/0OlIe6dVnGzYSfNSozNQ" class="cta-button" target="_blank" rel="noopener noreferrer">
+          Request Founding Member Access
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <span class="cta-secondary">Early pricing for Founding Members.</span>
+      </div>
+      
+      <div class="section-divider" style="margin-top: 62px;"></div>
+      
+      <div class="dashboard-preview">
+        <div class="preview-label"><span style="color: var(--accent);">Inside Sharke:</span> Grant Intelligence Snapshot</div>
+        <div class="browser-frame">
+          <div class="browser-topbar">
+            <div class="browser-dots">
+              <span class="browser-dot red"></span>
+              <span class="browser-dot yellow"></span>
+              <span class="browser-dot green"></span>
+            </div>
+            <div class="browser-title">Sharke · Opportunity Detail</div>
+            <div class="browser-spacer"></div>
+          </div>
+          <div class="dashboard-card">
+            <div class="dashboard-header">
+              <div class="dashboard-score">
+                <div class="score-badge">
+                  <span class="score-number" id="score-number">94</span>
+                  <span class="score-label-small">Match</span>
+                </div>
+                <div class="score-text">
+                  <div class="score-title" id="score-title">Verified high match</div>
+                  <div class="score-subtitle" id="score-subtitle">Top 1% of 40k opportunities</div>
+                </div>
+              </div>
+              <div class="dashboard-status" id="dashboard-status">
+                <span class="status-dot"></span>
+                <span class="status-text" id="status-text">Draft ready</span>
+              </div>
+            </div>
+            
+            <div class="dashboard-funder">
+              <div class="funder-name" id="funder-name">Community Resilience Fund</div>
+              <div class="funder-details" id="funder-details">Ford Foundation · $150k to $250k</div>
+            </div>
+            
+            <div class="dashboard-insight" id="dashboard-insight">
+              <div class="insight-label" id="insight-label">Hidden preference detected</div>
+              <div class="insight-text" id="insight-text">
+                Stated focus: "General Health"<br>
+                <span class="insight-highlight">Actual pattern: 85% to Rural Youth Mental Health</span><br>
+                That's your exact profile.
+              </div>
+            </div>
+            
+            <div class="dashboard-verification" id="dashboard-verification">
+              <svg class="verification-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+              <span id="verification-text">Geo-restriction: verified compatible (Southwest Region)</span>
+            </div>
+          </div>
+        </div>
+        <div class="preview-indicators">
+          <span class="preview-dot active" data-index="0"></span>
+          <span class="preview-dot" data-index="1"></span>
+          <span class="preview-dot" data-index="2"></span>
+        </div>
+      </div>
+      
+      <div class="hero-stat-callout">
+        <span class="hero-stat-number">30-100 hours back</span>
+        <span class="hero-stat-text">for every unfundable grant your team doesn't chase.</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+  <div class="section-spacer"></div>
+
+  <section class="problem-section fade-section">
+    <div class="section-content">
+      <div class="section-label" style="color: var(--accent);">The real problem</div>
+      <h2 class="section-title">Why capable nonprofits still miss funding</h2>
+      
+      <div class="problem-stat-hero">
+        <div class="problem-stat-primary">
+          <span class="problem-stat-prefix">Roughly</span>
+          <span class="problem-stat-number">85%</span>
+          <span class="problem-stat-label">of grant applications are rejected</span>
+        </div>
+        <div class="problem-stat-secondary">
+          Each one takes <strong>30 to 100+ hours</strong> to research and write. Most fail before a reviewer ever reads them.
+        </div>
+      </div>
+      
+      <div class="problem-grid">
+        <div class="problem-main">
+          <p class="problem-lead">
+            Your team isn't the problem. The process is.
+          </p>
+          <p class="problem-body">
+            Teams target the wrong funders, miss hidden eligibility rules, or overlook constraints that disqualify them before review begins. Most grant tools optimize for writing speed - even when the opportunity was never viable.
+          </p>
+        </div>
+        
+        <div class="problem-categories">
+          <div class="problem-category">
+            <div class="problem-category-header">
+              <div class="problem-category-label access">Access problems</div>
+              <div class="problem-category-stat access">70% of private funding is invite-only</div>
+            </div>
+            <div class="problem-list">
+              <div class="problem-item">
+                <span class="problem-icon access">•</span>
+                <span>Most funders never post public RFPs</span>
+              </div>
+              <div class="problem-item">
+                <span class="problem-icon access">•</span>
+                <span>Public databases overrepresent funders that rarely support small nonprofits</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="problem-category">
+            <div class="problem-category-header">
+              <div class="problem-category-label timing">Timing problems</div>
+              <div class="problem-category-stat timing">2yr lag in most databases</div>
+            </div>
+            <div class="problem-list">
+              <div class="problem-item">
+                <span class="problem-icon timing">•</span>
+                <span>Eligibility rules quietly eliminate otherwise strong applications</span>
+              </div>
+              <div class="problem-item">
+                <span class="problem-icon timing">•</span>
+                <span>Funder priorities shift quietly between cycles</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="problem-category">
+            <div class="problem-category-header">
+              <div class="problem-category-label accuracy">Accuracy problems</div>
+              <div class="problem-category-stat accuracy">33-60% AI error rate</div>
+            </div>
+            <div class="problem-list">
+              <div class="problem-item">
+                <span class="problem-icon accuracy">•</span>
+                <span>AI-generated drafts introduce claims that aren't true</span>
+              </div>
+              <div class="problem-item">
+                <span class="problem-icon accuracy">•</span>
+                <span>Most tools guess when information is missing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="problem-conclusion">
+        <p>Across all three problems, teams usually discover them too late. By the time anyone flags the issue, the deadline has passed, and many teams never realize there was a better opportunity to pursue.</p>
+        <span class="conclusion-highlight">Sharke surfaces these problems while there's still time to act.</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider warm"></div>
+  <div class="section-spacer"></div>
+
+  <section class="features-section fade-section">
+    <div class="section-content">
+      <div class="section-label" style="color: var(--accent);">What Sharke handles</div>
+      <h2 class="section-title">The grant work that drains your team. Handled.</h2>
+      
+      <p class="features-intro">
+        Verification, research, and drafting. Without hallucinating facts or introducing risk.
+      </p>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="M21 21l-4.35-4.35"/>
+            </svg>
+          </div>
+          <div class="feature-role">The analyst</div>
+          <h3 class="feature-title">Eligibility filtering</h3>
+          <p class="feature-description">
+            Checks geography, entity type, funding thresholds, and timing. Saves 30+ hours per bad lead before writing starts.
+          </p>
+          <div class="feature-proof">12+ disqualifier types flagged automatically</div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 3v18h18"/>
+              <path d="M18 9l-5 5-4-4-3 3"/>
+            </svg>
+          </div>
+          <div class="feature-role">The researcher</div>
+          <h3 class="feature-title">Funder fit analysis</h3>
+          <p class="feature-description">
+            Identifies funders who routinely support smaller organizations. Stop chasing grants designed for institutions 10x your size.
+          </p>
+          <div class="feature-proof">40,000+ funder records analyzed</div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+              <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+              <path d="M2 2l7.586 7.586"/>
+              <circle cx="11" cy="11" r="2"/>
+            </svg>
+          </div>
+          <div class="feature-role">The writer</div>
+          <h3 class="feature-title">Verified draft generation</h3>
+          <p class="feature-description">
+            Generates application drafts after verification. Claims included only when verifiable; gaps flagged for you to fill.
+          </p>
+          <div class="feature-proof">Every claim traced to primary sources</div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div class="feature-role">The strategist</div>
+          <h3 class="feature-title">Relationship readiness signals</h3>
+          <p class="feature-description">
+            Identifies when relationship-building is required before applying. Allocate time where it matters most.
+          </p>
+          <div class="feature-proof">Invite-only funders most databases miss</div>
+        </div>
+      </div>
+      
+      <div class="verification-badge">
+        <div class="verification-badge-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <p class="verification-badge-text">
+          <strong>Built on the verification framework from <em>AI You Can Actually Trust</em>.</strong> Every eligibility check, funder preference, and grant requirement is verified against primary sources before it reaches your team.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider subtle"></div>
+  <div class="section-spacer"></div>
+
+  <section class="access-section fade-section">
+    <div class="section-content">
+      <div class="access-content">
+        <div class="section-label" style="color: var(--accent);">Private access</div>
+        <h2 class="access-title">Private access until public launch (September 2026)</h2>
+        
+        <p class="access-text short">
+          Sharke is rolling out in limited phases. What we provide requires careful capacity management.
+        </p>
+        
+        <p class="access-text">
+          Until September 2026, access is extended only to organizations selected for the Founding Member cohort - teams working with active grant deadlines and real submission constraints.
+        </p>
+        
+        <div class="intermediary-callout" style="background: var(--accent-muted); border-color: rgba(62, 207, 142, 0.2);">
+          <div class="intermediary-label" style="color: var(--accent);">For intermediaries and foundations</div>
+          <p class="intermediary-text">Many strong organizations go unfunded because they lack the hours to research and write, not because they lack impact. Sharke bridges this execution gap so funding decisions reflect program quality, not staff size.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+  <div class="section-spacer"></div>
+
+  <section class="closing-section fade-section">
+    <div class="closing-content">
+      <p class="closing-text">
+        You already know how to run programs that matter.<br>
+        Funding them shouldn't require a full-time grants team.
+      </p>
+      
+      <p class="closing-highlight">Sharke gives small teams an edge in choosing the right grants.</p>
+      
+      <p class="closing-subtext">Verified. Transparent. Built to keep you in control.</p>
+      
+      <div class="cta-group" style="margin-top: 48px;">
+        <a href="https://api.leadconnectorhq.com/widget/form/0OlIe6dVnGzYSfNSozNQ" class="cta-button cta-primary-large" target="_blank" rel="noopener noreferrer">
+          Request Founding Member Access
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <span class="cta-secondary" style="font-style: italic;">Built for teams managing live grant deadlines, with early pricing for Founding Members.</span>
+      </div>
+      
+      <div class="cta-divider">
+        <span class="cta-divider-line"></span>
+        <span class="cta-divider-text">or start with the research</span>
+        <span class="cta-divider-line"></span>
+      </div>
+      
+      <a href="https://api.leadconnectorhq.com/widget/form/6i05W0htVdqu0AgUlI5J" class="cta-outline-link" target="_blank" rel="noopener noreferrer">
+        Why Strong Grant Applications Still Lose &rarr;
+      </a>
+      <span class="cta-secondary">A clear explanation of the structural reasons good applications are screened out.</span>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <div class="footer-logo-mark">
+          <span class="footer-logo-s">S</span>
+        </div>
+        <span class="footer-logo-text">Sharke.ai</span>
+      </div>
+      
+      <a href="mailto:angelica@sharke.ai" class="footer-email">angelica@sharke.ai</a>
+      <span class="footer-copyright">© 2026 Sharke.ai</span>
+      <span class="footer-qualifier" style="display: block; margin-top: 12px; font-size: 12px; color: var(--text-muted); opacity: 0.7;">Statistics based on sector analyses and public datasets.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Fade-in sections
+    const fadeSections = document.querySelectorAll('.fade-section');
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    fadeSections.forEach(section => fadeObserver.observe(section));
+
+    // Dashboard card cycling animation
+    const opportunities = [
+      {
+        score: 94,
+        scoreTitle: "Verified high match",
+        scoreSubtitle: "Top 1% of 40k opportunities",
+        status: "Draft ready",
+        statusClass: "accent",
+        funderName: "Community Resilience Fund",
+        funderDetails: "Ford Foundation · $150k to $250k",
+        insightLabel: "Hidden preference detected",
+        insightText: 'Stated focus: "General Health"<br><span class="insight-highlight">Actual pattern: 85% to Rural Youth Mental Health</span><br>That\'s your exact profile.',
+        insightClass: "warm",
+        verification: "Geo-restriction: verified compatible (Southwest Region)"
+      },
+      {
+        score: 67,
+        scoreTitle: "Potential fit",
+        scoreSubtitle: "Top 15% of 40k opportunities",
+        status: "Risk flagged",
+        statusClass: "warm",
+        funderName: "Youth Development Initiative",
+        funderDetails: "Kellogg Foundation · $75k to $125k",
+        insightLabel: "Eligibility concern",
+        insightText: 'Requires 3-year track record.<br><span class="insight-highlight">Your org: 2.5 years operating history.</span><br>Consider waiting until Q4.',
+        insightClass: "warm",
+        verification: "Budget range: verified compatible ($50k-$150k)"
+      },
+      {
+        score: 31,
+        scoreTitle: "Low match",
+        scoreSubtitle: "Bottom 30% of 40k opportunities",
+        status: "Not recommended",
+        statusClass: "muted",
+        funderName: "Metropolitan Health Trust",
+        funderDetails: "Regional Foundation · $200k to $500k",
+        insightLabel: "Disqualifying factor found",
+        insightText: 'Requires hospital partnership.<br><span class="insight-highlight">Your org type: Community nonprofit</span><br>This funder isn\'t built for you.',
+        insightClass: "cool",
+        verification: "Entity type: incompatible (requires 501c3 hospital)"
+      }
+    ];
+
+    let currentIndex = 0;
+    const card = document.querySelector('.dashboard-card');
+    const dots = document.querySelectorAll('.preview-dot');
+
+    function updateCard(index) {
+      const opp = opportunities[index];
+      
+      card.classList.add('fade-out');
+      
+      setTimeout(() => {
+        document.getElementById('score-number').textContent = opp.score;
+        document.getElementById('score-title').textContent = opp.scoreTitle;
+        document.getElementById('score-subtitle').textContent = opp.scoreSubtitle;
+        document.getElementById('status-text').textContent = opp.status;
+        document.getElementById('funder-name').textContent = opp.funderName;
+        document.getElementById('funder-details').textContent = opp.funderDetails;
+        document.getElementById('insight-label').textContent = opp.insightLabel;
+        document.getElementById('insight-text').innerHTML = opp.insightText;
+        document.getElementById('verification-text').textContent = opp.verification;
+        
+        // Update score badge color
+        const scoreBadge = document.querySelector('.score-badge');
+        const scoreNumber = document.getElementById('score-number');
+        const scoreTitle = document.getElementById('score-title');
+        
+        if (opp.score >= 80) {
+          scoreBadge.style.borderColor = 'var(--accent)';
+          scoreBadge.style.background = 'var(--accent-muted)';
+          scoreNumber.style.color = 'var(--accent)';
+          scoreTitle.style.color = 'var(--accent)';
+        } else if (opp.score >= 50) {
+          scoreBadge.style.borderColor = 'var(--warm)';
+          scoreBadge.style.background = 'var(--warm-muted)';
+          scoreNumber.style.color = 'var(--warm)';
+          scoreTitle.style.color = 'var(--warm)';
+        } else {
+          scoreBadge.style.borderColor = 'var(--text-muted)';
+          scoreBadge.style.background = 'rgba(139, 149, 165, 0.1)';
+          scoreNumber.style.color = 'var(--text-muted)';
+          scoreTitle.style.color = 'var(--text-muted)';
+        }
+        
+        // Update status styling
+        const statusContainer = document.getElementById('dashboard-status');
+        const statusDot = statusContainer.querySelector('.status-dot');
+        const statusText = document.getElementById('status-text');
+        
+        if (opp.statusClass === 'accent') {
+          statusContainer.style.background = 'var(--accent-muted)';
+          statusDot.style.background = 'var(--accent)';
+          statusText.style.color = 'var(--accent)';
+        } else if (opp.statusClass === 'warm') {
+          statusContainer.style.background = 'var(--warm-muted)';
+          statusDot.style.background = 'var(--warm)';
+          statusText.style.color = 'var(--warm)';
+        } else {
+          statusContainer.style.background = 'rgba(139, 149, 165, 0.1)';
+          statusDot.style.background = 'var(--text-muted)';
+          statusText.style.color = 'var(--text-muted)';
+        }
+        
+        // Update insight box color
+        const insightBox = document.getElementById('dashboard-insight');
+        const insightLabel = document.getElementById('insight-label');
+        
+        if (opp.insightClass === 'warm') {
+          insightBox.style.background = 'var(--warm-muted)';
+          insightBox.style.borderColor = 'rgba(245, 158, 11, 0.2)';
+          insightLabel.style.color = 'var(--warm)';
+        } else if (opp.insightClass === 'cool') {
+          insightBox.style.background = 'var(--cool-muted)';
+          insightBox.style.borderColor = 'rgba(96, 165, 250, 0.2)';
+          insightLabel.style.color = 'var(--cool)';
+        }
+        
+        // Update dots
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+        
+        card.classList.remove('fade-out');
+      }, 300);
+    }
+
+    // Auto-cycle every 5 seconds
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % opportunities.length;
+      updateCard(currentIndex);
+    }, 5000);
+
+    // Click on dots to change
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        currentIndex = index;
+        updateCard(index);
+      });
+    });
+  </script>
+</body>
+</html>
