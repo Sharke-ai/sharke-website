@@ -76,6 +76,18 @@
     .logo-s { color: var(--bg-primary); font-size: 16px; font-weight: 600; }
     .logo-text { font-size: 17px; font-weight: 500; color: var(--text-primary); }
     
+    .free-tools-link {
+      color: var(--bg-primary);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 6px;
+      background: var(--accent);
+      transition: opacity 0.2s ease;
+    }
+
+    .free-tools-link:hover { opacity: 0.85; }
+
     .login-link {
       color: var(--text-secondary);
       font-size: 14px;
@@ -1030,7 +1042,10 @@
         <div class="logo-mark"><span class="logo-s">S</span></div>
         <span class="logo-text">Sharke.ai</span>
       </div>
-      <a href="https://sharke-app.netlify.app/login" class="login-link">Login</a>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <a href="https://sharke-app.netlify.app/free-tools" class="free-tools-link">Free Tools</a>
+        <a href="https://sharke-app.netlify.app/login" class="login-link">Login</a>
+      </div>
     </div>
   </nav>
 
