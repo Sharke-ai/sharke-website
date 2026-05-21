@@ -1,0 +1,12 @@
+# Clean URLs for hidden landing pages
+/ed      /ed.html      200
+/gw      /gw.html      200
+/fai     /fai.html     200
+/thank-you  /thank-you.html  200
+/the-20-billion-hallucination  /The_20_Billion_Hallucination.html  200
+/foundations  /foundations.html  200
+/readiness  /readiness.html  200
+/subscribe-ed  /subscribe-ed.html  200
+/subscribe-gw  /subscribe-gw.html  200
+/privacy /privacy.html 200
+/terms   /terms.html   200
