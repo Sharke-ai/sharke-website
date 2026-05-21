@@ -696,13 +696,198 @@
     .continuation-frame { padding: 28px 0; }
     .standalone-testimonial { padding: 40px 0; }
   }
+
+  /* ---- v2 conversion rewrite additions ---- */
+
+  /* Primary action button used in hook, mid-page, and sticky CTAs */
+  .run-check-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--red);
+    color: #fff;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 16px 28px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.05s;
+  }
+  .run-check-btn:hover { background: #962110; color: #fff; }
+  .run-check-btn:active { transform: translateY(1px); }
+  .run-check-btn .arrow { display: inline-block; transition: transform 0.15s; }
+  .run-check-btn:hover .arrow { transform: translateX(3px); }
+
+  /* Early replacement-Pursue callout inside the continuation frame */
+  .early-promise-callout {
+    background: var(--warm-white);
+    border-left: 4px solid var(--green);
+    padding: 22px 26px;
+    margin: 28px 0 0;
+  }
+  .early-promise-callout p {
+    margin: 0;
+    color: var(--black);
+    font-size: 1.05rem;
+    line-height: 1.55;
+    font-style: normal;
+    font-weight: 400;
+  }
+  .early-promise-callout strong { font-weight: 700; color: var(--black); }
+
+  /* "1 in 3" stat callout in the reframe block */
+  .stat-callout {
+    margin: 28px 0 8px;
+    padding: 22px 26px;
+    background: var(--off-white);
+    border-left: 4px solid var(--red);
+  }
+  .stat-callout .stat-num {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--red);
+    letter-spacing: -0.02em;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .stat-callout .stat-text {
+    color: var(--black);
+    font-size: 1.02rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Mid-page $49 orientation strip between reframe and offer */
+  .mid-orientation {
+    padding: 36px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--off-white);
+  }
+  .mid-orientation .price {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--mid-gray);
+    letter-spacing: 0.1em;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+  .mid-orientation .orient-line {
+    margin: 0 0 22px;
+    font-size: 1.1rem;
+    color: var(--black);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .mid-orientation .cta-row { margin: 0; }
+
+  /* Cost summary: one compressed block with three short lines */
+  .cost-summary { padding: 64px 0 24px; }
+  .cost-summary ul {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0;
+    border-top: 1px solid var(--rule);
+  }
+  .cost-summary li {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+    align-items: baseline;
+  }
+  .cost-summary .cost-label {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--red);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .cost-summary .cost-text {
+    font-size: 1rem;
+    color: var(--black);
+    line-height: 1.5;
+  }
+  @media (max-width: 600px) {
+    .cost-summary li { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* Isolated reputational consequence pull-quote */
+  .rep-callout {
+    padding: 64px 0;
+    background: var(--black);
+    color: var(--off-white);
+  }
+  .rep-callout .rep-line {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--off-white);
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+  .rep-callout .rep-sub {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: #c9c3b8;
+    line-height: 1.45;
+    margin: 0;
+  }
+  @media (max-width: 600px) {
+    .rep-callout { padding: 44px 0; }
+    .rep-callout .rep-line { font-size: 1.4rem; }
+    .rep-callout .rep-sub { font-size: 1rem; }
+  }
+
+  /* Sticky bottom CTA - visible after hook, hidden when checkout is in view */
+  .sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--black);
+    color: var(--off-white);
+    padding: 14px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    z-index: 100;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.18);
+  }
+  .sticky-cta.visible { transform: translateY(0); }
+  .sticky-cta .sticky-meta {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.85rem;
+    color: #c9c3b8;
+    letter-spacing: 0.02em;
+  }
+  .sticky-cta .sticky-meta strong { color: #fff; font-weight: 600; }
+  .sticky-cta .run-check-btn { padding: 10px 22px; font-size: 0.85rem; }
+  @media (max-width: 600px) {
+    .sticky-cta { gap: 10px; padding: 12px 14px; }
+    .sticky-cta .sticky-meta { font-size: 0.78rem; }
+    .sticky-cta .run-check-btn { padding: 9px 16px; font-size: 0.78rem; }
+  }
 </style>
 </head>
 <body>
 
 <header class="site-header">
   <a class="logo" href="#">Sharke<span>.</span>ai</a>
-  <span class="header-tag">The fit check on the grant in motion</span>
+  <span class="header-tag">The verification check on the grant in motion</span>
 </header>
 
 <main>
@@ -711,9 +896,10 @@
   <section class="hook">
     <div class="container">
       <p class="eyebrow">Executive Directors</p>
-      <h1>Your team is already working on a grant that was never verified.</h1>
-      <p class="subhead">The decision to pursue it was made on incomplete information. The next 20 to 30 hours of staff time are about to go in anyway. By the time your team finds out whether the grant has a path to funding, the hours are already gone.</p>
+      <h1>Most teams think they&rsquo;re being thorough. In reality, they&rsquo;re making a 20- to 30-hour decision on incomplete information.</h1>
+      <p class="subhead">Your team is already working on a grant that was never verified. By the time you find out whether it has a path to funding, the hours are already gone.</p>
       <p class="qualifier">For nonprofits with $150K to $5M in revenue with a grant already in motion.</p>
+      <p style="margin-top: 28px;"><a href="#checkout-area" class="run-check-btn">Run the verification check<span class="arrow">&rarr;</span></a></p>
     </div>
   </section>
 
@@ -723,6 +909,9 @@
       <p>Stop before your team spends another hour on it.</p>
       <p>This is not about whether to start a grant. It is about whether to continue the one already in motion.</p>
       <p style="margin-top: 18px !important; color: var(--black) !important; font-weight: 700 !important; font-style: normal !important;">Right now, your team is working on a grant that does not have a path to funding. You will not know which one until after the hours are gone.</p>
+      <div class="early-promise-callout">
+        <p>If the grant your team is working on does not have a path, you do not leave with nothing. <strong>A verified Pursue on a replacement grant is included with the Move-on verdict.</strong> The goal is not stopping momentum. It is redirecting it before another 20 hours go in.</p>
+      </div>
     </div>
   </section>
 
@@ -734,11 +923,24 @@
       <p>The grant your team is working on right now was chosen on partial information. Someone scanned the listing, the deadline fit the calendar, the dollar amount fit the gap. The decision was made before anyone verified whether the funder would fund an organization like yours.</p>
       <ul class="failure-list">
         <li>Eligibility gate buried in the guidelines.</li>
-        <li>Funder's award history does not include organizations like yours.</li>
+        <li>Funder&rsquo;s award history does not include organizations like yours.</li>
         <li>Cycle already closed for new applicants.</li>
         <li>Relationship required but never stated in the listing.</li>
       </ul>
       <p>None of these are writing problems. They are decisions made too late. By the time your team finds out, the hours are already in.</p>
+      <div class="stat-callout">
+        <span class="stat-num">1 in 3</span>
+        <p class="stat-text">grants come back Move on. That is where the math lands hardest, and where the verification check pays for itself in cash protection before the loss happens.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MID-PAGE ORIENTATION: surface the offer before the page argues further -->
+  <section class="mid-orientation">
+    <div class="container">
+      <p class="price">$49 / Decision in 24 hours</p>
+      <p class="orient-line">Before your team continues, Sharke verifies whether the grant has a path to funding.</p>
+      <p class="cta-row"><a href="#checkout-area" class="run-check-btn">Run the verification check<span class="arrow">&rarr;</span></a></p>
     </div>
   </section>
 
@@ -760,7 +962,7 @@
         </div>
         <div class="col sharke">
           <div class="col-label">Sharke</div>
-          <div class="col-verb">Checks fit</div>
+          <div class="col-verb">Verifies</div>
         </div>
       </div>
 
@@ -794,8 +996,7 @@
           <p>No path to funding for this grant. A verified Pursue on a replacement grant is included. Your team doesn&rsquo;t leave this without a grant worth the hours.</p>
         </div>
       </div>
-      <p>Each verdict includes the reason. Not an opinion. A documented finding tied to the source.</p>
-      <p class="verdict-mix">Roughly a third of grants come back Move On. That is where the math lands hardest. The fit check pays out in cash protection on the verdicts that prevent the loss before it happens.</p>
+      <p>Each verdict includes the reason. Not an opinion. A documented finding tied to the source. Forwardable to your board.</p>
     </div>
   </section>
 
@@ -859,41 +1060,47 @@
     <div class="container">
       <h3>Why this matters now</h3>
       <h2>AI is already in your workflow.</h2>
-      <p>Right now, your team is working on at least one grant surfaced by AI that has not been verified. That is where the risk is. AI gives you more things that look like opportunities. It does not tell you which ones have a path to funding.</p>
-      <p>More opportunities does not mean more revenue. The grants that have a path are the only ones that produce cash. Your team is applying broadly because that feels like cash protection. The math runs the other way. Same effort, concentrated on grants with a path, produces revenue. Same effort, applied without verification, produces zero.</p>
-      <p>And it is not just this grant. The same gap shows up on the next one. And the five after that.</p>
+      <p>Right now, your team is working on at least one grant AI surfaced. Your team is applying broadly. The math feels defensive: more applications, more chances at money. The math runs the other way. Same effort, concentrated on grants with a verified path, produces revenue. The same gap shows up on the grant your team will open tomorrow morning, and the five after that.</p>
     </div>
   </section>
 
-  <!-- FIRST COST: THE HOURS + TESTIMONIAL -->
+  <!-- THREE COSTS - COMPRESSED INTO ONE BLOCK -->
+  <section class="cost-summary">
+    <div class="container">
+      <h3>What an unverified grant costs</h3>
+      <h2>The grant already in motion will commit to one of these costs in the next 20 to 30 hours. The verification check tells you which, before they go in.</h2>
+      <ul>
+        <li>
+          <span class="cost-label">Hours</span>
+          <span class="cost-text">20 to 30 per unverified grant. $960 to $1,440 in staff time. Gone whether the grant funds or not.</span>
+        </li>
+        <li>
+          <span class="cost-label">Opportunity</span>
+          <span class="cost-text">The grant that had a path, never written. The funder that would have funded, never contacted. The hours that went into the wrong grant are the hours that did not go into the right one.</span>
+        </li>
+        <li>
+          <span class="cost-label">Relationship</span>
+          <span class="cost-text">An application to a grant that does not match shapes how the funder sees you the next time your name comes across their desk.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ISOLATED REPUTATIONAL CONSEQUENCE CALLOUT -->
+  <section class="rep-callout">
+    <div class="container">
+      <p class="rep-line">Reviewers remember the orgs that did not match.</p>
+      <p class="rep-sub">You do not get a second first impression. The relationship is shaped before you have one.</p>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL + COMMITMENT LINE -->
   <section>
     <div class="container">
-      <h3>The first cost</h3>
-      <h2>The hours. 20 to 30 per unverified grant. $960 to $1,440 in staff time.</h2>
-      <p>An unverified grant takes 20 to 30 hours of staff time to write. At a fully loaded rate, that is $960 to $1,440 per application. The hours are gone whether the grant funds or not. The fit check returns a verdict in 24 hours, before those hours go in.</p>
-
       <div class="testimonial-block">
-        <p>"We were a week into a $200K federal grant when we ran the fit check. The verdict flagged a match-funding requirement buried in the supplementary guidelines. We had no realistic path to the match. We stopped, and the staff hours that would have gone into writing went to two state-level opportunities Sharke surfaced. One landed 90 days later. The $49 saved us 60 hours and probably the quarter."</p>
+        <p>&ldquo;We were a week into a $200K federal grant when we ran the verification check. The verdict flagged a match-funding requirement buried in the supplementary guidelines. We had no realistic path to the match. We stopped, and the staff hours that would have gone into writing went to two state-level opportunities Sharke surfaced. One landed 90 days later. The $49 saved us 60 hours and probably the quarter.&rdquo;</p>
         <cite>Executive Director, $1.2M workforce development nonprofit</cite>
       </div>
-    </div>
-  </section>
-
-  <!-- SECOND COST: THE OPPORTUNITY -->
-  <section>
-    <div class="container">
-      <h3>The second cost</h3>
-      <h2>The grant your team did not pursue. It lost out to the wrong one that consumed the time.</h2>
-      <p>The grant that had a path, never written. The funder that would have funded, never contacted. The hours that went into the wrong grant are the hours that did not go into the right one. That cost is invisible because it is the thing that never happened.</p>
-    </div>
-  </section>
-
-  <!-- THIRD COST: THE RELATIONSHIP. Peaks immediately before founder/CTA -->
-  <section>
-    <div class="container">
-      <h3>The third cost</h3>
-      <h2>The relationship. How the funder sees you the next time your name comes across their desk.</h2>
-      <p>An application to a grant that does not have a path does not just get rejected. It shapes how your organization is seen the next time your name appears in that funder's inbox. Reviewers remember the orgs that did not match. The relationship is shaped before you have one. You do not get a second first impression.</p>
       <p style="margin-top: 28px; font-weight: 700; color: var(--black); font-size: 1.05rem; border-top: 2px solid var(--red); padding-top: 20px;">Once you see what happens before the writing starts, you do not go back to letting your team start without verifying first.</p>
     </div>
   </section>
@@ -903,7 +1110,7 @@
     <div class="container">
       <div class="founder-mark">CB</div>
       <div>
-        <p><span class="founder-name">Sharke is built by Collin Brown.</span> I have been on every side of the grant table. I founded and led a nonprofit as Executive Director, sit on a nonprofit board today, and have applied for and won grants from NIH, NIMH, NSF, private foundations, and a $1M federal grant. Every fit check is signed off by me before it reaches your inbox.</p>
+        <p><span class="founder-name">Sharke is built by Collin Brown.</span> I have been on every side of the grant table. I founded and led a nonprofit as Executive Director, sit on a nonprofit board today, and have applied for and won grants from NIH, NIMH, NSF, private foundations, and a $1M federal grant. Every verification check is signed off by me before it reaches your inbox.</p>
         <p style="margin-top: 12px;">Author of "AI You Can Actually Trust" (Amazon Top 50 Business Bestseller). Wharton MBA. Trained at Duke Sanford School of Public Policy.</p>
         <span class="founder-creds">Founder &nbsp;/&nbsp; Sharke.ai &nbsp;/&nbsp; Austin, TX</span>
       </div>
@@ -915,14 +1122,14 @@
     <div class="container">
       <h2>The grant your team is working on right now. Send it.</h2>
 
-      <p>Not a hypothetical. The one already in motion. We run the fit check before the next 20 to 30 hours go in.</p>
+      <p>Not a hypothetical. The one already in motion. We run the verification check before the next 20 to 30 hours go in.</p>
 
       <p class="action-trigger">Stop before your team spends another hour on it.</p>
 
       <ul class="step-sequence">
         <li>
           <span class="step-num">Step 1</span>
-          <span class="step-text"><strong>Run the fit check</strong></span>
+          <span class="step-text"><strong>Run the verification check</strong></span>
         </li>
         <li>
           <span class="step-num">Step 2</span>
@@ -942,11 +1149,12 @@
       <div style="border: 1px solid #2a2a2a; padding: 20px 24px; margin: 20px 0 24px; background: #111; font-family: 'IBM Plex Mono', monospace;">
         <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #2a2a2a; color: #a09890; font-size: 0.85rem;"><span>One unverified grant</span><span style="color: var(--off-white);">20 to 30 hours</span></div>
         <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #2a2a2a; color: #a09890; font-size: 0.85rem;"><span>Cost in staff time</span><span style="color: var(--off-white);">$960 to $1,440</span></div>
-        <div style="display: flex; justify-content: space-between; padding: 8px 0; color: #a09890; font-size: 0.85rem;"><span>Fit check</span><span style="color: var(--off-white);">$49</span></div>
+        <div style="display: flex; justify-content: space-between; padding: 8px 0; color: #a09890; font-size: 0.85rem;"><span>Verification check</span><span style="color: var(--off-white);">$49</span></div>
         <p style="font-size: 0.82rem; color: var(--off-white); margin: 14px 0 0; font-style: italic; letter-spacing: 0.02em;">Not a cost. Protection against work your team is already doing.</p>
       </div>
 
-      <p class="price-line"><strong>$49.</strong> Verdict back in 24 hours. If the verdict is Move on, a verified Pursue on a replacement grant is included. If we cannot give you a clear verdict in 24 hours, you do not pay.</p>
+      <p class="price-line"><strong>$49. Decision in 24 hours.</strong> If the verdict is Move on, a verified Pursue on a replacement grant is included. If we cannot give you a clear verdict in 24 hours, you do not pay.</p>
+      <p style="margin: 18px 0 16px; text-align: center;"><a href="#checkout-area" class="run-check-btn">Run the verification check<span class="arrow">&rarr;</span></a></p>
 
       <p style="margin: 0 0 16px; display:flex; align-items:center; justify-content:center; gap:6px;">
         <svg width="12" height="14" viewBox="0 0 24 28" fill="none" stroke="#a09890" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="18" height="13" rx="2"/><path d="M7 13V9a5 5 0 0 1 10 0v4"/></svg>
@@ -972,7 +1180,7 @@
   <section class="close-section">
     <div class="container">
       <p>Your team is working on the grant right now.</p>
-      <p class="final-line">Either it has a path to funding, or it does not. The fit check tells you which, before the next 20 to 30 hours go in.</p>
+      <p class="final-line">Either it has a path to funding, or it does not. The verification check tells you which, before the next 20 to 30 hours go in.</p>
     </div>
   </section>
 
@@ -1009,6 +1217,38 @@
     errorDiv.querySelector('p').textContent = 'Something went wrong. Please refresh to try again.';
     console.error('Checkout error:', err);
   });
+</script>
+
+<aside class="sticky-cta" id="sticky-cta" aria-hidden="true">
+  <span class="sticky-meta"><strong>$49.</strong> Decision in 24 hours.</span>
+  <a href="#checkout-area" class="run-check-btn">Run the verification check<span class="arrow">&rarr;</span></a>
+</aside>
+<script>
+  (function() {
+    var sticky = document.getElementById('sticky-cta');
+    var hook = document.querySelector('.hook');
+    var checkoutArea = document.getElementById('checkout-area');
+    if (!sticky) return;
+    function hookHeight() { return hook ? hook.offsetHeight + hook.offsetTop : 600; }
+    function update() {
+      var pastHook = window.scrollY > hookHeight();
+      var checkoutInView = false;
+      if (checkoutArea) {
+        var rect = checkoutArea.getBoundingClientRect();
+        checkoutInView = rect.top < window.innerHeight - 80 && rect.bottom > 80;
+      }
+      if (pastHook && !checkoutInView) {
+        sticky.classList.add('visible');
+        sticky.setAttribute('aria-hidden', 'false');
+      } else {
+        sticky.classList.remove('visible');
+        sticky.setAttribute('aria-hidden', 'true');
+      }
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
 </script>
 
 </body>
