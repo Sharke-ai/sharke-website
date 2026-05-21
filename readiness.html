@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharke Readiness Assessment</title>
+<meta name="description" content="Find out whether grants actually fit your organization. Five minutes, no signup, no email, free.">
+<meta property="og:title" content="Sharke Readiness Assessment">
+<meta property="og:description" content="Find out whether grants actually fit your organization. Five minutes, no signup, no email, free.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.sharke.ai/readiness">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sharke Readiness Assessment">
+<meta name="twitter:description" content="Find out whether grants actually fit your organization. Five minutes, no signup, no email, free.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f5f2ec;
+    --warm-mid: #d4c9b0;
+    --accent: #b8341b;
+    --accent-dim: #8a2614;
+    --rule: #d0c9bc;
+    --muted: #7a7266;
+    --box-bg: #ede8de;
+    --box-bg-deep: #e3dccf;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  section { padding: 72px 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type { border-bottom: none; }
+
+  /* HEADER */
+  header { padding: 28px 0 24px; border-bottom: 2px solid var(--ink); }
+  .header-inner {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+  }
+  .wordmark {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink); text-decoration: none;
+  }
+  .segment-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.08em; color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* HOOK */
+  .hook { padding-top: 88px; padding-bottom: 72px; }
+  .hook-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 28px;
+  }
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(30px, 4.8vw, 46px);
+    font-weight: 700; line-height: 1.22; letter-spacing: -0.01em;
+    margin-bottom: 18px;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .pivot {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: clamp(17px, 2.1vw, 20px);
+    line-height: 1.5;
+    color: var(--accent-dim);
+    max-width: 600px;
+    margin-bottom: 28px;
+  }
+  .hook-tighten {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: clamp(18px, 2.2vw, 21px);
+    line-height: 1.5;
+    color: #2a2824;
+    max-width: 600px;
+    margin-bottom: 36px;
+  }
+  .hook-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 12px 0 10px 0;
+    border-bottom: 1.5px solid var(--accent);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .hook-cta:hover { color: var(--accent-dim); border-color: var(--accent-dim); }
+  .hook-cta .arrow { display: inline-block; transition: transform 0.15s; }
+  .hook-cta:hover .arrow { transform: translateX(3px); }
+
+  /* THE WOUND */
+  .wound-body { font-size: 18px; line-height: 1.65; color: #2a2824; max-width: 640px; }
+  .wound-body p + p { margin-top: 18px; }
+  .wound-body strong { font-weight: 500; color: var(--ink); }
+
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(22px, 3.3vw, 28px);
+    font-weight: 700; line-height: 1.25;
+    margin-bottom: 28px; letter-spacing: -0.01em;
+  }
+  h2 em { font-style: italic; color: var(--accent); }
+
+  h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  p + p { margin-top: 18px; }
+
+  /* DIAGNOSTIC BLOCK */
+  .diagnostic { background: var(--paper); }
+  .diagnostic-intro {
+    font-size: 18px; line-height: 1.6;
+    color: #2a2824; margin-bottom: 36px; max-width: 640px;
+  }
+  .diagnostic-intro strong { font-weight: 600; color: var(--ink); }
+
+  .assumptions {
+    display: flex; flex-direction: column; gap: 0;
+    margin: 8px 0 36px 0;
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    background: var(--box-bg);
+  }
+  .assumption {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: clamp(19px, 2.6vw, 24px);
+    line-height: 1.4;
+    color: #1a1916;
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .assumption:last-child { border-bottom: none; }
+  .assumption::before {
+    content: '\201C';
+    position: absolute;
+    left: 10px; top: 14px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 32px;
+    color: var(--accent);
+    font-style: normal;
+    line-height: 1;
+  }
+  .assumption-text { display: block; padding-left: 18px; }
+
+  .diagnostic-turn {
+    font-size: 18px; line-height: 1.65;
+    color: #2a2824; max-width: 640px;
+    margin-top: 32px;
+  }
+  .diagnostic-turn strong { font-weight: 600; color: var(--ink); }
+
+  /* INEVITABILITY BRIDGE */
+  .bridge {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 56px 0;
+    border-bottom: none;
+    border-top: none;
+  }
+  .bridge-line {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(22px, 3.2vw, 28px);
+    line-height: 1.4;
+    color: var(--paper);
+    max-width: 620px;
+  }
+  .bridge-line em { font-style: italic; color: #e8775e; }
+  .bridge-sub {
+    margin-top: 18px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: #c9c3b8;
+    max-width: 580px;
+  }
+
+  /* WHY + WHAT YOU GET */
+  .why-line {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(20px, 2.6vw, 23px);
+    line-height: 1.45;
+    color: var(--ink);
+    margin-bottom: 36px;
+    max-width: 640px;
+    letter-spacing: -0.005em;
+  }
+  .why-line em { font-style: italic; color: var(--accent); }
+
+  .deliverable-list { list-style: none; margin: 24px 0 28px 0; }
+  .deliverable-list li {
+    display: flex; gap: 18px; align-items: flex-start;
+    padding: 20px 0; border-bottom: 1px solid var(--rule);
+  }
+  .deliverable-list li:first-child { border-top: 1px solid var(--rule); }
+  .dl-marker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+    color: var(--accent); padding-top: 3px; flex-shrink: 0; width: 30px;
+  }
+  .dl-text { font-size: 16.5px; line-height: 1.55; color: #2a2824; }
+  .dl-text strong { font-weight: 500; color: var(--ink); }
+
+  .trust-line {
+    margin-top: 28px;
+    padding: 18px 22px;
+    background: var(--box-bg);
+    border-left: 2px solid var(--ink);
+    font-size: 15px;
+    line-height: 1.55;
+    color: #2a2824;
+  }
+  .trust-line strong { font-weight: 600; color: var(--ink); }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 88px 0 96px 0;
+    border-bottom: none;
+  }
+  .cta-friction {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: #c9c3b8;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+  .cta-friction span { color: var(--paper); }
+  .cta-friction span + span::before {
+    content: '\00B7';
+    color: #5a5550;
+    padding: 0 10px;
+  }
+
+  .cta-statement {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(22px, 3.3vw, 28px);
+    line-height: 1.4;
+    color: var(--paper);
+    margin-bottom: 36px;
+    max-width: 620px;
+  }
+  .cta-statement em { font-style: italic; color: #e8775e; }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 20px 36px;
+    text-decoration: none;
+    transition: background 0.15s, transform 0.05s;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+  }
+  .btn-primary:hover { background: var(--accent-dim); }
+  .btn-primary:active { transform: translateY(1px); }
+  .btn-primary .arrow { display: inline-block; margin-left: 8px; transition: transform 0.15s; }
+  .btn-primary:hover .arrow { transform: translateX(3px); }
+
+  .cta-meta {
+    margin-top: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #7a7266;
+    letter-spacing: 0.04em;
+  }
+
+  /* CLOSING */
+  .closing { background: var(--paper); padding: 88px 0 80px 0; border-bottom: none; }
+  .closing-line {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(22px, 3vw, 26px);
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.005em;
+  }
+  .closing-line em { font-style: italic; color: var(--accent); }
+  .closing-sub {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: clamp(18px, 2.3vw, 21px);
+    line-height: 1.5;
+    color: #2a2824;
+    margin-bottom: 40px;
+    max-width: 620px;
+  }
+  .btn-primary.dark-on-light {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn-primary.dark-on-light:hover { background: #1f1d1a; }
+
+  /* FOOTER */
+  footer { padding: 40px 0 48px; border-top: 1px solid var(--rule); }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-mark {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .footer-cred {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px; color: var(--muted); font-style: italic;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    section { padding: 56px 0; }
+    .hook { padding-top: 64px; padding-bottom: 56px; }
+    .cta-section { padding: 64px 0 72px 0; }
+    .closing { padding: 64px 0 64px 0; }
+    .assumption { padding: 20px 22px 20px 36px; }
+    .assumption::before { left: 8px; top: 12px; font-size: 28px; }
+    .btn-primary { width: 100%; padding: 18px 24px; }
+    .cta-friction span + span::before { padding: 0 6px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="wordmark">Sharke</a>
+      <span class="segment-tag">Readiness Assessment</span>
+    </div>
+  </div>
+</header>
+
+<!-- HOOK -->
+<section class="hook">
+  <div class="container">
+    <p class="hook-eyebrow">Before another quarter gets decided by default</p>
+    <h1>Your organization is <em>already building</em> around a funding model. Nobody has verified whether grants belong in it.</h1>
+    <p class="pivot">Not which grant to apply for. Whether grants are the right channel at all.</p>
+    <p class="hook-tighten">Most nonprofits never decide. The direction hardens anyway.</p>
+    <a href="https://sharke-app.netlify.app/free-tools/grant-readiness" class="hook-cta">Close the Question<span class="arrow">&rarr;</span></a>
+  </div>
+</section>
+
+<!-- THE WOUND -->
+<section>
+  <div class="container">
+    <h3>The decision being made by default</h3>
+    <h2>Nobody chose this. The organization is choosing it anyway.</h2>
+    <div class="wound-body">
+      <p>The org keeps drifting toward one funding model without ever stopping to check whether grants actually fit at this size and mission. Another quarter passes. Grants stay unexplored, or the team chases them without knowing whether the path is real.</p>
+      <p>By the time the direction is visible, it is already strategy. <strong>Nobody decided. It just hardened.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- DIAGNOSTIC: the emotional core -->
+<section class="diagnostic">
+  <div class="container">
+    <h3>The assumptions running the room</h3>
+    <h2>Right now, the organization is probably operating on assumptions like these.</h2>
+    <p class="diagnostic-intro">Not stated out loud. Not on a slide. Just sitting underneath every conversation about what to pursue next.</p>
+
+    <div class="assumptions">
+      <div class="assumption"><span class="assumption-text">We&rsquo;re probably too small to compete.</span></div>
+      <div class="assumption"><span class="assumption-text">Federal funding probably isn&rsquo;t realistic for an org our size.</span></div>
+      <div class="assumption"><span class="assumption-text">Foundations that fund work like ours probably already have their relationships.</span></div>
+    </div>
+
+    <p class="diagnostic-turn">The problem is not whether those assumptions are true. Some are. Some aren&rsquo;t. <strong>The problem is the funding strategy is already being built on them, and none have been checked against what funders actually do.</strong></p>
+  </div>
+</section>
+
+<!-- INEVITABILITY BRIDGE -->
+<section class="bridge">
+  <div class="container">
+    <p class="bridge-line">This is already happening. The only question is whether the organization names the direction <em>deliberately</em>, or drifts into it by default.</p>
+    <p class="bridge-sub">The Readiness Assessment closes the question in five minutes. No signup, no email.</p>
+  </div>
+</section>
+
+<!-- WHY + WHAT YOU GET -->
+<section>
+  <div class="container">
+    <h3>What the assessment does</h3>
+    <p class="why-line">The Readiness Assessment exists because most nonprofits spend the year moving toward or away from grants without verifying whether grants actually fit.</p>
+
+    <h3 style="margin-top:8px;">What you walk away with</h3>
+    <ul class="deliverable-list">
+      <li>
+        <span class="dl-marker">01</span>
+        <span class="dl-text">A <strong>Ready / Strengthen Then Apply / Not Yet</strong> verdict on grants for your org, at this size, mission, and geography.</span>
+      </li>
+      <li>
+        <span class="dl-marker">02</span>
+        <span class="dl-text">The reasoning behind the verdict, source-cited.</span>
+      </li>
+      <li>
+        <span class="dl-marker">03</span>
+        <span class="dl-text">A preview of the funder universe your org actually matches against, with reasoning.</span>
+      </li>
+    </ul>
+
+    <p class="trust-line"><strong>The assessment compares your org against documented funder behavior, eligibility patterns, and award history.</strong> Not generic nonprofit assumptions, not vibes-based scoring.</p>
+  </div>
+</section>
+
+<!-- PRIMARY CTA -->
+<section class="cta-section">
+  <div class="container">
+    <p class="cta-friction"><span>5 minutes</span><span>No login</span><span>No email</span><span>Free</span></p>
+    <p class="cta-statement">Settle the question your org has been answering by default. <em>Today.</em></p>
+    <a href="https://sharke-app.netlify.app/free-tools/grant-readiness" class="btn-primary">Close the Question<span class="arrow">&rarr;</span></a>
+    <p class="cta-meta">Opens the assessment. Nothing to install.</p>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="container">
+    <p class="closing-line">Not running the assessment is still a decision.</p>
+    <p class="closing-sub">It just commits the year before you know what you committed to.</p>
+    <a href="https://sharke-app.netlify.app/free-tools/grant-readiness" class="btn-primary dark-on-light">Close the Question<span class="arrow">&rarr;</span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-mark">Sharke / The verification layer for grant decisions</span>
+      <span class="footer-cred">Built by a former nonprofit Executive Director. Grant recipient: NIH, NSF, foundations.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
