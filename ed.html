@@ -884,6 +884,32 @@
 
   /* ---- v3 add-back additions ---- */
 
+  /* Hook identity-tension callout (sits above the primary CTA) */
+  .hook .identity-pull {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--mid-gray);
+    line-height: 1.5;
+    border-left: 3px solid var(--red);
+    padding-left: 18px;
+    margin: 32px 0 0;
+    max-width: 580px;
+  }
+  @media (max-width: 600px) {
+    .hook .identity-pull { font-size: 0.98rem; padding-left: 14px; margin: 28px 0 0; }
+  }
+
+  /* Reframe long-shots tightening line */
+  .reframe-tightening {
+    font-weight: 700;
+    color: var(--black);
+    font-size: 1.05rem;
+    margin: 24px 0 0;
+    padding-top: 18px;
+    border-top: 2px solid var(--red);
+  }
+
   /* Enhanced early-promise callout: heavier weight, badge label, green wash */
   .early-promise-callout {
     background: rgba(26, 102, 64, 0.06);
@@ -1004,9 +1030,10 @@
   <section class="hook">
     <div class="container">
       <p class="eyebrow">Executive Directors</p>
-      <h1>Most teams think they&rsquo;re being thorough. In reality, they&rsquo;re making a 20- to 30-hour decision on incomplete information.</h1>
-      <p class="subhead">Your team is already working on a grant that was never verified. By the time you find out whether it has a path to funding, the hours are already gone.</p>
+      <h1>Your team is already working on a grant that was never verified.</h1>
+      <p class="subhead">The decision to pursue it was made on incomplete information. By the time your team finds out whether it has a path to funding, the hours are already gone.</p>
       <p class="qualifier">For nonprofits with $150K to $5M in revenue with a grant already in motion.</p>
+      <p class="identity-pull">Most teams think they&rsquo;re being thorough. In reality, they&rsquo;re making a 20- to 30-hour decision on incomplete information.</p>
       <p style="margin-top: 28px;"><a href="#checkout-area" class="run-check-btn">Run the verification check<span class="arrow">&rarr;</span></a></p>
     </div>
   </section>
@@ -1016,11 +1043,7 @@
     <div class="container">
       <p>Stop before your team spends another hour on it.</p>
       <p>This is not about whether to start a grant. It is about whether to continue the one already in motion.</p>
-      <p style="margin-top: 18px !important; color: var(--black) !important; font-weight: 700 !important; font-style: normal !important;">Right now, your team is working on a grant that does not have a path to funding. You will not know which one until after the hours are gone.</p>
-      <div class="early-promise-callout">
-        <span class="promise-badge">Included with the verification check</span>
-        <p>If the grant your team is working on does not have a path, you do not leave with nothing. <strong>A verified Pursue on a replacement grant is included with the Move-on verdict.</strong> The goal is not stopping momentum. It is redirecting it before another 20 hours go in.</p>
-      </div>
+      <p style="margin-top: 18px !important; color: var(--black) !important; font-weight: 700 !important; font-style: normal !important;">Your team is very likely working on at least one grant that does not have a path to funding. You will not know which one until after the hours are gone.</p>
     </div>
   </section>
 
@@ -1037,20 +1060,11 @@
         <li>Relationship required but never stated in the listing.</li>
       </ul>
       <p>None of these are writing problems. They are decisions made too late. By the time your team finds out, the hours are already in.</p>
+      <p class="reframe-tightening">You should take long shots. The problem is taking the wrong ones.</p>
       <div class="stat-callout">
         <span class="stat-num">1 in 3</span>
         <p class="stat-text">grants come back Move on. That is where the math lands hardest. The verification check pays out in cash protection on the verdicts that prevent the loss before it happens.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- MID-PAGE ORIENTATION: surface the offer before the page argues further -->
-  <section class="mid-orientation">
-    <div class="container">
-      <p class="price">$49 / Decision in 24 hours</p>
-      <p class="orient-line">Before your team continues, Sharke verifies whether the grant has a path to funding.</p>
-      <p class="orient-promise">If it does not, <strong>a verified Pursue on a replacement grant is included.</strong></p>
-      <p class="cta-row"><a href="#checkout-area" class="run-check-btn">Run the verification check<span class="arrow">&rarr;</span></a></p>
     </div>
   </section>
 
@@ -1103,7 +1117,7 @@
         </div>
         <div class="decision-card">
           <p class="verdict move">Move on</p>
-          <p>No path to funding for this grant. A verified Pursue on a replacement grant is included. Your team doesn&rsquo;t leave this without a grant worth the hours.</p>
+          <p>No path on this one. You don&rsquo;t leave with nothing. A verified Pursue on a replacement grant comes with the verdict, included.</p>
         </div>
       </div>
       <p>Each verdict includes the reason. Not an opinion. A documented finding tied to the source. Forwardable to your board.</p>
@@ -1222,9 +1236,10 @@
     <div class="container">
       <div class="founder-mark">CB</div>
       <div>
-        <p><span class="founder-name">Sharke is built by Collin Brown.</span> I have been on every side of the grant table. I founded and led a nonprofit as Executive Director, sit on a nonprofit board today, and have applied for and won grants from NIH, NIMH, NSF, private foundations, and a $1M federal grant. Every verification check is signed off by me before it reaches your inbox.</p>
-        <p style="margin-top: 12px;">Author of "AI You Can Actually Trust" (Amazon Top 50 Business Bestseller). Wharton MBA. Trained at Duke Sanford School of Public Policy.</p>
-        <span class="founder-creds">Founder &nbsp;/&nbsp; Sharke.ai &nbsp;/&nbsp; Austin, TX</span>
+        <p><span class="founder-name">Built by Collin Brown.</span></p>
+        <p style="margin-top: 12px;">Former nonprofit Executive Director. Current nonprofit board member. Experience winning NIH, NSF, foundation, and federal grants, including a $1M federal award. Every verification check is signed off by me before it reaches your inbox.</p>
+        <p style="margin-top: 12px;">Author of <em>AI You Can Actually Trust</em>. Wharton MBA. Duke Sanford School of Public Policy.</p>
+        <span class="founder-creds">Founder, SHARKE.AI &nbsp;|&nbsp; Austin, TX</span>
       </div>
     </div>
   </section>
@@ -1236,7 +1251,7 @@
 
       <p>Not a hypothetical. The one already in motion. We run the verification check before the next 20 to 30 hours go in.</p>
 
-      <p class="action-trigger">Stop before your team spends another hour on it.</p>
+      <p class="action-trigger">Stop before another 20 to 30 hours go in.</p>
 
       <ul class="step-sequence">
         <li>
