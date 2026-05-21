@@ -881,6 +881,114 @@
     .sticky-cta .sticky-meta { font-size: 0.78rem; }
     .sticky-cta .run-check-btn { padding: 9px 16px; font-size: 0.78rem; }
   }
+
+  /* ---- v3 add-back additions ---- */
+
+  /* Enhanced early-promise callout: heavier weight, badge label, green wash */
+  .early-promise-callout {
+    background: rgba(26, 102, 64, 0.06);
+    border-left: 6px solid var(--green);
+    padding: 28px 32px;
+    margin: 36px 0 0;
+  }
+  .early-promise-callout .promise-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 600;
+    margin: 0 0 12px;
+    display: block;
+  }
+  .early-promise-callout p {
+    margin: 0;
+    color: var(--black);
+    font-size: 1.14rem;
+    line-height: 1.55;
+    font-style: normal;
+    font-weight: 400;
+  }
+  .early-promise-callout strong { font-weight: 700; color: var(--black); }
+  @media (max-width: 600px) {
+    .early-promise-callout { padding: 22px 22px; }
+    .early-promise-callout p { font-size: 1.02rem; }
+  }
+
+  /* Mid-page orientation: add a small green guarantee line */
+  .mid-orientation .orient-promise {
+    margin: 0 0 22px;
+    font-size: 0.92rem;
+    color: var(--green);
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .mid-orientation .orient-promise strong { color: var(--green); font-weight: 600; font-style: normal; }
+
+  /* Tiered cost-summary: each item visually escalates toward the rep callout */
+  .cost-summary li.cost-tier-1 .cost-text { font-size: 1rem; }
+  .cost-summary li.cost-tier-2 {
+    background: rgba(192, 57, 43, 0.03);
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .cost-summary li.cost-tier-2 .cost-text { font-size: 1.05rem; }
+  .cost-summary li.cost-tier-3 {
+    background: rgba(192, 57, 43, 0.07);
+    padding-left: 16px;
+    padding-right: 16px;
+    border-bottom: 2px solid var(--red);
+  }
+  .cost-summary li.cost-tier-3 .cost-label { color: var(--red); font-weight: 700; }
+  .cost-summary li.cost-tier-3 .cost-text {
+    font-size: 1.12rem;
+    font-weight: 500;
+    color: var(--black);
+  }
+  /* Pull rep-callout up against cost-summary so it reads as the peak */
+  section.cost-summary + section.rep-callout { margin-top: -1px; }
+
+  /* Two-guarantees mini-block in the final CTA (dark-on-black theme) */
+  .two-guarantees {
+    margin: 24px 0;
+    padding: 22px 24px;
+    background: rgba(26, 102, 64, 0.10);
+    border-left: 4px solid var(--green);
+  }
+  .two-guarantees .guarantees-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #6ec59a;
+    font-weight: 600;
+    margin: 0 0 14px;
+  }
+  .two-guarantees ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .two-guarantees li {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--off-white);
+    padding: 6px 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .two-guarantees li strong { font-weight: 600; color: #fff; }
+  .two-guarantees .g-arrow {
+    color: #6ec59a;
+    font-weight: 700;
+    flex-shrink: 0;
+    line-height: 1.5;
+  }
+  @media (max-width: 600px) {
+    .two-guarantees { padding: 18px 20px; }
+    .two-guarantees li { font-size: 0.9rem; }
+  }
 </style>
 </head>
 <body>
@@ -910,6 +1018,7 @@
       <p>This is not about whether to start a grant. It is about whether to continue the one already in motion.</p>
       <p style="margin-top: 18px !important; color: var(--black) !important; font-weight: 700 !important; font-style: normal !important;">Right now, your team is working on a grant that does not have a path to funding. You will not know which one until after the hours are gone.</p>
       <div class="early-promise-callout">
+        <span class="promise-badge">Included with the verification check</span>
         <p>If the grant your team is working on does not have a path, you do not leave with nothing. <strong>A verified Pursue on a replacement grant is included with the Move-on verdict.</strong> The goal is not stopping momentum. It is redirecting it before another 20 hours go in.</p>
       </div>
     </div>
@@ -930,7 +1039,7 @@
       <p>None of these are writing problems. They are decisions made too late. By the time your team finds out, the hours are already in.</p>
       <div class="stat-callout">
         <span class="stat-num">1 in 3</span>
-        <p class="stat-text">grants come back Move on. That is where the math lands hardest, and where the verification check pays for itself in cash protection before the loss happens.</p>
+        <p class="stat-text">grants come back Move on. That is where the math lands hardest. The verification check pays out in cash protection on the verdicts that prevent the loss before it happens.</p>
       </div>
     </div>
   </section>
@@ -940,6 +1049,7 @@
     <div class="container">
       <p class="price">$49 / Decision in 24 hours</p>
       <p class="orient-line">Before your team continues, Sharke verifies whether the grant has a path to funding.</p>
+      <p class="orient-promise">If it does not, <strong>a verified Pursue on a replacement grant is included.</strong></p>
       <p class="cta-row"><a href="#checkout-area" class="run-check-btn">Run the verification check<span class="arrow">&rarr;</span></a></p>
     </div>
   </section>
@@ -1064,29 +1174,35 @@
     </div>
   </section>
 
-  <!-- THREE COSTS - COMPRESSED INTO ONE BLOCK -->
+  <!-- THREE COSTS - COMPRESSED INTO ONE BLOCK, TIERED ESCALATION -->
   <section class="cost-summary">
     <div class="container">
       <h3>What an unverified grant costs</h3>
       <h2>The grant already in motion will commit to one of these costs in the next 20 to 30 hours. The verification check tells you which, before they go in.</h2>
       <ul>
-        <li>
+        <li class="cost-tier-1">
           <span class="cost-label">Hours</span>
           <span class="cost-text">20 to 30 per unverified grant. $960 to $1,440 in staff time. Gone whether the grant funds or not.</span>
         </li>
-        <li>
+        <li class="cost-tier-2">
           <span class="cost-label">Opportunity</span>
           <span class="cost-text">The grant that had a path, never written. The funder that would have funded, never contacted. The hours that went into the wrong grant are the hours that did not go into the right one.</span>
         </li>
-        <li>
+        <li class="cost-tier-3">
           <span class="cost-label">Relationship</span>
           <span class="cost-text">An application to a grant that does not match shapes how the funder sees you the next time your name comes across their desk.</span>
         </li>
       </ul>
+
+      <!-- Testimonial adjacent to costs: juxtaposes the $1,200 cost with the ED quote -->
+      <div class="testimonial-block">
+        <p>&ldquo;We were a week into a $200K federal grant when we ran the verification check. The verdict flagged a match-funding requirement buried in the supplementary guidelines. We had no realistic path to the match. We stopped, and the staff hours that would have gone into writing went to two state-level opportunities Sharke surfaced. One landed 90 days later. The $49 saved us 60 hours and probably the quarter.&rdquo;</p>
+        <cite>Executive Director, $1.2M workforce development nonprofit</cite>
+      </div>
     </div>
   </section>
 
-  <!-- ISOLATED REPUTATIONAL CONSEQUENCE CALLOUT -->
+  <!-- ISOLATED REPUTATIONAL CONSEQUENCE - PEAK OF THE COST ARC -->
   <section class="rep-callout">
     <div class="container">
       <p class="rep-line">Reviewers remember the orgs that did not match.</p>
@@ -1094,14 +1210,10 @@
     </div>
   </section>
 
-  <!-- TESTIMONIAL + COMMITMENT LINE -->
+  <!-- CLOSING PEAK LINE -->
   <section>
     <div class="container">
-      <div class="testimonial-block">
-        <p>&ldquo;We were a week into a $200K federal grant when we ran the verification check. The verdict flagged a match-funding requirement buried in the supplementary guidelines. We had no realistic path to the match. We stopped, and the staff hours that would have gone into writing went to two state-level opportunities Sharke surfaced. One landed 90 days later. The $49 saved us 60 hours and probably the quarter.&rdquo;</p>
-        <cite>Executive Director, $1.2M workforce development nonprofit</cite>
-      </div>
-      <p style="margin-top: 28px; font-weight: 700; color: var(--black); font-size: 1.05rem; border-top: 2px solid var(--red); padding-top: 20px;">Once you see what happens before the writing starts, you do not go back to letting your team start without verifying first.</p>
+      <p style="margin-top: 0; font-weight: 700; color: var(--black); font-size: 1.08rem; border-top: 2px solid var(--red); padding-top: 24px;">Once you see what happens before the writing starts, you do not go back to letting your team start without verifying first.</p>
     </div>
   </section>
 
@@ -1153,7 +1265,16 @@
         <p style="font-size: 0.82rem; color: var(--off-white); margin: 14px 0 0; font-style: italic; letter-spacing: 0.02em;">Not a cost. Protection against work your team is already doing.</p>
       </div>
 
-      <p class="price-line"><strong>$49. Decision in 24 hours.</strong> If the verdict is Move on, a verified Pursue on a replacement grant is included. If we cannot give you a clear verdict in 24 hours, you do not pay.</p>
+      <p class="price-line"><strong>$49. Decision in 24 hours.</strong></p>
+
+      <div class="two-guarantees">
+        <p class="guarantees-label">Two guarantees</p>
+        <ul>
+          <li><span class="g-arrow">&rarr;</span><span><strong>Move-on verdict:</strong> a verified Pursue on a replacement grant is included.</span></li>
+          <li><span class="g-arrow">&rarr;</span><span><strong>Not back in 24 hours:</strong> you do not pay.</span></li>
+        </ul>
+      </div>
+
       <p style="margin: 18px 0 16px; text-align: center;"><a href="#checkout-area" class="run-check-btn">Run the verification check<span class="arrow">&rarr;</span></a></p>
 
       <p style="margin: 0 0 16px; display:flex; align-items:center; justify-content:center; gap:6px;">
