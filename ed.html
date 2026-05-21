@@ -869,6 +869,20 @@
     border-top: 2px solid var(--red);
   }
 
+  /* Soft frame around the Stripe checkout so the off-white form does not
+     collide with the surrounding black CTA section. Acts as a warm-paper
+     transition layer between the dark CTA and the Stripe iframe inside. */
+  .checkout-frame {
+    background: var(--warm-white);
+    border: 1px solid #2a2a2a;
+    padding: 20px 22px 24px;
+    margin: 12px 0 0;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
+  @media (max-width: 600px) {
+    .checkout-frame { padding: 16px 14px 20px; }
+  }
+
   /* Tiered cost-summary: each item visually escalates toward the rep callout */
   .cost-summary li.cost-tier-1 .cost-text { font-size: 1rem; }
   .cost-summary li.cost-tier-2 {
@@ -1215,18 +1229,16 @@
         <span style="font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:#a09890;">Powered by Stripe</span>
       </p>
 
-      <!-- Stripe checkout -- auto-mounted -->
-      <div id="checkout-area">
-        <div id="checkout-loading" style="text-align:center; padding:24px 0;">
-          <p style="color:#a09890; font-family:'IBM Plex Mono',monospace; font-size:0.82rem; letter-spacing:0.04em; margin:0;">Loading secure checkout...</p>
+      <!-- Stripe checkout -- auto-mounted, wrapped in a soft frame to ease the black-to-white transition -->
+      <div id="checkout-area" class="checkout-frame">
+        <div id="checkout-loading" style="text-align:center; padding:36px 0;">
+          <p style="color:var(--mid-gray); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; letter-spacing:0.04em; margin:0;">Loading secure checkout...</p>
         </div>
-        <div id="checkout-container" style="min-height:350px; margin:8px 0;"></div>
+        <div id="checkout-container" style="min-height:350px;"></div>
         <div id="checkout-error" style="display:none; text-align:center; padding:16px 0;">
           <p style="color:var(--red); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; margin:0;"></p>
         </div>
       </div>
-
-      <p style="color: #a09890; font-size: 0.88rem; margin: 24px 0 0; line-height: 1.55; font-style: italic; text-align: center;">This checks the grant your team is working on. The subscription makes sure the next one is right.</p>
     </div>
   </section>
 
