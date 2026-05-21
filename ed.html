@@ -721,23 +721,6 @@
   .run-check-btn .arrow { display: inline-block; transition: transform 0.15s; }
   .run-check-btn:hover .arrow { transform: translateX(3px); }
 
-  /* Early replacement-Pursue callout inside the continuation frame */
-  .early-promise-callout {
-    background: var(--warm-white);
-    border-left: 4px solid var(--green);
-    padding: 22px 26px;
-    margin: 28px 0 0;
-  }
-  .early-promise-callout p {
-    margin: 0;
-    color: var(--black);
-    font-size: 1.05rem;
-    line-height: 1.55;
-    font-style: normal;
-    font-weight: 400;
-  }
-  .early-promise-callout strong { font-weight: 700; color: var(--black); }
-
   /* "1 in 3" stat callout in the reframe block */
   .stat-callout {
     margin: 28px 0 8px;
@@ -761,30 +744,6 @@
     line-height: 1.5;
     margin: 0;
   }
-
-  /* Mid-page $49 orientation strip between reframe and offer */
-  .mid-orientation {
-    padding: 36px 0;
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    background: var(--off-white);
-  }
-  .mid-orientation .price {
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 0.78rem;
-    color: var(--mid-gray);
-    letter-spacing: 0.1em;
-    margin: 0 0 14px;
-    text-transform: uppercase;
-  }
-  .mid-orientation .orient-line {
-    margin: 0 0 22px;
-    font-size: 1.1rem;
-    color: var(--black);
-    font-weight: 500;
-    line-height: 1.5;
-  }
-  .mid-orientation .cta-row { margin: 0; }
 
   /* Cost summary: one compressed block with three short lines */
   .cost-summary { padding: 64px 0 24px; }
@@ -910,47 +869,6 @@
     border-top: 2px solid var(--red);
   }
 
-  /* Enhanced early-promise callout: heavier weight, badge label, green wash */
-  .early-promise-callout {
-    background: rgba(26, 102, 64, 0.06);
-    border-left: 6px solid var(--green);
-    padding: 28px 32px;
-    margin: 36px 0 0;
-  }
-  .early-promise-callout .promise-badge {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--green);
-    font-weight: 600;
-    margin: 0 0 12px;
-    display: block;
-  }
-  .early-promise-callout p {
-    margin: 0;
-    color: var(--black);
-    font-size: 1.14rem;
-    line-height: 1.55;
-    font-style: normal;
-    font-weight: 400;
-  }
-  .early-promise-callout strong { font-weight: 700; color: var(--black); }
-  @media (max-width: 600px) {
-    .early-promise-callout { padding: 22px 22px; }
-    .early-promise-callout p { font-size: 1.02rem; }
-  }
-
-  /* Mid-page orientation: add a small green guarantee line */
-  .mid-orientation .orient-promise {
-    margin: 0 0 22px;
-    font-size: 0.92rem;
-    color: var(--green);
-    line-height: 1.5;
-    font-style: italic;
-  }
-  .mid-orientation .orient-promise strong { color: var(--green); font-weight: 600; font-style: normal; }
-
   /* Tiered cost-summary: each item visually escalates toward the rep callout */
   .cost-summary li.cost-tier-1 .cost-text { font-size: 1rem; }
   .cost-summary li.cost-tier-2 {
@@ -1031,7 +949,7 @@
     <div class="container">
       <p class="eyebrow">Executive Directors</p>
       <h1>Your team is already working on a grant that was never verified.</h1>
-      <p class="subhead">The decision to pursue it was made on incomplete information. By the time your team finds out whether it has a path to funding, the hours are already gone.</p>
+      <p class="subhead">By the time you find out whether it has a path to funding, the hours are already gone.</p>
       <p class="qualifier">For nonprofits with $150K to $5M in revenue with a grant already in motion.</p>
       <p class="identity-pull">Most teams think they&rsquo;re being thorough. In reality, they&rsquo;re making a 20- to 30-hour decision on incomplete information.</p>
       <p style="margin-top: 28px;"><a href="#checkout-area" class="run-check-btn">Run the verification check<span class="arrow">&rarr;</span></a></p>
