@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Sharke: Grant Verification for Consultants</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0d0d;
+    --off-white: #f4f1ec;
+    --warm-white: #f9f7f3;
+    --ink: #1c1c1c;
+    --red: #b83025;
+    --mid-gray: #6a6158;
+    --light-gray: #d8d3ca;
+    --rule: #cec9c0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 18px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HEADER */
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--red); }
+
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--mid-gray);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  section:last-of-type { border-bottom: none; }
+
+  /* HOOK */
+  .hook {
+    padding-top: 84px;
+    padding-bottom: 84px;
+  }
+
+  .hook .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 28px;
+  }
+
+  .hook h1 {
+    font-size: clamp(1.9rem, 3.8vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    max-width: 580px;
+  }
+
+  .hook .subhead {
+    font-size: 1.05rem;
+    color: var(--mid-gray);
+    line-height: 1.75;
+    max-width: 540px;
+    font-style: italic;
+  }
+
+  /* TEXT */
+  p {
+    margin-bottom: 1.3em;
+    font-size: 1rem;
+    color: #1a1a1a;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 20px;
+  }
+
+  /* QUOTE BLOCK */
+  .scene-block {
+    border-left: 3px solid var(--red);
+    padding: 24px 28px;
+    margin: 32px 0;
+    background: var(--off-white);
+  }
+
+  .scene-block p {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: #2a2a2a;
+    margin-bottom: 0.9em;
+  }
+
+  .scene-block p:last-child { margin-bottom: 0; }
+
+  /* VERIFY LIST */
+  .verify-list {
+    list-style: none;
+    margin: 28px 0;
+  }
+
+  .verify-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 10px 0;
+    font-size: 0.97rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .verify-list li:last-child { border-bottom: none; }
+
+  .verify-list .arrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--red);
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  /* DELIVERABLE BOX */
+  .deliverable-box {
+    border: 1px solid var(--rule);
+    padding: 32px;
+    background: var(--off-white);
+    margin: 32px 0;
+  }
+
+  .deliverable-box .box-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 20px;
+  }
+
+  .deliverable-list {
+    list-style: none;
+  }
+
+  .deliverable-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    font-size: 0.93rem;
+    border-bottom: 1px solid var(--light-gray);
+  }
+
+  .deliverable-list li:last-child { border-bottom: none; }
+
+  .deliverable-list .tick {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: #1a6640;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  /* BEFORE/AFTER */
+  .before-after {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 32px 0;
+    border: 1px solid var(--rule);
+  }
+
+  @media (max-width: 500px) {
+    .before-after { grid-template-columns: 1fr; }
+  }
+
+  .ba-col {
+    padding: 28px 24px;
+  }
+
+  .ba-col:first-child {
+    border-right: 1px solid var(--rule);
+    background: #ede8e0;
+  }
+
+  .ba-col:last-child {
+    background: var(--off-white);
+  }
+
+  .ba-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 12px;
+  }
+
+  .ba-col p {
+    font-size: 0.93rem;
+    margin: 0;
+  }
+
+  /* STANDARD BLOCK */
+  .standard-block {
+    border-top: 3px solid var(--black);
+    padding-top: 28px;
+    margin-top: 36px;
+  }
+
+  .standard-block p {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--black);
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--black);
+    color: var(--off-white);
+    padding: 80px 0;
+    border-bottom: none;
+  }
+
+  .cta-section h2 {
+    color: var(--off-white);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    margin-bottom: 16px;
+  }
+
+  .cta-section p {
+    color: #9c958e;
+    font-size: 0.97rem;
+  }
+
+  .action-trigger {
+    font-size: 1rem;
+    color: var(--off-white);
+    font-weight: 700;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  .price-line {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem;
+    color: #9c958e;
+    margin: 28px 0 32px;
+    letter-spacing: 0.04em;
+  }
+
+  .price-line strong {
+    color: var(--off-white);
+    font-weight: 500;
+  }
+
+  /* FORM */
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #9c958e;
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: var(--off-white);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: #666;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: #555;
+  }
+
+  .submit-btn {
+    display: block;
+    width: 100%;
+    background: var(--off-white);
+    color: var(--black);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .submit-btn:hover {
+    background: var(--red);
+    color: #fff;
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* CLOSE */
+  .close-section {
+    padding: 72px 0 80px;
+  }
+
+  .close-section p {
+    font-size: 1.05rem;
+    color: var(--mid-gray);
+    font-style: italic;
+    max-width: 500px;
+  }
+
+  .close-section .final-line {
+    font-size: 1.05rem;
+    color: var(--black);
+    font-style: normal;
+    font-weight: 700;
+    margin-top: 0;
+  }
+
+  /* ANIM */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hook .eyebrow { animation: fadeUp 0.5s ease 0.05s both; }
+  .hook h1       { animation: fadeUp 0.55s ease 0.15s both; }
+  .hook .subhead { animation: fadeUp 0.55s ease 0.28s both; }
+
+  @media (max-width: 480px) {
+    .close-section a[href*="sharke-app.netlify.app"] {
+      display: block;
+      width: 100%;
+      text-align: center;
+      box-sizing: border-box;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .container   { padding: 0 20px; }
+    section      { padding: 52px 0; }
+    .hook        { padding-top: 56px; padding-bottom: 56px; }
+    .cta-section { padding: 60px 0; }
+  }
+
+  /* Soft frame around the Stripe checkout so the off-white form does not
+     collide with the surrounding dark CTA section. Revealed via JS after
+     the user clicks the run-verification button. */
+  .checkout-frame {
+    background: var(--warm-white);
+    border: 1px solid #2a2a2a;
+    padding: 20px 22px 36px;
+    margin: 12px 0 0;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
+  .checkout-frame #checkout-container { margin-bottom: 8px; }
+  @media (max-width: 600px) {
+    .checkout-frame { padding: 16px 14px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://sharke.ai?utm_source=drip&utm_medium=email&utm_campaign=gw">Sharke<span>.</span>ai</a>
+  <span class="header-tag">Verification-First Grant Intelligence</span>
+</header>
+
+<main>
+
+  <!-- HOOK -->
+  <section class="hook">
+    <div class="container">
+      <p class="eyebrow">Grant Writers &amp; Consultants</p>
+      <h1>Before you tell a client to pursue a grant, can you prove it was viable?</h1>
+      <p class="subhead">Right now, most consultants cannot. That is not an efficiency problem. It is exposure.</p>
+    </div>
+  </section>
+
+  <!-- REFRAME -->
+  <section>
+    <div class="container">
+      <h3>The real problem</h3>
+      <h2>This is not a research problem. It is a liability problem.</h2>
+      <p>You recommended it. They acted on it.</p>
+      <p>If it wasn't viable, there is no process you can point to that proves you did your job. There is no document. No source trail. No verification layer behind the recommendation that left your hands.</p>
+      <p>Most consultants think they are being thorough. In reality, they are making a 25-hour client bet on incomplete information, funded by their own unpaid research hours.</p>
+      <p>Two failure modes drive most of this. A <strong>Vibe Match</strong> -- where the mission language fits but the budget floor, geography, or operating history doesn't. And a <strong>Ghost Deadline</strong> -- a cycle listed as open that hasn't actually accepted applications in two or three years. Both look viable until someone checks the primary source. Neither gets caught by a recommendation built on intuition alone.</p>
+    </div>
+  </section>
+
+  <!-- SCENE -->
+  <section>
+    <div class="container">
+      <h3>What it looks like</h3>
+      <h2>They didn't fire you. They decided quietly.</h2>
+      <div class="scene-block">
+        <p>The rejection comes back. Your client doesn't complain. They thank you.</p>
+        <p>A few weeks later, you follow up. They're "reassessing."</p>
+        <p>You hear they hired someone else.</p>
+        <p>They decided quietly that you sent them somewhere you shouldn't have. That the 25 hours their program coordinator spent was based on your word, and you didn't have a process to stand behind. The referral they would have given goes with them.</p>
+      </div>
+      <p>Before your next recommendation goes out, that same risk is still there.</p>
+    </div>
+  </section>
+
+  <!-- WHAT SHARKE DOES -->
+  <section>
+    <div class="container">
+      <h3>What Sharke does</h3>
+      <h2>This is the step before a recommendation leaves your hands.</h2>
+      <p>Run the grant through a verification layer that checks every factor that determines whether a recommendation is defensible. Everything checked against primary sources, not summaries.</p>
+      <ul class="verify-list">
+        <li><span class="arrow">→</span> Eligibility requirements</li>
+        <li><span class="arrow">→</span> Funder award history</li>
+        <li><span class="arrow">→</span> Organization fit for your client</li>
+        <li><span class="arrow">→</span> Timing and cycle status</li>
+        <li><span class="arrow">→</span> Relationship requirements</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section>
+    <div class="container">
+      <h3>What you get</h3>
+      <h2>A Due Diligence Report you can show your client.</h2>
+      <p>Not an opinion. A document.</p>
+      <div class="deliverable-box">
+        <p class="box-label">Due Diligence Report: What It Contains</p>
+        <ul class="deliverable-list">
+          <li><span class="tick">✓</span> Eligibility confirmed against primary source</li>
+          <li><span class="tick">✓</span> Funder award history checked</li>
+          <li><span class="tick">✓</span> Client organization fit assessed</li>
+          <li><span class="tick">✓</span> Sources cited</li>
+          <li><span class="tick">✓</span> Decision documented with reasoning</li>
+        </ul>
+      </div>
+      <div class="before-after">
+        <div class="ba-col">
+          <p class="ba-label">Before</p>
+          <p>"I believe this is a good fit."</p>
+        </div>
+        <div class="ba-col">
+          <p class="ba-label">After</p>
+          <p>"Here is the verification behind this recommendation."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE STANDARD -->
+  <section>
+    <div class="container">
+      <h3>The standard</h3>
+      <h2>This is what separates a recommendation from a defensible recommendation.</h2>
+      <p>Your clients are already using AI to find grants themselves. They expect faster answers. They expect better decisions. What they do not accept is an unverifiable recommendation, especially after they have committed time to pursuing it.</p>
+      <div class="standard-block">
+        <p>Strong consultants do not send a recommendation without a verification trail behind it. That is the standard. This is what closes the gap between having an opinion and having a process.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>What grant are you about to recommend?</h2>
+      <p>The recommendation you are about to send is either defensible -- or it isn't. Once it goes out, you don't get to take it back.</p>
+      <p class="action-trigger">Strong consultants don't send a recommendation without this.</p>
+      <p class="price-line"><strong>$49.</strong> Verification trail in 24 hours.</p>
+
+      <div style="border-left: 3px solid #9c958e; padding: 20px 24px; margin: 28px 0; background: #1a1a1a;">
+        <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: #9c958e; margin-bottom: 10px;">THIS IS HOW CLIENT RELATIONSHIPS FAIL</p>
+        <p style="font-size: 0.9rem; font-style: italic; color: #c8cfd8; margin-bottom: 10px;">"I had already sent the recommendation. The cycle hadn't been open in three years. My client spent 22 hours on an application that had nowhere to go. That's the last time I sent anything without running a check first."</p>
+        <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: #9c958e; margin: 0;">Grant Consultant — Independent Practice</p>
+      </div>
+
+      <p style="font-size: 0.82rem; color: #9c958e; margin-bottom: 16px;">You're about to run this on a real grant.</p>
+      <button id="checkout-btn" class="submit-btn" onclick="revealCheckout()">Run Verification Before Sending &rarr;</button>
+      <!-- Stripe checkout, click-to-reveal, wrapped in soft frame -->
+      <div id="checkout-area" class="checkout-frame" style="display:none;">
+        <div id="checkout-loading" style="display:none; text-align:center; padding:36px 0;">
+          <p style="color:var(--mid-gray); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; letter-spacing:0.04em; margin:0;">Preparing secure checkout...</p>
+        </div>
+        <div id="checkout-container" style="display:none; min-height:350px;"></div>
+        <div id="checkout-error" style="display:none; text-align:center; padding:16px 0;">
+          <p style="color:var(--red); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; margin:0;"></p>
+        </div>
+      </div>
+      <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #9c958e; text-align: center; margin-top: 14px; letter-spacing: 0.04em;">If we can't verify the grant against documented funder data, you get a full refund. No reason to guess.</p>
+      <p style="margin-top: 12px; display:flex; align-items:center; justify-content:center; gap:6px;">
+        <svg width="12" height="14" viewBox="0 0 24 28" fill="none" stroke="#9c958e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="18" height="13" rx="2"/><path d="M7 13V9a5 5 0 0 1 10 0v4"/></svg>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:#9c958e;">Powered by Stripe</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- CLOSE -->
+  <section class="close-section">
+    <div class="container">
+      <p>If that recommendation is wrong, what do you show your client?</p>
+      <br>
+      <p class="final-line">This is the answer to that question, before they have to ask it.</p>
+      <div style="margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--rule);">
+        <p style="font-size: 0.88rem; color: var(--mid-gray); font-style: normal; margin-bottom: 16px;">Still reviewing client work? Start with the Grant Readiness Assessment and Budget Builder -- free, no login.</p>
+        <a href="https://sharke-app.netlify.app/free-tools" style="display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 20px; background: var(--black); color: var(--off-white); text-decoration: none; cursor: pointer;">Start the Assessment →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  var stripe = Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4');
+  var checkoutReady = null;
+
+  // Pre-initialize checkout on page load so it's instant when user clicks
+  checkoutReady = stripe.initEmbeddedCheckout({
+    fetchClientSecret: function() {
+      return fetch('/.netlify/functions/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan: 'grb' })
+      })
+      .then(function(resp) { return resp.json(); })
+      .then(function(data) {
+        if (data.error) throw new Error(data.error);
+        return data.clientSecret;
+      });
+    }
+  });
+
+  function revealCheckout() {
+    var btn = document.getElementById('checkout-btn');
+    var frame = document.getElementById('checkout-area');
+    var container = document.getElementById('checkout-container');
+    var loading = document.getElementById('checkout-loading');
+    var errorDiv = document.getElementById('checkout-error');
+
+    btn.style.display = 'none';
+    errorDiv.style.display = 'none';
+    frame.style.display = 'block';
+    loading.style.display = 'block';
+
+    checkoutReady.then(function(checkout) {
+      loading.style.display = 'none';
+      container.style.display = 'block';
+      checkout.mount('#checkout-container');
+    }).catch(function(err) {
+      loading.style.display = 'none';
+      frame.style.display = 'none';
+      btn.style.display = 'block';
+      errorDiv.style.display = 'block';
+      errorDiv.querySelector('p').textContent = 'Something went wrong. Please try again.';
+      console.error('Checkout error:', err);
+    });
+  }
+</script>
+
+</body>
+</html>
