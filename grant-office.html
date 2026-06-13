@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharke: Your Grant Office, For Nonprofits With No Grant Staff</title>
+<meta name="description" content="No one on staff owns grants? Sharke becomes your grant office. We find and qualify the funders that fit, draft against their real requirements, and track every deadline, so a real grant pipeline runs without hiring for one.">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-white: #f5f2ed;
+    --warm-white: #faf8f4;
+    --red: #c0392b;
+    --mid-gray: #6b6560;
+    --light-gray: #ddd8d0;
+    --rule: #d0cbc2;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; scroll-behavior: smooth; }
+  body {
+    background: var(--warm-white);
+    color: var(--black);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HEADER */
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+  .logo span { color: var(--red); }
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--mid-gray);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* LAYOUT */
+  .container { max-width: 700px; margin: 0 auto; padding: 0 32px; }
+  section { padding: 72px 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type { border-bottom: none; }
+
+  /* HOOK */
+  .hook { padding-top: 80px; padding-bottom: 80px; }
+  .hook .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 28px;
+  }
+  .hook h1 {
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    max-width: 600px;
+  }
+  .hook .subhead {
+    font-size: 1.1rem;
+    color: var(--mid-gray);
+    line-height: 1.7;
+    max-width: 560px;
+    font-style: italic;
+  }
+
+  /* BODY TEXT */
+  p { margin-bottom: 1.3em; font-size: 1rem; color: #1a1a1a; }
+  p:last-child { margin-bottom: 0; }
+  h2 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 24px; line-height: 1.3; }
+  h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 20px;
+  }
+
+  /* FAILURE LIST */
+  .failure-list { list-style: none; margin: 28px 0; border-left: 3px solid var(--red); padding-left: 24px; }
+  .failure-list li { font-size: 0.97rem; color: #2a2a2a; padding: 6px 0; line-height: 1.5; }
+  .failure-list li + li { border-top: 1px solid var(--rule); }
+
+  /* WALKTHROUGH */
+  .walk-list { list-style: none; margin: 28px 0 0; }
+  .walk-list li { display: flex; align-items: flex-start; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+  .walk-list li:last-child { border-bottom: none; }
+  .walk-list .step-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    flex-shrink: 0;
+    padding-top: 4px;
+    min-width: 58px;
+  }
+  .walk-list .step-text { font-size: 0.97rem; color: #1a1a1a; line-height: 1.55; }
+  .walk-list .step-text strong { font-weight: 700; }
+
+  /* BEFORE / AFTER */
+  .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 32px 0; border: 1px solid var(--rule); }
+  @media (max-width: 500px) { .before-after { grid-template-columns: 1fr; } }
+  .ba-col { padding: 28px 24px; }
+  .ba-col:first-child { border-right: 1px solid var(--rule); background: #f0ebe3; }
+  .ba-col:last-child { background: var(--off-white); }
+  .ba-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 12px;
+  }
+  .ba-col p { font-size: 0.93rem; margin: 0; }
+
+  /* CREDIBILITY */
+  .cred-block { border-left: 3px solid var(--red); padding: 22px 26px; margin-top: 8px; background: var(--off-white); }
+  .cred-block p { font-size: 0.95rem; color: #2a2a2a; margin: 0; font-style: italic; }
+
+  /* CTA SECTION */
+  .cta-section { background: var(--black); color: var(--off-white); padding: 80px 0; border-bottom: none; }
+  .cta-section h2 { color: var(--off-white); font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 16px; }
+  .cta-section p { color: #a09890; font-size: 0.97rem; }
+  .action-trigger { font-size: 1rem; color: var(--off-white); font-weight: 700; margin: 28px 0; font-style: italic; }
+  .cta-btn {
+    display: inline-block;
+    background: var(--off-white);
+    color: var(--black);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 18px 40px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .cta-btn:hover { background: var(--red); color: #fff; }
+  .cta-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #a09890; letter-spacing: 0.06em; margin-top: 20px; }
+
+  /* CLOSE */
+  .close-section { padding: 72px 0 80px; }
+  .close-section p { font-size: 1rem; color: var(--mid-gray); font-style: italic; max-width: 520px; }
+  .close-section .final-line { font-size: 1.05rem; color: var(--black); font-style: normal; font-weight: 700; margin-top: 24px; }
+
+  /* FADE IN */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .hook h1, .hook .subhead, .hook .eyebrow { animation: fadeUp 0.6s ease both; }
+  .hook .eyebrow { animation-delay: 0.05s; }
+  .hook h1 { animation-delay: 0.15s; }
+  .hook .subhead { animation-delay: 0.28s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .container { padding: 0 20px; }
+    section { padding: 52px 0; }
+    .hook { padding-top: 56px; padding-bottom: 56px; }
+    .cta-section { padding: 60px 0; }
+    .walk-list .step-num { min-width: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://sharke.ai">Sharke<span>.</span>ai</a>
+  <span class="header-tag">Verification-First Grant Intelligence</span>
+</header>
+
+<main>
+
+  <!-- HOOK -->
+  <section class="hook">
+    <div class="container">
+      <p class="eyebrow">Nonprofits with no grant office</p>
+      <h1>You do not have a grant office. You have a list of grants no one has time to run.</h1>
+      <p class="subhead">When grants are everyone's side job, they become no one's job. The deadlines you meant to hit pass quietly. The funders who would have said yes never hear from you.</p>
+    </div>
+  </section>
+
+  <!-- REFRAME -->
+  <section>
+    <div class="container">
+      <h3>The real problem</h3>
+      <h2>The problem was never the writing.</h2>
+      <p>It is that no one owns the work from start to finish. Without an owner, every grant starts late, gets researched in a hurry, and goes out on a guess about whether the funder was ever a fit.</p>
+      <p>That is not a staffing failure. It is what happens to any task that belongs to everyone and no one.</p>
+      <ul class="failure-list">
+        <li>Good funders you never found.</li>
+        <li>Deadlines that passed before anyone looked.</li>
+        <li>Hours spent on grants that were never a fit.</li>
+        <li>Drafts started the week they were due.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- WHAT SHARKE DOES -->
+  <section>
+    <div class="container">
+      <h3>What Sharke does</h3>
+      <h2>Sharke becomes your grant office.</h2>
+      <p>Not one more tool you have to find time to learn. The function itself, run for you, from finding the grant to handing you a draft.</p>
+      <ul class="walk-list">
+        <li>
+          <span class="step-num">Step 1</span>
+          <span class="step-text"><strong>Finds and watches your funders.</strong> Sharke tracks the funders that match your mission, so real opportunities reach you instead of you chasing them.</span>
+        </li>
+        <li>
+          <span class="step-num">Step 2</span>
+          <span class="step-text"><strong>Verifies fit before any time goes in.</strong> Eligibility, funder history, your size and geography, the timing of the cycle. Each grant comes back with a clear verdict: pursue, wait, or move on.</span>
+        </li>
+        <li>
+          <span class="step-num">Step 3</span>
+          <span class="step-text"><strong>Drafts the application for you.</strong> Written against the funder's real requirements and grounded in your organization's own materials, not a generic template.</span>
+        </li>
+        <li>
+          <span class="step-num">Step 4</span>
+          <span class="step-text"><strong>Tracks every deadline and submission.</strong> Nothing slips while you run the rest of the organization.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section>
+    <div class="container">
+      <h3>What you get</h3>
+      <h2>A real grant pipeline, without hiring for one.</h2>
+      <p>You get the output of a grant office: a qualified pipeline, decisions you can defend to your board, and drafts ready for you to review.</p>
+      <p>You do not get another hire to manage, another salary to cover, or another system to keep running.</p>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER -->
+  <section>
+    <div class="container">
+      <h3>What this changes</h3>
+      <div class="before-after">
+        <div class="ba-col">
+          <p class="ba-label">Before</p>
+          <p>Grants happen when someone has a free afternoon. You find out a funder was wrong after the time is already gone.</p>
+        </div>
+        <div class="ba-col">
+          <p class="ba-label">After</p>
+          <p>Grants run on a schedule someone else keeps. You see the decision before the work starts, and review drafts instead of writing them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO BUILT IT -->
+  <section>
+    <div class="container">
+      <h3>Who built it</h3>
+      <div class="cred-block">
+        <p>Sharke was built by Collin Brown, who has secured grants from NIH, NSF, and private foundations, including over a million dollars in federal awards, and has served as a nonprofit Executive Director. The verification standard behind every decision is the same one he used to win them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Start running grants like you have an office.</h2>
+      <p>Tell Sharke about your organization and your priorities. It begins finding and qualifying the grants worth your time, and drafting the ones you choose to pursue.</p>
+      <p class="action-trigger">You do not have to hire a department to act like you have one.</p>
+      <a href="https://sharke-app.netlify.app/signup" class="cta-btn">Get started &rarr;</a>
+      <p class="cta-meta">Built for nonprofits with no grant staff.</p>
+    </div>
+  </section>
+
+  <!-- CLOSE -->
+  <section class="close-section">
+    <div class="container">
+      <p>You do not need to find more grants to chase.</p>
+      <p class="final-line">You need an office that runs them. That is what Sharke is.</p>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
