@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharke: Grant Office Membership for Executive Directors</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-white: #f5f2ed;
+    --warm-white: #faf8f4;
+    --red: #c0392b;
+    --mid-gray: #6b6560;
+    --rule: #d0cbc2;
+    --green: #1a6640;
+    --amber: #8a6200;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; scroll-behavior: smooth; }
+  body {
+    background: var(--warm-white);
+    color: var(--black);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+  .logo span { color: var(--red); }
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--mid-gray);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .container { max-width: 700px; margin: 0 auto; padding: 0 32px; }
+  section { padding: 56px 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type { border-bottom: none; }
+
+  /* HOOK */
+  .hook { padding-top: 80px; padding-bottom: 72px; }
+  .hook .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 28px;
+  }
+  .hook h1 {
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    max-width: 580px;
+  }
+  /* GRB / Red Team line — directly under hook h1 */
+  .hook .protection-line {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 28px;
+    padding: 12px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .hook .protection-line strong { color: var(--black); }
+
+  /* MICRO-CTA after hook */
+  .hook .micro-interrupt {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--black);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .hook .micro-interrupt a {
+    color: var(--red);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-style: normal;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .hook-quote {
+    border-left: 3px solid var(--rule);
+    padding: 16px 20px;
+  }
+  .hook-quote p {
+    font-size: 0.97rem;
+    font-style: italic;
+    color: #2a2a2a;
+    margin-bottom: 10px;
+  }
+  .hook-quote cite {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    font-style: normal;
+  }
+
+  p { margin-bottom: 1.3em; font-size: 1rem; color: #1a1a1a; }
+  p:last-child { margin-bottom: 0; }
+  h2 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 20px; line-height: 1.3; }
+  h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 16px;
+  }
+
+  .insight-block {
+    border-left: 3px solid var(--red);
+    padding: 18px 22px;
+    background: var(--off-white);
+    margin: 28px 0;
+  }
+  .insight-block p { font-size: 1.02rem; font-style: italic; color: #1a1a1a; margin: 0; }
+
+  .irrev-block {
+    border: 1px solid var(--black);
+    padding: 24px 28px;
+    margin: 20px 0 0;
+    background: var(--off-white);
+  }
+  .irrev-block p { font-size: 1.02rem; font-style: italic; margin: 0; line-height: 1.6; }
+
+  /* RIGHT NOW INTERRUPT */
+  .right-now {
+    background: var(--off-white);
+    border-top: 3px solid var(--black);
+    border-bottom: 1px solid var(--rule);
+    padding: 36px 0;
+  }
+  .right-now p {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .right-now p em {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--mid-gray);
+    display: block;
+    font-size: 1rem;
+    margin-top: 8px;
+  }
+
+  /* WORKFLOW — short visual version */
+  .workflow-short {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 24px 0;
+    border: 1px solid var(--rule);
+  }
+  .wf-step {
+    flex: 1;
+    min-width: 120px;
+    padding: 16px 14px;
+    text-align: center;
+    border-right: 1px solid var(--rule);
+    background: var(--off-white);
+  }
+  .wf-step:last-child { border-right: none; }
+  .wf-step .wf-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    display: block;
+    margin-bottom: 5px;
+  }
+  .wf-step .wf-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--black);
+  }
+  .wf-step.red-team { background: #0a0a0a; }
+  .wf-step.red-team .wf-label { color: #a09890; }
+  .wf-step.red-team .wf-name { color: var(--off-white); }
+
+  /* RED TEAM CARDS — short */
+  .rt-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 24px 0; }
+  @media (max-width: 540px) { .rt-cards { grid-template-columns: 1fr; } }
+  .rt-card {
+    border: 1px solid var(--rule);
+    padding: 16px 18px;
+    background: var(--off-white);
+  }
+  .rt-card .rt-card-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  .rt-card p { font-size: 0.86rem; color: #3a3a3a; margin: 0; line-height: 1.5; }
+
+  /* DIVISION BLOCK */
+  .division-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 24px 0;
+    border: 1px solid var(--rule);
+  }
+  @media (max-width: 500px) { .division-block { grid-template-columns: 1fr; } }
+  .div-col { padding: 22px 20px; }
+  .div-col:first-child { border-right: 1px solid var(--rule); background: var(--off-white); }
+  .div-col:last-child { background: #f0ebe3; }
+  .div-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 12px;
+  }
+  .div-col ul { list-style: none; padding: 0; margin: 0; }
+  .div-col ul li {
+    font-size: 0.9rem;
+    color: #1a1a1a;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--rule);
+    line-height: 1.5;
+  }
+  .div-col ul li:last-child { border-bottom: none; }
+
+  /* MEMBERSHIP */
+  .membership-block { border: 1px solid var(--rule); margin: 24px 0; }
+  .membership-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 14px 22px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .membership-row:last-child { border-bottom: none; }
+  .membership-row .icon {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--green);
+    flex-shrink: 0;
+    margin-top: 2px;
+    min-width: 16px;
+  }
+  .membership-row .label { font-size: 0.93rem; color: #1a1a1a; font-weight: 700; margin-bottom: 3px; }
+  .membership-row .desc { font-size: 0.86rem; color: var(--mid-gray); font-style: italic; margin: 0; }
+
+  /* SAMPLE FINDING */
+  .trail-sample { border: 1px solid var(--rule); background: var(--off-white); }
+  .trail-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 14px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .trail-header-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+  }
+  .trail-header-verdict {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+  .trail-row {
+    display: grid;
+    grid-template-columns: 148px 1fr;
+    border-bottom: 1px solid var(--rule);
+  }
+  .trail-row:last-child { border-bottom: none; }
+  .trail-field {
+    padding: 12px 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--mid-gray);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-right: 1px solid var(--rule);
+    background: #ece8e0;
+  }
+  .trail-value {
+    padding: 12px 18px;
+    font-size: 0.88rem;
+    color: #1a1a1a;
+  }
+
+  /* CTA */
+  .cta-section { background: var(--black); color: var(--off-white); padding: 80px 0; border-bottom: none; }
+  .cta-section h2 { color: var(--off-white); font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 12px; line-height: 1.25; }
+  .cta-section .cta-sub { color: #a09890; font-size: 0.97rem; margin-bottom: 0; }
+  .cta-section .tomorrow {
+    color: var(--off-white);
+    font-size: 0.97rem;
+    font-style: italic;
+    margin: 20px 0 0;
+  }
+
+  /* SECOND REVIEWER BLOCK */
+  .second-reviewer {
+    border: 1px solid #333;
+    padding: 20px 24px;
+    margin: 24px 0;
+    background: #111;
+  }
+  .second-reviewer p {
+    color: var(--off-white);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+  .second-reviewer p:last-child { margin-bottom: 0; }
+  .second-reviewer .sr-rule {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #a09890;
+    border-top: 1px solid #2a2a2a;
+    padding-top: 14px;
+    margin-top: 14px;
+    margin-bottom: 0;
+  }
+
+  .price-box {
+    border: 1px solid #333;
+    padding: 20px 24px;
+    margin: 24px 0;
+    background: #111;
+  }
+  .price-box .price-amount {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--off-white);
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .price-box .price-includes {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: #a09890;
+    line-height: 2;
+  }
+  .price-box .price-includes span {
+    display: block;
+    padding: 2px 0;
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .price-box .price-includes span:last-child { border-bottom: none; }
+
+  /* STANDARD LINE */
+  .standard-line {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #a09890;
+    text-align: center;
+    padding: 14px 0;
+    border-top: 1px solid #2a2a2a;
+    border-bottom: 1px solid #2a2a2a;
+    margin: 20px 0 24px;
+  }
+
+  .form-reassurance {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: #555;
+    text-align: center;
+    margin-top: 14px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hook h1, .hook .subhead, .hook .eyebrow, .hook-quote, .hook .protection-line, .hook .micro-interrupt {
+    animation: fadeUp 0.6s ease both;
+  }
+  .hook .eyebrow         { animation-delay: 0.05s; }
+  .hook h1               { animation-delay: 0.15s; }
+  .hook .protection-line { animation-delay: 0.25s; }
+  .hook .micro-interrupt { animation-delay: 0.32s; }
+  .hook-quote            { animation-delay: 0.40s; }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .container   { padding: 0 20px; }
+    section      { padding: 44px 0; }
+    .hook        { padding-top: 56px; padding-bottom: 56px; }
+    .cta-section { padding: 60px 0; }
+    .workflow-short { flex-direction: column; }
+    .wf-step { border-right: none; border-bottom: 1px solid var(--rule); }
+    .wf-step:last-child { border-bottom: none; }
+    .trail-row { grid-template-columns: 100px 1fr; }
+  }
+
+  /* Soft frame around the Stripe checkout so the off-white form does not
+     collide with the surrounding black CTA section. */
+  .checkout-frame {
+    background: var(--warm-white);
+    border: 1px solid #2a2a2a;
+    padding: 20px 22px 36px;
+    margin: 12px 0 0;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
+  .checkout-frame #checkout-container { margin-bottom: 8px; }
+  @media (max-width: 600px) {
+    .checkout-frame { padding: 16px 14px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="#" class="logo">SHARKE<span>.</span></a>
+  <span class="header-tag">Executive Directors / $79/month</span>
+</header>
+
+<main>
+
+  <!-- HOOK -->
+  <section class="hook">
+    <div class="container">
+      <p class="eyebrow">Executive Directors / Membership</p>
+      <h1>Your team is writing grants right now that have not been challenged.</h1>
+
+      <!-- GRB / Red Team line — directly under hook -->
+      <p class="protection-line">
+        <strong>GRB protects the decision.</strong> &nbsp;·&nbsp; <strong>Red Team protects the submission.</strong>
+      </p>
+
+      <!-- Micro-CTA interrupt -->
+      <p class="micro-interrupt">The draft in motion right now has not been Red Teamed. <a href="#how-it-works">See how it works ↓</a></p>
+
+      <div class="hook-quote">
+        <p>"We were about to submit three applications to funders that do not fund organizations our size. That is 60 hours we got back for grants we could actually win."</p>
+        <cite>Executive Director, food security nonprofit, Texas</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- POST-HOOK INEVITABILITY -->
+  <div style="background: var(--black); padding: 22px 0; border-bottom: 1px solid #1e1e1e;">
+    <div class="container">
+      <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; color: var(--off-white); margin: 0; letter-spacing: 0.02em;">You just protected one grant. The rest of your pipeline is still unprotected.</p>
+    </div>
+  </div>
+
+  <!-- MEMORY ANCHOR — what happened / what hasn't -->
+  <section style="padding: 36px 0; background: var(--off-white); border-bottom: 1px solid var(--rule);">
+    <div class="container">
+      <h3>What just happened and what has not</h3>
+      <div class="membership-block" style="margin: 0;">
+        <div class="membership-row">
+          <span class="icon" style="color: var(--green);">✓</span>
+          <div><p class="label" style="margin:0;">Grant Review Brief: one documented decision on one grant</p></div>
+        </div>
+        <div class="membership-row">
+          <span class="icon" style="color: var(--red); font-size: 1rem;">—</span>
+          <div><p class="label" style="margin:0; color: var(--mid-gray); font-weight: 400;">Red Team: not run. Your other drafts in motion have not been challenged.</p></div>
+        </div>
+      </div>
+      <div class="irrev-block" style="margin-top: 16px;">
+        <p>GRB protects the decision. Red Team protects the submission. That is what membership gives you, on every draft, before it leaves.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE GAP -->
+  <section>
+    <div class="container">
+      <h3>What you now know</h3>
+      <h2>One documented decision changes what every undocumented decision looks like.</h2>
+      <p>Your pipeline has more grants. None of the drafts your team is actively working on have been challenged. Deadlines are being tracked. Work is happening. None of it has been pressure-tested before your team committed time to it.</p>
+
+      <div class="insight-block">
+        <p>Most teams discover many grants they were pursuing should never have been submitted. That pattern exists in your pipeline right now.</p>
+      </div>
+
+      <p>That is staff time your team spent on a grant you will not win. It is hours logged against a deadline. It is a board meeting where you report a pipeline that has never been pressure-tested. And it is a funder who now knows your organization from an application you should never have sent.</p>
+    </div>
+  </section>
+
+  <!-- WHAT RED TEAM COVERS — SHORT -->
+  <section>
+    <div class="container">
+      <h3>What Red Team challenges</h3>
+      <h2>Red Team challenges the draft before it leaves.</h2>
+      <p>Where the GRB answered whether to pursue, Red Team challenges the draft your team wrote. It runs after drafting, before submission.</p>
+
+      <div class="rt-cards">
+        <div class="rt-card">
+          <p class="rt-card-label">FIT</p>
+          <p>Does this draft match what the funder actually funds? Giving history, mission alignment, geographic scope: checked against documented evidence.</p>
+        </div>
+        <div class="rt-card">
+          <p class="rt-card-label">REQUIREMENTS</p>
+          <p>Is there anything that disqualifies you? Eligibility, hard disqualifiers, unresolved placeholders, and missing attachments, caught before submission.</p>
+        </div>
+        <div class="rt-card">
+          <p class="rt-card-label">LANGUAGE</p>
+          <p>Does anything weaken how reviewers read this? Hedging, terminology mismatches, and confidence gaps, flagged before the draft leaves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIGHT NOW INTERRUPT #1 -->
+  <div class="right-now">
+    <div class="container">
+      <p>The draft your team is writing right now has not been Red Teamed.<em>Before it reaches submission: will it be challenged, or not?</em></p>
+    </div>
+  </div>
+
+  <!-- WORKFLOW — SHORT VISUAL -->
+  <section id="how-it-works">
+    <div class="container">
+      <h3>How this works</h3>
+      <h2>Sharke does the work. You make the decisions.</h2>
+
+      <div class="workflow-short">
+        <div class="wf-step">
+          <span class="wf-label">01</span>
+          <span class="wf-name">GRB</span>
+        </div>
+        <div class="wf-step">
+          <span class="wf-label">02</span>
+          <span class="wf-name">Draft</span>
+        </div>
+        <div class="wf-step red-team">
+          <span class="wf-label">03</span>
+          <span class="wf-name">Red Team</span>
+        </div>
+        <div class="wf-step">
+          <span class="wf-label">04</span>
+          <span class="wf-name">Submit</span>
+        </div>
+      </div>
+
+      <div class="division-block">
+        <div class="div-col">
+          <p class="div-label">Sharke does</p>
+          <ul>
+            <li>Red Teams drafted grants before submission</li>
+            <li>Analyzes funder award history via 990 records</li>
+            <li>Catches hard disqualifiers and fit risks</li>
+            <li>Returns documented findings with primary-source evidence</li>
+            <li>Drafts LOI and full application after fit is verified</li>
+          </ul>
+        </div>
+        <div class="div-col">
+          <p class="div-label">You decide</p>
+          <ul>
+            <li>Pursue, wait, or move on</li>
+            <li>Which opportunities to prioritize</li>
+            <li>How to refine the draft before submission</li>
+            <li>When to revisit after a gap closes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT MEMBERSHIP INCLUDES — TIGHTENED -->
+  <section>
+    <div class="container">
+      <h3>What membership includes</h3>
+      <h2>A grant office that runs before your staff time does.</h2>
+
+      <div class="membership-block">
+        <div class="membership-row">
+          <span class="icon">✓</span>
+          <div>
+            <p class="label">Unlimited Red Team: challenge before every submission</p>
+            <p class="desc">Flags fit risks, eligibility problems, and language that weakens reviewer confidence on what your team actually wrote. No per-use cost.</p>
+          </div>
+        </div>
+        <div class="membership-row">
+          <span class="icon">✓</span>
+          <div>
+            <p class="label">GRB credits for new decisions</p>
+            <p class="desc">A new grant enters your pipeline. Before a single staff hour is committed, the GRB returns a documented pursue, wait, or move on decision, tied to primary sources, not summaries.</p>
+          </div>
+        </div>
+        <div class="membership-row">
+          <span class="icon">✓</span>
+          <div>
+            <p class="label">12+ hard disqualifier checks on every analysis</p>
+            <p class="desc">Geography, entity type, budget thresholds, operating history, timing, relationship requirements. Any single failure stops the clock.</p>
+          </div>
+        </div>
+        <div class="membership-row">
+          <span class="icon">✓</span>
+          <div>
+            <p class="label">LOI and full application drafting, after verification confirms fit</p>
+            <p class="desc">Not a template. A draft built for this funder, this opportunity, after fit is confirmed.</p>
+          </div>
+        </div>
+        <div class="membership-row">
+          <span class="icon">✓</span>
+          <div>
+            <p class="label">Grant discovery, including opportunities no other platform carries</p>
+            <p class="desc">Pre-filtered to your organization. Includes grants that do not appear on Instrumentl, GrantStation, or any social feed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL — moved pre-CTA -->
+  <section style="padding: 40px 0;">
+    <div class="container">
+      <div class="hook-quote">
+        <p>"The first month we ran verification across our pipeline, five of eleven grants we were considering did not clear the eligibility check. We had already started writing on two of them. That is the work we got back, and the two funders we stopped pursuing before they knew our name."</p>
+        <cite>Executive Director, workforce development nonprofit</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAMPLE FINDING -->
+  <section style="padding-top: 0; border-top: none;">
+    <div class="container">
+      <div class="trail-sample">
+        <div class="trail-header">
+          <span class="trail-header-label">Red Team Draft Challenge: Sample Output</span>
+          <span class="trail-header-verdict">Move On</span>
+        </div>
+        <div class="trail-row">
+          <span class="trail-field">FIT</span>
+          <span class="trail-value">Funder has not awarded to organizations under $2M in the last 36 months. Geographic restriction excludes your service area. Pattern does not support pursuit.</span>
+        </div>
+        <div class="trail-row">
+          <span class="trail-field">REQUIREMENTS</span>
+          <span class="trail-value">Review stopped at FIT. No staff time committed to requirements check.</span>
+        </div>
+        <div class="trail-row">
+          <span class="trail-field">LANGUAGE</span>
+          <span class="trail-value">Review stopped at FIT. No staff time committed to language check.</span>
+        </div>
+        <div class="trail-row">
+          <span class="trail-field">Decision</span>
+          <span class="trail-value">Do not pursue. No staff time committed.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRE-CTA PRESSURE -->
+  <div class="right-now">
+    <div class="container">
+      <p>The draft your team is writing right now has not been Red Teamed. Neither have the others in your pipeline.<em>Membership is what challenges the draft before submission. Not after rejection.</em></p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <p class="standard-line">Strong teams do not submit drafts that have not been challenged.</p>
+
+      <h2>That draft is still unprotected.</h2>
+
+      <!-- Second reviewer framing -->
+      <div class="second-reviewer">
+        <p>You wrote the draft.<br>Red Team protects the submission.</p>
+        <p class="sr-rule">GRB protects the decision &nbsp;·&nbsp; Red Team protects the submission &nbsp;·&nbsp; Membership protects the pipeline</p>
+      </div>
+
+      <!-- Reputational consequence — peaks before price -->
+      <div style="border-left: 3px solid var(--red); padding: 16px 20px; margin: 0 0 24px; background: #111;">
+        <p style="color: var(--off-white); font-size: 0.97rem; margin: 0; line-height: 1.65;">The grant your team submitted last cycle to the wrong funder: that funder has your name on file. Not as a grantee. As an organization that applied and missed. The next time your name comes across their desk, that is the context. Red Team stops that from happening with the draft in motion right now.</p>
+      </div>
+
+      <!-- Cost of inaction -->
+      <div style="border-top: 1px solid #2a2a2a; padding-top: 18px; margin-bottom: 24px;">
+        <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; color: #a09890; margin-bottom: 10px;">The math</p>
+        <p style="color: var(--off-white); font-size: 0.93rem; margin: 0; line-height: 1.7;">A grant writer spending 8 hours on a proposal that should not have been written has already spent more than this membership costs. Most teams do that more than once per cycle.</p>
+      </div>
+
+      <!-- Inevitability framing + protection line repeat before price -->
+      <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--red); margin: 0 0 10px;">If the draft is not challenged, the risk stays with your team.</p>
+      <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; color: #a09890; margin: 0 0 24px;">GRB protects the decision. Red Team protects the submission.</p>
+
+      <p class="tomorrow" style="margin-bottom: 24px;">The draft your team is working on right now has not been challenged. This is the step that changes that. Before submission.</p>
+
+      <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--off-white); margin: 0 0 16px;">Beta pricing through September. $79/mo locks in before public launch.</p>
+
+      <!-- Price box -->
+      <div class="price-box">
+        <span class="price-amount">$79 / month</span>
+        <div class="price-includes">
+          <span>Unlimited Red Team challenge</span>
+          <span>GRB credits for new decisions</span>
+          <span>LOI and full application drafting</span>
+          <span>Discovery including grants no other platform carries</span>
+          <span>Cancel anytime</span>
+        </div>
+      </div>
+
+      <!-- Workflow label -->
+      <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--off-white); text-align: center; margin: 0 0 20px; padding: 14px 0; border-top: 1px solid #2a2a2a; border-bottom: 1px solid #2a2a2a;">DISCOVER &middot; VERIFY &middot; DRAFT &middot; RED TEAM | EVERY GRANT</p>
+
+      <p class="form-reassurance" style="margin: 0 0 4px; color: #a09890;">No contracts. Cancel any time.</p>
+      <p style="margin: 0 0 20px; display:flex; align-items:center; justify-content:center; gap:6px;">
+        <svg width="12" height="14" viewBox="0 0 24 28" fill="none" stroke="#a09890" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="18" height="13" rx="2"/><path d="M7 13V9a5 5 0 0 1 10 0v4"/></svg>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:#a09890;">Powered by Stripe</span>
+      </p>
+
+      <!-- Stripe checkout, auto-mounted, wrapped in soft frame -->
+      <div id="checkout-area" class="checkout-frame">
+        <div id="checkout-loading" style="text-align:center; padding:36px 0;">
+          <p style="color:var(--mid-gray); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; letter-spacing:0.04em; margin:0;">Loading secure checkout...</p>
+        </div>
+        <div id="checkout-container" style="min-height:350px;"></div>
+        <div id="checkout-error" style="display:none; text-align:center; padding:16px 0;">
+          <p style="color:var(--red); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; margin:0;"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  var stripe = Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4');
+  var checkoutReady = null;
+
+  // Auto-mount checkout on page load
+  checkoutReady = stripe.initEmbeddedCheckout({
+    fetchClientSecret: function() {
+      return fetch('/.netlify/functions/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan: 'ed' })
+      })
+      .then(function(resp) { return resp.json(); })
+      .then(function(data) {
+        if (data.error) throw new Error(data.error);
+        return data.clientSecret;
+      });
+    }
+  });
+
+  checkoutReady.then(function(checkout) {
+    document.getElementById('checkout-loading').style.display = 'none';
+    checkout.mount('#checkout-container');
+  }).catch(function(err) {
+    document.getElementById('checkout-loading').style.display = 'none';
+    var errorDiv = document.getElementById('checkout-error');
+    errorDiv.style.display = 'block';
+    errorDiv.querySelector('p').textContent = 'Something went wrong. Please refresh to try again.';
+    console.error('Checkout error:', err);
+  });
+</script>
+
+</body>
+</html>

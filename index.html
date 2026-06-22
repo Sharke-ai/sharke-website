@@ -3,8 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sharke. The verification layer for grant funding.</title>
-<meta name="description" content="Sharke measures verified coverage: how much of your grant pipeline has a documented path to funding. Grant eligibility, grant fit, funder research, and award history checked before staff time goes in. A verdict on every grant: Pursue, Wait, or Move on.">
+<title>Sharke. Build a funding pipeline that can fund your mission.</title>
+<meta name="description" content="Sharke measures your Verified Pipeline: how much of your grant pipeline has a documented path to funding. Grant eligibility, grant fit, funder research, and award history checked before staff time goes in. A verdict on every grant: Pursue, Wait, or Move on.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sharke">
+<meta property="og:title" content="Sharke. Build a funding pipeline that can fund your mission.">
+<meta property="og:description" content="See how much of your grant pipeline has a documented path to funding. Eligibility, fit, funder research, and award history checked before staff time goes in.">
+<meta property="og:url" content="https://sharke.ai/">
+<meta property="og:image" content="https://sharke.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sharke. Build a funding pipeline that can fund your mission.">
+<meta name="twitter:description" content="Your Verified Pipeline: how much of your pipeline has a documented path to funding, before staff time goes in.">
+<meta name="twitter:image" content="https://sharke.ai/og-image.png">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..800&family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -263,7 +274,7 @@
   .route.primary { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 40px; padding: 38px 36px; border-color: var(--accent-border); border-width: 1.5px; background: linear-gradient(120deg, rgba(74,227,160,0.10), var(--bg-2) 70%); }
   .route-main { flex: 1; }
   .route-side { flex: 0 0 300px; }
-  .route-tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 14px; }
+  .route-tag { font-family: var(--mono); font-size: 14px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; padding-bottom: 13px; border-bottom: 1px solid var(--rule); }
   .route.primary .route-tag { color: var(--accent); }
   .route h3 { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--ink); margin-bottom: 12px; line-height: 1.2; }
   .route.primary h3 { font-size: clamp(23px, 2.7vw, 30px); margin-bottom: 0; }
@@ -356,7 +367,7 @@
     <a href="/" class="logo"><span class="logo-mark"><span class="logo-s">S</span></span><span class="logo-text">Sharke.ai</span></a>
     <div class="header-right">
       <a href="https://sharke-app.netlify.app/login" class="header-login">Log in</a>
-      <a href="https://sharke-app.netlify.app/free-tools/funding-path-checkup" class="header-cta">Funding Path Checkup</a>
+      <a href="/funding-gap" class="header-cta">Find your funding gap</a>
     </div>
   </div>
 </header>
@@ -364,7 +375,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
-    <p class="eyebrow">The verification layer for grant funding</p>
+    <p class="eyebrow">Build the funding pipeline that funds the mission</p>
     <h1>Your grant pipeline looks full. <span style="color: var(--accent);">The funding still feels less certain than it should.</span></h1>
     <p class="lead">Here is the math on a $300,000 grant goal.</p>
     <div class="hero-ledger">
@@ -377,7 +388,7 @@
     <p class="hero-illus">Illustrative. Your own numbers are computed when you run the free Funding Path Checkup.</p>
     <p class="trust-line">Every verdict is built from documented funder behavior, eligibility criteria, award history, and primary-source 990 records. Not AI guesses.</p>
     <div class="cta-row">
-      <a href="https://sharke-app.netlify.app/free-tools/funding-path-checkup" class="btn-primary">Run the free Funding Path Checkup <span class="arr">&rarr;</span></a>
+      <a href="/funding-gap" class="btn-primary">Find your funding gap <span class="arr">&rarr;</span></a>
       <span class="risk-reducers">Free. No signup. About five minutes.</span>
     </div>
   </div>
@@ -500,11 +511,11 @@
 <section class="numbers">
   <div class="wrap">
     <p class="eyebrow">What that gap is</p>
-    <h2>Paper coverage versus verified coverage.</h2>
-    <p class="lead">Paper coverage is every grant you are tracking. Verified coverage is how much of it has a documented path to funding. The drop between the two is the number that actually decides your year.</p>
+    <h2>Your paper pipeline versus your Verified Pipeline.</h2>
+    <p class="lead">Your paper pipeline is every grant you are tracking. Your Verified Pipeline is how much of it has a documented path to funding. The drop between the two is the number that actually decides your year.</p>
 
     <div class="formula-box">
-      <div class="formula">verified coverage = verified pipeline value / your grant-revenue gap</div>
+      <div class="formula">Verified Pipeline value / your Funding Gap = how much of your goal is real</div>
       <div class="formula-gloss">In plain terms: does your pipeline hold enough verified opportunity to reach your funding goal?</div>
     </div>
 
@@ -553,7 +564,7 @@
     </blockquote>
 
     <div class="cta-row" style="margin-top:36px;">
-      <a href="https://sharke-app.netlify.app/free-tools/funding-path-checkup" class="btn-primary">Run the free Funding Path Checkup <span class="arr">&rarr;</span></a>
+      <a href="/funding-gap" class="btn-primary">Find your funding gap <span class="arr">&rarr;</span></a>
       <span class="risk-reducers">Free. No signup. About five minutes.</span>
     </div>
   </div>
@@ -604,7 +615,7 @@
 <!-- HOW VERIFIED COVERAGE WORKS -->
 <section>
   <div class="wrap">
-    <p class="eyebrow">How verified coverage works</p>
+    <p class="eyebrow">How the Verified Pipeline gets built</p>
     <h2>Measure the gap. Rule every grant in or out. Then fill the gap with grants that have a path, and keep that number current.</h2>
 
     <div class="steps">
@@ -612,7 +623,7 @@
         <div class="step-num">Step 01 / Measure</div>
         <h3>How much verified pipeline you actually need</h3>
         <p>Your funding goal is your number. Sharke shows how much verified pipeline it realistically takes to reach it, based on how grants are actually awarded to organizations like yours. A range, never a fixed promise.</p>
-        <div class="step-result">You see your verified coverage.</div>
+        <div class="step-result">You see your Funding Gap.</div>
       </div>
       <div class="step">
         <div class="step-num">Step 02 / Verify</div>
@@ -629,12 +640,12 @@
       <div class="step">
         <div class="step-num">Step 04 / Maintain</div>
         <h3>Keep the number current</h3>
-        <p>As cycles turn and funder priorities shift, your coverage stays live. Sharke also surfaces the relationships worth building now, including invite-only funders, so next cycle does not start from zero.</p>
+        <p>As cycles turn and funder priorities shift, your Verified Pipeline stays live. Sharke also surfaces the relationships worth building now, including invite-only funders, so next cycle does not start from zero.</p>
         <div class="step-result">Your number stays current, and you build toward funders you cannot apply to cold.</div>
       </div>
     </div>
 
-    <p class="motions"><strong>Two things move your coverage: the grants worth pursuing, and the funder relationships worth building now.</strong> Sharke tracks both and keeps the number current. That is the Verified Pipeline.</p>
+    <p class="motions"><strong>Two things move your Verified Pipeline: the grants worth pursuing, and the funder relationships worth building now.</strong> Sharke tracks both and keeps it current.</p>
   </div>
 </section>
 
@@ -644,8 +655,8 @@
     <p class="eyebrow">Who built Sharke</p>
     <p class="founder-narrative"><a href="https://www.linkedin.com/in/collinbrowniii/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:4px;">Collin Brown</a> has spent his career building ways to measure things people thought could only be judged by intuition. In mergers and acquisitions, his framework for measuring acquisitiveness helped companies distinguish between deals that created value and deals that destroyed it. The work is still cited in M&amp;A research today.</p>
     <p class="founder-narrative" style="margin-top:18px;">In grant-seeking, he saw the same problem: organizations were making major funding decisions without a way to measure whether their pipeline had a path to the funding they needed.</p>
-    <p class="founder-narrative" style="margin-top:14px;"><strong style="color:var(--accent);font-weight:500;">Verified coverage is that measurement.</strong></p>
-    <p class="founder-support" style="margin-top:22px;">He has secured grants from <strong>NIH, NSF</strong>, private foundations, and <strong>$1M+ federal awards</strong> across corporate, university, startup, and nonprofit work, including time as a nonprofit Executive Director. Wharton MBA. Trained at Duke Sanford School of Public Policy. Author of "AI You Can Actually Trust" (Amazon Top 50 Business Bestseller).</p>
+    <p class="founder-narrative" style="margin-top:14px;"><strong style="color:var(--accent);font-weight:500;">Your Funding Gap is that measurement.</strong></p>
+    <p class="founder-support" style="margin-top:22px;">He has won grants at both for-profit and nonprofit organizations, from <strong>NIH, NSF, and USDA</strong> to <strong>Meta and Google</strong>, including <strong>$1M+ in federal awards</strong>, and he served in the White House Office of Management and Budget. Wharton MBA. Trained at Duke Sanford School of Public Policy. Author of "AI You Can Actually Trust" (Amazon Top 50 Business Bestseller).</p>
     <div class="founder-nvidia">Selected for the <b>2026 NVIDIA Inception Program</b></div>
   </div>
 </section>
@@ -664,10 +675,10 @@
         <a href="/grant-office" class="route-cta">See Sharke as your grant office <span class="arr">&rarr;</span></a>
       </div>
       <div class="route">
-        <div class="route-tag">Nonprofits with one grant director</div>
-        <h3>Your grant director is the whole department. Every opportunity competes for the same set of hands.</h3>
+        <div class="route-tag">Nonprofits with one development director</div>
+        <h3>Your development director is the whole department. Every opportunity competes for the same set of hands.</h3>
         <p>Give them an execution team, or the tools to move faster on their own.</p>
-        <a href="/grant-director" class="route-cta">See both ways forward <span class="arr">&rarr;</span></a>
+        <a href="/grant-director" class="route-cta">See both ways to support your director <span class="arr">&rarr;</span></a>
       </div>
       <div class="route">
         <div class="route-tag">Grant writers &amp; consultants</div>
@@ -677,9 +688,9 @@
       </div>
       <div class="route">
         <div class="route-tag">Foundations &amp; capacity builders</div>
-        <h3>At the next board review you will be asked what your capacity dollars produced. Right now the honest answer is "we ran a workshop."</h3>
-        <p>Build a verified pipeline for every organization you fund.</p>
-        <a href="/foundations" class="route-cta">See how this fits your portfolio <span class="arr">&rarr;</span></a>
+        <h3>At the next board review you will be asked what your capacity dollars built. Right now the honest answer is "we ran a workshop."</h3>
+        <p>Build the one capacity that sustains a mission: the capacity to fund it, installed in every organization you fund.</p>
+        <a href="/foundations" class="route-cta">See how this builds your grantees' capacity <span class="arr">&rarr;</span></a>
       </div>
     </div>
   </div>
@@ -690,7 +701,7 @@
   <div class="wrap">
     <p class="final-urgency">The hours are already being spent. The only question is whether they are going to the right grants.</p>
     <p class="final-inev">See whether your pipeline can actually reach your funding goal, before the year decides for you.</p>
-    <a href="https://sharke-app.netlify.app/free-tools/funding-path-checkup" class="btn-primary">Run the free Funding Path Checkup <span class="arr">&rarr;</span></a>
+    <a href="/funding-gap" class="btn-primary">Find your funding gap <span class="arr">&rarr;</span></a>
     <p class="risk-reducers">Free. No signup. About five minutes.</p>
   </div>
 </section>
@@ -707,7 +718,7 @@
 
 <div class="sticky-cta">
   <span>Free. About five minutes.</span>
-  <a href="https://sharke-app.netlify.app/free-tools/funding-path-checkup" class="btn-primary">Run the Funding Path Checkup <span class="arr">&rarr;</span></a>
+  <a href="/funding-gap" class="btn-primary">Find your funding gap <span class="arr">&rarr;</span></a>
 </div>
 
 </body>

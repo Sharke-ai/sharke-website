@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sharke.ai - Founding Member Pricing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-primary: #FFFFFF;
+      --text-secondary: #D1D5DB;
+      --text-muted: #9CA3AF;
+      --bg-primary: #0a0f1a;
+      --bg-secondary: #0f1520;
+      --bg-card: #111827;
+      --border: #1F2937;
+      --border-light: #374151;
+      --accent: #4AE3A0;
+      --accent-muted: rgba(74, 227, 160, 0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* Nav */
+    .nav {
+      padding: 20px 0;
+      background: transparent;
+    }
+    .nav-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-mark {
+      width: 28px; height: 28px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-s { color: var(--bg-primary); font-size: 16px; font-weight: 600; }
+    .logo-text { font-size: 17px; font-weight: 500; color: var(--text-primary); }
+    .nav-link {
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text-primary); }
+
+    /* Hero */
+    .hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 40px 40px;
+      text-align: center;
+    }
+    .hero-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 16px;
+      line-height: 1.6;
+    }
+    .hero-stat {
+      display: inline-block;
+      font-size: 15px;
+      color: var(--accent);
+      background: var(--accent-muted);
+      padding: 8px 20px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+
+    /* Pricing Cards */
+    .pricing-section {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
+    }
+    .pricing-grid {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .pricing-card {
+      flex: 1;
+      min-width: 280px;
+      max-width: 400px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px 32px;
+      text-align: left;
+    }
+    .pricing-card.featured {
+      border: 2px solid var(--accent);
+      position: relative;
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #0a0e17;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 4px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .pricing-tier {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .pricing-amount {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    .pricing-period {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+    .pricing-desc {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin: 16px 0 28px;
+      line-height: 1.6;
+    }
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 32px;
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 2.2;
+    }
+    .pricing-features li {
+      padding-left: 24px;
+      position: relative;
+    }
+    .pricing-features li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .pricing-cta {
+      display: block;
+      text-align: center;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+    .pricing-cta-default {
+      background: var(--border-light);
+      color: var(--text-primary);
+    }
+    .pricing-cta-default:hover {
+      background: #4B5563;
+    }
+    .pricing-cta-accent {
+      background: var(--accent);
+      color: #0a0e17;
+    }
+    .pricing-cta-accent:hover {
+      filter: brightness(1.1);
+    }
+    .pricing-note {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    /* Proof Section */
+    .proof-section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+      text-align: center;
+    }
+    .proof-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .proof-quote {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 32px;
+      padding: 0 20px;
+    }
+    .proof-stats {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .proof-stat {
+      text-align: center;
+    }
+    .proof-stat-number {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .proof-stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ROI Section */
+    .roi-section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+    }
+    .roi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px;
+    }
+    .roi-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .roi-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+    }
+    .roi-row:last-child { border-bottom: none; }
+    .roi-label { color: var(--text-secondary); }
+    .roi-value { color: var(--text-primary); font-weight: 500; }
+    .roi-highlight {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 17px;
+    }
+
+    /* FAQ */
+    .faq-section {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+    }
+    .faq-title {
+      font-size: 24px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0;
+    }
+    .faq-question {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .faq-answer {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .footer a { color: var(--accent); }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 32px; }
+      .hero { padding: 60px 24px 40px; }
+      .pricing-section { padding: 40px 24px 60px; }
+      .pricing-grid { gap: 24px; }
+      .pricing-card { min-width: 100%; }
+      .proof-stats { gap: 24px; }
+      .roi-card { padding: 24px; }
+      .faq-section { padding: 0 24px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-content">
+      <a href="/" class="logo">
+        <div class="logo-mark"><span class="logo-s">S</span></div>
+        <span class="logo-text">Sharke</span>
+      </a>
+      <a href="/" class="nav-link">Back to Home</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-label">Founding Partner Pricing</div>
+    <h1>A funding pipeline that can fund your mission</h1>
+    <p>Sharke is the grants department for nonprofits that cannot afford one. We build and verify your funding pipeline, done for you, so your hours only go to grants you can win.</p>
+    <p style="font-size: 15px;">No contract. Cancel anytime. Founding rates locked in.</p>
+    <div class="hero-stat">Founding partners start now and pay nothing until September 1, then the monthly rate begins</div>
+  </section>
+
+  <!-- Pricing Cards -->
+  <section class="pricing-section">
+    <div class="pricing-grid">
+
+      <!-- Done-for-you: the grants department -->
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Free until Sept 1</div>
+        <div class="pricing-tier">Done for you</div>
+        <div class="pricing-amount">$250<span class="pricing-period">+/month</span></div>
+        <p class="pricing-desc">The grants department for nonprofits that cannot afford one. We build and verify your funding pipeline and keep it current, priced to how much of your mission rides on grants.</p>
+        <ul class="pricing-features">
+          <li>Half your funding from grants: $250/month</li>
+          <li>About three-quarters: $350/month</li>
+          <li>Essentially all of it: $450/month</li>
+          <li>Founding partners pay nothing until September 1, then the monthly rate begins</li>
+          <li>Federal grants over $100k added per application</li>
+        </ul>
+        <a href="https://calendly.com/collin-sharke?utm_source=website&amp;utm_campaign=pricing" class="pricing-cta pricing-cta-accent">
+          Spend 15 minutes on your pipeline
+        </a>
+        <p class="pricing-note">Best for organizations under $3M with little or no grant staff</p>
+      </div>
+
+      <!-- Self-serve -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Self-serve</div>
+        <div class="pricing-amount">$149<span class="pricing-period">/month</span></div>
+        <p class="pricing-desc">Run the verification yourself. The Founding Partner rate, locked for your first year.</p>
+        <ul class="pricing-features">
+          <li>Funding Path Checkup and verified-coverage scoring</li>
+          <li>Funder behavior, 990 award history, eligibility</li>
+          <li>Founding Partner rate: $149/month year one, $199 after</li>
+          <li>No contract, cancel anytime</li>
+        </ul>
+        <a href="https://sharke-app.netlify.app/signup" class="pricing-cta pricing-cta-default">
+          Start self-serve
+        </a>
+        <p class="pricing-note">Best for organizations with someone to run it</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Proof Section -->
+  <section class="proof-section">
+    <div class="proof-label">What verification catches</div>
+    <p class="proof-quote">
+      &ldquo;A nonprofit found a foundation grant through an AI research tool. The mission language was close.
+      The issue area matched. The grant amount was right. They started writing. A review of the foundation&rsquo;s
+      990s showed that over the past four years, every single grant had gone to organizations the board members
+      had a prior relationship with. The foundation had never funded a cold applicant. That is 20 to 30 hours
+      of staff time invested in a process that was never open to them.&rdquo;
+    </p>
+    <div class="proof-stats">
+      <div class="proof-stat">
+        <div class="proof-stat-number">30-40%</div>
+        <div class="proof-stat-label">of &ldquo;good fit&rdquo; grants fail verification</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-number">20-30 hrs</div>
+        <div class="proof-stat-label">saved per dead-end application avoided</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI Section -->
+  <section class="roi-section">
+    <div class="roi-card">
+      <div class="roi-title">The math is simple</div>
+      <div class="roi-row">
+        <span class="roi-label">Average hours wasted per dead-end application</span>
+        <span class="roi-value">20-30 hours</span>
+      </div>
+      <div class="roi-row">
+        <span class="roi-label">Average nonprofit staff cost per hour</span>
+        <span class="roi-value">$35/hr</span>
+      </div>
+      <div class="roi-row">
+        <span class="roi-label">Cost of ONE dead-end application</span>
+        <span class="roi-value">$700-$1,050</span>
+      </div>
+      <div class="roi-row">
+        <span class="roi-label">Sharke, done for you (monthly)</span>
+        <span class="roi-value">From $250</span>
+      </div>
+      <div class="roi-row">
+        <span class="roi-label">Applications to skip to break even</span>
+        <span class="roi-highlight">Just 1</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <h2 class="faq-title">Common questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-question">How is this different from Instrumentl or GrantStation?</div>
+      <div class="faq-answer">Those tools hand you more matches to sort through. Sharke does the work and tells you which grants can actually fund your mission. Most tools rent an AI to guess your matches from a description. Sharke runs a model built to learn from what actually gets funded, checks every grant against funder 990 data and award history, and builds the verified pipeline for you. They add decisions to your week. We remove them.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Can we try it before committing?</div>
+      <div class="faq-answer">First month is free. No contract. Cancel anytime. You&rsquo;ll see results on your first grant check.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">We already check eligibility. Why do we need this?</div>
+      <div class="faq-answer">Eligibility is table stakes. Sharke checks funder behavior: who they&rsquo;ve actually funded, whether they take cold applicants, whether their priorities have shifted. That&rsquo;s the stuff guidelines don&rsquo;t tell you.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">What if I have more than 5 clients? (consultant)</div>
+      <div class="faq-answer">Email us at collin@sharke.ai. We offer custom pricing for larger practices.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">We can&rsquo;t afford another subscription.</div>
+      <div class="faq-answer">Skipping a single dead-end application saves 20 to 30 hours, roughly $700 to $1,050 in staff time. The plan pays for itself the first time it stops one, and most teams stop several a quarter.</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 <a href="/">Sharke.ai</a>. The grants department for nonprofits that cannot afford one.</p>
+    <p style="margin-top: 8px;">Questions? <a href="mailto:collin@sharke.ai">collin@sharke.ai</a> &middot; 512-253-1537</p>
+  </footer>
+
+</body>
+</html>
