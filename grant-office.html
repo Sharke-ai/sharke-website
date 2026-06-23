@@ -4,8 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sharke: Your Grant Office, For Nonprofits With No Grant Staff</title>
-<meta name="description" content="No one on staff owns grants? Sharke becomes your grant office. We find and qualify the funders that fit, draft against their real requirements, and track every deadline, so a real grant pipeline runs without hiring for one.">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="description" content="No one on staff owns grants? Sharke becomes your grant office. It verifies fit before any hours go in, surfaces only the funders with a documented path, drafts the ones you choose to pursue, and tracks every deadline, so a real grant pipeline runs without hiring for one.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sharke">
+<meta property="og:title" content="Sharke: Your Grant Office, For Nonprofits With No Grant Staff">
+<meta property="og:description" content="No one on staff owns grants? Sharke becomes your grant office: it verifies fit before hours go in, surfaces funders with a documented path, drafts what you pursue, and tracks every deadline.">
+<meta property="og:url" content="https://sharke.ai/grant-office">
+<meta property="og:image" content="https://sharke.ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sharke: Your Grant Office">
+<meta name="twitter:description" content="A real grant pipeline, without hiring for one. Verification-first grant intelligence.">
+<meta name="twitter:image" content="https://sharke.ai/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --black: #0a0a0a;
@@ -15,6 +26,23 @@
     --mid-gray: #6b6560;
     --light-gray: #ddd8d0;
     --rule: #d0cbc2;
+
+    /* Decision Record paper tokens (shared component, matches homepage) */
+    --paper: #f6f4ef;
+    --paper-ink: #16140f;
+    --paper-ink-2: #403d35;
+    --paper-ink-3: #857f74;
+    --paper-rule: #ddd8cf;
+    /* shared verified green: same value as the homepage Decision Record */
+    --verified: #1f6b42;
+    --verified-bg: #eef6f0;
+    --verified-border: #bfdcc8;
+    --rec-red: #8f2424;
+    --rec-red-bg: #fbf1f1;
+    /* shared type tokens */
+    --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'IBM Plex Mono', monospace;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,10 +50,13 @@
   body {
     background: var(--warm-white);
     color: var(--black);
-    font-family: 'Libre Baskerville', Georgia, serif;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
+
+  /* Serif headlines (editorial), clean sans body */
+  .hook h1, h2 { font-family: 'Fraunces', Georgia, serif; }
 
   /* HEADER */
   .site-header {
@@ -35,16 +66,11 @@
     align-items: center;
     justify-content: space-between;
   }
-  .logo {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--black);
-    text-decoration: none;
-  }
-  .logo span { color: var(--red); }
+  /* Shared brand lockup: S badge + wordmark (badge uses each surface's accent) */
+  .brandmark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brandmark .bm-mark { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 6px; background: var(--red); flex-shrink: 0; }
+  .brandmark .bm-s { font-family: var(--sans); color: var(--warm-white); font-size: 15px; font-weight: 700; line-height: 1; }
+  .brandmark .bm-text { font-family: var(--sans); font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: var(--black); line-height: 1; }
   .header-tag {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.72rem;
@@ -119,6 +145,20 @@
   .walk-list .step-text { font-size: 0.97rem; color: #1a1a1a; line-height: 1.55; }
   .walk-list .step-text strong { font-weight: 700; }
 
+  /* VERDICT CHIPS */
+  .verdict-row { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .verdict-chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border: 1px solid var(--rule);
+    background: var(--warm-white);
+    color: var(--mid-gray);
+  }
+  .verdict-chip.pursue { border-color: var(--verified); color: var(--verified); }
+
   /* BEFORE / AFTER */
   .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 32px 0; border: 1px solid var(--rule); }
   @media (max-width: 500px) { .before-after { grid-template-columns: 1fr; } }
@@ -134,6 +174,7 @@
     margin-bottom: 12px;
   }
   .ba-col p { font-size: 0.93rem; margin: 0; }
+  .irrevocable { font-size: 1rem; color: var(--black); font-weight: 700; margin: 24px 0 0; line-height: 1.5; }
 
   /* CREDIBILITY */
   .cred-block { border-left: 3px solid var(--red); padding: 22px 26px; margin-top: 8px; background: var(--off-white); }
@@ -160,10 +201,89 @@
   .cta-btn:hover { background: var(--red); color: #fff; }
   .cta-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #a09890; letter-spacing: 0.06em; margin-top: 20px; }
 
+  /* PRICE LEDGER */
+  .price-ledger { border: 1px solid #2a2a2a; padding: 22px 24px; margin: 28px 0; background: #111; font-family: 'IBM Plex Mono', monospace; text-align: left; }
+  .price-ledger .row { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid #2a2a2a; color: #a09890; font-size: 0.85rem; }
+  .price-ledger .row .v { color: var(--off-white); white-space: nowrap; }
+  .price-ledger .row.price { padding-top: 14px; border-bottom: none; }
+  .price-ledger .row.price .k, .price-ledger .row.price .v { color: #fff; font-weight: 700; font-size: 0.95rem; }
+  .price-ledger .founding { font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: #e57368; margin: 14px 0 0; }
+  .price-ledger .terms { font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: #a09890; margin: 8px 0 0; }
+  .price-ledger .source { font-size: 0.64rem; letter-spacing: 0.03em; color: #7a736c; margin: 12px 0 0; line-height: 1.5; }
+  .src-note { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; color: var(--mid-gray); letter-spacing: 0.03em; line-height: 1.5; margin: 16px 0 0; }
+  .price-ledger .tier { font-size: 0.64rem; letter-spacing: 0.05em; text-transform: uppercase; color: #a09890; margin: 12px 0 0; }
+
+  /* SELF-SERVE SECONDARY */
+  .self-serve { border: 1px solid #2a2a2a; padding: 22px 24px; margin: 30px 0 0; }
+  .self-serve .ss-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: #a09890; margin: 0 0 12px; }
+  .self-serve p { color: #a09890; font-size: 0.92rem; margin: 0 0 14px; line-height: 1.55; }
+  .self-serve .ss-price { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--off-white); margin: 0 0 16px; }
+  .self-serve .ss-price span { display: block; font-size: 0.62rem; color: #7a736c; letter-spacing: 0.03em; margin-top: 5px; text-transform: uppercase; }
+  .self-serve .ss-btn { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--off-white); border: 1px solid #6b6560; padding: 13px 22px; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+  .self-serve .ss-btn:hover { border-color: var(--off-white); color: #fff; }
+  .self-serve button.ss-btn { background: transparent; cursor: pointer; }
+  .ss-checkout { background: var(--warm-white); border-radius: 6px; padding: 16px; margin-top: 16px; }
+  .ss-checkout-msg p { color: var(--mid-gray); font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; text-align: center; margin: 0; padding: 18px 0; }
+  #ss-checkout-error p { color: var(--red); }
+  .ss-stripe { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--mid-gray); letter-spacing: 0.04em; margin: 0 0 12px; text-align: center; }
+  .beta-badge { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: var(--red); padding: 6px 12px; margin: 0 0 14px; }
+
+  /* DECISION RECORD (shared paper-card component, identical to homepage) */
+  .record {
+    background: var(--paper); color: var(--paper-ink);
+    border: 1px solid var(--paper-rule); border-radius: 6px; overflow: hidden;
+    box-shadow: 0 14px 36px rgba(22,20,15,0.10);
+    font-family: var(--mono); font-size: 12px; line-height: 1.55; margin-top: 8px;
+  }
+  .rec-head { display: flex; justify-content: space-between; align-items: flex-start; padding: 18px 22px 14px; border-bottom: 1px solid var(--paper-rule); }
+  .rec-brand { font-size: 8.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--paper-ink-3); margin-bottom: 6px; }
+  .rec-grant { font-family: var(--serif); font-size: 17px; font-weight: 400; line-height: 1.18; color: var(--paper-ink); }
+  .rec-meta { font-size: 10px; color: var(--paper-ink-3); margin-top: 5px; }
+  .rec-verdict { padding: 16px 22px; }
+  .rec-verdict-eyebrow { font-size: 8.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--paper-ink-3); margin-bottom: 8px; }
+  .rec-badge { display: inline-block; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 10px; border-radius: 3px; font-weight: 500; margin-bottom: 12px; }
+  .rec-line { font-family: var(--serif); font-style: italic; font-size: 48px; font-weight: 400; line-height: 0.95; margin-bottom: 8px; }
+  .pursue .rec-badge { color: var(--verified); background: var(--verified-bg); border: 1px solid var(--verified-border); }
+  .pursue .rec-line { color: var(--verified); }
+  .pursue .rec-redirect { color: var(--verified); }
+  .moveon .rec-badge { color: var(--rec-red); background: var(--rec-red-bg); border: 1px solid #e6c0c0; }
+  .moveon .rec-line { color: var(--rec-red); }
+  .rec-redirect { font-size: 11.5px; font-weight: 500; color: var(--paper-ink); margin-top: 10px; padding: 9px 12px; background: var(--verified-bg); border-left: 3px solid var(--verified); border-radius: 3px; }
+  .rec-reasons { padding: 4px 22px 18px; }
+  .rec-reason { padding: 11px 0; border-top: 1px solid var(--paper-rule); }
+  .rec-reason-h { font-size: 11.5px; font-weight: 500; color: var(--paper-ink); margin-bottom: 3px; }
+  .rec-reason-h .n { color: var(--paper-ink-3); margin-right: 6px; }
+  .rec-reason-b { font-size: 11px; color: var(--paper-ink-2); }
+  .rec-source { font-size: 9.5px; color: var(--paper-ink-3); margin-top: 4px; font-style: italic; }
+  .rec-note { padding: 12px 22px 18px; font-size: 10.5px; color: var(--paper-ink-3); border-top: 1px solid var(--paper-rule); line-height: 1.55; }
+  .rec-foot { display: flex; align-items: center; gap: 8px; }
+  .rec-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .pursue .rec-dot { background: var(--verified); }
+  .moveon .rec-dot { background: var(--rec-red); }
+  .rec-foot-text { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--paper-ink-3); }
+
+  /* TESTIMONIAL */
+  .quote { border-left: 3px solid var(--red); padding: 4px 0 4px 24px; margin-top: 8px; }
+  .quote p { font-size: 1.05rem; color: var(--black); font-style: italic; line-height: 1.6; margin: 0 0 14px; }
+  .quote cite { font-family: 'IBM Plex Mono', monospace; font-style: normal; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mid-gray); }
+
+  /* FREE ON-RAMP */
+  .cta-section .free-onramp { font-size: 0.92rem; color: #a09890; margin-top: 22px; }
+  .cta-section .free-onramp a { color: var(--off-white); text-decoration: underline; text-underline-offset: 3px; }
+  .cta-section .free-onramp a:hover { color: #fff; }
+
   /* CLOSE */
   .close-section { padding: 72px 0 80px; }
   .close-section p { font-size: 1rem; color: var(--mid-gray); font-style: italic; max-width: 520px; }
   .close-section .final-line { font-size: 1.05rem; color: var(--black); font-style: normal; font-weight: 700; margin-top: 24px; }
+
+  /* FOOTER */
+  .site-footer { border-top: 1px solid var(--rule); padding: 40px 0; background: var(--off-white); }
+  .site-footer .footer-badge { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); margin: 0 0 12px; }
+  .site-footer .footer-data { font-size: 0.85rem; color: var(--mid-gray); margin: 0 0 14px; max-width: 560px; line-height: 1.6; }
+  .site-footer .footer-legal { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--mid-gray); letter-spacing: 0.04em; margin: 0; }
+  .site-footer .footer-legal a { color: var(--mid-gray); text-decoration: underline; text-underline-offset: 3px; }
+  .site-footer .footer-legal a:hover { color: var(--black); }
 
   /* FADE IN */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
@@ -180,14 +300,33 @@
     .hook { padding-top: 56px; padding-bottom: 56px; }
     .cta-section { padding: 60px 0; }
     .walk-list .step-num { min-width: 48px; }
+    .hook h1 { font-size: 1.8rem; }
+    .cta-btn, .hook-cta, .ss-btn { display: block; width: 100%; text-align: center; }
+    .cta-btn { padding: 17px 16px; font-size: 0.78rem; }
   }
+
+  /* HERO + MID-PAGE CTA */
+  .hook-cta { display: inline-block; margin-top: 32px; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; background: var(--black); color: var(--off-white); border: 1.5px solid var(--black); padding: 15px 26px; text-decoration: none; transition: background 0.2s, border-color 0.2s, color 0.2s; }
+  .hook-cta:hover { background: var(--red); border-color: var(--red); color: #fff; }
+  .midpage-cta { text-align: center; margin-top: 40px; }
+  .midpage-cta .hook-cta { margin-top: 0; }
+
+  /* FAQ */
+  .faq details { border-bottom: 1px solid var(--rule); }
+  .faq details:first-of-type { border-top: 1px solid var(--rule); }
+  .faq summary { padding: 18px 0; font-size: 1rem; font-weight: 700; color: var(--black); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; font-family: 'IBM Plex Mono', monospace; color: var(--red); font-size: 1.3rem; line-height: 1; flex-shrink: 0; }
+  .faq details[open] summary::after { content: '\2212'; }
+  .faq details p { margin: 0 0 18px; font-size: 0.95rem; color: #2a2a2a; line-height: 1.6; }
+  .faq details:not([open]) p { display: none; }
 </style>
 </head>
 <body>
 
 <header class="site-header">
-  <a class="logo" href="https://sharke.ai">Sharke<span>.</span>ai</a>
-  <span class="header-tag">Verification-First Grant Intelligence</span>
+  <a class="brandmark" href="https://sharke.ai"><span class="bm-mark"><span class="bm-s">S</span></span><span class="bm-text">Sharke.ai</span></a>
+  <span class="header-tag">Your grant office, done for you</span>
 </header>
 
 <main>
@@ -196,24 +335,39 @@
   <section class="hook">
     <div class="container">
       <p class="eyebrow">Nonprofits with no grant office</p>
-      <h1>You do not have a grant office. You have a list of grants no one has time to run.</h1>
-      <p class="subhead">When grants are everyone's side job, they become no one's job. The deadlines you meant to hit pass quietly. The funders who would have said yes never hear from you.</p>
+      <h1>You do not have a grant office. You have deadlines passing while no one owns the pipeline.</h1>
+      <p class="subhead">Somewhere on your list right now is a grant worth pursuing this cycle. No one has the hours to find out which one. The deadlines you meant to hit pass quietly, while you and your staff are working elsewhere.</p>
+      <a href="/funding-gap" class="hook-cta">Find your funding gap &rarr;</a>
     </div>
   </section>
 
   <!-- REFRAME -->
   <section>
     <div class="container">
-      <h3>The real problem</h3>
-      <h2>The problem was never the writing.</h2>
-      <p>It is that no one owns the work from start to finish. Without an owner, every grant starts late, gets researched in a hurry, and goes out on a guess about whether the funder was ever a fit.</p>
-      <p>That is not a staffing failure. It is what happens to any task that belongs to everyone and no one.</p>
+      <h3>What your team cannot see yet</h3>
+      <h2>You cannot tell which of these grants can actually be won.</h2>
+      <p>Even with the hours, every grant on that list would go out on a guess about whether the funder was ever a real fit. Some of them are not long shots. They have no documented path to funding at all, and right now there is no way to tell which ones.</p>
+      <p>In the grant pipelines Sharke has reviewed, about 1 in 4 had no path. Staff time went into them anyway, and it was never coming back.</p>
       <ul class="failure-list">
-        <li>Good funders you never found.</li>
-        <li>Deadlines that passed before anyone looked.</li>
         <li>Hours spent on grants that were never a fit.</li>
-        <li>Drafts started the week they were due.</li>
+        <li>Grants pursued on a guess, not a documented path.</li>
+        <li>Deadlines that passed before anyone looked.</li>
+        <li>Good funders you never found.</li>
       </ul>
+      <p class="src-note">Share of pipeline grants with no documented path to funding: based on grant pipelines reviewed by Sharke.</p>
+    </div>
+  </section>
+
+  <!-- WHY NOW -->
+  <section>
+    <div class="container">
+      <h3>Why waiting is already late</h3>
+      <h2>Next year's funding is being decided right now.</h2>
+      <p>The funders who will write checks next year are building those relationships this cycle. The programs renewing next year are reviewing who fits now. None of it waits for the moment you decide you need the money. By then the cycle is underway and the room is full.</p>
+      <p>Roughly 70% of foundations do not accept unsolicited proposals. That money goes where a funder already knows the organization. The relationship that puts you in that group forms months before the grant exists, not the week you apply. Sharke surfaces the invite-only funders worth building toward now, so the door is open before you need it.</p>
+      <p>Federal programs freeze and priorities shift, and a grant you won before is no longer a safe bet to win again. When you need to replace that funding fast, there is no fast. The pipeline that catches the loss is the one you started before it happened. Sharke verifies whether a program is funding this cycle and whether you still fit what it funds now, before anyone spends the 50-plus hours a federal application takes.</p>
+      <p class="irrevocable">If you wait until the grant is needed, you are already late.</p>
+      <p class="src-note">Share of U.S. foundations that do not accept unsolicited proposals: Foundation Center / Candid.</p>
     </div>
   </section>
 
@@ -222,19 +376,25 @@
     <div class="container">
       <h3>What Sharke does</h3>
       <h2>Sharke becomes your grant office.</h2>
-      <p>Not one more tool you have to find time to learn. The function itself, run for you, from finding the grant to handing you a draft.</p>
+      <p>Sharke builds and manages a verified pipeline for you: the grant office function itself, run for you, from finding the grants worth pursuing to a finished draft. Not one more thing for your team to learn and run.</p>
       <ul class="walk-list">
         <li>
           <span class="step-num">Step 1</span>
-          <span class="step-text"><strong>Finds and watches your funders.</strong> Sharke tracks the funders that match your mission, so real opportunities reach you instead of you chasing them.</span>
+          <span class="step-text"><strong>Verifies fit before any hours go in.</strong> Eligibility, funder history, your size and geography, where you sit in the funding cycle. Every grant comes back with one verdict and the sources behind it, not a score or a percentage.
+            <span class="verdict-row">
+              <span class="verdict-chip pursue">Pursue</span>
+              <span class="verdict-chip">Wait</span>
+              <span class="verdict-chip">Move on</span>
+            </span>
+          </span>
         </li>
         <li>
           <span class="step-num">Step 2</span>
-          <span class="step-text"><strong>Verifies fit before any time goes in.</strong> Eligibility, funder history, your size and geography, the timing of the cycle. Each grant comes back with a clear verdict: pursue, wait, or move on.</span>
+          <span class="step-text"><strong>Surfaces the grants and funders worth your time.</strong> Sharke watches the funders that match your mission and surfaces better-fit grants you are not tracking, each one carrying its own verdict, plus the funder relationships worth building toward now. You add only what has a documented path, never a longer list to triage.</span>
         </li>
         <li>
           <span class="step-num">Step 3</span>
-          <span class="step-text"><strong>Drafts the application for you.</strong> Written against the funder's real requirements and grounded in your organization's own materials, not a generic template.</span>
+          <span class="step-text"><strong>Drafts the ones you choose to pursue.</strong> Written against the funder's real requirements and grounded in your organization's own materials, not a generic template.</span>
         </li>
         <li>
           <span class="step-num">Step 4</span>
@@ -244,13 +404,51 @@
     </div>
   </section>
 
+  <!-- WHAT A VERDICT LOOKS LIKE -->
+  <section>
+    <div class="container">
+      <h3>What a verdict looks like</h3>
+      <h2>A real verdict, with the sources behind it.</h2>
+      <div class="record moveon">
+        <div class="rec-head">
+          <div>
+            <div class="rec-brand">Sharke / Decision Record</div>
+            <div class="rec-grant">Community Health Fund</div>
+            <div class="rec-meta">2026 cycle &middot; budget floor in effect</div>
+          </div>
+        </div>
+        <div class="rec-verdict">
+          <div class="rec-verdict-eyebrow">Verdict</div>
+          <span class="rec-badge">Strategic mismatch</span>
+          <div class="rec-line">Move on.</div>
+          <div class="rec-redirect">Sharke redirects those 30 hours to the better-fit opportunities it surfaces in their place.</div>
+        </div>
+        <div class="rec-reasons">
+          <div class="rec-reason">
+            <div class="rec-reason-h"><span class="n">1</span>Award history favors much larger budgets</div>
+            <div class="rec-reason-b">Of the last 20 grants, 18 went to organizations with budgets above $2M. This organization's budget is $410K.</div>
+            <div class="rec-source">Source: 990-PF Schedule I, 2021 to 2025</div>
+          </div>
+          <div class="rec-reason">
+            <div class="rec-reason-h"><span class="n">2</span>No new grantees</div>
+            <div class="rec-reason-b">No first-time grantee has been funded in the last four cycles.</div>
+            <div class="rec-source">Source: 990-PF Schedule I, award recipients</div>
+          </div>
+        </div>
+        <div class="rec-note">Categorical, never a score, never a win promise.</div>
+      </div>
+      <p class="src-note">Illustrative example. Your verdicts are built from each funder's own documented record.</p>
+    </div>
+  </section>
+
   <!-- WHAT YOU GET -->
   <section>
     <div class="container">
       <h3>What you get</h3>
-      <h2>A real grant pipeline, without hiring for one.</h2>
-      <p>You get the output of a grant office: a qualified pipeline, decisions you can defend to your board, and drafts ready for you to review.</p>
+      <h2>A verified pipeline that de-risks your mission's funding.</h2>
+      <p>You get the output of a grant office: a pipeline where every grant has been checked for a real path, decisions you can defend to your board, and drafts ready for you to review. The funding behind your programs stops resting on grants no one verified.</p>
       <p>You do not get another hire to manage, another salary to cover, or another system to keep running.</p>
+      <div class="midpage-cta"><a href="#cta-section" class="hook-cta">See your options &rarr;</a></div>
     </div>
   </section>
 
@@ -265,9 +463,10 @@
         </div>
         <div class="ba-col">
           <p class="ba-label">After</p>
-          <p>Grants run on a schedule someone else keeps. You see the decision before the work starts, and review drafts instead of writing them.</p>
+          <p>Grants run on a schedule someone else keeps. You see the verdict before the work starts, and review drafts instead of writing them.</p>
         </div>
       </div>
+      <p class="irrevocable">Once you have seen a pipeline run on a schedule someone else keeps, going back to grants as everyone's spare-afternoon job stops feeling like a plan.</p>
     </div>
   </section>
 
@@ -276,19 +475,75 @@
     <div class="container">
       <h3>Who built it</h3>
       <div class="cred-block">
-        <p>Sharke was built by Collin Brown, who has secured grants from NIH, NSF, and private foundations, including over a million dollars in federal awards, and has served as a nonprofit Executive Director. The verification standard behind every decision is the same one he used to win them.</p>
+        <p>I have spent my career replacing gut calls with data: how the largest financial institutions set their global IT footprint, when mergers and acquisitions create value instead of destroying it, and which grants are worth winning, at for-profit and nonprofit organizations from NIH, NSF, and USDA to Meta and Google. I have done that work across the private sector and the White House Office of Management and Budget, and I sign off on every Sharke verdict myself.</p>
+        <p style="margin-top:14px; font-family:'IBM Plex Mono',monospace; font-size:0.8rem; letter-spacing:0.04em; color:#6b6560;">Collin Brown &nbsp;/&nbsp; Wharton MBA &nbsp;/&nbsp; Founder, Sharke.ai</p>
       </div>
     </div>
   </section>
 
+  <!-- PROOF -->
+  <section>
+    <div class="container">
+      <h3>From a team that ran it</h3>
+      <div class="quote">
+        <p>"What hit me was realizing how much time we were putting into grants that were never really live opportunities for us. We had a couple that looked completely reasonable on the surface, but once we dug into who the funder actually supported, it changed the conversation pretty fast. I'd rather know that before my staff disappears into another month of work."</p>
+        <cite>Executive Director · Community health nonprofit · $850K budget</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container">
+      <h3>Questions</h3>
+      <h2>Before you decide</h2>
+      <details>
+        <summary>When can we start?</summary>
+        <p>You can book a grant office review now. Self-serve signups open with the beta on June 22, 2026.</p>
+      </details>
+      <details>
+        <summary>What if we have not identified any grants yet?</summary>
+        <p>That is the common starting point. Sharke finds and qualifies the funders that fit your mission, so you begin from a verified shortlist instead of a blank page.</p>
+      </details>
+      <details>
+        <summary>Is this AI, or is a person involved?</summary>
+        <p>Both. Sharke does the research and drafting, and every verdict is built from documented funder filings, 990s, award history, and eligibility, not AI guesses. With the grant office plan, the Sharke team manages the work for you.</p>
+      </details>
+      <details>
+        <summary>Do we have to sign a contract?</summary>
+        <p>No. It is month to month, and you can cancel anytime.</p>
+      </details>
+    </div>
+  </section>
+
   <!-- CTA -->
-  <section class="cta-section">
+  <section class="cta-section" id="cta-section">
     <div class="container">
       <h2>Start running grants like you have an office.</h2>
-      <p>Tell Sharke about your organization and your priorities. It begins finding and qualifying the grants worth your time, and drafting the ones you choose to pursue.</p>
-      <p class="action-trigger">You do not have to hire a department to act like you have one.</p>
-      <a href="https://sharke-app.netlify.app/signup" class="cta-btn">Get started &rarr;</a>
-      <p class="cta-meta">Built for nonprofits with no grant staff.</p>
+      <p>Somewhere on your list right now is a deadline that closes this cycle, and a funder who will not hear from you before it does. Nothing moves until someone owns it. Book a grant office review, bring the grants already in motion, and see where the documented path is before another month of staff time gets committed.</p>
+      <p class="action-trigger">Sharke does the grant work. Your team reviews and approves. You do not hire a department, you get one.</p>
+
+      <div class="price-ledger">
+        <div class="row"><span class="k">Grant work, done properly</span><span class="v">~45 hrs / month</span></div>
+        <div class="row"><span class="k">Outsourced to a grant consultant</span><span class="v">$2,250 to $4,500 / mo</span></div>
+        <div class="row price"><span class="k">Run by Sharke, your grant office</span><span class="v">$250 to $450 / mo</span></div>
+        <p class="tier">Priced to how much of your mission rides on grants: $250 at about half, $350 at three-quarters, $450 at essentially all. Federal grants over $100k added per application.</p>
+        <p class="founding">A limited founding cohort. Founding rates rise once references exist.</p>
+        <p class="terms">No contract. Cancel anytime.</p>
+        <p class="source">Consultant cost: $50 to $100 an hour, mid-level (2025 to 2026), for the work an organization with about half its funding from grants takes on, roughly 1.5 applications a month at 30 hours each.</p>
+      </div>
+
+      <a href="https://calendly.com/collin-sharke?utm_source=website&amp;utm_campaign=grant_office" class="cta-btn">Let's spend 15 minutes on your pipeline &rarr;</a>
+      <p class="cta-meta">Bring the grants already in motion. In 15 minutes we will show you where your pipeline has a documented path, and where it does not, before more staff time goes in.</p>
+
+      <div class="self-serve">
+        <p class="ss-label">Not ready for the full office?</p>
+        <p>Check one grant first. We run the same verification on a single grant, so you know before the next 20 to 30 hours go in.</p>
+        <p class="ss-price">One grant: $49<span>An answer in 24 hours. You never pay to be told no.</span></p>
+        <a href="/ed" class="ss-btn">Check one grant for $49 &rarr;</a>
+      </div>
+
+      <p class="free-onramp">The problem is rarely the one grant already in motion. <a href="/funding-gap">Find your funding gap</a> and see what share of your current pipeline can actually fund the year.</p>
     </div>
   </section>
 
@@ -301,6 +556,54 @@
   </section>
 
 </main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="footer-badge">Member, NVIDIA Inception Program</p>
+    <p class="footer-data">Your information is used only to find, verify, and draft grants for your organization. See our Privacy Policy for details.</p>
+    <p class="footer-legal">&copy; 2026 Sharke.ai &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+  </div>
+</footer>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  var stripe = Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4');
+  var ssCheckout = null;
+  function revealSelfServeCheckout() {
+    var btn = document.getElementById('ss-checkout-btn');
+    var area = document.getElementById('ss-checkout-area');
+    var container = document.getElementById('ss-checkout-container');
+    var loading = document.getElementById('ss-checkout-loading');
+    var errorDiv = document.getElementById('ss-checkout-error');
+    btn.style.display = 'none';
+    area.style.display = 'block';
+    loading.style.display = 'block';
+    errorDiv.style.display = 'none';
+    if (!ssCheckout) {
+      ssCheckout = stripe.initEmbeddedCheckout({
+        fetchClientSecret: function() {
+          return fetch('/.netlify/functions/create-checkout-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ plan: 'self_serve' })
+          })
+          .then(function(resp) { return resp.json(); })
+          .then(function(data) { if (data.error) throw new Error(data.error); return data.clientSecret; });
+        }
+      });
+    }
+    ssCheckout.then(function(checkout) {
+      loading.style.display = 'none';
+      container.style.display = 'block';
+      checkout.mount('#ss-checkout-container');
+    }).catch(function(err) {
+      loading.style.display = 'none';
+      errorDiv.style.display = 'block';
+      errorDiv.querySelector('p').textContent = 'Something went wrong. Please refresh to try again.';
+      console.error('Self-serve checkout error:', err);
+    });
+  }
+</script>
 
 </body>
 </html>
