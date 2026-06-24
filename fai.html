@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharke: Grant Verification for Associations &amp; Intermediaries</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0c0c0c;
+    --off-white: #f3f0eb;
+    --warm-white: #f8f6f1;
+    --ink: #1c1c1c;
+    --red: #b02b20;
+    --mid-gray: #68615a;
+    --light-gray: #d6d0c8;
+    --rule: #cbc5bc;
+    --navy: #1a2332;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 18px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HEADER */
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--red); }
+
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--mid-gray);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  section:last-of-type { border-bottom: none; }
+
+  /* HOOK */
+  .hook {
+    padding-top: 84px;
+    padding-bottom: 84px;
+  }
+
+  .hook .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 28px;
+  }
+
+  .hook h1 {
+    font-size: clamp(1.85rem, 3.6vw, 2.65rem);
+    font-weight: 700;
+    line-height: 1.22;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    max-width: 580px;
+  }
+
+  .hook .subhead {
+    font-size: 1.05rem;
+    color: var(--mid-gray);
+    line-height: 1.75;
+    max-width: 540px;
+    font-style: italic;
+  }
+
+  /* TEXT */
+  p {
+    margin-bottom: 1.3em;
+    font-size: 1rem;
+    color: #1a1a1a;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 20px;
+  }
+
+  /* SCENE BLOCK */
+  .scene-block {
+    border-left: 3px solid var(--red);
+    padding: 24px 28px;
+    margin: 32px 0;
+    background: var(--off-white);
+  }
+
+  .scene-block p {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: #2a2a2a;
+    margin-bottom: 0.9em;
+  }
+
+  .scene-block p:last-child { margin-bottom: 0; }
+
+  .scene-block .scene-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 16px;
+    font-style: normal;
+  }
+
+  /* CONDITION LIST */
+  .condition-list {
+    list-style: none;
+    margin: 28px 0;
+    border-left: 3px solid var(--navy);
+    padding-left: 24px;
+  }
+
+  .condition-list li {
+    font-size: 0.97rem;
+    padding: 7px 0;
+    color: #2a2a2a;
+    border-bottom: 1px solid var(--light-gray);
+    line-height: 1.5;
+  }
+
+  .condition-list li:last-child { border-bottom: none; }
+
+  /* WHAT YOU GET GRID */
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  @media (max-width: 560px) {
+    .outcomes-grid { grid-template-columns: 1fr; }
+  }
+
+  .outcome-card {
+    border: 1px solid var(--rule);
+    padding: 24px 20px;
+    background: var(--off-white);
+  }
+
+  .outcome-card .oc-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 10px;
+  }
+
+  .outcome-card p {
+    font-size: 0.9rem;
+    color: #2a2a2a;
+    margin: 0;
+  }
+
+  /* BEFORE/AFTER */
+  .before-after {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 32px 0;
+    border: 1px solid var(--rule);
+  }
+
+  @media (max-width: 500px) {
+    .before-after { grid-template-columns: 1fr; }
+  }
+
+  .ba-col {
+    padding: 28px 24px;
+  }
+
+  .ba-col:first-child {
+    border-right: 1px solid var(--rule);
+    background: #eae5dc;
+  }
+
+  .ba-col:last-child {
+    background: var(--off-white);
+  }
+
+  .ba-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 12px;
+  }
+
+  .ba-col p { font-size: 0.93rem; margin: 0; }
+
+  /* IRREVOCABILITY */
+  .irrev-block {
+    border-top: 3px solid var(--black);
+    padding-top: 28px;
+    margin-top: 36px;
+  }
+
+  .irrev-block p {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  /* CTA SECTION: dark navy, board-safe feel */
+  .cta-section {
+    background: var(--navy);
+    color: var(--off-white);
+    padding: 88px 0;
+    border-bottom: none;
+  }
+
+  .cta-section h2 {
+    color: var(--off-white);
+    font-size: clamp(1.4rem, 2.8vw, 2rem);
+    margin-bottom: 16px;
+    max-width: 520px;
+  }
+
+  .cta-section .cta-sub {
+    color: #8b9aaa;
+    font-size: 0.97rem;
+    max-width: 480px;
+    margin-bottom: 0;
+  }
+
+  .cta-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: #8b9aaa;
+    margin: 32px 0 20px;
+    letter-spacing: 0.03em;
+  }
+
+  .cta-steps {
+    list-style: none;
+    margin: 0 0 36px;
+  }
+
+  .cta-steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid #2e3f54;
+    font-size: 0.93rem;
+    color: #c8cfd8;
+  }
+
+  .cta-steps li:last-child { border-bottom: none; }
+
+  .cta-steps .step-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: #8b9aaa;
+    flex-shrink: 0;
+    margin-top: 3px;
+    letter-spacing: 0.08em;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 18px 44px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 3px 0 #7a1d14, 0 4px 8px rgba(0,0,0,0.25);
+    position: relative;
+    top: 0;
+  }
+
+  .cta-btn:hover {
+    background: #c93224;
+    color: #fff;
+    top: 1px;
+    box-shadow: 0 2px 0 #7a1d14, 0 3px 6px rgba(0,0,0,0.2);
+  }
+
+  .cta-btn:active {
+    top: 3px;
+    box-shadow: 0 0 0 #7a1d14, 0 1px 3px rgba(0,0,0,0.15);
+  }
+
+  .action-trigger {
+    font-size: 1rem;
+    color: var(--off-white);
+    font-weight: 700;
+    margin: 0 0 28px;
+    font-style: italic;
+  }
+
+  .cta-footer-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: #5a6b7a;
+    margin-top: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  /* CLOSE */
+  .close-section {
+    padding: 72px 0 80px;
+  }
+
+  .close-section p {
+    font-size: 1rem;
+    color: var(--mid-gray);
+    font-style: italic;
+    max-width: 520px;
+  }
+
+  .close-section .final-line {
+    font-size: 1rem;
+    color: var(--black);
+    font-style: normal;
+    font-weight: 700;
+    font-style: italic;
+    margin-top: 0;
+  }
+
+  /* ANIM */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hook .eyebrow { animation: fadeUp 0.5s ease 0.05s both; }
+  .hook h1       { animation: fadeUp 0.55s ease 0.15s both; }
+  .hook .subhead { animation: fadeUp 0.55s ease 0.28s both; }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .container   { padding: 0 20px; }
+    section      { padding: 52px 0; }
+    .hook        { padding-top: 56px; padding-bottom: 56px; }
+    .cta-section { padding: 60px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="#">Sharke<span>.</span>ai</a>
+  <span class="header-tag">Grant verification for intermediaries</span>
+</header>
+
+<main>
+
+  <!-- HOOK -->
+  <section class="hook">
+    <div class="container">
+      <p class="eyebrow">Associations &amp; Intermediaries</p>
+      <h1>This week, organizations in your portfolio are working on grants they will not win.</h1>
+      <p class="subhead">You will not know which ones until the rejections arrive. That is not a future risk. It is a current condition you are already accountable for.</p>
+    </div>
+  </section>
+
+  <!-- REFRAME -->
+  <section>
+    <div class="container">
+      <h3>The gap your guidance left open</h3>
+      <h2>You have already addressed AI. That did not change what happens before writing begins.</h2>
+      <p>You provided guidance. You supported adoption. Your organizations now use AI to find grants.</p>
+      <p>The day after your guidance ended, they went back to using those tools. The grants being worked on this week were identified using AI. Nothing changed between the AI result and the time commitment.</p>
+      <p>That gap is still open. The work happening inside it is invisible to you until the rejections arrive.</p>
+      <div class="scene-block">
+        <p class="scene-label">The question that is already on the agenda</p>
+        <p>Your board or your funders will ask: "What changed in your portfolio after the capacity-building investment?"</p>
+        <p>You have program data. You have awareness metrics. You cannot see what happened after. Right now, you do not have that answer.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRENT STATE -->
+  <section>
+    <div class="container">
+      <h3>What is happening right now</h3>
+      <h2>Your organizations are not making worse decisions than before. They are making faster ones.</h2>
+      <p>AI identifies more grant opportunities. The mission language aligns. No one verifies the fit before writing begins. More applications go out. Not better ones. The volume of invisible misalignment in your portfolio has increased since AI adoption, not decreased.</p>
+      <ul class="condition-list">
+        <li><strong>Vibe Match:</strong> Mission language aligns, but the budget floor, geography, or operating history requirement disqualifies the organization. Writing starts anyway.</li>
+        <li><strong>Ghost Deadline:</strong> AI surfaces a grant listed as open. The cycle closed two years ago. No one checked the primary source before committing staff time.</li>
+        <li>Funder relationships damaged by ill-fitting proposals that should never have been submitted</li>
+        <li>Staff time committed before anyone verified the decision</li>
+      </ul>
+      <p>None of this is visible until submissions come back. At that point, the cost is already complete.</p>
+    </div>
+  </section>
+
+  <!-- PEER EVIDENCE -->
+  <section>
+    <div class="container">
+      <h3>What this looks like in your member organizations</h3>
+      <div class="scene-block">
+        <p class="scene-label">Executive Director, food security nonprofit, Texas</p>
+        <p>"We were about to submit three applications to funders that do not fund organizations our size. That is 60 hours we got back for grants we could actually win."</p>
+      </div>
+      <p>This organization did not have a bad grant writer. They had a decision problem. The same problem is active in your portfolio right now, at this week's grant cycle, before anyone has caught it.</p>
+    </div>
+  </section>
+
+  <!-- WHAT SHARKE DOES -->
+  <section>
+    <div class="container">
+      <h3>What Sharke does</h3>
+      <h2>Verification happens before the time is spent, across your entire cohort.</h2>
+      <p>This is not an awareness program. It is a verification layer installed at the decision point that precedes writing. For every active grant in your cohort:</p>
+      <div class="before-after">
+        <div class="ba-col">
+          <p class="ba-label">WITHOUT VERIFICATION</p>
+          <p>Grant identified &rarr; writing begins &rarr; eligibility checked (or not) &rarr; submission &rarr; rejection reveals the problem.</p>
+        </div>
+        <div class="ba-col">
+          <p class="ba-label">WITH VERIFICATION</p>
+          <p>Grant identified &rarr; fit verified against primary sources &rarr; pursue / wait / move on decision returned &rarr; writing begins only when verified.</p>
+        </div>
+      </div>
+      <p>The grants being worked on this week are either going to be verified before submission or after rejection. There is no third option. This is the only mechanism that changes which one happens.</p>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section>
+    <div class="container">
+      <h3>What you get</h3>
+      <h2>A documented record of what changed. Not just awareness that something should.</h2>
+      <div class="outcomes-grid">
+        <div class="outcome-card">
+          <p class="oc-label">Portfolio visibility</p>
+          <p>Which grants were stopped before time was spent, and why.</p>
+        </div>
+        <div class="outcome-card">
+          <p class="oc-label">Decision documentation</p>
+          <p>Which were pursued, which were deferred, with the source trail behind each decision.</p>
+        </div>
+        <div class="outcome-card">
+          <p class="oc-label">Misalignment data</p>
+          <p>Where eligibility gaps were caught before they became submissions.</p>
+        </div>
+        <div class="outcome-card">
+          <p class="oc-label">Board-ready output</p>
+          <p>An Impact Brief you can present to your funders or board as documented evidence of what changed.</p>
+        </div>
+      </div>
+      <p>When your funders ask what your capacity-building investment produced this cycle, this is what you point to.</p>
+      <div class="irrev-block">
+        <p>The intermediaries that run this cohort do not go back to supporting AI adoption without a verification layer. The methodology stays. The standard is set. The funder accountability question has a documented answer.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 24px;">This runs during the current grant cycle. Not after. Not next quarter.</p>
+      <h2>The grants being worked on this week will either be verified before submission or after rejection.</h2>
+      <p class="cta-sub">There is no third option. This is the only mechanism that changes which one happens.</p>
+
+      <p class="cta-sub" style="margin-top: 20px;">This is already happening in your portfolio this week.</p>
+
+      <p class="cta-meta">In 10 minutes, you will see:</p>
+      <ul class="cta-steps">
+        <li>
+          The decision gap across a cohort like yours
+        </li>
+        <li>
+          How verification runs inside active grant workflows
+        </li>
+        <li>
+          The Impact Brief you would present to your board
+        </li>
+      </ul>
+
+      <div style="border: 1px solid #2e3f54; padding: 20px 24px; margin: 28px 0 8px; background: rgba(255,255,255,0.04);">
+        <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #8b9aaa; margin-bottom: 12px;">Cohort structure</p>
+        <p style="font-size: 0.93rem; color: #c8cfd8; margin: 0; line-height: 1.7;">15-25 organizations &nbsp;&middot;&nbsp; Bounded cohort &nbsp;&middot;&nbsp; Board-ready Portfolio Impact Brief</p>
+      </div>
+
+      <p class="action-trigger">10 minutes. I'll show you where this is happening in a cohort like yours.</p>
+
+      <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: #8b9aaa; margin: 0 0 20px;">This is funded at the association level. No cost to participating organizations.</p>
+
+      <a href="https://calendly.com/collin-sharke?utm_source=drip&utm_medium=email&utm_campaign=fai" class="cta-btn">See Where This Is Happening in Your Portfolio: 10 Minutes</a>
+    </div>
+  </section>
+
+  <!-- CLOSE -->
+  <section class="close-section">
+    <div class="container">
+      <p>The grants being worked on in your portfolio this week will either be verified before submission or after rejection.</p>
+      <br>
+      <p class="final-line">There is no third option.</p>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

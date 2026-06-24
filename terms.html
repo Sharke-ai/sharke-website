@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service · Sharke.ai</title>
+<meta name="description" content="The terms that govern your use of Sharke.ai.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght,wdth@9..40,400..800,75..100&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0f1a;
+    --bg-elevated: #111827;
+    --bg-elevated-2: #1a2236;
+    --accent: #4AE3A0;
+    --accent-muted: rgba(74, 227, 160, 0.12);
+    --accent-border: rgba(74, 227, 160, 0.3);
+    --text-primary: #FFFFFF;
+    --text-secondary: #D1D5DB;
+    --text-muted: #9CA3AF;
+    --rule: rgba(255, 255, 255, 0.1);
+    --rule-strong: rgba(255, 255, 255, 0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; scroll-behavior: smooth; }
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: var(--bg-primary);
+    z-index: 100;
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .logo-s { color: var(--bg-primary); font-size: 16px; font-weight: 600; line-height: 1; }
+  .logo-text { font-size: 17px; font-weight: 500; color: var(--text-primary); line-height: 1; }
+  .header-right { display: flex; align-items: center; gap: 24px; }
+  .header-tools {
+    background: var(--accent);
+    color: var(--bg-primary);
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .header-tools:hover { background: #6EEEB5; }
+  .header-login {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    border: 1px solid var(--rule-strong);
+    padding: 9px 18px;
+    border-radius: 6px;
+    transition: border-color 0.2s, background 0.2s;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .header-login:hover { border-color: var(--accent); background: var(--accent-muted); }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+  .page-header { padding: 80px 0 40px; border-bottom: 1px solid var(--rule); }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .last-updated {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  .placeholder-banner {
+    background: var(--accent-muted);
+    border: 1px solid var(--accent-border);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin: 36px 0 0;
+    font-size: 0.92rem;
+    color: var(--text-primary);
+  }
+  .placeholder-banner strong { color: var(--accent); }
+
+  .prose { padding: 48px 0 80px; }
+  .prose h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 40px 0 14px;
+    line-height: 1.3;
+  }
+  .prose h2:first-child { margin-top: 0; }
+  .prose p { color: var(--text-secondary); margin-bottom: 1.1em; font-size: 0.98rem; }
+  .prose ul { padding-left: 22px; margin-bottom: 1.2em; }
+  .prose li { color: var(--text-secondary); margin-bottom: 0.5em; font-size: 0.98rem; }
+  .prose strong { color: var(--text-primary); font-weight: 600; }
+
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    padding: 36px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+  .site-footer a { color: var(--text-muted); text-decoration: none; }
+  .site-footer a:hover { color: var(--text-primary); }
+  .site-footer .footer-right { display: flex; gap: 24px; }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 14px 20px; }
+    .container { padding: 0 20px; }
+    .page-header { padding: 56px 0 28px; }
+    .prose { padding: 32px 0 56px; }
+    .site-footer { flex-direction: column; gap: 12px; padding: 28px 20px; text-align: center; }
+  }
+  @media (max-width: 380px) {
+    .site-header { padding: 10px 14px; }
+    .header-right { gap: 8px; }
+    .header-tools { padding: 9px 12px; font-size: 0.84rem; }
+    .header-login { padding: 9px 12px; font-size: 0.84rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="/"><span class="logo-mark"><span class="logo-s">S</span></span><span class="logo-text">Sharke.ai</span></a>
+  <div class="header-right">
+    <a class="header-tools" href="https://sharke-app.netlify.app/free-tools">Resources</a>
+    <a class="header-login" href="https://sharke-app.netlify.app/login">Login</a>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <p class="eyebrow">Legal</p>
+    <h1>Terms of Service</h1>
+    <p class="last-updated">Last updated: May 8, 2026</p>
+    <div class="placeholder-banner">
+      <strong>Placeholder.</strong> This is a working draft of our terms of service. We are finalizing the legally reviewed version. Material terms below reflect how we operate; precise legal language may change.
+    </div>
+  </div>
+</section>
+
+<section class="prose">
+  <div class="container">
+    <h2>Agreement</h2>
+    <p>These Terms of Service ("Terms") govern your access to and use of Sharke.ai and the Sharke web application (together, the "Service") provided by Sharke.ai ("Sharke," "we," "us"). By accessing or using the Service you agree to these Terms. If you are using the Service on behalf of an organization, you represent that you have authority to bind that organization to these Terms, and "you" includes that organization.</p>
+
+    <h2>Eligibility</h2>
+    <p>You must be at least 18 years old and able to form a legally binding contract to use the Service. The Service is intended for use by adults working at nonprofit organizations and other institutions involved in grant work.</p>
+
+    <h2>Accounts</h2>
+    <p>You are responsible for maintaining the confidentiality of your login credentials and for all activity on your account. Notify us promptly at <a href="mailto:angelica@sharke.ai">angelica@sharke.ai</a> if you suspect unauthorized access. We may suspend or terminate accounts that violate these Terms or that are inactive for an extended period.</p>
+
+    <h2>Acceptable use</h2>
+    <p>You agree not to:</p>
+    <ul>
+      <li>Use the Service to violate any law or third-party right.</li>
+      <li>Reverse engineer, decompile, or attempt to extract source code, except as permitted by law.</li>
+      <li>Scrape, mass-download, or systematically reproduce data from the Service.</li>
+      <li>Resell or sublicense access to the Service without our written permission.</li>
+      <li>Upload malicious code, attempt to disrupt the Service, or circumvent security or rate limits.</li>
+      <li>Use the Service to send spam, phish, or otherwise abuse third parties.</li>
+    </ul>
+
+    <h2>Your content</h2>
+    <p>You retain all rights in the documents, profile information, and other content you submit to the Service ("Your Content"). You grant Sharke a worldwide, non-exclusive, royalty-free license to host, process, copy, transmit, and display Your Content solely as needed to provide and improve the Service. We may use de-identified or aggregated information derived from Your Content for product analytics and to improve the Service.</p>
+
+    <h2>Sharke output</h2>
+    <p>The Service produces analyses, decision records, drafts, summaries, and other outputs ("Output") based on Your Content and public funder data. Output is provided for your internal use. You are responsible for reviewing Output before relying on it or submitting any portion of it to a funder. Output may contain errors. Sharke is a research and decision-support tool, not a substitute for legal, financial, or grant-strategy advice.</p>
+
+    <h2>Free tools</h2>
+    <p>Public free tools (such as the Grant Readiness Assessment and Budget Builder) are provided for your use without an account. We may impose usage limits to protect the Service and may modify or discontinue free tools at any time.</p>
+
+    <h2>Subscriptions and payment</h2>
+    <p>Paid plans, including Founding Member and future tiered subscriptions, are billed in advance on a monthly or annual basis. Fees are non-refundable except as expressly stated or required by law. We may change prices for future billing cycles with reasonable notice. Failure to pay may result in suspension or termination.</p>
+
+    <h2>Third-party services</h2>
+    <p>The Service integrates with or links to third-party services (for example, payment processing, email delivery, public grant data sources). Your use of those services is governed by their own terms and privacy policies. We are not responsible for third-party services.</p>
+
+    <h2>Intellectual property</h2>
+    <p>Sharke, the Sharke name and logo, the Service, and all related software, content, and data (excluding Your Content and public data) are owned by Sharke or its licensors and are protected by intellectual property laws. We grant you a limited, non-exclusive, non-transferable license to access and use the Service in accordance with these Terms.</p>
+
+    <h2>Confidentiality</h2>
+    <p>We will treat Your Content as confidential and will not disclose it except as needed to operate the Service, as permitted by our Privacy Policy, or as required by law.</p>
+
+    <h2>Disclaimers</h2>
+    <p>The Service is provided on an "AS IS" and "AS AVAILABLE" basis. To the maximum extent permitted by law, we disclaim all warranties, express or implied, including merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that the Service will be uninterrupted, error-free, or that Output will be accurate or complete. Grant funding decisions are made by funders, not Sharke; we do not guarantee any funding outcome.</p>
+
+    <h2>Limitation of liability</h2>
+    <p>To the maximum extent permitted by law, Sharke and its officers, directors, employees, and agents will not be liable for any indirect, incidental, special, consequential, or punitive damages, or for any loss of profits, revenue, data, or goodwill, arising from or related to your use of the Service. Our total aggregate liability for any claim arising from or related to these Terms or the Service will not exceed the greater of (a) the amount you paid Sharke in the twelve months before the claim and (b) one hundred U.S. dollars.</p>
+
+    <h2>Indemnification</h2>
+    <p>You agree to indemnify and hold harmless Sharke and its affiliates from any claim, damages, or expenses (including reasonable attorneys' fees) arising from your use of the Service, your violation of these Terms, or your violation of any third-party right.</p>
+
+    <h2>Termination</h2>
+    <p>You may stop using the Service at any time. We may suspend or terminate your access if you violate these Terms or if continued provision of the Service is impractical. On termination, your right to use the Service ends. Sections that by their nature should survive termination (including intellectual property, disclaimers, limitation of liability, indemnification, and dispute resolution) will survive.</p>
+
+    <h2>Governing law and disputes</h2>
+    <p>These Terms are governed by the laws of the State of Texas, without regard to its conflict-of-laws principles. The exclusive venue for any dispute arising from or related to these Terms or the Service is the state and federal courts located in Travis County, Texas, and you consent to the personal jurisdiction of those courts.</p>
+
+    <h2>Changes to these Terms</h2>
+    <p>We may update these Terms from time to time. If we make material changes, we will notify you by email or by posting a notice on the site before the changes take effect. Your continued use of the Service after the changes take effect constitutes acceptance of the updated Terms.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about these Terms? Email <a href="mailto:angelica@sharke.ai">angelica@sharke.ai</a>.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div><a href="mailto:angelica@sharke.ai">angelica@sharke.ai</a> &nbsp;·&nbsp; © 2026 Sharke.ai &nbsp;·&nbsp; Member of the NVIDIA Inception Program</div>
+  <div class="footer-right">
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+  </div>
+</footer>
+
+</body>
+</html>

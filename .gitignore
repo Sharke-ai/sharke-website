@@ -1,0 +1,4 @@
+# Local Netlify folder
+.netlify
+# Local agent/session config
+.claude/

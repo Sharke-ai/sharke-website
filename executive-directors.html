@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharke: Grant Verification for Executive Directors</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-white: #f5f2ed;
+    --warm-white: #faf8f4;
+    --red: #c0392b;
+    --mid-gray: #6b6560;
+    --light-gray: #ddd8d0;
+    --rule: #d0cbc2;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 18px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--black);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HEADER */
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .logo span {
+    color: var(--red);
+  }
+
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--mid-gray);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  section:last-of-type {
+    border-bottom: none;
+  }
+
+  /* HOOK */
+  .hook {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .hook .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 28px;
+  }
+
+  .hook h1 {
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    max-width: 580px;
+  }
+
+  .hook .subhead {
+    font-size: 1.1rem;
+    color: var(--mid-gray);
+    line-height: 1.7;
+    max-width: 540px;
+    font-style: italic;
+  }
+
+  /* BODY TEXT */
+  p {
+    margin-bottom: 1.3em;
+    font-size: 1rem;
+    color: #1a1a1a;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 20px;
+  }
+
+  /* FAILURE LIST */
+  .failure-list {
+    list-style: none;
+    margin: 28px 0;
+    border-left: 3px solid var(--red);
+    padding-left: 24px;
+  }
+
+  .failure-list li {
+    font-size: 0.97rem;
+    color: #2a2a2a;
+    padding: 6px 0;
+    line-height: 1.5;
+  }
+
+  .failure-list li + li {
+    border-top: 1px solid var(--rule);
+  }
+
+  /* VERIFY LIST */
+  .verify-list {
+    list-style: none;
+    margin: 28px 0;
+  }
+
+  .verify-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 10px 0;
+    font-size: 0.97rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .verify-list li:last-child { border-bottom: none; }
+
+  .verify-list .check {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--red);
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  /* DECISION CARDS */
+  .decision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  @media (max-width: 600px) {
+    .decision-grid { grid-template-columns: 1fr; }
+  }
+
+  .decision-card {
+    border: 1px solid var(--rule);
+    padding: 24px 20px;
+    background: var(--off-white);
+  }
+
+  .decision-card .verdict {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .verdict.pursue { color: #1a6640; }
+  .verdict.wait   { color: #8a6200; }
+  .verdict.move   { color: var(--red); }
+
+  .decision-card p {
+    font-size: 0.88rem;
+    color: var(--mid-gray);
+    margin: 0;
+  }
+
+  /* BEFORE / AFTER */
+  .before-after {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 32px 0;
+    border: 1px solid var(--rule);
+  }
+
+  @media (max-width: 500px) {
+    .before-after { grid-template-columns: 1fr; }
+  }
+
+  .ba-col {
+    padding: 28px 24px;
+  }
+
+  .ba-col:first-child {
+    border-right: 1px solid var(--rule);
+    background: #f0ebe3;
+  }
+
+  .ba-col:last-child {
+    background: var(--off-white);
+  }
+
+  .ba-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 12px;
+  }
+
+  .ba-col p {
+    font-size: 0.93rem;
+    margin: 0;
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: var(--black);
+    color: var(--off-white);
+    padding: 80px 0;
+    border-bottom: none;
+  }
+
+  .cta-section h2 {
+    color: var(--off-white);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    margin-bottom: 16px;
+  }
+
+  .cta-section p {
+    color: #a09890;
+    font-size: 0.97rem;
+  }
+
+  .action-trigger {
+    font-size: 1rem;
+    color: var(--off-white);
+    font-weight: 700;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  .price-line {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem;
+    color: #a09890;
+    margin: 28px 0 32px;
+    letter-spacing: 0.04em;
+  }
+
+  .price-line strong {
+    color: var(--off-white);
+    font-weight: 500;
+  }
+
+  /* FORM */
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #a09890;
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: var(--off-white);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: #666;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: #555;
+  }
+
+  .submit-btn {
+    display: inline-block;
+    background: var(--off-white);
+    color: var(--black);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    margin-top: 8px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .submit-btn:hover {
+    background: var(--red);
+    color: #fff;
+  }
+
+  /* CLOSE */
+  .close-section {
+    padding: 72px 0 80px;
+  }
+
+  .close-section p {
+    font-size: 1rem;
+    color: var(--mid-gray);
+    font-style: italic;
+    max-width: 500px;
+  }
+
+  .close-section .final-line {
+    font-size: 1.05rem;
+    color: var(--black);
+    font-style: normal;
+    font-weight: 700;
+    margin-top: 24px;
+  }
+
+  /* TESTIMONIAL */
+  .testimonial-block {
+    border-left: 3px solid var(--red);
+    padding: 24px 28px;
+    margin: 36px 0 0;
+    background: var(--off-white);
+  }
+
+  .testimonial-block p {
+    font-size: 0.97rem;
+    font-style: italic;
+    color: #2a2a2a;
+    margin-bottom: 10px;
+  }
+
+  .testimonial-block cite {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    font-style: normal;
+  }
+
+  /* STEP SEQUENCE */
+  .step-sequence {
+    list-style: none;
+    margin: 28px 0 32px;
+  }
+
+  .step-sequence li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.95rem;
+    color: #a09890;
+  }
+
+  .step-sequence li:last-child { border-bottom: none; }
+
+  .step-sequence .step-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .step-sequence .step-text strong {
+    color: var(--off-white);
+    font-weight: 600;
+  }
+
+  /* DIVIDER */
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 32px 0;
+  }
+
+  /* FADE IN */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hook h1, .hook .subhead, .hook .eyebrow {
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hook .eyebrow { animation-delay: 0.05s; }
+  .hook h1       { animation-delay: 0.15s; }
+  .hook .subhead { animation-delay: 0.28s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .container   { padding: 0 20px; }
+    section      { padding: 52px 0; }
+    .hook        { padding-top: 56px; padding-bottom: 56px; }
+    .cta-section { padding: 60px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://sharke.ai">Sharke<span>.</span>ai</a>
+  <span class="header-tag">Verification-First Grant Intelligence</span>
+</header>
+
+<main>
+
+  <!-- HOOK -->
+  <section class="hook">
+    <div class="container">
+      <p class="eyebrow">Executive Directors</p>
+      <h1>You are already working on a grant that will not convert.</h1>
+      <p class="subhead">Not because your team is doing anything wrong. Because the decision to pursue it was made on incomplete information. And you will not know until after the time is spent.</p>
+    </div>
+  </section>
+
+  <!-- REFRAME -->
+  <section>
+    <div class="container">
+      <h3>The real problem</h3>
+      <h2>Most nonprofits do not lose on writing.</h2>
+      <p>They lose on the decision made before writing starts.</p>
+      <ul class="failure-list">
+        <li>Eligibility missed.</li>
+        <li>Funder does not fund organizations your size.</li>
+        <li>Deadline already closed.</li>
+        <li>Relationship required but not stated.</li>
+      </ul>
+      <p>Those are not writing problems.</p>
+      <p>They are decisions made too late. After your team has already committed hours to something that was never a real opportunity.</p>
+    </div>
+  </section>
+
+  <!-- WHAT SHARKE DOES -->
+  <section>
+    <div class="container">
+      <h3>What Sharke does</h3>
+      <h2>Before your team continues, this is the step.</h2>
+      <p>Paste the grant your team is actively working on. We verify it against documented funder reality. Not summaries, not AI-generated profiles.</p>
+      <ul class="verify-list">
+        <li><span class="check">→</span> Eligibility requirements</li>
+        <li><span class="check">→</span> Funder award history</li>
+        <li><span class="check">→</span> Organization size and geography fit</li>
+        <li><span class="check">→</span> Timing and cycle status</li>
+        <li><span class="check">→</span> Relationship patterns</li>
+      </ul>
+      <p>Actual funder documentation. Not summaries.</p>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section>
+    <div class="container">
+      <h3>What you get</h3>
+      <h2>Within 24 hours, a clear decision.</h2>
+      <div class="decision-grid">
+        <div class="decision-card">
+          <p class="verdict pursue">Pursue</p>
+          <p>Continue. Real fit. The documentation to back it.</p>
+        </div>
+        <div class="decision-card">
+          <p class="verdict wait">Wait</p>
+          <p>Not a fit yet. Specific gap identified. Come back when it closes.</p>
+        </div>
+        <div class="decision-card">
+          <p class="verdict move">Move on</p>
+          <p>Not a real opportunity. Stop now, before more hours are lost.</p>
+        </div>
+      </div>
+      <p>Each decision includes the reason. Not an opinion. A documented finding tied to the source.</p>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER -->
+  <section>
+    <div class="container">
+      <h3>What this changes</h3>
+      <div class="before-after">
+        <div class="ba-col">
+          <p class="ba-label">Before</p>
+          <p>Your team writes, then discovers problems. You find out what was wrong after the time is gone.</p>
+        </div>
+        <div class="ba-col">
+          <p class="ba-label">After</p>
+          <p>You know before another hour is spent. The decision is made on documented evidence, not assumptions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO / WHY NOW -->
+  <section>
+    <div class="container">
+      <h3>Why this matters now</h3>
+      <h2>Your team is already using AI to find grants.</h2>
+      <p>That means more grants identified. More time committed. More wrong decisions made earlier, with more confidence.</p>
+      <p>AI finds opportunities that look right. It doesn't verify whether they are. Your team commits time before anyone checks. Small organizations cannot absorb that pattern at scale.</p>
+      <p>This is for Executive Directors at nonprofits with active grants in motion. If your team is working on a grant right now, this applies today.</p>
+    </div>
+  </section>
+
+  <!-- FUNDER RELATIONSHIP DAMAGE -->
+  <section>
+    <div class="container">
+      <h3>The second cost</h3>
+      <h2>There is a cost most teams do not see until it is already done.</h2>
+      <p>When your organization submits an application that was never a real fit, it does not just get rejected.</p>
+      <p>It shapes how your organization is seen the next time your name appears in that funder's inbox. That context carries forward. Not your mission. Not your impact. The proposal that did not fit.</p>
+      <p>You do not see it immediately. It shows up later, when a relationship you needed is already cold.</p>
+      <p>This is not just about this grant. It is about the context your organization carries the next time your name appears in a funder's inbox.</p>
+
+      <div class="testimonial-block">
+        <p>"We were already working on a grant when we ran the check. It flagged a geographic restriction we missed. We stopped. That alone saved about 20 hours."</p>
+        <cite>Executive Director, workforce nonprofit</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="fit-check" class="cta-section">
+    <div class="container">
+      <h2>What grant is your team working on right now?</h2>
+
+      <p>The grant your team is working on right now. Not one you're considering. The one already in motion. This is the step before another hour is spent.</p>
+
+      <p class="action-trigger">Stop before your team spends another hour on it.</p>
+
+      <ul class="step-sequence">
+        <li>
+          <span class="step-num">Step 1</span>
+          <span class="step-text"><strong>Verify the grant</strong></span>
+        </li>
+        <li>
+          <span class="step-num">Step 2</span>
+          <span class="step-text"><strong>Pursue, wait, or move on</strong></span>
+        </li>
+        <li>
+          <span class="step-num">Step 3</span>
+          <span class="step-text"><strong>Only then start writing</strong></span>
+        </li>
+      </ul>
+
+      <p>Once you see this, you can't go back to starting applications without verifying first.</p>
+
+      <p class="price-line"><strong>$49.</strong> Decision in 24 hours.</p>
+
+      <div class="form-group">
+        <label for="grant-name">Grant / Funder Name</label>
+        <input type="text" id="grant-name" name="grant_name" placeholder="e.g. Robert Wood Johnson Foundation, Health Equity 2025">
+      </div>
+      <div class="form-group">
+        <label for="org-name">Your Organization</label>
+        <input type="text" id="org-name" name="org_name" placeholder="Organization name">
+      </div>
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" placeholder="you@yourorg.org">
+      </div>
+      <div class="form-group">
+        <label for="context">Brief context (optional)</label>
+        <textarea id="context" name="context" rows="3" placeholder="Stage of work, any specific eligibility concerns, deadline pressure..."></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Get Decision in 24 Hours →</button>
+    </div>
+  </section>
+
+  <!-- CLOSE -->
+  <section class="close-section">
+    <div class="container">
+      <p>You do not need more grant opportunities identified.</p>
+      <p class="final-line">You need to know if the one your team is already working on is real.</p>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

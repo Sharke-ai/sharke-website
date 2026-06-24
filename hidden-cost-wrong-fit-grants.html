@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Hidden Cost of Applying to Wrong-Fit Grants | Sharke.ai</title>
+  <meta name="description" content="Small nonprofits spend 25+ hours per grant application. Most unsuccessful applications fail on basic fit issues that could be caught in under an hour. Here's what that really costs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-primary: #FFFFFF;
+      --text-secondary: #D1D5DB;
+      --text-muted: #9CA3AF;
+      --bg-primary: #0a0f1a;
+      --bg-secondary: #0f1520;
+      --bg-card: #111827;
+      --border-subtle: #1F2937;
+      --border-light: #374151;
+      --accent: #4AE3A0;
+      --accent-muted: rgba(74, 227, 160, 0.15);
+      --warm: #FBBF24;
+      --warm-muted: rgba(251, 191, 36, 0.12);
+      --cool: #7DD3FC;
+      --cool-muted: rgba(125, 211, 252, 0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* Nav - fixed, matches index.html */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 0;
+      background: transparent;
+      transition: background 0.3s ease;
+    }
+
+    .nav.scrolled {
+      background: rgba(10, 15, 26, 0.95);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo { display: flex; align-items: center; gap: 10px; }
+
+    .logo-mark {
+      width: 28px; height: 28px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .logo-s { color: var(--bg-primary); font-size: 16px; font-weight: 600; }
+    .logo-text { font-size: 17px; font-weight: 500; color: var(--text-primary); }
+
+    .nav-links { display: flex; align-items: center; gap: 12px; }
+
+    .free-tools-link {
+      color: var(--bg-primary);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 6px;
+      background: var(--accent);
+      transition: opacity 0.2s ease;
+    }
+    .free-tools-link:hover { opacity: 0.85; }
+
+    .login-link {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      transition: border-color 0.2s ease;
+    }
+    .login-link:hover { border-color: var(--border-light); }
+
+    /* Hero */
+    .hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 140px 40px 60px;
+      text-align: center;
+    }
+
+    .hero-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.18;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+
+    /* Section structure */
+    .section-divider {
+      position: relative;
+      height: 1px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .section-divider::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.3;
+    }
+
+    .section-divider::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.4;
+    }
+
+    .section-divider.warm::before {
+      background: linear-gradient(90deg, transparent, var(--warm), transparent);
+    }
+    .section-divider.warm::after {
+      background: var(--warm);
+    }
+
+    .section-spacer {
+      height: 24px;
+    }
+
+    .section-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .section-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -0.3px;
+      margin-bottom: 20px;
+    }
+
+    .section-subtitle {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.6;
+      margin-bottom: 48px;
+    }
+
+    /* Fade-in sections */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stats grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-number.accent { color: var(--warm); }
+    .stat-number.warn { color: #F87171; }
+    .stat-number.good { color: var(--accent); }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .stats-context {
+      margin-top: 32px;
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    .stats-context strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Cost cards grid */
+    .cost-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .cost-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 28px 24px;
+    }
+
+    .cost-icon {
+      font-size: 20px;
+      color: var(--warm);
+      margin-bottom: 12px;
+    }
+
+    .cost-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .cost-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Span 2 columns for the first card */
+    .cost-card.wide {
+      grid-column: span 2;
+    }
+
+    /* Wrong-fit examples */
+    .examples-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 720px;
+    }
+
+    .example-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+    }
+
+    .example-icon {
+      font-size: 18px;
+      color: #F87171;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .example-text {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .example-text strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .examples-footer {
+      margin-top: 32px;
+      padding: 20px 24px;
+      background: var(--accent-muted);
+      border: 1px solid rgba(74, 227, 160, 0.2);
+      border-radius: 10px;
+      max-width: 720px;
+    }
+
+    .examples-footer p {
+      font-size: 15px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ROI section */
+    .roi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 720px;
+    }
+
+    .roi-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .roi-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 15px;
+    }
+
+    .roi-row:last-child { border-bottom: none; }
+
+    .roi-label { color: var(--text-secondary); }
+    .roi-value { color: var(--text-primary); font-weight: 500; }
+
+    .roi-highlight {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 17px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .roi-context {
+      margin-top: 32px;
+      max-width: 720px;
+    }
+
+    .roi-context p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .roi-context strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .roi-pullquote {
+      margin-top: 24px;
+      padding: 20px 24px;
+      border-left: 3px solid var(--accent);
+      background: var(--accent-muted);
+      border-radius: 0 8px 8px 0;
+      max-width: 720px;
+    }
+
+    .roi-pullquote p {
+      font-size: 17px;
+      color: var(--accent);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* CTA section */
+    .cta-section {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 80px 40px 40px;
+    }
+
+    .cta-section h2 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 16px 32px;
+      background: var(--accent);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(62, 207, 142, 0.3);
+    }
+
+    .cta-button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(62, 207, 142, 0.4);
+    }
+
+    .cta-secondary-link {
+      display: block;
+      margin-top: 16px;
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+    }
+
+    .cta-secondary-link:hover { color: var(--accent); }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .footer a { color: var(--accent); }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero { padding: 120px 24px 40px; }
+      .hero h1 { font-size: 32px; }
+      .hero p { font-size: 17px; }
+      .section-content { padding: 60px 24px; }
+      .section-title { font-size: 24px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-number { font-size: 28px; }
+      .cost-grid { grid-template-columns: 1fr; }
+      .cost-card.wide { grid-column: span 1; }
+      .roi-card { padding: 24px; }
+      .cta-section { padding: 60px 24px 40px; }
+      .cta-section h2 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <div class="nav-content">
+      <a href="/" class="logo">
+        <div class="logo-mark"><span class="logo-s">S</span></div>
+        <span class="logo-text">Sharke</span>
+      </a>
+      <div class="nav-links">
+        <a href="https://sharke-app.netlify.app/free-tools" class="free-tools-link">Free Tools</a>
+        <a href="https://sharke-app.netlify.app/login" class="login-link">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-label">Insights</div>
+    <h1>The Hidden Cost of Applying to Wrong-Fit Grants</h1>
+    <p>Most teams discover a grant doesn&rsquo;t fit after investing 25+ hours. The real cost isn&rsquo;t the rejection letter. It&rsquo;s everything that didn&rsquo;t happen while your team was writing.</p>
+  </section>
+
+  <!-- Section 1: The Math Nobody Does -->
+  <div class="section-divider"></div>
+  <div class="section-spacer"></div>
+
+  <section class="fade-section">
+    <div class="section-content">
+      <div class="section-label">The reality</div>
+      <h2 class="section-title">The math nobody does</h2>
+      <p class="section-subtitle">A significant majority of unsuccessful grant applications fail on basic fit issues: misaligned missions, ineligible geography, budget mismatches. These could have been identified before anyone started writing.</p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number accent">25+</div>
+          <div class="stat-label">hours per application, at minimum</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number warn">70&ndash;85%</div>
+          <div class="stat-label">of grant applications are unsuccessful</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number good">&lt;1 hr</div>
+          <div class="stat-label">to verify most fit issues before writing begins</div>
+        </div>
+      </div>
+
+      <p class="stats-context">What&rsquo;s striking is how preventable most of these misses are. Eligibility, geography, funder history. <strong>These can usually be verified in under an hour.</strong> The gap between 25 hours invested and 1 hour to check is where the real cost lives.</p>
+    </div>
+  </section>
+
+  <!-- Section 2: Five Costs Beyond the Application -->
+  <div class="section-divider warm"></div>
+  <div class="section-spacer"></div>
+
+  <section class="fade-section" style="background: var(--bg-secondary);">
+    <div class="section-content">
+      <div class="section-label">Beyond the rejection</div>
+      <h2 class="section-title">Five costs beyond the application</h2>
+      <p class="section-subtitle">The application itself is just the visible cost. The damage runs deeper, especially for small nonprofits that don&rsquo;t have slack in the system.</p>
+
+      <div class="cost-grid">
+
+        <div class="cost-card wide">
+          <div class="cost-icon">&bull;</div>
+          <div class="cost-title">Staff time your mission can&rsquo;t afford to lose</div>
+          <div class="cost-desc">Small nonprofits run lean. The same person writing grants is often running programs, managing volunteers, reporting to the board. When 25+ hours go to an application that was never viable, that&rsquo;s not just wasted time. It&rsquo;s direct service that didn&rsquo;t happen, a program that launched late, a community need that waited. Recovering those hours means more impact delivered, not just fewer rejections.</div>
+        </div>
+
+        <div class="cost-card">
+          <div class="cost-icon">&bull;</div>
+          <div class="cost-title">The burnout cycle</div>
+          <div class="cost-desc">Repeated rejections on grants that were never viable erode morale and retention. Staff start to question whether the effort matters, not because they lack talent, but because the process keeps setting them up to fail.</div>
+        </div>
+
+        <div class="cost-card">
+          <div class="cost-icon">&bull;</div>
+          <div class="cost-title">Board confidence</div>
+          <div class="cost-desc">Each failed application is a line item the board remembers. Over time, a pattern of rejections, even on grants that were never realistic, quietly undermines confidence in leadership and strategy.</div>
+        </div>
+
+        <div class="cost-card">
+          <div class="cost-icon">&bull;</div>
+          <div class="cost-title">Mission drift</div>
+          <div class="cost-desc">When teams chase every available dollar, programs start reshaping around what&rsquo;s funded, not what the community needs. The organization slowly bends toward money instead of mission.</div>
+        </div>
+
+        <div class="cost-card">
+          <div class="cost-icon">&bull;</div>
+          <div class="cost-title">The compounding effect</div>
+          <div class="cost-desc">Every wrong-fit application doesn&rsquo;t just waste time. It crowds out a right-fit one. The grant your team should have pursued this quarter didn&rsquo;t get written because the calendar was full of dead ends.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: What Wrong-Fit Actually Looks Like -->
+  <div class="section-divider"></div>
+  <div class="section-spacer"></div>
+
+  <section class="fade-section">
+    <div class="section-content">
+      <div class="section-label">In practice</div>
+      <h2 class="section-title">What wrong-fit actually looks like</h2>
+      <p class="section-subtitle">These aren&rsquo;t edge cases. They&rsquo;re the most common reasons applications fail, and each one is catchable before writing begins.</p>
+
+      <div class="examples-list">
+        <div class="example-item">
+          <div class="example-icon">&times;</div>
+          <div class="example-text"><strong>Budget mismatch:</strong> Applying for $500K from a funder whose average award over the past four years is $25K. The RFP doesn&rsquo;t say no. The 990 data does.</div>
+        </div>
+        <div class="example-item">
+          <div class="example-icon">&times;</div>
+          <div class="example-text"><strong>Buried geographic exclusion:</strong> The funder only awards in three counties. That restriction is on page 12 of the guidelines, not the overview page your team read first.</div>
+        </div>
+        <div class="example-item">
+          <div class="example-icon">&times;</div>
+          <div class="example-text"><strong>Eligibility type missed:</strong> The funder requires 501(c)(3) status. Your organization operates under fiscal sponsorship. The listing doesn&rsquo;t make this obvious.</div>
+        </div>
+        <div class="example-item">
+          <div class="example-icon">&times;</div>
+          <div class="example-text"><strong>Shifted priorities:</strong> The funder pivoted from education to workforce development two cycles ago. The online listing still says &ldquo;education &amp; community development.&rdquo;</div>
+        </div>
+        <div class="example-item">
+          <div class="example-icon">&times;</div>
+          <div class="example-text"><strong>Closed network:</strong> A review of the foundation&rsquo;s awards shows every grant over four years went to organizations with prior board relationships. The foundation has never funded a cold applicant.</div>
+        </div>
+      </div>
+
+      <div class="examples-footer">
+        <p>Every one of these can usually be verified in under an hour, before your team invests 25+ hours writing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: The Real Return on Not Applying -->
+  <div class="section-divider warm"></div>
+  <div class="section-spacer"></div>
+
+  <section class="fade-section" style="background: var(--bg-secondary);">
+    <div class="section-content">
+      <div class="section-label">The upside</div>
+      <h2 class="section-title">The real return on not applying</h2>
+      <p class="section-subtitle">When you catch wrong-fit grants early, the hours don&rsquo;t disappear. They go back to your team. For small nonprofits, that&rsquo;s not an abstraction. It&rsquo;s capacity.</p>
+
+      <div class="roi-card">
+        <div class="roi-title">What screening looks like at scale</div>
+        <div class="roi-row">
+          <span class="roi-label">Applications screened out before writing</span>
+          <span class="roi-value">40 per year</span>
+        </div>
+        <div class="roi-row">
+          <span class="roi-label">Hours per application (minimum)</span>
+          <span class="roi-value">25 hours</span>
+        </div>
+        <div class="roi-row">
+          <span class="roi-label">Total hours redirected to mission</span>
+          <span class="roi-highlight">1,000 hours</span>
+        </div>
+        <div class="roi-row">
+          <span class="roi-label">Staff cost per hour</span>
+          <span class="roi-value">$48/hr</span>
+        </div>
+        <div class="roi-row">
+          <span class="roi-label">Staff capacity recovered</span>
+          <span class="roi-highlight">$48,000</span>
+        </div>
+      </div>
+
+      <div class="roi-context">
+        <p><strong>For a team of 3, that&rsquo;s the equivalent of an extra person for a month.</strong> Not hired, just unlocked. Those hours become direct service delivered, programs launched on time, community needs met sooner, and stronger applications on grants that actually fit.</p>
+        <p>Small nonprofits don&rsquo;t have slack in the system. Every hour matters. Recovered time goes straight back to mission.</p>
+      </div>
+
+      <div class="roi-pullquote">
+        <p>&ldquo;The most valuable grant decision your team makes might be the one they don&rsquo;t pursue.&rdquo;</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: CTA -->
+  <div class="section-divider"></div>
+  <div class="section-spacer"></div>
+
+  <section class="fade-section">
+    <div class="cta-section">
+      <h2>Pursue the right grants with confidence</h2>
+      <p>Sharke validates grant fit against documented funder priorities, eligibility criteria, and funding history so your team focuses where it truly fits and moves forward with confidence.</p>
+      <a href="/pricing.html" class="cta-button">View Founding Member Pricing</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 <a href="/">Sharke.ai</a> | Build a funding pipeline that can fund your mission</p>
+    <p style="margin-top: 8px;">Questions? <a href="mailto:angelica@sharke.ai">angelica@sharke.ai</a> &middot; 512-253-1537</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Nav scroll effect
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Fade-in sections on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+
+</body>
+</html>

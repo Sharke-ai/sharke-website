@@ -3,20 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
 <title>Sharke: Grant Verification for Consultants</title>
-<meta name="description" content="Before you tell a client to pursue a grant, prove it was viable. Sharke returns a source-cited Decision Record in 24 hours, built from the funder's real award history. $49.">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Sharke">
-<meta property="og:title" content="Sharke: Grant Verification for Consultants">
-<meta property="og:description" content="Prove a grant is viable before you recommend it. A source-cited Decision Record in 24 hours, from the funder's real award history. $49.">
-<meta property="og:url" content="https://sharke.ai/gw">
-<meta property="og:image" content="https://sharke.ai/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Sharke: Grant Verification for Consultants">
-<meta name="twitter:description" content="Prove a grant is viable before you recommend it. Grant verification for consultants.">
-<meta name="twitter:image" content="https://sharke.ai/og-image.png">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -143,7 +130,7 @@
     margin-bottom: 20px;
   }
 
-  /* QUOTE BLOCK */
+  /* QUOTE BLOCK for the scenario scene */
   .scene-block {
     border-left: 3px solid var(--red);
     padding: 24px 28px;
@@ -380,10 +367,67 @@
     color: #fff;
   }
 
-  .submit-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  /* TESTIMONIAL */
+  .testimonial-block {
+    border-left: 3px solid var(--red);
+    padding: 24px 28px;
+    margin: 36px 0 0;
+    background: var(--off-white);
   }
+
+  .testimonial-block p {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: #2a2a2a;
+    margin-bottom: 10px;
+  }
+
+  .testimonial-block cite {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    font-style: normal;
+  }
+
+  /* MOCK VERDICT */
+  .mock-verdict {
+    border: 1px solid var(--rule);
+    background: #f0ede6;
+    padding: 24px 28px;
+    margin: 24px 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.8;
+    color: #2a2a2a;
+  }
+
+  .mock-verdict .mv-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 14px;
+  }
+
+  .mock-verdict .mv-row {
+    display: flex;
+    gap: 12px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--light-gray);
+  }
+
+  .mock-verdict .mv-row:last-child { border-bottom: none; }
+
+  .mock-verdict .mv-key {
+    color: var(--mid-gray);
+    flex-shrink: 0;
+    width: 110px;
+  }
+
+  .mock-verdict .mv-val { color: #1a1a1a; }
+  .mock-verdict .mv-val.red { color: var(--red); font-weight: 500; }
 
   /* CLOSE */
   .close-section {
@@ -415,15 +459,6 @@
   .hook h1       { animation: fadeUp 0.55s ease 0.15s both; }
   .hook .subhead { animation: fadeUp 0.55s ease 0.28s both; }
 
-  @media (max-width: 480px) {
-    .close-section a[href*="sharke-app.netlify.app"] {
-      display: block;
-      width: 100%;
-      text-align: center;
-      box-sizing: border-box;
-    }
-  }
-
   @media (max-width: 600px) {
     .site-header { padding: 16px 20px; }
     .container   { padding: 0 20px; }
@@ -431,27 +466,12 @@
     .hook        { padding-top: 56px; padding-bottom: 56px; }
     .cta-section { padding: 60px 0; }
   }
-
-  /* Soft frame around the Stripe checkout so the off-white form does not
-     collide with the surrounding dark CTA section. Revealed via JS after
-     the user clicks the run-verification button. */
-  .checkout-frame {
-    background: var(--warm-white);
-    border: 1px solid #2a2a2a;
-    padding: 20px 22px 36px;
-    margin: 12px 0 0;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-  }
-  .checkout-frame #checkout-container { margin-bottom: 8px; }
-  @media (max-width: 600px) {
-    .checkout-frame { padding: 16px 14px 28px; }
-  }
 </style>
 </head>
 <body>
 
 <header class="site-header">
-  <a class="logo" href="https://sharke.ai?utm_source=drip&utm_medium=email&utm_campaign=gw">Sharke<span>.</span>ai</a>
+  <a class="logo" href="https://sharke.ai">Sharke<span>.</span>ai</a>
   <span class="header-tag">Grant verification for consultants</span>
 </header>
 
@@ -490,6 +510,11 @@
         <p>They decided quietly that you sent them somewhere you shouldn't have. That the 25 hours their program coordinator spent was based on your word, and you didn't have a process to stand behind. The referral they would have given goes with them.</p>
       </div>
       <p>Before your next recommendation goes out, that same risk is still there.</p>
+
+      <div class="testimonial-block">
+        <p>"We were about to recommend it. The verification showed the funder hadn't funded a new organization in five years. That saved a client relationship."</p>
+        <cite>Grant consultant</cite>
+      </div>
     </div>
   </section>
 
@@ -524,6 +549,14 @@
           <li><span class="tick">✓</span> Sources cited</li>
           <li><span class="tick">✓</span> Decision documented with reasoning</li>
         </ul>
+        <div class="mock-verdict">
+          <p class="mv-label">Example output</p>
+          <div class="mv-row"><span class="mv-key">Verdict</span><span class="mv-val red">Move On</span></div>
+          <div class="mv-row"><span class="mv-key">Reason</span><span class="mv-val">Funder has not awarded to a new grantee in 36 months</span></div>
+          <div class="mv-row"><span class="mv-key">Eligibility</span><span class="mv-val">Technically eligible</span></div>
+          <div class="mv-row"><span class="mv-key">Historical fit</span><span class="mv-val">None confirmed</span></div>
+          <div class="mv-row"><span class="mv-key">Source</span><span class="mv-val">IRS 990, 2021-2024</span></div>
+        </div>
       </div>
       <div class="before-after">
         <div class="ba-col">
@@ -553,34 +586,34 @@
   <!-- CTA -->
   <section class="cta-section">
     <div class="container">
-      <h2>What grant are you about to recommend?</h2>
-      <p>The recommendation you are about to send is either defensible, or it isn't. Once it goes out, you don't get to take it back.</p>
-      <p class="action-trigger">Strong consultants don't send a recommendation without this.</p>
+      <h2>What recommendation are you about to send?</h2>
+
+      <p>Before you send that recommendation.</p>
+
+      <p>Think about the recommendation sitting in your drafts right now. The one going to your client this week. Run this before you send it.</p>
+
+      <p>Once you see this, you can't go back to recommending grants without verifying first.</p>
+
+      <p class="action-trigger">Strong consultants don't send a recommendation without a verification trail behind it.</p>
       <p class="price-line"><strong>$49.</strong> Verification trail in 24 hours.</p>
 
-      <div style="border-left: 3px solid #9c958e; padding: 20px 24px; margin: 28px 0; background: #1a1a1a;">
-        <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: #9c958e; margin-bottom: 10px;">THIS IS HOW CLIENT RELATIONSHIPS FAIL</p>
-        <p style="font-size: 0.9rem; font-style: italic; color: #c8cfd8; margin-bottom: 10px;">"I had already sent the recommendation. The cycle hadn't been open in three years. My client spent 22 hours on an application that had nowhere to go. That's the last time I sent anything without running a check first."</p>
-        <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: #9c958e; margin: 0;">Grant Consultant, Independent Practice</p>
+      <div class="form-group">
+        <label for="grant-name">Grant / Funder Name</label>
+        <input type="text" id="grant-name" name="grant_name" placeholder="e.g. Annie E. Casey Foundation, Children and Families">
       </div>
-
-      <p style="font-size: 0.82rem; color: #9c958e; margin-bottom: 16px;">You're about to run this on a real grant.</p>
-      <button id="checkout-btn" class="submit-btn" onclick="revealCheckout()">Run Verification Before Sending &rarr;</button>
-      <!-- Stripe checkout, click-to-reveal, wrapped in soft frame -->
-      <div id="checkout-area" class="checkout-frame" style="display:none;">
-        <div id="checkout-loading" style="display:none; text-align:center; padding:36px 0;">
-          <p style="color:var(--mid-gray); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; letter-spacing:0.04em; margin:0;">Preparing secure checkout...</p>
-        </div>
-        <div id="checkout-container" style="display:none; min-height:350px;"></div>
-        <div id="checkout-error" style="display:none; text-align:center; padding:16px 0;">
-          <p style="color:var(--red); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; margin:0;"></p>
-        </div>
+      <div class="form-group">
+        <label for="client-org">Client Organization</label>
+        <input type="text" id="client-org" name="client_org" placeholder="Your client's organization name">
       </div>
-      <p style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #9c958e; text-align: center; margin-top: 14px; letter-spacing: 0.04em;">If we can't verify the grant against documented funder data, you get a full refund. No reason to guess.</p>
-      <p style="margin-top: 12px; display:flex; align-items:center; justify-content:center; gap:6px;">
-        <svg width="12" height="14" viewBox="0 0 24 28" fill="none" stroke="#9c958e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="18" height="13" rx="2"/><path d="M7 13V9a5 5 0 0 1 10 0v4"/></svg>
-        <span style="font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:#9c958e;">Powered by Stripe</span>
-      </p>
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" placeholder="you@yourpractice.com">
+      </div>
+      <div class="form-group">
+        <label for="context">Brief context (optional)</label>
+        <textarea id="context" name="context" rows="3" placeholder="Stage of recommendation, client type, any specific eligibility questions..."></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Get Due Diligence Report →</button>
     </div>
   </section>
 
@@ -590,62 +623,10 @@
       <p>If that recommendation is wrong, what do you show your client?</p>
       <br>
       <p class="final-line">This is the answer to that question, before they have to ask it.</p>
-      <div style="margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--rule);">
-        <p style="font-size: 0.88rem; color: var(--mid-gray); font-style: normal; margin-bottom: 16px;">Still reviewing client work? Start with the Grant Readiness Assessment and Budget Builder. Free, no login.</p>
-        <a href="https://sharke-app.netlify.app/free-tools" style="display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 20px; background: var(--black); color: var(--off-white); text-decoration: none; cursor: pointer;">Start the Assessment →</a>
-      </div>
     </div>
   </section>
 
 </main>
-
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-  var stripe = Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4');
-  var checkoutReady = null;
-
-  // Pre-initialize checkout on page load so it's instant when user clicks
-  checkoutReady = stripe.initEmbeddedCheckout({
-    fetchClientSecret: function() {
-      return fetch('/.netlify/functions/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: 'grb' })
-      })
-      .then(function(resp) { return resp.json(); })
-      .then(function(data) {
-        if (data.error) throw new Error(data.error);
-        return data.clientSecret;
-      });
-    }
-  });
-
-  function revealCheckout() {
-    var btn = document.getElementById('checkout-btn');
-    var frame = document.getElementById('checkout-area');
-    var container = document.getElementById('checkout-container');
-    var loading = document.getElementById('checkout-loading');
-    var errorDiv = document.getElementById('checkout-error');
-
-    btn.style.display = 'none';
-    errorDiv.style.display = 'none';
-    frame.style.display = 'block';
-    loading.style.display = 'block';
-
-    checkoutReady.then(function(checkout) {
-      loading.style.display = 'none';
-      container.style.display = 'block';
-      checkout.mount('#checkout-container');
-    }).catch(function(err) {
-      loading.style.display = 'none';
-      frame.style.display = 'none';
-      btn.style.display = 'block';
-      errorDiv.style.display = 'block';
-      errorDiv.querySelector('p').textContent = 'Something went wrong. Please try again.';
-      console.error('Checkout error:', err);
-    });
-  }
-</script>
 
 </body>
 </html>

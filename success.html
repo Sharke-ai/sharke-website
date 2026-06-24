@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharke: Payment Confirmed</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-white: #f5f2ed;
+    --warm-white: #faf8f4;
+    --red: #c0392b;
+    --mid-gray: #6b6560;
+    --rule: #d0cbc2;
+    --green: #1a6640;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; }
+  body {
+    background: var(--warm-white);
+    color: var(--black);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+  .logo span { color: var(--red); }
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--mid-gray);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .container { max-width: 600px; margin: 0 auto; padding: 0 32px; }
+
+  .success-section {
+    padding: 100px 0 80px;
+    text-align: center;
+  }
+
+  .check-icon {
+    width: 64px;
+    height: 64px;
+    border: 3px solid var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 32px;
+    color: var(--green);
+    font-size: 1.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+  }
+
+  .success-section h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 20px;
+  }
+
+  .success-section p {
+    font-size: 1rem;
+    color: #1a1a1a;
+    margin-bottom: 1.3em;
+  }
+
+  .success-section .sub {
+    color: var(--mid-gray);
+    font-style: italic;
+    font-size: 0.95rem;
+  }
+
+  .setup-box {
+    border: 1px solid var(--rule);
+    background: var(--off-white);
+    padding: 32px;
+    margin: 40px 0;
+    text-align: left;
+  }
+
+  .setup-box h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 16px;
+  }
+
+  .setup-box p {
+    font-size: 0.95rem;
+    color: #1a1a1a;
+    margin-bottom: 1em;
+  }
+
+  .setup-btn {
+    display: block;
+    width: 100%;
+    background: var(--black);
+    color: var(--off-white);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 20px 36px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-align: center;
+    text-decoration: none;
+  }
+  .setup-btn:hover { background: var(--red); }
+
+  .contact-line {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--mid-gray);
+    letter-spacing: 0.04em;
+    margin-top: 32px;
+    text-align: center;
+  }
+  .contact-line a { color: var(--mid-gray); text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .container { padding: 0 20px; }
+    .success-section { padding: 64px 0 56px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://sharke.ai">Sharke<span>.</span>ai</a>
+  <span class="header-tag">Build a funding pipeline that can fund your mission</span>
+</header>
+
+<main>
+  <section class="success-section">
+    <div class="container">
+      <div class="check-icon">&#10003;</div>
+      <h1>Payment confirmed.</h1>
+      <p>Your membership is active. Verification starts now.</p>
+      <p class="sub">You will receive a confirmation email from Stripe with your subscription details.</p>
+
+      <div class="setup-box">
+        <h2>Next step</h2>
+        <p>Set up your account to start running verification on your first grant. This takes about two minutes.</p>
+        <a id="setup-link" href="https://sharke-app.netlify.app/signup" class="setup-btn">Set Up Your Account</a>
+      </div>
+
+      <p class="contact-line">Questions? <a href="mailto:collin@sharke.ai">collin@sharke.ai</a></p>
+    </div>
+  </section>
+</main>
+
+<script>
+  // Pass session_id and plan through to signup
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get('session_id');
+  const plan = params.get('plan');
+  const link = document.getElementById('setup-link');
+  if (sessionId || plan) {
+    const signupParams = new URLSearchParams();
+    if (sessionId) signupParams.set('session_id', sessionId);
+    if (plan) signupParams.set('plan', plan);
+    link.href = 'https://sharke-app.netlify.app/signup?' + signupParams.toString();
+  }
+</script>
+</body>
+</html>

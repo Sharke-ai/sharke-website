@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharke: Grant Review Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-white: #f5f2ed;
+    --warm-white: #faf8f4;
+    --red: #c0392b;
+    --mid-gray: #6b6560;
+    --rule: #d0cbc2;
+    --green: #2a9d5c;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; scroll-behavior: smooth; }
+  body {
+    background: var(--warm-white);
+    color: var(--black);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+  .logo span { color: var(--red); }
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--mid-gray);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .container { max-width: 640px; margin: 0 auto; padding: 0 32px; }
+  section { padding: 56px 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type { border-bottom: none; }
+
+  /* BANNER */
+  .banner {
+    background: var(--black);
+    color: var(--off-white);
+    padding: 32px 0 28px;
+    border-bottom: none;
+  }
+  .banner h1 {
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+    color: var(--green);
+  }
+  .banner .subhead {
+    font-size: 0.92rem;
+    color: #a09890;
+    line-height: 1.65;
+    max-width: 480px;
+  }
+
+  /* SECTION HEADERS */
+  .section-head {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+    color: var(--black);
+  }
+
+  /* FIELD LABELS */
+  .field-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .field-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: #a09890;
+    margin-top: 4px;
+    margin-bottom: 0;
+  }
+
+  /* FORM */
+  .form-group { margin-bottom: 18px; }
+  .form-row {
+    display: flex;
+    gap: 16px;
+  }
+  .form-row .form-group { flex: 1; }
+  .form-row .form-group-small { flex: 0 0 120px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="url"],
+  textarea,
+  select {
+    width: 100%;
+    background: var(--off-white);
+    border: 1px solid var(--rule);
+    border-bottom: 2px solid var(--black);
+    color: var(--black);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 0.9rem;
+    padding: 13px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+    resize: vertical;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-bottom-color: var(--red);
+  }
+  input::placeholder, textarea::placeholder { color: #a09890; font-style: italic; }
+  select { cursor: pointer; }
+
+  /* RADIO GROUP */
+  .radio-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 4px; }
+  .radio-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1px solid var(--rule);
+    background: var(--off-white);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .radio-option:hover { border-color: var(--black); }
+  .radio-option.selected { border-color: var(--black); background: #edeae4; }
+  .radio-option input[type="radio"] { margin-top: 3px; flex-shrink: 0; accent-color: var(--black); }
+  .radio-option-text { font-size: 0.92rem; line-height: 1.5; }
+  .radio-option-label { font-weight: 700; display: block; margin-bottom: 2px; }
+  .radio-option-desc { font-size: 0.82rem; color: var(--mid-gray); display: block; }
+
+  /* INLINE RADIO (funder type) */
+  .radio-inline { display: flex; gap: 20px; margin-bottom: 4px; }
+  .radio-inline label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.92rem;
+  }
+  .radio-inline input[type="radio"] { accent-color: var(--black); }
+
+  /* CONDITIONAL FIELDS */
+  .conditional-fields { display: none; }
+  .conditional-fields.active { display: block; }
+
+  /* SUBMIT BUTTON */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    background: var(--black);
+    color: var(--off-white);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 18px 36px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+    text-align: center;
+  }
+  .submit-btn:hover { background: var(--red); }
+  .submit-btn:disabled { background: #555; cursor: not-allowed; }
+
+  .delivery-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: #a09890;
+    margin-top: 14px;
+    text-transform: uppercase;
+  }
+
+  /* FORM ERROR */
+  .form-error {
+    display: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--red);
+    margin-top: 12px;
+    letter-spacing: 0.04em;
+  }
+
+  /* SUCCESS STATE */
+  .success-state {
+    display: none;
+    text-align: center;
+    padding: 48px 0;
+  }
+  .success-state .success-icon {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 20px;
+  }
+  .success-state h2 { margin-bottom: 12px; }
+  .success-state p { color: var(--mid-gray); max-width: 400px; margin: 0 auto; }
+
+  /* TIMELINE */
+  .next-steps {
+    background: var(--off-white);
+    border-top: 3px solid var(--black);
+  }
+  .next-steps h2 { font-size: 1.2rem; margin-bottom: 28px; }
+  .step-list { list-style: none; }
+  .step-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.93rem;
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    flex-shrink: 0;
+    margin-top: 3px;
+    min-width: 48px;
+  }
+  .step-body strong { display: block; margin-bottom: 4px; }
+  .step-body span { font-size: 0.85rem; color: var(--mid-gray); }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .container { padding: 0 20px; }
+    section { padding: 44px 0; }
+    .banner { padding: 24px 0 20px; }
+    .form-row { flex-direction: column; gap: 0; }
+    .form-row .form-group-small { flex: 1; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://sharke.ai">Sharke<span>.</span>ai</a>
+  <span class="header-tag">Your Grant Review Brief</span>
+</header>
+
+<main>
+
+  <!-- BANNER -->
+  <section class="banner">
+    <div class="container">
+      <h1>Grant Review Brief</h1>
+      <p class="subhead">Verification runs before your team commits another hour. Enter the grant details below and we will get started.</p>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="submit-section">
+    <div class="container">
+
+      <!-- CONTACT -->
+      <div id="submit-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="field-label" for="first-name">First Name</label>
+            <input type="text" id="first-name" placeholder="First name" autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label class="field-label" for="last-name">Last Name</label>
+            <input type="text" id="last-name" placeholder="Last name" autocomplete="family-name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="email">Email</label>
+          <input type="email" id="email" placeholder="you@yourorg.org" autocomplete="email">
+        </div>
+
+        <!-- YOUR ORGANIZATION -->
+        <h2 class="section-head" style="margin-top: 36px;">Your Organization</h2>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="field-label" for="org-name">Organization Name</label>
+            <input type="text" id="org-name" placeholder="Organization name" autocomplete="organization">
+          </div>
+          <div class="form-group form-group-small">
+            <label class="field-label" for="org-state">State</label>
+            <input type="text" id="org-state" placeholder="TX" maxlength="2" autocomplete="address-level1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="org-website">Organization Website</label>
+          <input type="url" id="org-website" placeholder="https://yourorg.org" autocomplete="url">
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="program-summary">Program Seeking Funding</label>
+          <textarea id="program-summary" rows="3" placeholder="Briefly describe the program or initiative this grant would support"></textarea>
+        </div>
+
+        <!-- FUNDER / GRANT DETAILS -->
+        <h2 class="section-head" style="margin-top: 36px;">Funder / Grant Details</h2>
+
+        <div class="form-group">
+          <label class="field-label" for="funder-name">Funder Name</label>
+          <input type="text" id="funder-name" placeholder="e.g. Robert Wood Johnson Foundation" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label class="field-label">Funder Type</label>
+          <div class="radio-inline">
+            <label><input type="radio" name="funder-type" value="foundation" checked onchange="toggleFunderFields()"> Foundation</label>
+            <label><input type="radio" name="funder-type" value="federal" onchange="toggleFunderFields()"> Federal</label>
+            <label><input type="radio" name="funder-type" value="state_local" onchange="toggleFunderFields()"> State / Local</label>
+          </div>
+        </div>
+
+        <!-- Federal fields -->
+        <div id="federal-fields" class="conditional-fields">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="field-label" for="cfda">CFDA / ALN Number</label>
+              <input type="text" id="cfda" placeholder="93.600" autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label class="field-label" for="grants-gov-id">Grants.gov Opportunity ID</label>
+              <input type="text" id="grants-gov-id" placeholder="HHS-2026-001" autocomplete="off">
+            </div>
+          </div>
+        </div>
+
+        <!-- State/Local fields -->
+        <div id="state-local-fields" class="conditional-fields">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="field-label" for="funder-state">Funder State</label>
+              <select id="funder-state">
+                <option value="">Select state</option>
+                <option value="CA">CA</option>
+                <option value="NY">NY</option>
+                <option value="TX">TX</option>
+                <option value="IL">IL</option>
+                <option value="MD">MD</option>
+                <option value="DC">DC</option>
+                <option value="NC">NC</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="field-label" for="search-keyword">Search Keyword</label>
+              <input type="text" id="search-keyword" placeholder="e.g. youth services, housing" autocomplete="off">
+              <p class="field-note">Optional</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="grant-title">Grant / Program Title</label>
+          <input type="text" id="grant-title" placeholder="e.g. Health Equity 2026, Community Development Block Grant" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label class="field-label">Where is this grant in your process?</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="grant-stage" value="just_found">
+              <span class="radio-option-text">
+                <span class="radio-option-label">Just identified</span>
+                <span class="radio-option-desc">Team has not started work yet</span>
+              </span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="grant-stage" value="in_progress">
+              <span class="radio-option-text">
+                <span class="radio-option-label">Already in progress</span>
+                <span class="radio-option-desc">Team has started writing or research</span>
+              </span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="grant-stage" value="near_deadline">
+              <span class="radio-option-text">
+                <span class="radio-option-label">Deadline within two weeks</span>
+                <span class="radio-option-desc">Urgent verification needed</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <button class="submit-btn" id="submit-btn" onclick="submitForm()">Submit for Verification</button>
+        <p class="form-error" id="form-error"></p>
+        <p class="delivery-note">Grant Review Brief delivered within 24 hours</p>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="success-state" id="success-state">
+        <p class="success-icon">Submitted</p>
+        <h2>Verification is running.</h2>
+        <p>Your Grant Review Brief will be in your inbox within 24 hours.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHAT HAPPENS FROM HERE -->
+  <section class="next-steps">
+    <div class="container">
+      <h2>What happens from here</h2>
+      <ul class="step-list">
+        <li>
+          <span class="step-num">Now</span>
+          <span class="step-body">
+            <strong>Verification begins</strong>
+            <span>Eligibility, funder award history, organization fit, timing, and relationship patterns checked against primary sources.</span>
+          </span>
+        </li>
+        <li>
+          <span class="step-num">24 hrs</span>
+          <span class="step-body">
+            <strong>Grant Review Brief in your inbox</strong>
+            <span>Pursue, wait, or move on. With the documented finding behind it. Tied to primary sources you can act on or put in front of your board.</span>
+          </span>
+        </li>
+        <li>
+          <span class="step-num">After</span>
+          <span class="step-body">
+            <strong>Only then does drafting begin</strong>
+            <span>If the brief returns a Pursue verdict, drafting starts on verified fit. Not on assumptions.</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // ── Funder type toggle ──
+  function toggleFunderFields() {
+    var type = document.querySelector('input[name="funder-type"]:checked').value;
+    document.getElementById('federal-fields').className = 'conditional-fields' + (type === 'federal' ? ' active' : '');
+    document.getElementById('state-local-fields').className = 'conditional-fields' + (type === 'state_local' ? ' active' : '');
+  }
+
+  // ── Radio option highlight ──
+  document.querySelectorAll('.radio-option').forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      var group = this.closest('.radio-group');
+      group.querySelectorAll('.radio-option').forEach(function(o) { o.classList.remove('selected'); });
+      this.classList.add('selected');
+    });
+  });
+
+  // ── Get Stripe session_id from URL ──
+  var params = new URLSearchParams(window.location.search);
+  var sessionId = params.get('session_id') || '';
+  var plan = params.get('plan') || '';
+
+  // ── Pre-populate email from sessionStorage (if coming from landing page) ──
+  try {
+    var raw = sessionStorage.getItem('sharke_intake');
+    if (raw) {
+      var intake = JSON.parse(raw);
+      if (intake.email) document.getElementById('email').value = intake.email;
+      if (intake.org) document.getElementById('org-name').value = intake.org;
+      if (intake.funder) document.getElementById('funder-name').value = intake.funder;
+      sessionStorage.removeItem('sharke_intake');
+    }
+  } catch(e) {}
+
+  // ── Form submission ──
+  function submitForm() {
+    var firstName  = document.getElementById('first-name').value.trim();
+    var lastName   = document.getElementById('last-name').value.trim();
+    var email      = document.getElementById('email').value.trim();
+    var orgName    = document.getElementById('org-name').value.trim();
+    var funderName = document.getElementById('funder-name').value.trim();
+    var err        = document.getElementById('form-error');
+
+    // Validation
+    if (!firstName || !lastName) {
+      err.textContent = 'Enter your first and last name.';
+      err.style.display = 'block';
+      document.getElementById('first-name').focus();
+      return;
+    }
+    if (!email || !email.includes('@')) {
+      err.textContent = 'Enter a valid email address.';
+      err.style.display = 'block';
+      document.getElementById('email').focus();
+      return;
+    }
+    if (!orgName) {
+      err.textContent = 'Enter your organization name.';
+      err.style.display = 'block';
+      document.getElementById('org-name').focus();
+      return;
+    }
+    if (!funderName) {
+      err.textContent = 'Enter the funder name.';
+      err.style.display = 'block';
+      document.getElementById('funder-name').focus();
+      return;
+    }
+    err.style.display = 'none';
+
+    var btn = document.getElementById('submit-btn');
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+
+    var funderType = document.querySelector('input[name="funder-type"]:checked').value;
+    var grantStage = document.querySelector('input[name="grant-stage"]:checked');
+
+    var payload = {
+      stripe_session_id: sessionId,
+      plan: plan,
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
+      org_name: orgName,
+      org_state: document.getElementById('org-state').value.trim().toUpperCase(),
+      org_website: document.getElementById('org-website').value.trim(),
+      program_summary: document.getElementById('program-summary').value.trim(),
+      funder_name: funderName,
+      funder_type: funderType,
+      cfda: document.getElementById('cfda').value.trim(),
+      grants_gov_id: document.getElementById('grants-gov-id').value.trim(),
+      funder_state: document.getElementById('funder-state').value,
+      search_keyword: document.getElementById('search-keyword').value.trim(),
+      grant_title: document.getElementById('grant-title').value.trim(),
+      grant_stage: grantStage ? grantStage.value : 'not_specified',
+      submitted_at: new Date().toISOString()
+    };
+
+    // POST to Google Apps Script web app (appends row to Google Sheet)
+    // REPLACE this URL with your deployed Apps Script web app URL
+    var GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxcV9lFHnJ-41TOTZRn2hJYSb2vj_vbXMvVUFA9z_Ao_ILu_Tt7e-lAUM1a3qXYKDrZVg/exec';
+
+    fetch(GOOGLE_SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload)
+    })
+    .then(function() {
+      document.getElementById('submit-form').style.display = 'none';
+      document.getElementById('success-state').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    })
+    .catch(function() {
+      var errEl = document.getElementById('form-error');
+      errEl.textContent = 'Submission failed. Please try again or contact support.';
+      errEl.style.display = 'block';
+      btn.textContent = 'Submit for Verification';
+      btn.disabled = false;
+    });
+  }
+</script>
+
+</body>
+</html>

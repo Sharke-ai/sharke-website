@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy · Sharke.ai</title>
+<meta name="description" content="How Sharke.ai collects, uses, and protects information about you and your organization.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght,wdth@9..40,400..800,75..100&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0f1a;
+    --bg-elevated: #111827;
+    --bg-elevated-2: #1a2236;
+    --accent: #4AE3A0;
+    --accent-muted: rgba(74, 227, 160, 0.12);
+    --accent-border: rgba(74, 227, 160, 0.3);
+    --text-primary: #FFFFFF;
+    --text-secondary: #D1D5DB;
+    --text-muted: #9CA3AF;
+    --rule: rgba(255, 255, 255, 0.1);
+    --rule-strong: rgba(255, 255, 255, 0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; scroll-behavior: smooth; }
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: var(--bg-primary);
+    z-index: 100;
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .logo-s { color: var(--bg-primary); font-size: 16px; font-weight: 600; line-height: 1; }
+  .logo-text { font-size: 17px; font-weight: 500; color: var(--text-primary); line-height: 1; }
+  .header-right { display: flex; align-items: center; gap: 24px; }
+  .header-tools {
+    background: var(--accent);
+    color: var(--bg-primary);
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .header-tools:hover { background: #6EEEB5; }
+  .header-login {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    border: 1px solid var(--rule-strong);
+    padding: 9px 18px;
+    border-radius: 6px;
+    transition: border-color 0.2s, background 0.2s;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .header-login:hover { border-color: var(--accent); background: var(--accent-muted); }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+  .page-header { padding: 80px 0 40px; border-bottom: 1px solid var(--rule); }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .last-updated {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  .placeholder-banner {
+    background: var(--accent-muted);
+    border: 1px solid var(--accent-border);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin: 36px 0 0;
+    font-size: 0.92rem;
+    color: var(--text-primary);
+  }
+  .placeholder-banner strong { color: var(--accent); }
+
+  .prose { padding: 48px 0 80px; }
+  .prose h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 40px 0 14px;
+    line-height: 1.3;
+  }
+  .prose h2:first-child { margin-top: 0; }
+  .prose p { color: var(--text-secondary); margin-bottom: 1.1em; font-size: 0.98rem; }
+  .prose ul { padding-left: 22px; margin-bottom: 1.2em; }
+  .prose li { color: var(--text-secondary); margin-bottom: 0.5em; font-size: 0.98rem; }
+  .prose strong { color: var(--text-primary); font-weight: 600; }
+
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    padding: 36px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+  .site-footer a { color: var(--text-muted); text-decoration: none; }
+  .site-footer a:hover { color: var(--text-primary); }
+  .site-footer .footer-right { display: flex; gap: 24px; }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 14px 20px; }
+    .container { padding: 0 20px; }
+    .page-header { padding: 56px 0 28px; }
+    .prose { padding: 32px 0 56px; }
+    .site-footer { flex-direction: column; gap: 12px; padding: 28px 20px; text-align: center; }
+  }
+  @media (max-width: 380px) {
+    .site-header { padding: 10px 14px; }
+    .header-right { gap: 8px; }
+    .header-tools { padding: 9px 12px; font-size: 0.84rem; }
+    .header-login { padding: 9px 12px; font-size: 0.84rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="/"><span class="logo-mark"><span class="logo-s">S</span></span><span class="logo-text">Sharke.ai</span></a>
+  <div class="header-right">
+    <a class="header-tools" href="https://sharke-app.netlify.app/free-tools">Resources</a>
+    <a class="header-login" href="https://sharke-app.netlify.app/login">Login</a>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <p class="eyebrow">Legal</p>
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last updated: May 8, 2026</p>
+    <div class="placeholder-banner">
+      <strong>Placeholder.</strong> This is a working draft of our privacy policy. We are finalizing the legally reviewed version. Substantive practices described below are accurate; precise legal language may change.
+    </div>
+  </div>
+</section>
+
+<section class="prose">
+  <div class="container">
+    <h2>Who we are</h2>
+    <p>Sharke.ai ("Sharke," "we," "us") provides a verified pipeline tool for nonprofit grant teams. This Privacy Policy describes how we collect, use, and share information about you when you use sharke.ai or the Sharke web application.</p>
+
+    <h2>Information we collect</h2>
+    <p>We collect information in three ways:</p>
+    <ul>
+      <li><strong>Information you provide.</strong> Email address, organization name, role, and contact details when you sign up, request access, run a fit check, or use a free tool. Documents you upload to your Document Vault. Messages you send to us.</li>
+      <li><strong>Information about your use of Sharke.</strong> Pages viewed, features used, search queries, IP address, browser and device information, approximate geographic location, and timestamps. We use cookies and similar technologies to collect this information.</li>
+      <li><strong>Information from third parties.</strong> Public funder and grant data from sources such as Grants.gov, USAspending, IRS Form 990 filings, and state and local procurement portals. This is information about funders, not about you.</li>
+    </ul>
+
+    <h2>How we use information</h2>
+    <ul>
+      <li>To provide, operate, and improve Sharke and its features.</li>
+      <li>To run fit checks, surface matching grants, and generate analyses tailored to your organization.</li>
+      <li>To respond to inquiries, provide customer support, and send service-related communications.</li>
+      <li>To send marketing and newsletter emails where you have opted in. You can unsubscribe at any time.</li>
+      <li>To detect, prevent, and address fraud, abuse, security, and technical issues.</li>
+      <li>To comply with legal obligations and enforce our Terms of Service.</li>
+    </ul>
+
+    <h2>How we share information</h2>
+    <p>We do not sell your personal information. We share information only as follows:</p>
+    <ul>
+      <li><strong>Service providers.</strong> Vendors that help us run Sharke, including infrastructure (Netlify), database and backend (Xano), email delivery, payment processing (Stripe), and analytics. These providers process information under our instructions and contractual data protection terms.</li>
+      <li><strong>Legal requirements.</strong> When required by law, subpoena, or to protect our rights, users, or the public.</li>
+      <li><strong>Business transfers.</strong> In connection with a merger, acquisition, financing, or sale of assets, your information may be transferred to the successor entity, subject to this Privacy Policy.</li>
+      <li><strong>With your consent.</strong> When you direct us to share information with a third party.</li>
+    </ul>
+
+    <h2>Cookies and analytics</h2>
+    <p>We use first-party and third-party cookies for authentication, preferences, and analytics. We may use Google Analytics or similar tools to understand product usage. You can disable cookies in your browser; some features may not work without them.</p>
+
+    <h2>Data retention</h2>
+    <p>We retain account information for as long as your account is active and as needed to provide the service. We retain free-tool inputs for up to 12 months for product improvement, except where you request deletion. We retain transaction and tax records for the period required by law.</p>
+
+    <h2>Your rights</h2>
+    <p>Depending on where you live, you may have the right to access, correct, delete, or port your information; to object to or restrict certain processing; and to opt out of the sale or sharing of personal information. California, Colorado, Connecticut, Utah, and Virginia residents have specific rights under their state privacy laws, and EU/UK residents have rights under the GDPR. To exercise any of these rights, email <a href="mailto:angelica@sharke.ai">angelica@sharke.ai</a>. We will respond within the timeframe required by applicable law.</p>
+
+    <h2>Security</h2>
+    <p>We use administrative, technical, and physical safeguards to protect your information, including encryption in transit, access controls, and routine review of our security practices. No system is perfectly secure; we cannot guarantee absolute security.</p>
+
+    <h2>Children</h2>
+    <p>Sharke is intended for use by adults working at nonprofit organizations. We do not knowingly collect personal information from children under 13.</p>
+
+    <h2>International users</h2>
+    <p>Sharke is operated from the United States. If you access Sharke from outside the United States, your information will be transferred to and processed in the United States, which may have different data protection laws than your country.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>We may update this Privacy Policy from time to time. If we make material changes, we will notify you by email or by posting a notice on the site before the changes take effect. The "Last updated" date at the top of this page reflects the most recent revision.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this Privacy Policy or our practices? Email <a href="mailto:angelica@sharke.ai">angelica@sharke.ai</a>.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div><a href="mailto:angelica@sharke.ai">angelica@sharke.ai</a> &nbsp;·&nbsp; © 2026 Sharke.ai &nbsp;·&nbsp; Member of the NVIDIA Inception Program</div>
+  <div class="footer-right">
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+  </div>
+</footer>
+
+</body>
+</html>

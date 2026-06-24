@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Sharke: Your Verification Is Running</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-white: #f5f2ed;
+    --warm-white: #faf8f4;
+    --red: #c0392b;
+    --mid-gray: #6b6560;
+    --light-gray: #ddd8d0;
+    --rule: #d0cbc2;
+    --green: #2a7a4b;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 18px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--black);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HEADER */
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--red); }
+
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--mid-gray);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* LAYOUT */
+  .page-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 72px 40px 100px;
+  }
+
+  /* CONFIRMATION BLOCK */
+  .confirm-block {
+    border-left: 3px solid var(--green);
+    padding-left: 24px;
+    margin-bottom: 52px;
+  }
+
+  .confirm-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 14px;
+  }
+
+  .confirm-headline {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--black);
+    margin-bottom: 18px;
+  }
+
+  .confirm-body {
+    font-size: 0.95rem;
+    color: var(--mid-gray);
+    line-height: 1.7;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 48px 0;
+  }
+
+  /* FORM SECTION */
+  .form-heading {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 8px;
+  }
+
+  .form-subhead {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+
+  .form-note {
+    font-size: 0.88rem;
+    color: var(--mid-gray);
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+
+  .field-group {
+    margin-bottom: 28px;
+  }
+
+  label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  select {
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--light-gray);
+    border-radius: 2px;
+    padding: 13px 16px;
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 0.95rem;
+    color: var(--black);
+    outline: none;
+    transition: border-color 0.15s ease;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  input[type="text"]:focus,
+  input[type="date"]:focus,
+  select:focus {
+    border-color: var(--black);
+  }
+
+  input[type="date"] {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem;
+    color: var(--mid-gray);
+  }
+
+  .select-wrap {
+    position: relative;
+  }
+
+  .select-wrap::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--mid-gray);
+    pointer-events: none;
+  }
+
+  select {
+    cursor: pointer;
+    padding-right: 40px;
+  }
+
+  /* SUBMIT BUTTON */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    background: var(--black);
+    color: #fff;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 18px 24px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-top: 36px;
+    transition: background 0.15s ease;
+  }
+
+  .submit-btn:hover { background: #222; }
+
+  .submit-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--mid-gray);
+    text-align: center;
+    margin-top: 14px;
+    letter-spacing: 0.04em;
+  }
+
+  /* SUCCESS STATE */
+  .success-block {
+    display: none;
+    border-left: 3px solid var(--green);
+    padding-left: 24px;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .success-block.visible { display: block; }
+
+  .success-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 14px;
+  }
+
+  .success-headline {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--black);
+    margin-bottom: 18px;
+  }
+
+  .success-body {
+    font-size: 0.95rem;
+    color: var(--mid-gray);
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+
+  .success-irrev {
+    font-size: 0.95rem;
+    color: var(--black);
+    font-style: italic;
+    line-height: 1.65;
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+    margin-top: 4px;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* FOOTER */
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    text-decoration: none;
+  }
+
+  .footer-logo span { color: var(--red); }
+
+  .footer-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--light-gray);
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .page-wrap { padding: 48px 20px 80px; }
+    .confirm-headline { font-size: 1.4rem; }
+    .site-footer { padding: 24px 20px; flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://sharke.ai">Sharke<span>.</span>ai</a>
+  <span class="header-tag">Grant Verification</span>
+</header>
+
+<main class="page-wrap">
+
+  <!-- CONFIRMATION -->
+  <div class="confirm-block">
+    <div class="confirm-label">Purchase Confirmed</div>
+    <h1 class="confirm-headline">Now let's run your verification.</h1>
+    <p class="confirm-body">
+      Submit the grant details below and you will receive your verified decision within 24 hours. Pursue, wait, or move on.
+    </p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FORM -->
+  <div id="form-section">
+    <div class="form-heading">Step 2 of 2</div>
+    <div class="form-subhead">Tell us about the grant.</div>
+    <p class="form-note">This is the grant your team is actively working on. Not the list. The one already in motion.</p>
+
+    <form id="grant-form" name="grant-verification" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="grant-verification">
+      <input type="hidden" id="email" name="email" value="">
+      <p style="display:none"><label>Do not fill this in: <input name="bot-field"></label></p>
+
+      <div class="field-group">
+        <label for="org-name">Organization Name</label>
+        <input type="text" id="org-name" name="org-name" placeholder="The organization applying for the grant" required>
+      </div>
+
+      <div class="field-group">
+        <label for="grant-name">Grant Name</label>
+        <input type="text" id="grant-name" name="grant-name" placeholder="Name of the grant opportunity" required>
+      </div>
+
+      <div class="field-group">
+        <label for="funder">Funder</label>
+        <input type="text" id="funder" name="funder" placeholder="Foundation, agency, or organization offering this grant" required>
+      </div>
+
+      <div class="field-group">
+        <label for="deadline">Application Deadline</label>
+        <input type="date" id="deadline" name="deadline" required>
+      </div>
+
+      <div class="field-group">
+        <label for="state">State</label>
+        <div class="select-wrap">
+          <select id="state" name="state" required>
+            <option value="" disabled selected>Select your state</option>
+            <option>Alabama</option><option>Alaska</option><option>Arizona</option>
+            <option>Arkansas</option><option>California</option><option>Colorado</option>
+            <option>Connecticut</option><option>Delaware</option><option>Florida</option>
+            <option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+            <option>Illinois</option><option>Indiana</option><option>Iowa</option>
+            <option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
+            <option>Maine</option><option>Maryland</option><option>Massachusetts</option>
+            <option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+            <option>Missouri</option><option>Montana</option><option>Nebraska</option>
+            <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option>
+            <option>New Mexico</option><option>New York</option><option>North Carolina</option>
+            <option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+            <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
+            <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option>
+            <option>Texas</option><option>Utah</option><option>Vermont</option>
+            <option>Virginia</option><option>Washington</option><option>West Virginia</option>
+            <option>Wisconsin</option><option>Wyoming</option>
+            <option>Washington D.C.</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="grant-source">How did you find this grant?</label>
+        <div class="select-wrap">
+          <select id="grant-source" name="grant-source" required>
+            <option value="" disabled selected>Select source</option>
+            <option>LLM / AI tool</option>
+            <option>Paid grant database</option>
+            <option>Facebook</option>
+            <option>LinkedIn</option>
+            <option>Word of mouth</option>
+            <option>Funder website</option>
+            <option>Newsletter or email</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Grant for Verification</button>
+      <p class="submit-note">You will receive your decision within 24 hours.</p>
+
+    </form>
+  </div>
+
+  <!-- SUCCESS STATE -->
+  <div class="success-block" id="success-block">
+    <div class="success-label">Submitted</div>
+    <h2 class="success-headline">Got it. Your verification is running.</h2>
+    <p class="success-body">
+      You will receive your decision within 24 hours. Check your inbox. If you do not see it, check your spam folder.
+    </p>
+    <p class="success-irrev">
+      Most people who see this cannot go back to starting a grant without running this first.
+    </p>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <a class="footer-logo" href="https://sharke.ai">Sharke<span>.</span>ai</a>
+  <span class="footer-note">Verification-first grant intelligence</span>
+</footer>
+
+<script>
+  // Pull email from localStorage (set on landing page before Stripe redirect)
+  var savedEmail = localStorage.getItem('sharke_email');
+  if (savedEmail) {
+    document.getElementById('email').value = savedEmail;
+  }
+
+  const form = document.getElementById('grant-form');
+  const formSection = document.getElementById('form-section');
+  const successBlock = document.getElementById('success-block');
+  const submitBtn = form.querySelector('.submit-btn');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const fields = form.querySelectorAll('[required]');
+    let valid = true;
+
+    fields.forEach(field => {
+      field.style.borderColor = '';
+      if (!field.value.trim()) {
+        field.style.borderColor = '#c0392b';
+        valid = false;
+      }
+    });
+
+    if (!valid) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'SUBMITTING...';
+
+    const formData = new FormData(form);
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString()
+    })
+    .then(function() {
+      formSection.style.display = 'none';
+      successBlock.classList.add('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    })
+    .catch(function() {
+      formSection.style.display = 'none';
+      successBlock.classList.add('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
