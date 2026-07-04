@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sharke: For Nonprofits With One Development Director</title>
-<meta name="description" content="Your development director is the whole department. Give them a team. Choose Sharke as your grant execution staff that surfaces, verifies, and drafts under your director's direction, or go self-serve and run Sharke as the verification step before any hours go in.">
+<title>Sharke Grant Team: Self-Serve Grant Execution</title>
+<meta name="description" content="One person is doing the work of a whole grants team: an ED, a development director, or a committed volunteer. Sharke is the grant team they run. It does the finding and verifying under their direction, so their hours stop going to dead ends.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sharke">
 <meta property="og:title" content="Sharke: For Nonprofits With One Development Director">
-<meta property="og:description" content="Your development director is the whole department. Give them a team: Sharke as execution staff under their direction, or self-serve verification before any hours go in.">
+<meta property="og:description" content="One person is doing the work of a whole grants team. Sharke is the grant team they run: finding and verifying under their direction, before any hours go in.">
 <meta property="og:url" content="https://sharke.ai/grant-director">
 <meta property="og:image" content="https://sharke.ai/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Sharke for Development Directors">
-<meta name="twitter:description" content="Give your development director a team. Verification-first grant intelligence.">
+<meta name="twitter:description" content="Give the person who runs your grants a team. Verification-first grant intelligence.">
 <meta name="twitter:image" content="https://sharke.ai/og-image.png">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -232,7 +232,6 @@
   .ss-checkout-msg p { color: var(--mid-gray); font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; text-align: center; margin: 0; padding: 18px 0; }
   #ss-checkout-error p { color: var(--red); }
   .ss-stripe { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--mid-gray); letter-spacing: 0.04em; margin: 0 0 12px; text-align: center; }
-  .beta-badge { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: var(--red); padding: 6px 12px; margin: 0 0 14px; }
 
   /* PRICING + ROI */
   .fork-price { font-family: 'IBM Plex Mono', monospace; margin: 0 0 16px; line-height: 1.2; }
@@ -349,13 +348,23 @@
   .faq details[open] summary::after { content: '\2212'; }
   .faq details p { margin: 0 0 18px; font-size: 0.95rem; color: #2a2a2a; line-height: 1.6; }
   .faq details:not([open]) p { display: none; }
+  /* WHAT'S INSIDE walk list + hero note */
+  .walk-list { list-style: none; margin: 28px 0 0; }
+  .walk-list li { display: flex; align-items: flex-start; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+  .walk-list li:last-child { border-bottom: none; }
+  .walk-list .step-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); flex-shrink: 0; padding-top: 4px; min-width: 72px; }
+  .walk-list .step-text { font-size: 0.97rem; color: #1a1a1a; line-height: 1.55; }
+  .walk-list .step-text strong { font-weight: 700; }
+  .hook-note { margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.04em; color: #6b6560; line-height: 1.7; }
+  .hook-note a { color: inherit; text-decoration: underline; }
+  .hook-note a:hover { color: var(--red); }
 </style>
 </head>
 <body>
 
 <header class="site-header">
   <a class="brandmark" href="https://sharke.ai"><span class="bm-mark"><span class="bm-s">S</span></span><span class="bm-text">Sharke.ai</span></a>
-  <span class="header-tag">Grant execution for your director</span>
+  <span class="header-tag">Grant execution for the person who runs your grants</span>
 </header>
 
 <main>
@@ -363,23 +372,24 @@
   <!-- HOOK -->
   <section class="hook">
     <div class="container">
-      <p class="eyebrow">Pipeline execution for nonprofits with one development director</p>
-      <h1>Your development director is the whole department.</h1>
-      <p class="subhead">Right now, grants worth pursuing get dropped before anyone has the hours to verify them. Not because they were wrong. Because one person cannot hold it all.</p>
-      <p class="hook-solution">Sharke is the execution staff and verification behind your director: the pursue-or-pass call gets made before hours go in, and your director stops carrying the pipeline alone.</p>
-      <a href="/funding-gap" class="hook-cta">Find your funding gap &rarr;</a>
+      <p class="eyebrow">Self-serve grant execution</p>
+      <h1>One person is doing the work of a whole grants team.</h1>
+      <p class="subhead">An ED, a development director, or a committed volunteer with about 30 hours a month, holding research, verification, writing, and follow-up in one calendar. No one can do all of it well at once, and it is not for lack of skill.</p>
+      <p class="hook-solution">Sharke is the grant team they run: it does the finding and verifying, so their hours go to grants with documented fit, not dead ends, and the pipeline stops living in one person's head. Self-serve, $159 a month.</p>
+      <a href="#offer" class="hook-cta">Start self-serve, $159 a month &rarr;</a>
+      <p class="hook-note">No contract. Cancel anytime. The founding rate rises to $199 on September 1.<br>Not sure yet? <a href="/ed">Start with the $79 Funding Viability Check</a>, a board-ready read in 48 hours.</p>
     </div>
   </section>
 
   <!-- REFRAME -->
   <section>
     <div class="container">
-      <h3>Where the pipeline is breaking</h3>
-      <h2>One person cannot be the whole pipeline.</h2>
-      <p>Research, the pursue-or-pass call, the writing, the follow up. The work that gets cut is whatever was not due this week, and that is where the best long-term funders are.</p>
-      <p>The hours that do get spent are not all going to grants worth pursuing. In the pipelines Sharke has reviewed, about 1 in 4 had no documented path to funding at all, and there is no way to tell which from the inside.</p>
-      <p class="src-note">Share of pipeline grants with no documented path to funding: based on grant pipelines reviewed by Sharke.</p>
-      <p class="irrevocable">Once a second set of hands is on the pipeline, going back to one person carrying all of it stops looking like a plan.</p>
+      <h3>Where the math breaks down</h3>
+      <h2>No one person can be a whole grants team.</h2>
+      <p>Research, the pursue-or-pass call, the writing, the follow up: it is four jobs in one calendar. When everything is urgent, the long-horizon cultivation is what has to wait, and that is exactly where the best multi-year funders are.</p>
+      <p>Some of those hours go to grants that were never a real fit, and not because anyone misjudged them. Whether a funder actually backs an organization like yours lives in their 990s and award history, not in the call for proposals. About 1 in 4 grants in the pipelines Sharke has reviewed had no documented fit in the funder's own record, something no one can see from the inside.</p>
+      <p class="src-note">Share of pipeline grants with no documented fit in the funder's record: based on grant pipelines reviewed by Sharke.</p>
+      <p class="irrevocable">Give that person a second set of hands, and carrying all of it alone stops being the only option.</p>
     </div>
   </section>
 
@@ -388,11 +398,11 @@
     <div class="container">
       <h3>Why waiting is already late</h3>
       <h2>Next year's funding is being decided right now.</h2>
-      <p class="hinge">If your director waits until the grant is needed, the organization is already late.</p>
-      <p>The funders who will write checks next year are building those relationships this cycle. The programs renewing next year are reviewing who fits now. None of it waits for your director to find a free week. By the time the grant is on the list, the cycle is underway and the room is full.</p>
-      <p>Roughly 70% of foundations do not accept unsolicited proposals. That money goes where a funder already has a relationship. The cultivation that earns it starts months before the grant posts, not the week your director applies. Sharke surfaces the invite-only funders worth building toward now, so your director is cultivating next year's funding before this year's runs out.</p>
-      <p>Federal programs freeze and priorities shift, and a grant your team won before is no longer a safe bet to win again. When you need to replace that funding fast, there is no fast. The pipeline that catches the loss is the one your director started before it happened. Before your director sinks the 50-plus hours a federal reapplication takes, Sharke verifies whether that program is funding this cycle and whether you still fit it now.</p>
-      <p class="src-note">Share of U.S. foundations that do not accept unsolicited proposals: Foundation Center / Candid.</p>
+      <p class="hinge">By the time a grant is needed, the cycle that funds it has usually already closed.</p>
+      <p>The funders who will write checks next year are building those relationships this cycle. The programs renewing next year are reviewing who fits now. None of it waits for a free week to open up. By the time the grant is on the list, the cycle is underway and the room is full.</p>
+      <p>Roughly 70% of foundations do not accept unsolicited proposals. That money goes where a funder already has a relationship. The cultivation that earns it starts months before the grant posts, not the week your team applies. Sharke surfaces the invite-only funders worth building toward now, so whoever runs your grants is cultivating next year's funding before this year's runs out. And the room is getting more crowded: 87% of foundation leaders report rising demand for the grants they give.</p>
+      <p>Federal programs freeze and priorities shift, and a grant your team won before is no longer a safe bet to win again. When you need to replace that funding fast, there is no fast. The pipeline that catches the loss is the one your team started before it happened. Before your team commits the 50-plus hours a federal reapplication takes, Sharke verifies whether that program is funding this cycle and whether you still fit it now.</p>
+      <p class="src-note">Share of U.S. foundations that do not accept unsolicited proposals: Foundation Center / Candid. Rising demand: Center for Effective Philanthropy, State of Nonprofits 2026.</p>
     </div>
   </section>
 
@@ -441,6 +451,34 @@
     </div>
   </section>
 
+  <!-- WHAT'S INSIDE -->
+  <section>
+    <div class="container">
+      <h3>What self-serve includes</h3>
+      <h2>The full grants workspace, not another search tool.</h2>
+      <p>Matching databases hand your person a longer list to triage, at $179 to $299 a month. Sharke does the opposite of adding to the pile: it does the finding, the verifying, and the first draft, so the list gets shorter and the hours get sharper.</p>
+      <ul class="walk-list">
+        <li><span class="step-num">Verify</span><span class="step-text"><strong>The 25-hour mistakes stop this week.</strong> Every grant you are tracking gets a Decision Record: Pursue, Wait, or Move on, source-cited from the funder's own filings. The ones with no path leave the list before the next application starts.</span></li>
+        <li><span class="step-num">Find</span><span class="step-text"><strong>The grants you never had time to find stop passing you by.</strong> Sharke continuously surfaces better-fit grants and funders, each already verified, starting from funders that have backed organizations like yours more than once. This is where the missed revenue lives.</span></li>
+        <li><span class="step-num">Cultivate</span><span class="step-text"><strong>Next year's funding starts moving this cycle.</strong> Roughly 70% of foundations do not accept unsolicited proposals. Sharke shows who they actually fund, their openness to first-time grantees, and the invite-only doors worth cultivating now, while there is still time to be known before the check is written.</span></li>
+        <li><span class="step-num">Draft</span><span class="step-text"><strong>Applications go out instead of stalling at the blank page.</strong> Drafting grounded in your own materials and written against the funder's real requirements, ready for your person to review and make theirs.</span></li>
+        <li><span class="step-num">Keep</span><span class="step-text"><strong>The pipeline survives a resignation.</strong> Every verdict, funder, and deadline in one place your organization owns: ready for a board meeting, and still there when staff change.</span></li>
+      </ul>
+      <p class="src-note">Matching-database pricing: published 2026 plans of the leading grant-discovery tools.</p>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section>
+    <div class="container">
+      <h3>From a team that ran it</h3>
+      <div class="quote">
+        <p>"We've always had more grants on our list than we realistically had capacity for, so most of the decisions came down to instinct and urgency. What surprised me was seeing which ones actually had real fit and which ones just sounded promising. A few we were counting on really weren't there once we looked closer."</p>
+        <cite>Director of Development / Housing services nonprofit / $2.4M budget</cite>
+      </div>
+    </div>
+  </section>
+
   <!-- WHO BUILT IT -->
   <section>
     <div class="container">
@@ -456,33 +494,23 @@
   <section id="offer">
     <div class="container">
       <h3>Two ways forward</h3>
-      <h2>Give your director a team.</h2>
-      <p class="fork-intro">Right now, every funder, every draft, and every deadline runs through one person. The next grant on the list gets researched, written, and tracked by that same person, alone, unless something changes before it starts.</p>
+      <h2>Give your one grant person the leverage of a team.</h2>
+      <p class="fork-intro">Every month this runs on one person's spare hours, the same three things happen: hours go into grants that were never a real fit, deadlines with real fit pass unfound, and the relationships behind next year's checks do not start. Sharke turns all three around, starting the day you sign up.</p>
 
       <div class="fork-stack">
         <div class="fork-col lead">
-          <span class="fork-rec">Recommended</span>
-          <div class="fork-label">Done for you</div>
-          <div class="fork-title">Sharke as your execution staff</div>
-          <div class="fork-price"><span class="amt">From $250</span><span class="per"> / month</span><span class="founding">Founding rate, limited spots</span></div>
-          <p>Sharke does the execution under your director's direction. It surfaces the grants and funders worth pursuing, verifies which have a documented path, drafts against funder requirements, and keeps the pipeline moving. Your director sets strategy and approves the work, instead of doing all of it alone.</p>
+          <span class="fork-rec">Self-serve</span>
+          <div class="fork-label">Grant Team</div>
+          <div class="fork-title">Sharke as the team your person runs</div>
+          <div class="fork-price"><span class="amt">$159</span><span class="per"> / month</span><span class="founding">Founding rate, rises to $199 on Sept 1</span></div>
+          <p>Your person keeps the work in-house, with Sharke doing the finding and verifying before any hours go in. No onboarding, no new system to learn. You verify grants before a tool would have finished installing, and you stop committing time to grants that were never a match.</p>
           <ul class="fork-list">
-            <li><span class="check">&rarr;</span> Better-fit grants and funders surfaced, each verified</li>
-            <li><span class="check">&rarr;</span> Drafting grounded in your own materials</li>
-            <li><span class="check">&rarr;</span> Deadline and submission tracking</li>
+            <li><span class="check">&rarr;</span> A source-cited verdict on every grant, before the hours go in</li>
+            <li><span class="check">&rarr;</span> Better-fit grants and funders surfaced continuously, each verified</li>
+            <li><span class="check">&rarr;</span> Drafting grounded in your organization's own materials</li>
+            <li><span class="check">&rarr;</span> The whole pipeline in one place, board-ready, not in one person's head</li>
           </ul>
-          <a href="https://calendly.com/collin-sharke?utm_source=website&amp;utm_campaign=grant_director" class="fork-cta solid">Let's spend 15 minutes on your pipeline &rarr;</a>
-          <p class="fork-support">Bring the grants already in motion. We review where your pipeline has a documented path before your director commits more hours.</p>
-          <p class="fork-terms">No contract. Cancel anytime.</p>
-        </div>
-
-        <div class="fork-col secondary">
-          <div class="fork-label">Done by you</div>
-          <div class="fork-title">Self-serve</div>
-          <div class="fork-price"><span class="amt">$149</span><span class="per"> / month</span><span class="founding">Founding Partner rate, year one</span></div>
-          <p>Your director keeps the work in-house, with Sharke as the verification step before any hours go in. Self-serve is not another program to learn. No onboarding, no setup. You are verifying grants before a new system would have finished installing, and you stop committing staff time to grants that were never a match.</p>
-          <p class="beta-badge">Beta signups begin June 22, 2026</p>
-          <button id="ss-checkout-btn" class="fork-cta subtle" onclick="revealSelfServeCheckout()">Start self-serve &rarr;</button>
+          <button id="ss-checkout-btn" class="fork-cta solid" onclick="revealSelfServeCheckout()">Start self-serve &rarr;</button>
           <div id="ss-checkout-area" class="ss-checkout" style="display:none;">
             <p class="ss-stripe"><svg width="11" height="13" viewBox="0 0 24 28" fill="none" stroke="#6b6560" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><rect x="3" y="13" width="18" height="13" rx="2"/><path d="M7 13V9a5 5 0 0 1 10 0v4"/></svg> Powered by Stripe &middot; Secure checkout</p>
             <div id="ss-checkout-loading" class="ss-checkout-msg" style="display:none;"><p>Preparing secure checkout...</p></div>
@@ -491,28 +519,25 @@
           </div>
           <p class="fork-terms">No contract. Cancel anytime.</p>
         </div>
+
+        <div class="fork-col secondary">
+          <div class="fork-label">Not ready to subscribe?</div>
+          <div class="fork-title">The Grant Funding Viability Check</div>
+          <div class="fork-price"><span class="amt">$79</span><span class="per"> one-time</span><span class="founding">A board-ready answer in 48 hours</span></div>
+          <p>The funding behind your mission scored 0 to 100, your real runway in months, the grant pipeline your funding goal would take, and named funders that already back organizations like yours. Bring it to your board, then decide.</p>
+          <a href="/ed" class="fork-cta subtle">Get the Viability Check &rarr;</a>
+          <p class="fork-terms">One-time. No subscription.</p>
+        </div>
       </div>
+
+      <p class="free-onramp">Want it fully run for you instead? <a href="/grant-office">See Sharke as your grant director</a>: the same verified pipeline, done for you, from $200 a month.</p>
 
       <div class="roi-anchor">
-        <p><strong>Grant work does not feel expensive, because you pay for it in hours, not cash.</strong> The hours are only half of it. The other half is the grants you never see, the ones that slip by while your team is heads-down on the wrong one. An organization with 50% of its funding from grants applies to about 1.5 grants a month, roughly 30 hours of skilled work each, close to 45 hours a month your director already spends. Outsource it and a grant consultant runs $50 to $100 an hour, $2,250 to $4,500 a month at this volume. Done for you starts at $250 a month. Self-serve is $149. Neither is a new cost. It buys those hours back, and cuts the ones going to grants with no path.</p>
-        <p class="roi-source">Consultant rate: $50 to $100 an hour, mid-level, 2025 to 2026. Application volume: an organization with about half its funding from grants, roughly 1.5 a month at 30 hours each.</p>
+        <p><strong>Grant work has two costs, and the one on your books is the smaller one.</strong> The first is the hours. The market prices them clearly: freelance grant writers run $35 to $60 an hour, flat-fee proposals run $1,000 to $8,000 each, and a matching database that only finds grants runs $179 to $299 a month. The second cost never shows up anywhere: the grants with real fit that pass every cycle because no one had the hours to find them, verify them, and get an application in. The median institutional grant in the public record is about $20,000. Miss one a year where the fit was documented and no application went in, and doing nothing has cost more than ten times what Sharke does. Self-serve is $159 a month: the finding, the verifying, the drafting support, and the pipeline. It is priced like a tool, doing the job of the hours you cannot hire.</p>
+        <p class="roi-source">Freelance rates and flat-fee ranges: Upwork grant-writer rate data and 2026 market guides. Database pricing: published 2026 plans. Median institutional grant: public grant record (IRS Schedule I), Sharke analysis.</p>
       </div>
 
-      <p class="price-foot">Done for you is priced to how much of your mission rides on grants: $250 at about half, $350 at three-quarters, $450 at essentially all, with federal grants over $100k added per application. Founding rates are limited and rise once references exist. Self-serve is $149 a month your first year, then $199.</p>
-
-      <p class="free-onramp">The problem is rarely the one grant already in motion. <a href="/funding-gap">Find your funding gap</a> and see what share of your pipeline can actually fund the year.</p>
-      <p class="free-onramp">Not ready for either plan? <a href="/ed">Check one grant for $49</a>, back in 24 hours. You never pay to be told no.</p>
-    </div>
-  </section>
-
-  <!-- PROOF -->
-  <section>
-    <div class="container">
-      <h3>From a team that ran it</h3>
-      <div class="quote">
-        <p>"We've always had more grants on our list than we realistically had capacity for, so most of the decisions came down to instinct and urgency. What surprised me was seeing which ones actually had a path and which ones just sounded promising. A few we were counting on really weren't there once we looked closer."</p>
-        <cite>Director of Development · Housing services nonprofit · $2.4M budget</cite>
-      </div>
+      <p class="price-foot">Self-serve is $159 a month, rising to $199 on September 1. The Viability Check is $79, one-time. Done for you, on its own page, starts at $200 a month, rising to $275 on September 1, priced to how much of your mission rides on grants.</p>
     </div>
   </section>
 
@@ -523,15 +548,19 @@
       <h2>Before you decide</h2>
       <details>
         <summary>When can we start?</summary>
-        <p>You can book a pipeline review now. Self-serve signups open with the beta on June 22, 2026.</p>
+        <p>Today. Sign up and your workspace is live the same day: Sharke starts finding, verifying, and prioritizing your pipeline from the first login, with drafting support and deadline tracking included.</p>
       </details>
       <details>
-        <summary>Our director already has a system. Is this one more thing to learn?</summary>
-        <p>No. Self-serve adds the verification step before hours go in. With execution staff, Sharke does the work under your director's direction, so it takes load off instead of adding it.</p>
+        <summary>The person who runs our grants already has a system. Is this one more thing to learn?</summary>
+        <p>No. The pipeline, the verdicts, and the drafts live in one place that replaces the spreadsheet, not another tool that feeds it. Most teams are reviewing their first verified grants the same day they sign up.</p>
+      </details>
+      <details>
+        <summary>What happens when our development person moves on?</summary>
+        <p>That is exactly what Sharke protects against. The average development professional stays around 16 to 18 months, and the median vacancy runs six months (CompassPoint and the Haas, Jr. Fund, UnderDeveloped). A pipeline that lives in one person's head leaves with them. One that lives in Sharke is inherited by the next person on day one: verdicts, funders, deadlines and all.</p>
       </details>
       <details>
         <summary>Is this AI, or is a person involved?</summary>
-        <p>Both. Sharke does the research and drafting, and every verdict is built from documented funder filings, 990s, award history, and eligibility, not AI guesses. With execution staff, the Sharke team runs the pipeline under your director.</p>
+        <p>Both. Sharke does the research and drafting, and every verdict is built from documented funder filings, 990s, award history, and eligibility, not AI guesses. And a person stands behind it: the founder signs off on every verdict.</p>
       </details>
       <details>
         <summary>Do we have to sign a contract?</summary>
@@ -543,8 +572,8 @@
   <!-- CLOSE -->
   <section class="close-section">
     <div class="container">
-      <p>Your director is not the bottleneck.</p>
-      <p class="final-line">Being the entire department is. Sharke fixes that, whichever way you choose.</p>
+      <p>The person running your grants is not the bottleneck.</p>
+      <p class="final-line">Being the entire department is. Sharke fixes that, starting today.</p>
     </div>
   </section>
 
@@ -596,6 +625,26 @@
       console.error('Self-serve checkout error:', err);
     });
   }
+  // Warm the checkout function before the buyer reaches the offer, so the
+  // Stripe form appears fast on click (kills the serverless cold start).
+  (function () {
+    var offer = document.getElementById('offer');
+    if (!offer || !('IntersectionObserver' in window) || !window.fetch) return;
+    var warmed = false;
+    new IntersectionObserver(function (entries, io) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !warmed) {
+          warmed = true;
+          io.disconnect();
+          fetch('/.netlify/functions/create-checkout-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ warm: true })
+          }).catch(function () {});
+        }
+      });
+    }, { rootMargin: '800px 0px' }).observe(offer);
+  })();
 </script>
 
 </body>

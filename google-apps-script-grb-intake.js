@@ -1,5 +1,5 @@
 /**
- * Google Apps Script — GRB Intake Form to Google Sheet
+ * Google Apps Script -- GRB Intake Form to Google Sheet
  *
  * SETUP INSTRUCTIONS:
  * 1. Create a new Google Sheet
@@ -9,7 +9,12 @@
  *    F: Email | G: Organization | H: State | I: Website | J: Program Summary
  *    K: Funder Name | L: Funder Type | M: CFDA | N: Grants.gov ID
  *    O: Funder State | P: Search Keyword | Q: Grant Title | R: Grant Stage
- *    S: Status
+ *    S: Status | T: EIN | U: Grant Revenue Share | V: Funding Concern
+ *
+ *    Columns T-V carry the plan=gfvc ($79 Check) org-level intake. They are
+ *    appended AFTER Status so the original A-S layout is untouched. Until this
+ *    script is redeployed with them, the same answers also arrive packed into
+ *    J: Program Summary, so no intake is lost either way.
  *
  * 4. Open Extensions > Apps Script
  * 5. Paste this entire file into Code.gs (replace any existing code)
@@ -50,7 +55,10 @@ function doPost(e) {
       data.search_keyword || "",          // Search Keyword
       data.grant_title || "",             // Grant Title
       data.grant_stage || "",             // Grant Stage
-      "submitted"                         // Status
+      "submitted",                        // Status
+      data.ein || "",                     // EIN (gfvc)
+      data.grant_revenue_share || "",     // Grant Revenue Share (gfvc)
+      data.funding_concern || ""          // Funding Concern (gfvc)
     ]);
 
     return ContentService

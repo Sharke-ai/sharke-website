@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sharke: Grant Review Brief</title>
+<title id="page-title">Sharke: Grant Review Brief</title>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -272,7 +272,7 @@
 
 <header class="site-header">
   <a class="logo" href="https://sharke.ai">Sharke<span>.</span>ai</a>
-  <span class="header-tag">Your Grant Review Brief</span>
+  <span class="header-tag" id="header-tag">Your Grant Review Brief</span>
 </header>
 
 <main>
@@ -280,8 +280,8 @@
   <!-- BANNER -->
   <section class="banner">
     <div class="container">
-      <h1>Grant Review Brief</h1>
-      <p class="subhead">Verification runs before your team commits another hour. Enter the grant details below and we will get started.</p>
+      <h1 id="banner-title">Grant Review Brief</h1>
+      <p class="subhead" id="banner-subhead">Verification runs before your team commits another hour. Enter the grant details below and we will get started.</p>
     </div>
   </section>
 
@@ -327,9 +327,35 @@
         </div>
 
         <div class="form-group">
-          <label class="field-label" for="program-summary">Program Seeking Funding</label>
+          <label class="field-label" for="program-summary" id="program-summary-label">Program Seeking Funding</label>
           <textarea id="program-summary" rows="3" placeholder="Briefly describe the program or initiative this grant would support"></textarea>
         </div>
+
+        <!-- GFVC-ONLY FIELDS (plan=gfvc; hidden for the grant intake) -->
+        <div id="gfvc-fields-block" style="display: none;">
+
+          <div class="form-group">
+            <label class="field-label" for="ein">EIN</label>
+            <input type="text" id="ein" placeholder="e.g. 20-5468038" autocomplete="off">
+            <p class="field-note">Optional. It is on your IRS filings. We can also find it from your organization name and state.</p>
+          </div>
+
+          <div class="form-group">
+            <label class="field-label" for="grant-revenue-share">Share of Revenue Grants Would Carry</label>
+            <input type="text" id="grant-revenue-share" placeholder="e.g. 30 percent of budget, or a dollar target" autocomplete="off">
+            <p class="field-note">Optional. If you do not know it yet, the Check builds a public-record starting point.</p>
+          </div>
+
+          <div class="form-group">
+            <label class="field-label" for="funding-concern">A Specific Funding Concern</label>
+            <textarea id="funding-concern" rows="3" placeholder="e.g. One funder is 40 percent of our budget and their priorities are shifting"></textarea>
+            <p class="field-note">Optional. If something prompted this Check, name it and the read will speak to it.</p>
+          </div>
+
+        </div>
+
+        <!-- GRANT-INTAKE FIELDS (plan=grb; hidden for the gfvc org-level intake) -->
+        <div id="grant-fields-block">
 
         <!-- FUNDER / GRANT DETAILS -->
         <h2 class="section-head" style="margin-top: 36px;">Funder / Grant Details</h2>
@@ -418,16 +444,18 @@
           </div>
         </div>
 
+        </div><!-- /grant-fields-block -->
+
         <button class="submit-btn" id="submit-btn" onclick="submitForm()">Submit for Verification</button>
         <p class="form-error" id="form-error"></p>
-        <p class="delivery-note">Grant Review Brief delivered within 24 hours</p>
+        <p class="delivery-note" id="delivery-note">Grant Review Brief delivered within 24 hours</p>
       </div>
 
       <!-- SUCCESS STATE -->
       <div class="success-state" id="success-state">
         <p class="success-icon">Submitted</p>
-        <h2>Verification is running.</h2>
-        <p>Your Grant Review Brief will be in your inbox within 24 hours.</p>
+        <h2 id="success-head">Verification is running.</h2>
+        <p id="success-body">Your Grant Review Brief will be in your inbox within 24 hours.</p>
       </div>
 
     </div>
@@ -437,7 +465,7 @@
   <section class="next-steps">
     <div class="container">
       <h2>What happens from here</h2>
-      <ul class="step-list">
+      <ul class="step-list" id="steps-grb">
         <li>
           <span class="step-num">Now</span>
           <span class="step-body">
@@ -460,20 +488,43 @@
           </span>
         </li>
       </ul>
+      <ul class="step-list" id="steps-gfvc" style="display: none;">
+        <li>
+          <span class="step-num">Now</span>
+          <span class="step-body">
+            <strong>The public-record read begins</strong>
+            <span>Your IRS filings, the institutional grant record around organizations like yours, and the visible funder market -- read against the role grants would need to play in funding your mission.</span>
+          </span>
+        </li>
+        <li>
+          <span class="step-num">48 hrs</span>
+          <span class="step-body">
+            <strong>Your Grant Funding Viability Check in your inbox</strong>
+            <span>Your Funding Viability Index, your months of real runway, the pipeline your goal would take, and the first funders worth verifying. With a clear call: build against it, narrow it, or do not plan around it yet.</span>
+          </span>
+        </li>
+        <li>
+          <span class="step-num">After</span>
+          <span class="step-body">
+            <strong>The first Verified Pipeline step</strong>
+            <span>If the Check shows a credible path, the next move is verifying the first 3 to 5 funders for live fit, current cycle behavior, and pursue, cultivate, or remove calls.</span>
+          </span>
+        </li>
+      </ul>
     </div>
   </section>
 
 </main>
 
 <script>
-  // ── Funder type toggle ──
+  // -- Funder type toggle --
   function toggleFunderFields() {
     var type = document.querySelector('input[name="funder-type"]:checked').value;
     document.getElementById('federal-fields').className = 'conditional-fields' + (type === 'federal' ? ' active' : '');
     document.getElementById('state-local-fields').className = 'conditional-fields' + (type === 'state_local' ? ' active' : '');
   }
 
-  // ── Radio option highlight ──
+  // -- Radio option highlight --
   document.querySelectorAll('.radio-option').forEach(function(opt) {
     opt.addEventListener('click', function() {
       var group = this.closest('.radio-group');
@@ -482,12 +533,31 @@
     });
   });
 
-  // ── Get Stripe session_id from URL ──
+  // -- Get Stripe session_id from URL --
   var params = new URLSearchParams(window.location.search);
   var sessionId = params.get('session_id') || '';
   var plan = params.get('plan') || '';
+  var isGfvc = (plan === 'gfvc');
 
-  // ── Pre-populate email from sessionStorage (if coming from landing page) ──
+  // -- GFVC mode: the $79 Check needs an org-level intake, not grant details --
+  if (isGfvc) {
+    document.getElementById('page-title').textContent = 'Sharke: Grant Funding Viability Check';
+    document.getElementById('header-tag').textContent = 'Your Grant Funding Viability Check';
+    document.getElementById('banner-title').textContent = 'Grant Funding Viability Check';
+    document.getElementById('banner-subhead').textContent = 'You are in. Tell us where to point the Check: your organization, what it does, and anything on your mind about the funding. The 48-hour clock starts when you submit.';
+    document.getElementById('program-summary-label').textContent = 'What Your Organization Does';
+    document.getElementById('program-summary').placeholder = 'One line is enough: who you serve and how';
+    document.getElementById('gfvc-fields-block').style.display = 'block';
+    document.getElementById('grant-fields-block').style.display = 'none';
+    document.getElementById('submit-btn').textContent = 'Start the Check';
+    document.getElementById('delivery-note').textContent = 'Grant Funding Viability Check delivered within 48 hours';
+    document.getElementById('success-head').textContent = 'The Check is underway.';
+    document.getElementById('success-body').textContent = 'Your Grant Funding Viability Check will be in your inbox within 48 hours.';
+    document.getElementById('steps-grb').style.display = 'none';
+    document.getElementById('steps-gfvc').style.display = 'block';
+  }
+
+  // -- Pre-populate email from sessionStorage (if coming from landing page) --
   try {
     var raw = sessionStorage.getItem('sharke_intake');
     if (raw) {
@@ -499,7 +569,7 @@
     }
   } catch(e) {}
 
-  // ── Form submission ──
+  // -- Form submission --
   function submitForm() {
     var firstName  = document.getElementById('first-name').value.trim();
     var lastName   = document.getElementById('last-name').value.trim();
@@ -527,7 +597,7 @@
       document.getElementById('org-name').focus();
       return;
     }
-    if (!funderName) {
+    if (!isGfvc && !funderName) {
       err.textContent = 'Enter the funder name.';
       err.style.display = 'block';
       document.getElementById('funder-name').focus();
@@ -542,6 +612,20 @@
     var funderType = document.querySelector('input[name="funder-type"]:checked').value;
     var grantStage = document.querySelector('input[name="grant-stage"]:checked');
 
+    // GFVC extras. Sent as their own keys AND packed into program_summary, so the
+    // answers land in the existing Program Summary sheet column even before the
+    // Apps Script is redeployed with the new columns (T-V).
+    var ein = document.getElementById('ein').value.trim();
+    var revShare = document.getElementById('grant-revenue-share').value.trim();
+    var concern = document.getElementById('funding-concern').value.trim();
+    var programSummary = document.getElementById('program-summary').value.trim();
+    if (isGfvc) {
+      if (ein) programSummary += '\nEIN: ' + ein;
+      if (revShare) programSummary += '\nGrant revenue share: ' + revShare;
+      if (concern) programSummary += '\nFunding concern: ' + concern;
+      programSummary = programSummary.replace(/^\n+/, '');
+    }
+
     var payload = {
       stripe_session_id: sessionId,
       plan: plan,
@@ -551,15 +635,18 @@
       org_name: orgName,
       org_state: document.getElementById('org-state').value.trim().toUpperCase(),
       org_website: document.getElementById('org-website').value.trim(),
-      program_summary: document.getElementById('program-summary').value.trim(),
-      funder_name: funderName,
-      funder_type: funderType,
-      cfda: document.getElementById('cfda').value.trim(),
-      grants_gov_id: document.getElementById('grants-gov-id').value.trim(),
-      funder_state: document.getElementById('funder-state').value,
-      search_keyword: document.getElementById('search-keyword').value.trim(),
-      grant_title: document.getElementById('grant-title').value.trim(),
-      grant_stage: grantStage ? grantStage.value : 'not_specified',
+      program_summary: programSummary,
+      funder_name: isGfvc ? '' : funderName,
+      funder_type: isGfvc ? '' : funderType,
+      cfda: isGfvc ? '' : document.getElementById('cfda').value.trim(),
+      grants_gov_id: isGfvc ? '' : document.getElementById('grants-gov-id').value.trim(),
+      funder_state: isGfvc ? '' : document.getElementById('funder-state').value,
+      search_keyword: isGfvc ? '' : document.getElementById('search-keyword').value.trim(),
+      grant_title: isGfvc ? '' : document.getElementById('grant-title').value.trim(),
+      grant_stage: isGfvc ? '' : (grantStage ? grantStage.value : 'not_specified'),
+      ein: isGfvc ? ein : '',
+      grant_revenue_share: isGfvc ? revShare : '',
+      funding_concern: isGfvc ? concern : '',
       submitted_at: new Date().toISOString()
     };
 
@@ -582,7 +669,7 @@
       var errEl = document.getElementById('form-error');
       errEl.textContent = 'Submission failed. Please try again or contact support.';
       errEl.style.display = 'block';
-      btn.textContent = 'Submit for Verification';
+      btn.textContent = isGfvc ? 'Start the Check' : 'Submit for Verification';
       btn.disabled = false;
     });
   }
