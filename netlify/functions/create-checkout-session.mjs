@@ -47,7 +47,7 @@ export default async (req) => {
   // grant-writers product) and is never tied to the gw price/amount.
   // $159 is the founding-member rate; it steps up to $199/mo on 2026-09-01
   // (handled then, not via a Stripe schedule here).
-  // GFVC = the Grant Funding Viability Check, an inline $79 one-time price.
+  // GFVC = the Grant Funding Viability Assessment, an inline $79 one-time price.
   const isSelfServe = plan === "self_serve";
   const isGfvc = plan === "gfvc";
   const priceId = prices[plan];
@@ -58,7 +58,7 @@ export default async (req) => {
     });
   }
 
-  // GRB and the GFVC Check are one-time payments; ed/gw/self_serve are subscriptions
+  // GRB and the GFVC Assessment are one-time payments; ed/gw/self_serve are subscriptions
   const mode = (plan === "grb" || plan === "gfvc") ? "payment" : "subscription";
 
   // Build Stripe API request (form-encoded)
@@ -72,16 +72,16 @@ export default async (req) => {
     params.append("line_items[0][price_data][recurring][interval]", "month");
     params.append("line_items[0][price_data][product_data][name]", "Sharke Self-Serve");
   } else if (isGfvc) {
-    // Inline $79.00 one-time price for the Grant Funding Viability Check
+    // Inline $79.00 one-time price for the Grant Funding Viability Assessment
     params.append("line_items[0][price_data][currency]", "usd");
     params.append("line_items[0][price_data][unit_amount]", "7900");
-    params.append("line_items[0][price_data][product_data][name]", "Grant Funding Viability Check");
+    params.append("line_items[0][price_data][product_data][name]", "Grant Funding Viability Assessment");
   } else {
     params.append("line_items[0][price]", priceId);
   }
   params.append("line_items[0][quantity]", "1");
   // Subscriptions go to MVP signup; one-time products go to their own intake:
-  // GRB ($49 grant verdict) -> /review, GFVC Check ($79 org-level) -> /check-intake
+  // GRB ($49 grant verdict) -> /review, GFVC Assessment ($79 org-level) -> /check-intake
   const returnUrl = plan === "grb"
     ? `https://sharke.ai/review?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`
     : plan === "gfvc"

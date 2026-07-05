@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sharke: Grant Funding Viability Check</title>
+<title>Sharke: Grant Funding Viability Assessment</title>
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -238,7 +238,7 @@
 
 <header class="site-header">
   <a class="logo" href="https://sharke.ai">Sharke<span>.</span>ai</a>
-  <span class="header-tag">Your Grant Funding Viability Check</span>
+  <span class="header-tag">Your Grant Funding Viability Assessment</span>
 </header>
 
 <main>
@@ -246,8 +246,8 @@
   <!-- BANNER -->
   <section class="banner">
     <div class="container">
-      <h1>Grant Funding Viability Check</h1>
-      <p class="subhead">You are in. Tell us where to point the Check: your organization, what it does, and anything on your mind about the funding. The 48-hour clock starts when you submit.</p>
+      <h1>Grant Funding Viability Assessment</h1>
+      <p class="subhead">You are in. Tell us where to point the Assessment: your organization, what it does, and anything on your mind about the funding. The 48-hour clock starts when you submit.</p>
     </div>
   </section>
 
@@ -272,7 +272,7 @@
         <div class="form-group">
           <label class="field-label" for="email">Email</label>
           <input type="email" id="email" placeholder="you@yourorg.org" autocomplete="email">
-          <p class="field-note">Your Check is delivered here.</p>
+          <p class="field-note">Your Assessment is delivered here.</p>
         </div>
 
         <!-- YOUR ORGANIZATION -->
@@ -311,25 +311,25 @@
         <div class="form-group">
           <label class="field-label" for="grant-revenue-share">Share of Revenue Grants Would Carry</label>
           <input type="text" id="grant-revenue-share" placeholder="e.g. 30 percent of budget, or a dollar target" autocomplete="off">
-          <p class="field-note">Optional. If you do not know it yet, the Check builds a public-record starting point.</p>
+          <p class="field-note">Optional. If you do not know it yet, the Assessment builds a public-record starting point.</p>
         </div>
 
         <div class="form-group">
           <label class="field-label" for="funding-concern">A Specific Funding Concern</label>
           <textarea id="funding-concern" rows="3" placeholder="e.g. One funder is 40 percent of our budget and their priorities are shifting"></textarea>
-          <p class="field-note">Optional. If something prompted this Check, name it and the read will speak to it.</p>
+          <p class="field-note">Optional. If something prompted this Assessment, name it and the read will speak to it.</p>
         </div>
 
-        <button class="submit-btn" id="submit-btn" onclick="submitForm()">Start the Check</button>
+        <button class="submit-btn" id="submit-btn" onclick="submitForm()">Start the Assessment</button>
         <p class="form-error" id="form-error"></p>
-        <p class="delivery-note">Grant Funding Viability Check delivered within 48 hours</p>
+        <p class="delivery-note">Grant Funding Viability Assessment delivered within 48 hours</p>
       </div>
 
       <!-- SUCCESS STATE -->
       <div class="success-state" id="success-state">
         <p class="success-icon">Submitted</p>
-        <h2>The Check is underway.</h2>
-        <p>Your Grant Funding Viability Check will be in your inbox within 48 hours.</p>
+        <h2>The Assessment is underway.</h2>
+        <p>Your Grant Funding Viability Assessment will be in your inbox within 48 hours.</p>
       </div>
 
     </div>
@@ -350,7 +350,7 @@
         <li>
           <span class="step-num">48 hrs</span>
           <span class="step-body">
-            <strong>Your Grant Funding Viability Check in your inbox</strong>
+            <strong>Your Grant Funding Viability Assessment in your inbox</strong>
             <span>Your Funding Viability Index, your months of real runway, the pipeline your goal would take, and the first funders worth verifying. With a clear call: build against it, narrow it, or do not plan around it yet.</span>
           </span>
         </li>
@@ -358,7 +358,7 @@
           <span class="step-num">After</span>
           <span class="step-body">
             <strong>The first Verified Pipeline step</strong>
-            <span>If the Check shows a credible path, the next move is verifying the first 3 to 5 funders for live fit, current cycle behavior, and pursue, cultivate, or remove calls.</span>
+            <span>If the Assessment shows a credible path, the next move is verifying the first 3 to 5 funders for live fit, current cycle behavior, and pursue, cultivate, or remove calls.</span>
           </span>
         </li>
       </ul>
@@ -368,7 +368,7 @@
 </main>
 
 <script>
-  // -- Stripe return params (plan defaults to gfvc: this page belongs to the Check) --
+  // -- Stripe return params (plan defaults to gfvc: this page belongs to the Assessment) --
   var params = new URLSearchParams(window.location.search);
   var sessionId = params.get('session_id') || '';
   var plan = params.get('plan') || 'gfvc';
@@ -416,7 +416,7 @@
     btn.textContent = 'Submitting...';
     btn.disabled = true;
 
-    // The Check's extras go out as their own keys AND packed into program_summary,
+    // The Assessment's extras go out as their own keys AND packed into program_summary,
     // so the answers land in the existing Program Summary sheet column even before
     // the Apps Script is redeployed with the new columns (T-V).
     var ein = document.getElementById('ein').value.trim();
@@ -473,7 +473,7 @@
       var errEl = document.getElementById('form-error');
       errEl.textContent = 'Submission failed. Please try again or contact support.';
       errEl.style.display = 'block';
-      btn.textContent = 'Start the Check';
+      btn.textContent = 'Start the Assessment';
       btn.disabled = false;
     });
   }
