@@ -79,6 +79,16 @@
     max-width: 480px;
   }
 
+  .paid-banner {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin: 0 0 10px;
+  }
+
   /* SECTION HEADERS */
   .section-head {
     font-size: 1.3rem;
@@ -247,7 +257,8 @@
   <section class="banner">
     <div class="container">
       <h1>Grant Funding Viability Assessment</h1>
-      <p class="subhead">You are in. Tell us where to point the Assessment: your organization, what it does, and anything on your mind about the funding. The 48-hour clock starts when you submit.</p>
+      <p class="paid-banner" id="paid-banner" style="display:none;">Payment received.</p>
+      <p class="subhead" id="banner-subhead">You are in. Tell us where to point the Assessment: your organization, what it does, and anything on your mind about the funding. The 48-hour clock starts when you submit.</p>
     </div>
   </section>
 
@@ -383,6 +394,39 @@
       sessionStorage.removeItem('sharke_intake');
     }
   } catch(e) {}
+
+  // -- Post-payment arrival: confirm the payment landed and prefill what Stripe
+  //    already collected (email + name). Fails open: any error, non-paid session,
+  //    or direct visit just leaves the page exactly as it is today. --
+  function applyPaidState(info) {
+    var banner = document.getElementById('paid-banner');
+    banner.style.display = 'block';
+    document.getElementById('banner-subhead').textContent =
+      'One more step, about five minutes: tell us where to point the Assessment. ' +
+      'Your organization, what it does, and anything on your mind about the funding. ' +
+      'The 48-hour clock starts when you submit.';
+    if (info && info.email) {
+      var emailEl = document.getElementById('email');
+      if (!emailEl.value) emailEl.value = info.email;
+    }
+    if (info && info.name) {
+      var fn = document.getElementById('first-name');
+      var ln = document.getElementById('last-name');
+      var parts = info.name.trim().split(/\s+/);
+      if (!fn.value && parts.length > 0) fn.value = parts[0];
+      if (!ln.value && parts.length > 1) ln.value = parts.slice(1).join(' ');
+    }
+  }
+  if (sessionId) {
+    fetch('/.netlify/functions/session-status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sessionId })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) { if (data && data.paid) applyPaidState(data); })
+    .catch(function() {});
+  }
 
   // -- Form submission --
   function submitForm() {
