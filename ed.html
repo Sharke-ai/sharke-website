@@ -568,43 +568,34 @@
 
   /* ---- Animated visuals (GFVA pass 2026-07-06) ---- */
 
-  /* 1) Hero funding-gap bar: one funder leaves, the gap shows, small blocks fill it.
-     Pure CSS, plays once on load after the headline sequence. Decorative (aria-hidden). */
-  .gap-viz { max-width: 545px; margin: 30px 0 0; animation: fadeUp 0.6s ease both; animation-delay: 0.5s; }
+  /* 1) Hero funding-gap strip: STATIC three-row before/during/after (founder
+     2026-07-06: the animated version told the story only while it played).
+     Each row is captioned directly, so the whole arc reads in one glance. */
+  .gap-viz { max-width: 545px; margin: 30px 0 0; }
   .gap-viz-label {
     font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--mid-gray); margin: 0 0 8px;
+    text-transform: uppercase; color: var(--mid-gray); margin: 0 0 12px;
   }
-  .gap-bar { display: flex; gap: 3px; height: 30px; }
+  .gv-row { margin-bottom: 14px; }
+  .gv-cap {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.03em; color: #45403a; margin: 0 0 5px;
+  }
+  .gv-cap-green { color: var(--green); }
+  .gap-bar { display: flex; gap: 3px; height: 18px; }
   .gap-bar .blk { background: var(--ink); opacity: 0.82; }
   .gap-bar .b1 { width: 30%; }
+  .gap-bar .b2 { width: 26%; }
   .gap-bar .b3 { width: 18%; }
   .gap-bar .b4 { width: 14%; }
   .gap-bar .b5 { width: 12%; }
-  .gap-slot { position: relative; width: 26%; }
-  .gap-slot .leaver { position: absolute; inset: 0; background: var(--ink); opacity: 0.82; animation: blockLeave 0.9s ease 2.0s both; }
-  .gap-slot .gap-outline { position: absolute; inset: 0; border: 1.5px dashed var(--red); opacity: 0; animation: gapShow 0.45s ease 2.7s both; }
-  .gap-slot .pipe { position: absolute; top: 0; bottom: 0; width: 31%; background: var(--green); opacity: 0; transform: translateX(-12px); }
-  .gap-slot .p1 { left: 0;     animation: pipeIn 0.5s ease 3.4s both; }
-  .gap-slot .p2 { left: 34.5%; animation: pipeIn 0.5s ease 3.65s both; }
-  .gap-slot .p3 { left: 69%;   animation: pipeIn 0.5s ease 3.9s both; }
-  @keyframes blockLeave { to { transform: translateY(-40px); opacity: 0; } }
-  @keyframes gapShow { to { opacity: 1; } }
-  @keyframes pipeIn { to { opacity: 1; transform: none; } }
+  .gap-bar .gap-hole { border: 1.5px dashed var(--red); background: none; }
+  .gap-bar .gap-fill { display: flex; gap: 3px; }
+  .gap-bar .gap-fill span { flex: 1; background: var(--green); }
   .gap-viz-caption {
     font-size: 0.85rem; color: var(--mid-gray); line-height: 1.55;
-    margin: 10px 0 0; max-width: 500px;
+    margin: 12px 0 0; max-width: 500px;
   }
-  .gap-key { display: flex; gap: 16px 20px; flex-wrap: wrap; margin-top: 10px; }
-  .gk-item {
-    font-family: 'IBM Plex Mono', monospace; font-size: 0.67rem;
-    letter-spacing: 0.03em; color: var(--mid-gray);
-    display: flex; align-items: center; gap: 7px;
-  }
-  .gk-swatch { width: 14px; height: 10px; display: inline-block; flex-shrink: 0; }
-  .gk-swatch-blk  { background: var(--ink); opacity: 0.82; }
-  .gk-swatch-gap  { border: 1.5px dashed var(--red); }
-  .gk-swatch-pipe { background: var(--green); }
 
   /* 2) FVI dial: sample Index sweeping to its real sample value on scroll-into-view.
      Ships in final state; JS rewinds and animates only when motion is allowed. */
@@ -712,8 +703,7 @@
   .ap-step p .ap-sub { color: #a8a098; }
 
   @media (prefers-reduced-motion: reduce) {
-    .hook h1, .hook .subhead, .hook .eyebrow, .hook .qualifier, .gap-viz,
-    .gap-slot .leaver, .gap-slot .gap-outline, .gap-slot .pipe {
+    .hook h1, .hook .subhead, .hook .eyebrow, .hook .qualifier {
       animation-duration: 0.001s !important; animation-delay: 0s !important;
     }
     .fvi-arc-val { transition: none !important; }
@@ -741,25 +731,27 @@
       <p class="hero-stakes">The risk is not abstract. It is the next 200 staff hours: researching, sorting, writing, and defending funders that may never have been a real fit for the mission. The Assessment gives you the answer before the hours go in.</p>
       <a href="#start" class="cta-anchor hero-cta">Get the 48-hour grant funding read &rarr;</a>
       <p class="cta-microcopy">$79 one-time, rising to $99 on September 1. In 48 hours: the funding behind your mission scored 0 to 100, your months of real runway, the pipeline your goal would take, and named funders that already back organizations like yours. Your EIN and one line about your org is all it takes.</p>
-      <div class="gap-viz" aria-hidden="true">
+      <div class="gap-viz">
         <p class="gap-viz-label">Your funding, funder by funder (illustrative)</p>
-        <div class="gap-bar">
-          <div class="blk b1"></div>
-          <div class="gap-slot">
-            <div class="gap-outline"></div>
-            <div class="pipe p1"></div><div class="pipe p2"></div><div class="pipe p3"></div>
-            <div class="leaver"></div>
+        <div class="gv-row">
+          <p class="gv-cap">Today: a few funders carry the budget</p>
+          <div class="gap-bar" aria-hidden="true">
+            <div class="blk b1"></div><div class="blk b2"></div><div class="blk b3"></div><div class="blk b4"></div><div class="blk b5"></div>
           </div>
-          <div class="blk b3"></div>
-          <div class="blk b4"></div>
-          <div class="blk b5"></div>
         </div>
-        <div class="gap-key">
-          <span class="gk-item"><span class="gk-swatch gk-swatch-blk"></span>your funders today</span>
-          <span class="gk-item"><span class="gk-swatch gk-swatch-gap"></span>the gap when one steps back</span>
-          <span class="gk-item"><span class="gk-swatch gk-swatch-pipe"></span>the pipeline that fills it</span>
+        <div class="gv-row">
+          <p class="gv-cap">One changes direction</p>
+          <div class="gap-bar" aria-hidden="true">
+            <div class="blk b1"></div><div class="gap-hole b2"></div><div class="blk b3"></div><div class="blk b4"></div><div class="blk b5"></div>
+          </div>
         </div>
-        <p class="gap-viz-caption">The Assessment sizes that pipeline for your organization, before the gap opens.</p>
+        <div class="gv-row">
+          <p class="gv-cap gv-cap-green">The pipeline that fills the gap</p>
+          <div class="gap-bar" aria-hidden="true">
+            <div class="blk b1"></div><div class="gap-fill b2"><span></span><span></span><span></span></div><div class="blk b3"></div><div class="blk b4"></div><div class="blk b5"></div>
+          </div>
+        </div>
+        <p class="gap-viz-caption">The Assessment sizes that pipeline for your organization, before you need it.</p>
       </div>
       <p class="qualifier" style="margin-top: 22px;">For nonprofits with $150K to $10M in revenue.</p>
     </div>
