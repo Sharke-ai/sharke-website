@@ -96,8 +96,8 @@
   section:last-of-type { border-bottom: none; }
 
   .hook {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 60px;
+    padding-bottom: 72px;
   }
 
   .hook .eyebrow {
@@ -106,17 +106,17 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--red);
-    margin-bottom: 28px;
+    margin-bottom: 20px;
   }
 
   .hook h1 {
     font-family: 'Libre Baskerville', Georgia, serif;
-    font-size: clamp(2rem, 4vw, 2.9rem);
+    font-size: clamp(1.9rem, 3.6vw, 2.55rem);
     font-weight: 700;
     line-height: 1.22;
     letter-spacing: -0.01em;
-    margin-bottom: 32px;
-    max-width: 600px;
+    margin-bottom: 26px;
+    max-width: 660px;
   }
 
   .hook .subhead {
@@ -124,9 +124,9 @@
     font-size: 1.08rem;
     color: var(--mid-gray);
     line-height: 1.7;
-    max-width: 545px;
+    max-width: 620px;
     font-style: italic;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 
   .qualifier {
@@ -522,6 +522,16 @@
     margin-top: 18px;
   }
 
+  .hero-stakes {
+    border-left: 3px solid var(--red);
+    padding-left: 18px;
+    font-size: 0.98rem;
+    color: #26221f;
+    line-height: 1.6;
+    max-width: 545px;
+    margin: 0 0 6px;
+  }
+
   /* Soft frame around the inline Stripe checkout (warm paper on the dark CTA). */
   .checkout-frame {
     background: var(--warm-white);
@@ -541,7 +551,7 @@
 
 <header class="site-header">
   <a class="logo" href="https://sharke.ai">Sharke<span>.</span>ai</a>
-  <span class="header-tag">The funding behind your mission, scored in 48 hours</span>
+  <span class="header-tag">Know what role grants can carry, before the hours go in</span>
 </header>
 
 <main>
@@ -550,9 +560,10 @@
   <section class="hook">
     <div class="container">
       <p class="eyebrow">Executive &amp; Development Directors</p>
-      <h1>Your mission may depend on one or two funders. Could grants carry a meaningful share?</h1>
-      <p class="subhead">Most leaders aren't sure, and the usual answer, more applications to more funders, is producing more denials, not more confidence. The Grant Funding Viability Assessment is a board-ready answer on what it would take for grants to play a meaningful role in funding your mission, whether the public record supports that path, and which funders to verify first.</p>
-      <a href="#start" class="cta-anchor hero-cta">Start the Grant Funding Viability Assessment &rarr;</a>
+      <h1>If one or two funders change direction, you will need a verified pipeline to fill the gap in your funding.</h1>
+      <p class="subhead">Most leaders cannot say what that would take, and the usual answer, more applications to more funders, is producing more denials, not more confidence. The Grant Funding Viability Assessment is a board-ready answer on what it would take for grants to play a meaningful role in funding your mission, whether the public record supports that path, and which funders to verify first.</p>
+      <p class="hero-stakes">The budget locks either way. When it does, leadership will either know what role grants can carry, or staff will build the calendar around an assumption. The Assessment gives you the answer before the hours go in.</p>
+      <a href="#start" class="cta-anchor hero-cta">Get the 48-hour grant funding read &rarr;</a>
       <p class="cta-microcopy">$79 one-time, rising to $99 on September 1. In 48 hours: the funding behind your mission scored 0 to 100, your months of real runway, the pipeline your goal would take, and named funders that already back organizations like yours.</p>
       <p class="qualifier" style="margin-top: 22px;">For nonprofits with $150K to $10M in revenue.</p>
     </div>
@@ -563,6 +574,7 @@
     <div class="container">
       <p>If grants are in your next budget, leadership is already making an assumption: that enough funders exist, at realistic award sizes, with a real path for an organization like yours.</p>
       <p>The Assessment replaces that assumption with evidence: your funding position scored and benchmarked against roughly 50 organizations like you, the real depth of the funder market at your size, the pipeline a meaningful grant role would take, named funders that already back your peers, and the months of runway you have to build it. Before staff time is committed, not after.</p>
+      <p>For a development director, the risk is not abstract. It is the next 200 staff hours: researching, sorting, writing, and defending funders that may never have been a real fit for the mission.</p>
     </div>
   </section>
 
@@ -573,7 +585,6 @@
       <h2>A funder list tells you funders exist. It cannot tell you whether the math works.</h2>
       <p>Any database can hand you names. What no list can show: whether funders at your size actually give at sizes that matter, how many of them have backed organizations like yours more than once, how many wins, applications, and warm relationships a meaningful grant role would take, and whether your runway covers the time it takes to build that. A list is a pile of possibilities. The Assessment is the analysis that turns it into a decision.</p>
       <p>The usual response to a funding gap, more applications to more funders, is producing more denials, not more confidence, as funders get inundated. The Assessment is the opposite of more: it reads the evidence and says plainly what the record supports, including when the answer is no.</p>
-      <p>If the answer is yes, you know exactly what to build. If it is narrow, you know which assumption has to change. If it is no, you just saved the cycle.</p>
 
       <ul class="verify-list">
         <li><span class="check">&rarr;</span> Your Funding Viability Index: the funding behind your mission, scored 0 to 100 and benchmarked against your field</li>
@@ -827,6 +838,7 @@
       </div>
 
       <p class="price-line"><strong>$79, once. 48-hour turnaround.</strong> A board-ready read of your grant funding: your Funding Viability Index, what it would take for grants to meaningfully fund your mission, the pipeline it would require (target, wins, applications, funder relationships), how much flexible runway you have to build it, and the first funders to verify, every figure drawn from the public record.</p>
+      <p>The Assessment tells you whether the path is credible. If it is, the next step is already defined: verify the first 3 to 5 funders before staff time is committed.</p>
       <p class="guarantee">Every Assessment ends in a clear call on your grant plan: build against it, narrow it, or do not plan around it yet. If yours does not, tell us and we will take another look.</p>
 
       <!-- Inline Stripe checkout (embedded), plan gfvc ($79 one-time). Auto-mounts; returns to /check-intake, which captures intake to the Google Sheet. -->
