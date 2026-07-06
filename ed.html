@@ -545,6 +545,112 @@
     .checkout-frame { padding: 16px 14px 28px; }
   }
 
+  /* ---- Animated visuals (GFVA pass 2026-07-06) ---- */
+
+  /* 1) Hero funding-gap bar: one funder leaves, the gap shows, small blocks fill it.
+     Pure CSS, plays once on load after the headline sequence. Decorative (aria-hidden). */
+  .gap-viz { max-width: 545px; margin: 30px 0 0; animation: fadeUp 0.6s ease both; animation-delay: 0.5s; }
+  .gap-viz-label {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--mid-gray); margin: 0 0 8px;
+  }
+  .gap-bar { display: flex; gap: 3px; height: 30px; }
+  .gap-bar .blk { background: var(--ink); opacity: 0.82; }
+  .gap-bar .b1 { width: 30%; }
+  .gap-bar .b3 { width: 18%; }
+  .gap-bar .b4 { width: 14%; }
+  .gap-bar .b5 { width: 12%; }
+  .gap-slot { position: relative; width: 26%; }
+  .gap-slot .leaver { position: absolute; inset: 0; background: var(--ink); opacity: 0.82; animation: blockLeave 0.9s ease 2.0s both; }
+  .gap-slot .gap-outline { position: absolute; inset: 0; border: 1.5px dashed var(--red); opacity: 0; animation: gapShow 0.45s ease 2.7s both; }
+  .gap-slot .pipe { position: absolute; top: 0; bottom: 0; width: 31%; background: var(--green); opacity: 0; transform: translateX(-12px); }
+  .gap-slot .p1 { left: 0;     animation: pipeIn 0.5s ease 3.4s both; }
+  .gap-slot .p2 { left: 34.5%; animation: pipeIn 0.5s ease 3.65s both; }
+  .gap-slot .p3 { left: 69%;   animation: pipeIn 0.5s ease 3.9s both; }
+  @keyframes blockLeave { to { transform: translateY(-40px); opacity: 0; } }
+  @keyframes gapShow { to { opacity: 1; } }
+  @keyframes pipeIn { to { opacity: 1; transform: none; } }
+  .gap-viz-caption {
+    font-size: 0.85rem; color: var(--mid-gray); line-height: 1.55;
+    margin: 10px 0 0; max-width: 500px;
+  }
+
+  /* 2) FVI dial: sample Index sweeping to its real sample value on scroll-into-view.
+     Ships in final state; JS rewinds and animates only when motion is allowed. */
+  .fvi-dial-wrap {
+    display: flex; align-items: center; gap: 30px; flex-wrap: wrap;
+    margin: 30px 0 36px; padding: 26px 26px 22px;
+    background: var(--warm-white); border: 1px solid var(--rule);
+  }
+  .fvi-dial { position: relative; width: 200px; flex-shrink: 0; }
+  .fvi-dial svg { width: 100%; display: block; }
+  .fvi-arc-bg  { fill: none; stroke: var(--light-gray); stroke-width: 12; }
+  .fvi-arc-val { fill: none; stroke: var(--green); stroke-width: 12; transition: stroke-dashoffset 1.4s cubic-bezier(0.25, 0.7, 0.3, 1); }
+  .fvi-center { position: absolute; left: 0; right: 0; bottom: 6px; text-align: center; }
+  .fvi-num {
+    font-family: 'IBM Plex Mono', monospace; font-size: 2.35rem; font-weight: 700;
+    color: var(--ink); line-height: 1; display: block;
+  }
+  .fvi-of { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-gray); }
+  .fvi-side { flex: 1; min-width: 230px; }
+  .fvi-side .fvi-tag {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--mid-gray); margin: 0 0 8px;
+  }
+  .fvi-side .fvi-title { font-weight: 700; color: var(--ink); margin: 0 0 8px; font-size: 1.02rem; }
+  .fvi-side p { font-size: 0.92rem; margin: 0 0 10px; }
+  .fvi-side .fvi-posture {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--green); margin: 0;
+  }
+
+  /* 3) Pipeline-math build: four beats staggering in on scroll. */
+  .pipe-math { margin: 30px 0 8px; padding: 24px 26px 20px; background: var(--warm-white); border: 1px solid var(--rule); }
+  .pm-label {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--mid-gray); margin: 0 0 18px;
+  }
+  .pm-row { display: flex; align-items: stretch; gap: 12px; flex-wrap: wrap; }
+  .pm-step { flex: 1; min-width: 108px; }
+  .pm-num {
+    display: block; font-family: 'IBM Plex Mono', monospace; font-size: 1.65rem;
+    font-weight: 700; color: var(--ink); line-height: 1.1; margin-bottom: 6px;
+  }
+  .pm-desc { display: block; font-size: 0.8rem; color: var(--mid-gray); line-height: 1.45; }
+  .pm-arrow { align-self: center; color: var(--red); font-size: 1.1rem; flex-shrink: 0; }
+  .pm-foot { font-size: 0.78rem; color: var(--mid-gray); font-style: italic; margin: 16px 0 0; }
+  .pm-row > .reveal:nth-child(1) { transition-delay: 0s; }
+  .pm-row > .reveal:nth-child(2) { transition-delay: 0.15s; }
+  .pm-row > .reveal:nth-child(3) { transition-delay: 0.3s; }
+  .pm-row > .reveal:nth-child(4) { transition-delay: 0.45s; }
+  .pm-row > .reveal:nth-child(5) { transition-delay: 0.6s; }
+  .pm-row > .reveal:nth-child(6) { transition-delay: 0.75s; }
+  .pm-row > .reveal:nth-child(7) { transition-delay: 0.9s; }
+  @media (max-width: 600px) {
+    .pm-row { flex-direction: column; gap: 14px; }
+    .pm-arrow { display: none; }
+  }
+
+  /* 4) Record-count stat + scroll micro-reveals. .reveal is only ever added by JS,
+     so users without JS (or with reduced motion) always see the final state. */
+  .record-stat { margin: 18px 0 6px; }
+  .rs-num {
+    font-family: 'IBM Plex Mono', monospace; font-size: 1.9rem; font-weight: 700;
+    color: var(--ink);
+  }
+  .rs-label { font-size: 0.88rem; color: var(--mid-gray); margin-left: 8px; }
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .reveal.in-view { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hook h1, .hook .subhead, .hook .eyebrow, .hook .qualifier, .gap-viz,
+    .gap-slot .leaver, .gap-slot .gap-outline, .gap-slot .pipe {
+      animation-duration: 0.001s !important; animation-delay: 0s !important;
+    }
+    .fvi-arc-val { transition: none !important; }
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
+
 </style>
 </head>
 <body>
@@ -565,6 +671,21 @@
       <p class="hero-stakes">The budget locks either way. When it does, leadership will either know what role grants can carry, or staff will build the calendar around an assumption. The Assessment gives you the answer before the hours go in.</p>
       <a href="#start" class="cta-anchor hero-cta">Get the 48-hour grant funding read &rarr;</a>
       <p class="cta-microcopy">$79 one-time, rising to $99 on September 1. In 48 hours: the funding behind your mission scored 0 to 100, your months of real runway, the pipeline your goal would take, and named funders that already back organizations like yours.</p>
+      <div class="gap-viz" aria-hidden="true">
+        <p class="gap-viz-label">A concentrated funding base, illustrative</p>
+        <div class="gap-bar">
+          <div class="blk b1"></div>
+          <div class="gap-slot">
+            <div class="gap-outline"></div>
+            <div class="pipe p1"></div><div class="pipe p2"></div><div class="pipe p3"></div>
+            <div class="leaver"></div>
+          </div>
+          <div class="blk b3"></div>
+          <div class="blk b4"></div>
+          <div class="blk b5"></div>
+        </div>
+        <p class="gap-viz-caption">One funder steps back. The Assessment sizes what it would take to fill the space, before it opens.</p>
+      </div>
       <p class="qualifier" style="margin-top: 22px;">For nonprofits with $150K to $10M in revenue.</p>
     </div>
   </section>
@@ -643,6 +764,26 @@
       <h3>What you get</h3>
       <h2>A board-ready answer, in your hands in 48 hours.</h2>
       <p>Every $79 Assessment returns your Funding Viability Index, a single public-record number (out of 100) for how the funding behind your mission looks today, a named read of your position (Resilient, Thin-Reserve, Pressured but Well-Supported), the pipeline math sized to your revenue, the funder market at your size with a named shortlist to verify, your real cushion in months, and where the public record stops. Here is what that looks like, in real cases with identifying details changed.</p>
+
+      <div class="fvi-dial-wrap" role="img" aria-label="Sample Funding Viability Index dial showing 55 out of 100, posture: Pressured but Well-Supported, build against it">
+        <div class="fvi-dial">
+          <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path class="fvi-arc-bg" d="M 20 110 A 80 80 0 0 1 180 110"/>
+            <path class="fvi-arc-val" id="fvi-arc" d="M 20 110 A 80 80 0 0 1 180 110"
+                  stroke-dasharray="251.33" stroke-dashoffset="113.1"/>
+          </svg>
+          <div class="fvi-center">
+            <span class="fvi-num" id="fvi-num" data-target="55">55</span>
+            <span class="fvi-of">out of 100</span>
+          </div>
+        </div>
+        <div class="fvi-side">
+          <p class="fvi-tag">Sample Assessment / details changed</p>
+          <p class="fvi-title">Your Funding Viability Index</p>
+          <p>One public-record number for the funding behind the mission, with a named posture read and the first moves it points to.</p>
+          <p class="fvi-posture">Posture: Pressured but Well-Supported. Build against it.</p>
+        </div>
+      </div>
 
       <p class="sr-context">When Sharke's read of the evidence supports a credible grant-funded path, the Assessment says build against it, and hands you the posture, the math, and the named funders to start with:</p>
       <div class="sample-report pursue">
@@ -754,6 +895,7 @@
     <div class="container">
       <h3>Where the read comes from</h3>
       <h2>One EIN in. A full funding analysis out: your position, your field, and the funder market at your size.</h2>
+      <p class="record-stat"><span class="rs-num" id="rs-num" data-target="3.8">3.8</span><span class="rs-num">M+</span><span class="rs-label">grant award records behind the funder-market read</span></p>
       <p>We start from your EIN and one line on what your org does. The Assessment then builds three reads and runs them against each other: your own multi-year filings; a field cohort of roughly 50 organizations at your size and mission; and the record of who actually funded organizations like yours, at what sizes, how recently, and whether they came back. No single one of those is hard to find. Reading them against each other is the analysis: your runway against your field's, the market's real award sizes against the grant your pipeline needs, funder depth against the pipeline math. That is what turns public records into a decision. The Assessment reads:</p>
       <ul class="verify-list">
         <li><span class="check">&rarr;</span> your revenue trend, measured against your field's: are you gaining ground or losing it</li>
@@ -764,6 +906,20 @@
         <li><span class="check">&rarr;</span> a confidence level on every read, so you know how firmly the record supports it</li>
       </ul>
       <p>Every figure is sourced to the public record, not to assumptions. Where the record is too thin to be honest, the Assessment says that too, instead of dressing it up.</p>
+
+      <div class="pipe-math">
+        <p class="pm-label">The pipeline math, from a real Assessment (details changed)</p>
+        <div class="pm-row" id="pm-row">
+          <div class="pm-step"><span class="pm-num">$1.3M</span><span class="pm-desc">annual grant target, about half the budget</span></div>
+          <div class="pm-arrow" aria-hidden="true">&rarr;</div>
+          <div class="pm-step"><span class="pm-num">4</span><span class="pm-desc">repeatable wins</span></div>
+          <div class="pm-arrow" aria-hidden="true">&rarr;</div>
+          <div class="pm-step"><span class="pm-num">20</span><span class="pm-desc">applications, at typical grant-seeking odds</span></div>
+          <div class="pm-arrow" aria-hidden="true">&rarr;</div>
+          <div class="pm-step"><span class="pm-num">11</span><span class="pm-desc">funder relationships in cultivation</span></div>
+        </div>
+        <p class="pm-foot">Planning assumptions sized to revenue and the cohort's real award sizes, not a prediction of awards.</p>
+      </div>
 
       <div class="before-after">
         <div class="ba-col">
@@ -894,6 +1050,86 @@
   });
 </script>
 
+<script>
+  // Scroll-in animations (GFVA pass 2026-07-06). The page ships in its final
+  // state; this script rewinds and animates only when motion is allowed, so
+  // no-JS and reduced-motion users always see the finished page.
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!('IntersectionObserver' in window)) return;
+
+    var ease = function (t) { return 1 - Math.pow(1 - t, 3); };
+    var tween = function (dur, step, done) {
+      var t0 = null;
+      var frame = function (ts) {
+        if (t0 === null) t0 = ts;
+        var p = Math.min((ts - t0) / dur, 1);
+        step(ease(p));
+        if (p < 1) { requestAnimationFrame(frame); } else if (done) { done(); }
+      };
+      requestAnimationFrame(frame);
+    };
+
+    // FVI dial: rewind to 0, sweep to the sample value on first view.
+    var ARC_LEN = 251.33;
+    var arc = document.getElementById('fvi-arc');
+    var num = document.getElementById('fvi-num');
+    var dialTarget = num ? parseInt(num.getAttribute('data-target'), 10) : 0;
+    if (arc && num) {
+      arc.style.transition = 'none';
+      arc.style.strokeDashoffset = ARC_LEN;
+      num.textContent = '0';
+    }
+    var runDial = function () {
+      arc.style.transition = '';
+      // Force a style flush so the rewound offset is the transition start point.
+      void arc.getBoundingClientRect();
+      arc.style.strokeDashoffset = ARC_LEN * (1 - dialTarget / 100);
+      tween(1400, function (p) { num.textContent = Math.round(dialTarget * p); });
+    };
+
+    // Record-count stat: rewind to 0.0, count to the locked figure.
+    var rs = document.getElementById('rs-num');
+    var rsTarget = rs ? parseFloat(rs.getAttribute('data-target')) : 0;
+    if (rs) rs.textContent = '0.0';
+    var runStat = function () {
+      tween(1200, function (p) { rs.textContent = (rsTarget * p).toFixed(1); },
+        function () { rs.textContent = rsTarget.toFixed(1); });
+    };
+
+    // Micro-reveals: headings and cards rise in; pipeline beats stagger via CSS delays.
+    var revealTargets = [];
+    document.querySelectorAll('main section:not(.hook):not(.cta-section)').forEach(function (sec) {
+      sec.querySelectorAll('h2, h3, .decision-card, .ba-col').forEach(function (el) {
+        el.classList.add('reveal');
+        revealTargets.push(el);
+      });
+    });
+    var pmRow = document.getElementById('pm-row');
+    if (pmRow) {
+      Array.prototype.forEach.call(pmRow.children, function (el) { el.classList.add('reveal'); });
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        io.unobserve(entry.target);
+        if (entry.target.classList.contains('fvi-dial-wrap')) { runDial(); return; }
+        if (entry.target.classList.contains('record-stat')) { runStat(); return; }
+        if (entry.target.id === 'pm-row') {
+          Array.prototype.forEach.call(entry.target.children, function (el) { el.classList.add('in-view'); });
+          return;
+        }
+        entry.target.classList.add('in-view');
+      });
+    }, { threshold: 0.3 });
+
+    revealTargets.forEach(function (el) { io.observe(el); });
+    if (arc && num) io.observe(document.querySelector('.fvi-dial-wrap'));
+    if (rs) io.observe(document.querySelector('.record-stat'));
+    if (pmRow) io.observe(pmRow);
+  })();
+</script>
 
 </body>
 </html>
