@@ -80,6 +80,27 @@
     color: var(--mid-gray);
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    margin-left: auto;
+    margin-right: 18px;
+  }
+
+  .header-cta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 9px 16px;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .header-cta:hover { background: var(--red); }
+  @media (max-width: 700px) {
+    .header-tag { display: none; }
+    .header-cta { margin-left: auto; }
   }
 
   .container {
@@ -574,6 +595,16 @@
     font-size: 0.85rem; color: var(--mid-gray); line-height: 1.55;
     margin: 10px 0 0; max-width: 500px;
   }
+  .gap-key { display: flex; gap: 16px 20px; flex-wrap: wrap; margin-top: 10px; }
+  .gk-item {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.67rem;
+    letter-spacing: 0.03em; color: var(--mid-gray);
+    display: flex; align-items: center; gap: 7px;
+  }
+  .gk-swatch { width: 14px; height: 10px; display: inline-block; flex-shrink: 0; }
+  .gk-swatch-blk  { background: var(--ink); opacity: 0.82; }
+  .gk-swatch-gap  { border: 1.5px dashed var(--red); }
+  .gk-swatch-pipe { background: var(--green); }
 
   /* 2) FVI dial: sample Index sweeping to its real sample value on scroll-into-view.
      Ships in final state; JS rewinds and animates only when motion is allowed. */
@@ -696,6 +727,7 @@
 <header class="site-header">
   <a class="logo" href="https://sharke.ai">Sharke<span>.</span>ai</a>
   <span class="header-tag">Know what role grants can carry, before the hours go in</span>
+  <a class="header-cta" href="#start">Start &middot; $79</a>
 </header>
 
 <main>
@@ -710,7 +742,7 @@
       <a href="#start" class="cta-anchor hero-cta">Get the 48-hour grant funding read &rarr;</a>
       <p class="cta-microcopy">$79 one-time, rising to $99 on September 1. In 48 hours: the funding behind your mission scored 0 to 100, your months of real runway, the pipeline your goal would take, and named funders that already back organizations like yours. Your EIN and one line about your org is all it takes.</p>
       <div class="gap-viz" aria-hidden="true">
-        <p class="gap-viz-label">A budget carried by a few funders, illustrative</p>
+        <p class="gap-viz-label">Your funding, funder by funder (illustrative)</p>
         <div class="gap-bar">
           <div class="blk b1"></div>
           <div class="gap-slot">
@@ -722,7 +754,12 @@
           <div class="blk b4"></div>
           <div class="blk b5"></div>
         </div>
-        <p class="gap-viz-caption">One funder steps back. The Assessment sizes what it would take to fill the space, before it opens.</p>
+        <div class="gap-key">
+          <span class="gk-item"><span class="gk-swatch gk-swatch-blk"></span>your funders today</span>
+          <span class="gk-item"><span class="gk-swatch gk-swatch-gap"></span>the gap when one steps back</span>
+          <span class="gk-item"><span class="gk-swatch gk-swatch-pipe"></span>the pipeline that fills it</span>
+        </div>
+        <p class="gap-viz-caption">The Assessment sizes that pipeline for your organization, before the gap opens.</p>
       </div>
       <p class="qualifier" style="margin-top: 22px;">For nonprofits with $150K to $10M in revenue.</p>
     </div>
@@ -908,6 +945,7 @@
       </div>
       <p class="verdict-mix">Every call arrives with a named read of your position, Resilient, Thin-Reserve, Pressured but Well-Supported, and the sequenced first moves it points to. And more Assessments come back "narrow" or "not yet" than teams expect. That answer is the protective one: it is the moment leadership avoids building a funding plan around a path the evidence does not support, with months still left to choose.</p>
       <p style="margin-top: 28px;"><strong>You leave with a plan, not a diagnosis.</strong> The Assessment does not stop at whether grants can play that role. It hands leadership the sequenced first moves for the next cycle: the grant target and the wins it implies, the applications and relationships to keep in motion, and the first 3 to 5 funders to verify before staff time is committed. Planning assumptions, not predictions, but enough of a plan that your next conversation starts at "here is where we begin," not "here is what we found."</p>
+      <a href="#start" class="cta-anchor midpage-cta" style="margin-top: 26px;">See which call your record points to &rarr;</a>
     </div>
   </section>
 
