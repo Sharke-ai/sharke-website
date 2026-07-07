@@ -1,6 +1,5 @@
 # Clean URLs for hidden landing pages
 /ed      /ed.html      200
-/gw      /gw.html      200
 /check-intake  /check-intake.html  200
 /fai     /fai.html     200
 /thank-you  /thank-you.html  200
@@ -16,13 +15,15 @@
 # subscribe-ed retired 2026-06-17: the $79 ED membership is off the locked ladder; route to the grant-office home
 /subscribe-ed       /grant-office  301
 /subscribe-ed.html  /grant-office  301!
-# 3 segment pages retired 2026-07-07: sold the retired $49 / 24-hour per-grant "check", off the locked ladder.
+# Segment pages retired 2026-07-07: sold the retired $49 / 24-hour per-grant "check", off the locked ladder.
 # EDs + consultants -> the $79 GFVA (/ed); associations/intermediaries -> capacity builders (/foundations).
-# NOTE: consultants route to /ed not /gw because /gw still carries retired $49 copy (pending its own refresh).
+# /gw retired 2026-07-07 (same $49/24h motion; confirmed no live drip links it) -> /ed.
 /executive-directors       /ed           301!
 /executive-directors.html  /ed           301!
 /grant-writers             /ed           301!
 /grant-writers.html        /ed           301!
+/gw                        /ed           301!
+/gw.html                   /ed           301!
 /associations              /foundations  301!
 /associations.html         /foundations  301!
 /subscribe-gw  /subscribe-gw.html  200
