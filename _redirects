@@ -16,6 +16,15 @@
 # subscribe-ed retired 2026-06-17: the $79 ED membership is off the locked ladder; route to the grant-office home
 /subscribe-ed       /grant-office  301
 /subscribe-ed.html  /grant-office  301!
+# 3 segment pages retired 2026-07-07: sold the retired $49 / 24-hour per-grant "check", off the locked ladder.
+# EDs + consultants -> the $79 GFVA (/ed); associations/intermediaries -> capacity builders (/foundations).
+# NOTE: consultants route to /ed not /gw because /gw still carries retired $49 copy (pending its own refresh).
+/executive-directors       /ed           301!
+/executive-directors.html  /ed           301!
+/grant-writers             /ed           301!
+/grant-writers.html        /ed           301!
+/associations              /foundations  301!
+/associations.html         /foundations  301!
 /subscribe-gw  /subscribe-gw.html  200
 /privacy /privacy.html 200
 /terms   /terms.html   200
