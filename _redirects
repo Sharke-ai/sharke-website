@@ -13,7 +13,7 @@
 # /call -> founder Calendly (clean shareable URL; on-page CTAs use the full URL with UTM)
 /call  https://calendly.com/collin-sharke  302
 # subscribe-ed retired 2026-06-17: the $79 ED membership is off the locked ladder; route to the grant-office home
-/subscribe-ed       /grant-office  301
+/subscribe-ed       /grant-office  301!
 /subscribe-ed.html  /grant-office  301!
 # Segment pages retired 2026-07-07: sold the retired $49 / 24-hour per-grant "check", off the locked ladder.
 # EDs + consultants -> the $79 GFVA (/ed); associations/intermediaries -> capacity builders (/foundations).
@@ -26,6 +26,8 @@
 /gw.html                   /ed           301!
 /associations              /foundations  301!
 /associations.html         /foundations  301!
-/subscribe-gw  /subscribe-gw.html  200
+# subscribe-gw retired with the gw motion 2026-07-09: force both forms to /gw's destination
+/subscribe-gw       /ed  301!
+/subscribe-gw.html  /ed  301!
 /privacy /privacy.html 200
 /terms   /terms.html   200
