@@ -108,6 +108,11 @@
     display: block;
     margin-bottom: 6px;
   }
+  .field-optional {
+    color: #a09890;
+    text-transform: none;
+    letter-spacing: 0.04em;
+  }
   .field-note {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.62rem;
@@ -259,6 +264,7 @@
       <h1>Grant Funding Viability Assessment</h1>
       <p class="paid-banner" id="paid-banner" style="display:none;">Payment received.</p>
       <p class="subhead" id="banner-subhead">You are in. Tell us where to point the Assessment: your organization, what it does, and anything on your mind about the funding. The 48-hour clock starts when you submit.</p>
+      <p class="subhead" style="margin-top: 10px; font-size: 0.92em;">Your EIN and one line about your organization is all it takes. Everything else is optional and sharpens the read.</p>
     </div>
   </section>
 
@@ -295,13 +301,13 @@
             <input type="text" id="org-name" placeholder="Organization name" autocomplete="organization">
           </div>
           <div class="form-group form-group-small">
-            <label class="field-label" for="org-state">State</label>
+            <label class="field-label" for="org-state">State <span class="field-optional">(optional)</span></label>
             <input type="text" id="org-state" placeholder="TX" maxlength="2" autocomplete="address-level1">
           </div>
         </div>
 
         <div class="form-group">
-          <label class="field-label" for="org-website">Organization Website</label>
+          <label class="field-label" for="org-website">Organization Website <span class="field-optional">(optional)</span></label>
           <input type="url" id="org-website" placeholder="https://yourorg.org" autocomplete="url">
         </div>
 
@@ -498,15 +504,19 @@
       submitted_at: new Date().toISOString()
     };
 
-    // POST to the same Google Apps Script web app as /review (appends a row to
-    // the shared Intake sheet; the Plan column separates the two products).
-    var GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxcV9lFHnJ-41TOTZRn2hJYSb2vj_vbXMvVUFA9z_Ao_ILu_Tt7e-lAUM1a3qXYKDrZVg/exec';
-
-    fetch(GOOGLE_SHEET_URL, {
+    // POST through our own Netlify function, which relays to the shared Apps
+    // Script intake sheet server-side and returns a REAL verdict. The old
+    // direct no-cors POST could show success while the row never landed.
+    fetch('/.netlify/functions/submit-intake', {
       method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
+    })
+    .then(function(res) {
+      return res.json().catch(function() { return { ok: false }; }).then(function(data) {
+        if (res.ok && data && data.ok === true) return true;
+        throw new Error((data && data.error) || ('HTTP ' + res.status));
+      });
     })
     .then(function() {
       document.getElementById('submit-form').style.display = 'none';
@@ -515,7 +525,7 @@
     })
     .catch(function() {
       var errEl = document.getElementById('form-error');
-      errEl.textContent = 'Submission failed. Please try again or contact support.';
+      errEl.textContent = 'Your submission did not go through, and nothing was lost: your answers are still on this page. Please try again in a moment. If it still fails, email collin@sharke.ai and we will take your intake by reply; your 48-hour clock starts from that email.';
       errEl.style.display = 'block';
       btn.textContent = 'Start the Assessment';
       btn.disabled = false;
