@@ -1,497 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sharke.ai - Founding Member Pricing</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --text-primary: #FFFFFF;
-      --text-secondary: #D1D5DB;
-      --text-muted: #9CA3AF;
-      --bg-primary: #0a0f1a;
-      --bg-secondary: #0f1520;
-      --bg-card: #111827;
-      --border: #1F2937;
-      --border-light: #374151;
-      --accent: #4AE3A0;
-      --accent-muted: rgba(74, 227, 160, 0.15);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharke.ai - Pricing</title>
+<meta name="description" content="One ladder: start free, add weight when the mission needs it. Every level priced so the next step is obvious.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-white: #f5f2ed;
+    --warm-white: #faf8f4;
+    --red: #c0392b;
+    --mid-gray: #6b6560;
+    --light-gray: #ddd8d0;
+    --rule: #d0cbc2;
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* shared verified green: same value as the homepage Decision Record */
+    --verified: #1f6b42;
+    --verified-bg: #eef6f0;
+    --verified-border: #bfdcc8;
+    /* shared type tokens */
+    --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
 
-    body {
-      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      min-height: 100vh;
-      overflow-x: hidden;
-      font-size: 17px;
-      line-height: 1.6;
-    }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; scroll-behavior: smooth; }
+  body {
+    background: var(--warm-white);
+    color: var(--black);
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    a { text-decoration: none; color: inherit; }
+  /* Serif headlines (editorial), clean sans body */
+  .hook h1, h2, .rung-name { font-family: 'Fraunces', Georgia, serif; }
 
-    /* Nav */
-    .nav {
-      padding: 20px 0;
-      background: transparent;
-    }
-    .nav-content {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo { display: flex; align-items: center; gap: 10px; }
-    .logo-mark {
-      width: 28px; height: 28px;
-      background: var(--accent);
-      border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .logo-s { color: var(--bg-primary); font-size: 16px; font-weight: 600; }
-    .logo-text { font-size: 17px; font-weight: 500; color: var(--text-primary); }
-    .nav-link {
-      font-size: 14px;
-      color: var(--text-muted);
-      transition: color 0.2s;
-    }
-    .nav-link:hover { color: var(--text-primary); }
+  /* HEADER */
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  /* Shared brand lockup: S badge + wordmark (badge uses each surface's accent) */
+  .brandmark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brandmark .bm-mark { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 6px; background: var(--red); flex-shrink: 0; }
+  .brandmark .bm-s { font-family: var(--sans); color: var(--warm-white); font-size: 15px; font-weight: 700; line-height: 1; }
+  .brandmark .bm-text { font-family: var(--sans); font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: var(--black); line-height: 1; }
+  .header-nav { display: flex; align-items: center; gap: 24px; }
+  .header-nav a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--mid-gray);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .header-nav a:hover { color: var(--black); }
 
-    /* Hero */
-    .hero {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 80px 40px 40px;
-      text-align: center;
-    }
-    .hero-label {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-    .hero h1 {
-      font-size: 44px;
-      font-weight: 700;
-      line-height: 1.15;
-      margin-bottom: 20px;
-    }
-    .hero p {
-      font-size: 18px;
-      color: var(--text-muted);
-      max-width: 560px;
-      margin: 0 auto 16px;
-      line-height: 1.6;
-    }
-    .hero-stat {
-      display: inline-block;
-      font-size: 15px;
-      color: var(--accent);
-      background: var(--accent-muted);
-      padding: 8px 20px;
-      border-radius: 8px;
-      margin-top: 12px;
-    }
+  /* LAYOUT */
+  .container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+  section { padding: 72px 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type { border-bottom: none; }
 
-    /* Pricing Cards */
-    .pricing-section {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 60px 40px 80px;
-    }
-    .pricing-grid {
-      display: flex;
-      gap: 32px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .pricing-card {
-      flex: 1;
-      min-width: 280px;
-      max-width: 400px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 40px 32px;
-      text-align: left;
-    }
-    .pricing-card.featured {
-      border: 2px solid var(--accent);
-      position: relative;
-    }
-    .pricing-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--accent);
-      color: #0a0e17;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      padding: 4px 16px;
-      border-radius: 20px;
-      white-space: nowrap;
-    }
-    .pricing-tier {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-    .pricing-amount {
-      font-size: 48px;
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1;
-    }
-    .pricing-period {
-      font-size: 18px;
-      font-weight: 400;
-      color: var(--text-muted);
-    }
-    .pricing-desc {
-      color: var(--text-muted);
-      font-size: 15px;
-      margin: 16px 0 28px;
-      line-height: 1.6;
-    }
-    .pricing-features {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 32px;
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 2.2;
-    }
-    .pricing-features li {
-      padding-left: 24px;
-      position: relative;
-    }
-    .pricing-features li::before {
-      content: "\2713";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: 600;
-    }
-    .pricing-cta {
-      display: block;
-      text-align: center;
-      padding: 14px 24px;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: none;
-    }
-    .pricing-cta-default {
-      background: var(--border-light);
-      color: var(--text-primary);
-    }
-    .pricing-cta-default:hover {
-      background: #4B5563;
-    }
-    .pricing-cta-accent {
-      background: var(--accent);
-      color: #0a0e17;
-    }
-    .pricing-cta-accent:hover {
-      filter: brightness(1.1);
-    }
-    .pricing-note {
-      text-align: center;
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 12px;
-    }
+  /* HOOK */
+  .hook { padding-top: 80px; padding-bottom: 64px; }
+  .hook .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 28px;
+  }
+  .hook h1 {
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    max-width: 620px;
+  }
+  .hook .subhead {
+    font-size: 1.1rem;
+    color: var(--mid-gray);
+    line-height: 1.7;
+    max-width: 580px;
+    font-style: italic;
+  }
 
-    /* Proof Section */
-    .proof-section {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 40px 80px;
-      text-align: center;
-    }
-    .proof-label {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--accent);
-      margin-bottom: 24px;
-    }
-    .proof-quote {
-      font-size: 18px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      font-style: italic;
-      margin-bottom: 32px;
-      padding: 0 20px;
-    }
-    .proof-stats {
-      display: flex;
-      gap: 40px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .proof-stat {
-      text-align: center;
-    }
-    .proof-stat-number {
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--accent);
-    }
-    .proof-stat-label {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
+  /* BODY TEXT */
+  p { margin-bottom: 1.3em; font-size: 1rem; color: #1a1a1a; }
+  p:last-child { margin-bottom: 0; }
+  h2 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 24px; line-height: 1.3; }
+  h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-bottom: 20px;
+  }
 
-    /* ROI Section */
-    .roi-section {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 40px 80px;
-    }
-    .roi-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 40px;
-    }
-    .roi-title {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-    .roi-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 15px;
-    }
-    .roi-row:last-child { border-bottom: none; }
-    .roi-label { color: var(--text-secondary); }
-    .roi-value { color: var(--text-primary); font-weight: 500; }
-    .roi-highlight {
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 17px;
-    }
+  /* THE LADDER
+     Four rungs in a vertical sequence. Each rung reads slightly heavier
+     than the last: border weight and background step up as the level does,
+     and a mono rail on the left ties the rungs into one ladder. */
+  .ladder { list-style: none; margin: 8px 0 0; position: relative; }
+  .ladder::before {
+    content: '';
+    position: absolute;
+    left: 17px; top: 20px; bottom: 20px;
+    width: 1px;
+    background: var(--rule);
+  }
+  .rung-wrap { position: relative; padding-left: 52px; }
+  .rung-wrap + .rung-wrap { margin-top: 26px; }
+  .rung-step {
+    position: absolute;
+    left: 0; top: 26px;
+    width: 35px; height: 35px;
+    border-radius: 50%;
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--mid-gray);
+  }
+  .rung-wrap.w3 .rung-step { border-color: var(--mid-gray); color: var(--black); }
+  .rung-wrap.w4 .rung-step { background: var(--black); border-color: var(--black); color: var(--off-white); }
 
-    /* FAQ */
-    .faq-section {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 0 40px 80px;
-    }
-    .faq-title {
-      font-size: 24px;
-      font-weight: 600;
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .faq-item {
-      border-bottom: 1px solid var(--border);
-      padding: 24px 0;
-    }
-    .faq-question {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-    }
-    .faq-answer {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
+  .rung {
+    border: 1px solid var(--rule);
+    background: var(--warm-white);
+    padding: 30px 30px 26px;
+    position: relative;
+  }
+  /* weight steps up rung by rung */
+  .rung-wrap.w2 .rung { background: var(--off-white); border-color: #b8b2a8; }
+  .rung-wrap.w3 .rung { background: var(--off-white); border-color: var(--black); border-width: 1.5px; }
+  .rung-wrap.w4 .rung { background: var(--black); border-color: var(--black); border-width: 1.5px; box-shadow: 0 14px 36px rgba(22,20,15,0.14); }
 
-    /* Footer */
-    .footer {
-      text-align: center;
-      padding: 40px;
-      border-top: 1px solid var(--border);
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-    .footer a { color: var(--accent); }
+  .rung-flag {
+    position: absolute;
+    top: -11px; left: 28px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--red);
+    padding: 4px 10px;
+  }
+  .rung-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+  .rung-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--black);
+    line-height: 1.25;
+    margin-bottom: 14px;
+  }
+  .rung-body { font-size: 0.95rem; color: #1a1a1a; line-height: 1.6; margin-bottom: 22px; max-width: 560px; }
+  .rung-cta {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .rung-cta.subtle { background: transparent; color: var(--black); border: 1px solid var(--black); }
+  .rung-cta.subtle:hover { background: var(--black); color: var(--off-white); }
+  .rung-cta.solid { background: var(--black); color: var(--off-white); border: 1.5px solid var(--black); }
+  .rung-cta.solid:hover { background: var(--red); border-color: var(--red); color: #fff; }
+  .rung-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin: 14px 0 0;
+  }
 
-    /* Responsive */
-    @media (max-width: 640px) {
-      .hero h1 { font-size: 32px; }
-      .hero { padding: 60px 24px 40px; }
-      .pricing-section { padding: 40px 24px 60px; }
-      .pricing-grid { gap: 24px; }
-      .pricing-card { min-width: 100%; }
-      .proof-stats { gap: 24px; }
-      .roi-card { padding: 24px; }
-      .faq-section { padding: 0 24px 60px; }
-    }
-  </style>
+  /* dark rung (4) inversions */
+  .rung-wrap.w4 .rung-label { color: #e57368; }
+  .rung-wrap.w4 .rung-name { color: var(--off-white); }
+  .rung-wrap.w4 .rung-body { color: #cfc8c0; }
+  .rung-wrap.w4 .rung-meta { color: #a09890; }
+  .rung-wrap.w4 .rung-cta.solid { background: var(--off-white); color: var(--black); border-color: var(--off-white); }
+  .rung-wrap.w4 .rung-cta.solid:hover { background: var(--red); border-color: var(--red); color: #fff; }
+
+  /* GOAL GUARANTEE (pattern lifted from grant-office.html price ledger) */
+  .goal-guarantee {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.86rem;
+    line-height: 1.55;
+    color: #16140f;
+    background: var(--verified-bg);
+    border: 1px solid var(--verified-border);
+    border-left: 3px solid var(--verified);
+    padding: 18px 22px;
+    margin: 34px 0 0 52px;
+  }
+  .goal-guarantee strong { color: var(--verified); display: block; margin-bottom: 6px; }
+  .goal-guarantee .gg-scope {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin-top: 12px;
+  }
+
+  /* FAQ */
+  .faq details { border-bottom: 1px solid var(--rule); }
+  .faq details:first-of-type { border-top: 1px solid var(--rule); }
+  .faq summary { padding: 18px 0; font-size: 1rem; font-weight: 700; color: var(--black); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; font-family: 'IBM Plex Mono', monospace; color: var(--red); font-size: 1.3rem; line-height: 1; flex-shrink: 0; }
+  .faq details[open] summary::after { content: '\2212'; }
+  .faq details p { margin: 0 0 18px; font-size: 0.95rem; color: #2a2a2a; line-height: 1.6; }
+  .faq details:not([open]) p { display: none; }
+
+  /* FOOTER */
+  .site-footer { border-top: 1px solid var(--rule); padding: 40px 0; background: var(--off-white); }
+  .site-footer .footer-badge { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); margin: 0 0 12px; }
+  .site-footer .footer-data { font-size: 0.85rem; color: var(--mid-gray); margin: 0 0 14px; max-width: 560px; line-height: 1.6; }
+  .site-footer .footer-legal { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--mid-gray); letter-spacing: 0.04em; margin: 0; }
+  .site-footer .footer-legal a { color: var(--mid-gray); text-decoration: underline; text-underline-offset: 3px; }
+  .site-footer .footer-legal a:hover { color: var(--black); }
+
+  /* FADE IN */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .hook h1, .hook .subhead, .hook .eyebrow { animation: fadeUp 0.6s ease both; }
+  .hook .eyebrow { animation-delay: 0.05s; }
+  .hook h1 { animation-delay: 0.15s; }
+  .hook .subhead { animation-delay: 0.28s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .container { padding: 0 20px; }
+    section { padding: 52px 0; }
+    .hook { padding-top: 56px; padding-bottom: 44px; }
+    .hook h1 { font-size: 1.8rem; }
+    .ladder::before { display: none; }
+    .rung-wrap { padding-left: 0; }
+    .rung-step { display: none; }
+    .rung { padding: 26px 22px 22px; }
+    .rung-cta { display: block; width: 100%; text-align: center; }
+    .goal-guarantee { margin-left: 0; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- Nav -->
-  <nav class="nav">
-    <div class="nav-content">
-      <a href="/" class="logo">
-        <div class="logo-mark"><span class="logo-s">S</span></div>
-        <span class="logo-text">Sharke</span>
-      </a>
-      <a href="/" class="nav-link">Back to Home</a>
-    </div>
+<header class="site-header">
+  <a class="brandmark" href="/"><span class="bm-mark"><span class="bm-s">S</span></span><span class="bm-text">Sharke.ai</span></a>
+  <nav class="header-nav">
+    <a href="/">Home</a>
+    <a href="https://sharke-app.netlify.app/login">Log in</a>
   </nav>
+</header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-label">Founding Partner Pricing</div>
-    <h1>A funding pipeline that can fund your mission</h1>
-    <p>Sharke is the grants department for nonprofits that cannot afford one. We build and verify your funding pipeline, done for you, so your hours only go to grants with verified fit.</p>
-    <p style="font-size: 15px;">No contract. Cancel anytime. Founding rates locked in.</p>
-    <div class="hero-stat">A limited founding cohort. Founding rates rise once references exist.</div>
-  </section>
+<main>
 
-  <!-- Pricing Cards -->
-  <section class="pricing-section">
-    <div class="pricing-grid">
-
-      <!-- Done-for-you: the grants department -->
-      <div class="pricing-card featured">
-        <div class="pricing-badge">Founding rates until Sept 1</div>
-        <div class="pricing-tier">Done for you</div>
-        <div class="pricing-amount">$200<span class="pricing-period">+/month</span></div>
-        <p class="pricing-desc">The grants department for nonprofits that cannot afford one. We build and verify your funding pipeline and keep it current, priced to how much of your mission rides on grants.</p>
-        <ul class="pricing-features">
-          <li>Half your funding from grants: $200/month ($2,400/year)</li>
-          <li>About three-quarters: $300/month ($3,600/year)</li>
-          <li>Essentially all of it: $400/month ($4,800/year)</li>
-          <li>Rises to $275 to $450 on September 1; the rate you join at is the rate you keep</li>
-          <li>Federal grants over $100k added per application</li>
-        </ul>
-        <a href="https://calendly.com/collin-sharke?utm_source=website&amp;utm_campaign=pricing" class="pricing-cta pricing-cta-accent">
-          Set up your grant office
-        </a>
-        <p class="pricing-note">Best for organizations under $3M with little or no grant staff</p>
-      </div>
-
-      <!-- Self-serve -->
-      <div class="pricing-card">
-        <div class="pricing-tier">Self-serve</div>
-        <div class="pricing-amount">$159<span class="pricing-period">/month</span></div>
-        <p class="pricing-desc">The full workspace, run by your own person: Sharke finds, verifies, drafts, and tracks. The founding rate, before it rises to $199 on September 1.</p>
-        <ul class="pricing-features">
-          <li>Funding Path Checkup and verified-coverage scoring</li>
-          <li>Funder behavior, 990 award history, eligibility</li>
-          <li>$159/month, or $1,788 paid annually; rises to $199/month on September 1</li>
-          <li>No contract, cancel anytime</li>
-        </ul>
-        <a href="https://sharke-app.netlify.app/signup" class="pricing-cta pricing-cta-default">
-          Start self-serve
-        </a>
-        <p class="pricing-note">Best for organizations with someone to run it</p>
-      </div>
-
+  <!-- HOOK -->
+  <section class="hook">
+    <div class="container">
+      <p class="eyebrow">Pricing</p>
+      <h1>Start free. Add weight when the mission needs it.</h1>
+      <p class="subhead">Four levels, one ladder. Each one answers a bigger question about the funding behind your mission.</p>
     </div>
   </section>
 
-  <!-- Proof Section -->
-  <section class="proof-section">
-    <div class="proof-label">What verification catches</div>
-    <p class="proof-quote">
-      &ldquo;A nonprofit found a foundation grant through an AI research tool. The mission language was close.
-      The issue area matched. The grant amount was right. They started writing. A review of the foundation&rsquo;s
-      990s showed that over the past four years, every single grant had gone to organizations the board members
-      had a prior relationship with. The foundation had never funded a cold applicant. That is 20 to 30 hours
-      of staff time invested in a process that was never open to them.&rdquo;
-    </p>
-    <div class="proof-stats">
-      <div class="proof-stat">
-        <div class="proof-stat-number">30-40%</div>
-        <div class="proof-stat-label">of &ldquo;good fit&rdquo; grants fail verification</div>
-      </div>
-      <div class="proof-stat">
-        <div class="proof-stat-number">20-30 hrs</div>
-        <div class="proof-stat-label">saved per dead-end application avoided</div>
-      </div>
-    </div>
-  </section>
+  <!-- THE LADDER -->
+  <section>
+    <div class="container">
+      <h3>The ladder</h3>
 
-  <!-- ROI Section -->
-  <section class="roi-section">
-    <div class="roi-card">
-      <div class="roi-title">The math is simple</div>
-      <div class="roi-row">
-        <span class="roi-label">Average hours wasted per dead-end application</span>
-        <span class="roi-value">20-30 hours</span>
-      </div>
-      <div class="roi-row">
-        <span class="roi-label">Average nonprofit staff cost per hour</span>
-        <span class="roi-value">$35/hr</span>
-      </div>
-      <div class="roi-row">
-        <span class="roi-label">Cost of ONE dead-end application</span>
-        <span class="roi-value">$700-$1,050</span>
-      </div>
-      <div class="roi-row">
-        <span class="roi-label">Sharke, done for you (monthly)</span>
-        <span class="roi-value">From $200</span>
-      </div>
-      <div class="roi-row">
-        <span class="roi-label">Applications to skip to break even</span>
-        <span class="roi-highlight">Just 1</span>
-      </div>
+      <ol class="ladder">
+
+        <!-- RUNG 1 -->
+        <li class="rung-wrap w1">
+          <span class="rung-step" aria-hidden="true">1</span>
+          <div class="rung">
+            <p class="rung-label">Free</p>
+            <p class="rung-name">Funding Path Checkup</p>
+            <p class="rung-body">The gap between what your mission needs and what your pipeline can actually fund, in about five minutes. No account, nothing leaves your browser.</p>
+            <a href="/funding-gap" class="rung-cta subtle">Find your funding gap &rarr;</a>
+            <p class="rung-meta">Free. No signup. About five minutes.</p>
+          </div>
+        </li>
+
+        <!-- RUNG 2 -->
+        <li class="rung-wrap w2">
+          <span class="rung-step" aria-hidden="true">2</span>
+          <div class="rung">
+            <span class="rung-flag">Most start here</span>
+            <p class="rung-label">$79 one-time, rising to $99 on September 1</p>
+            <p class="rung-name">Grant Funding Viability Assessment</p>
+            <p class="rung-body">The funding behind your mission scored 0 to 100, your months of real runway, the pipeline your goal would take, and named funders that already back organizations like yours. A board-ready answer, in your hands in 48 hours.</p>
+            <a href="/ed" class="rung-cta solid">See the Assessment &rarr;</a>
+          </div>
+        </li>
+
+        <!-- RUNG 3 -->
+        <li class="rung-wrap w3">
+          <span class="rung-step" aria-hidden="true">3</span>
+          <div class="rung">
+            <p class="rung-label">$159 / month, rising to $199 on September 1</p>
+            <p class="rung-name">The grant team your person runs</p>
+            <p class="rung-body">The full workspace for the person who runs your grants: finds, verifies, drafts, and tracks. A source-cited verdict on every grant, before the hours go in. Drafting support with a Red Team review that critiques every application the way a grantmaker would.</p>
+            <a href="/grant-director" class="rung-cta solid">See what is inside &rarr;</a>
+            <p class="rung-meta">No contract. Cancel anytime.</p>
+          </div>
+        </li>
+
+        <!-- RUNG 4 -->
+        <li class="rung-wrap w4">
+          <span class="rung-step" aria-hidden="true">4</span>
+          <div class="rung">
+            <p class="rung-label">$200 to $400 / month founding, $275 to $450 from September 1</p>
+            <p class="rung-name">Your grant office, done for you</p>
+            <p class="rung-body">Sharke does the grant work. Your team reviews and approves. Verification of your first 3 to 5 funders starts the first week. Priced to how much of your mission rides on grants: $200 at about half, $300 at three-quarters, $400 at essentially all.</p>
+            <a href="/grant-office" class="rung-cta solid">Set up your grant office &rarr;</a>
+            <p class="rung-meta">The rate you join at is the rate you keep. No contract. Cancel anytime.</p>
+          </div>
+        </li>
+
+      </ol>
+
+      <!-- GOAL GUARANTEE (applies to the grant office plan) -->
+      <p class="goal-guarantee">
+        <strong>The Funding Goal Guarantee</strong>
+        If Sharke cannot identify enough verified opportunities and funder relationships to support your funding goal, we continue working at no charge until we do.
+        <span class="gg-scope">Applies to the grant office plan</span>
+      </p>
+
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="faq-section">
-    <h2 class="faq-title">Common questions</h2>
-
-    <div class="faq-item">
-      <div class="faq-question">How is this different from Instrumentl or GrantStation?</div>
-      <div class="faq-answer">Those tools hand you more matches to sort through. Sharke does the work and tells you which grants can actually fund your mission. Most tools rent an AI to guess your matches from a description. Sharke runs a model built to learn from what actually gets funded, checks every grant against funder 990 data and award history, and builds the verified pipeline for you. They add decisions to your week. We remove them.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">Can we try it before committing?</div>
-      <div class="faq-answer">First month is free. No contract. Cancel anytime. You&rsquo;ll see results on your first grant check.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">We already check eligibility. Why do we need this?</div>
-      <div class="faq-answer">Eligibility is table stakes. Sharke checks funder behavior: who they&rsquo;ve actually funded, whether they take cold applicants, whether their priorities have shifted. That&rsquo;s the stuff guidelines don&rsquo;t tell you.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">What if I have more than 5 clients? (consultant)</div>
-      <div class="faq-answer">Email us at collin@sharke.ai. We offer custom pricing for larger practices.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">We can&rsquo;t afford another subscription.</div>
-      <div class="faq-answer">Skipping a single dead-end application saves 20 to 30 hours, roughly $700 to $1,050 in staff time. The plan pays for itself the first time it stops one, and most teams stop several a quarter.</div>
+  <section class="faq">
+    <div class="container">
+      <h3>Questions</h3>
+      <h2>Before you decide</h2>
+      <details>
+        <summary>How is this different from a grant-matching database?</summary>
+        <p>A matching database hands you a longer list to triage. Sharke checks the list against documented funder behavior and tells you what deserves staff time.</p>
+      </details>
+      <details>
+        <summary>Do we have to sign a contract?</summary>
+        <p>No. Subscriptions are month to month, and you can cancel anytime. The Assessment is a one-time purchase.</p>
+      </details>
+      <details>
+        <summary>Which level should we start at?</summary>
+        <p>Run the free Checkup first: it shows the size of your Funding Gap in about five minutes. If grants carry a real share of your budget, the Assessment turns that gap into a board-ready plan, and the subscriptions build the pipeline that closes it.</p>
+      </details>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>&copy; 2026 <a href="/">Sharke.ai</a>. The grants department for nonprofits that cannot afford one.</p>
-    <p style="margin-top: 8px;">Questions? <a href="mailto:collin@sharke.ai">collin@sharke.ai</a> &middot; 512-253-1537</p>
-  </footer>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="footer-badge">Member, NVIDIA Inception Program</p>
+    <p class="footer-data">Your information is used only to find, verify, and draft grants for your organization. See our Privacy Policy for details.</p>
+    <p class="footer-legal">&copy; 2026 Sharke.ai &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+  </div>
+</footer>
 
 </body>
 </html>

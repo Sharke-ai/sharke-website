@@ -2,12 +2,12 @@
 /ed      /ed.html      200
 /check-intake  /check-intake.html  200
 /fai     /fai.html     200
-/thank-you  /thank-you.html  200
 /the-20-billion-hallucination  /The_20_Billion_Hallucination.html  200
 /foundations  /foundations.html  200
 /grant-office  /grant-office.html  200
 /grant-director  /grant-director.html  200
 /readiness  /readiness.html  200
+/pricing  /pricing.html  200
 # free funding-gap check routes to the existing tool (Day-0 email + service-page CTA destination)
 /funding-gap  https://sharke-app.netlify.app/free-tools/funding-path-checkup  302
 # /call -> founder Calendly (clean shareable URL; on-page CTAs use the full URL with UTM)
@@ -29,5 +29,10 @@
 # subscribe-gw retired with the gw motion 2026-07-09: force both forms to /gw's destination
 /subscribe-gw       /ed  301!
 /subscribe-gw.html  /ed  301!
+# $49 Grant Review Brief retired 2026-07-13 (founder: not selling it); /review + its thank-you surface -> /ed
+/review           /ed  301!
+/review.html      /ed  301!
+/thank-you        /ed  301!
+/thank-you.html   /ed  301!
 /privacy /privacy.html 200
 /terms   /terms.html   200
