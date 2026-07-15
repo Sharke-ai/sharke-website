@@ -2,3 +2,5 @@
 .netlify
 # Local agent/session config
 .claude/
+# Dependencies (analytics function)
+node_modules/

@@ -253,6 +253,53 @@
   .rec-quote cite { display: block; margin-top: 10px; font-family: var(--mono); font-style: normal; font-size: 11.5px; letter-spacing: 0.04em; color: var(--ink-4); }
 
   /* â”€â”€ TWO NUMBERS â”€â”€ */
+  /* DECISION DASHBOARD (revived animated verdict card, re-skinned to verdict semantics 2026-07-14) */
+  .decision-dashboard {
+    border: 1px solid var(--rule); background: var(--bg-2);
+    transition: opacity 0.3s ease; border-radius: 8px; overflow: hidden;
+    text-align: left; max-width: 640px; margin: 30px auto 0;
+  }
+  .decision-dashboard.fade-out { opacity: 0; }
+  .dash-bar {
+    display: flex; align-items: center; justify-content: center; position: relative;
+    padding: 12px 18px; background: rgba(0,0,0,0.3); border-bottom: 1px solid var(--rule);
+  }
+  .dash-dots { position: absolute; left: 18px; display: flex; gap: 7px; }
+  .dash-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--rule-2); }
+  .dash-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--ink-3); }
+  .dash-content { padding: 26px 28px; }
+  .dash-top { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-bottom: 26px; }
+  .dash-ring {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    width: 74px; height: 74px; border: 2px solid var(--accent); background: var(--accent-soft);
+    flex-shrink: 0; border-radius: 50%;
+  }
+  .dash-glyph { font-size: 1.7rem; font-weight: 700; color: var(--accent); line-height: 1; }
+  .dash-verdict-label { font-family: var(--mono); font-size: 8.5px; color: var(--accent); margin-top: 4px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; text-align: center; line-height: 1.1; }
+  .dash-meta { flex: 1; }
+  .dash-eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 5px; line-height: 1.3; }
+  .dash-rank { font-size: 13px; color: var(--ink-3); margin: 0; line-height: 1.4; }
+  .dash-status { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-soft); padding: 6px 14px; border-radius: 100px; flex-shrink: 0; }
+  .dash-status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .dash-status-text { font-family: var(--mono); font-size: 11px; color: var(--accent); font-weight: 500; white-space: nowrap; }
+  .dash-funder { text-align: center; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 20px 0; margin-bottom: 20px; }
+  .dash-funder-name { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 5px; line-height: 1.2; }
+  .dash-funder-sub { font-size: 13px; color: var(--ink-3); margin: 0; }
+  .dash-insight { background: var(--accent-soft); border: 1px solid var(--accent-border); padding: 20px 22px; margin-bottom: 20px; border-radius: 5px; text-align: center; }
+  .dash-insight-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; font-weight: 500; }
+  .dash-insight-text { font-size: 14.5px; color: var(--ink); line-height: 1.55; }
+  .dash-insight-text .hl { font-weight: 600; color: var(--accent); display: block; margin: 5px 0; }
+  .dash-verify { display: flex; align-items: center; justify-content: center; gap: 9px; font-size: 13px; color: var(--accent); margin: 0; }
+  .dash-verify-icon { display: inline-flex; font-weight: 700; flex-shrink: 0; }
+  .dash-source { font-family: var(--mono); font-size: 10px; letter-spacing: 0.02em; color: var(--ink-4); text-align: center; margin: 13px 0 0; }
+  .dash-preview { display: flex; gap: 8px; justify-content: center; margin-top: 22px; }
+  .dash-pip { width: 8px; height: 8px; border-radius: 50%; background: var(--rule-2); cursor: pointer; transition: background 0.2s; border: none; padding: 0; }
+  .dash-pip.active { background: var(--accent); }
+  @media (max-width: 600px) {
+    .dash-top { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .dash-content { padding: 22px 18px; }
+  }
+
   .numbers { background: var(--bg-2); }
 
   /* â”€â”€ PIPELINE STATS â”€â”€ */
@@ -440,7 +487,7 @@
       <li class="bento-card">
         <div class="bento-inner">
           <svg class="bento-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.25"/><path d="M12 7.25V12l3.1 1.8"/><path d="M12 2.2v1.3M21.8 12h-1.3M12 21.8v-1.3M2.2 12h1.3"/></svg>
-          <div class="bento-text"><strong>Do not lose another <span class="stat-token">20 to 30 hours</span> on a grant that was never a real opportunity.</strong> Before your team writes a single word, Sharke checks eligibility, geography, recent awards, organization size, and timing against the funder's own record. Grants with no real path leave the list before more staff time goes in.</div>
+          <div class="bento-text"><strong>Do not lose another <span class="stat-token">20 to 30 hours</span> on a grant that was never a real opportunity.</strong> Before your team writes a single word, Sharke checks eligibility, geography, recent awards, organization size, and timing against the funder's own record. Grants with no real path to funding leave the list before more staff time goes in.</div>
         </div>
       </li>
       <li class="bento-card">
@@ -483,7 +530,7 @@
 <section>
   <div class="wrap">
     <p class="eyebrow">The Sharke workflow</p>
-    <h2>From every grant identified to every application submitted: one verified path.</h2>
+    <h2>From every grant identified to every application submitted: one verified path to funding.</h2>
     <div class="pipe-anim">
       <svg id="pipeFlow" viewBox="0 0 920 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram. Grants you unlock through the funder relationships Sharke sources and you build join the grants Sharke finds as grants identified, including grants you already track. Every identified grant is verified against eligibility, award history, geography, and timing. Weak fits are ruled out before staff hours go in; each ruled-out dot represents about 25 hours of staff time reclaimed. The rest enter the Verified Pipeline, developed and managed by Sharke, and continue through drafting, Red Team review, and submission.">
 
@@ -623,7 +670,7 @@
       <div class="ledger-row reveal"><span class="ledger-label">Documented path to funding</span><span class="ledger-value">$95,000</span></div>
       <div class="ledger-ratio"><span class="ratio-num">0.32x</span><span class="ratio-label">of your goal<br>documented</span></div>
     </div>
-    <p class="hero-takeaway">A full-looking pipeline, and only a fraction with a real path. That gap is the part no one has shown you.</p>
+    <p class="hero-takeaway">A full-looking pipeline, and only a fraction with a real path to funding. That gap is the part no one has shown you.</p>
     <p class="gap-equation">Funding Gap = your grant goal minus your Verified Pipeline.</p>
     <p class="hero-illus">Illustrative. The free Funding Path Checkup estimates whether the current pipeline is large enough for the stated grant goal. The Assessment determines what the public record supports and what must be verified next.</p>
 
@@ -638,11 +685,11 @@
       <div>
         <div class="stat-num">50+ hrs</div>
         <div class="stat-label">of staff time per federal application</div>
-        <div class="stat-source">Same source. The hours go in whether or not the grant ever had a path.</div>
+        <div class="stat-source">Same source. The hours go in whether or not the grant ever had a path to funding.</div>
       </div>
     </div>
 
-    <p class="board-line">A board can evaluate a documented funding path. It is much harder to defend a plan built on grants no one verified before staff time was committed.</p>
+    <p class="board-line">A board can evaluate a documented path to funding. It is much harder to defend a plan built on grants no one verified before staff time was committed.</p>
 
     <p class="cta-anchor">Before the current pipeline becomes the year's plan, verify what is behind it.</p>
     <div class="cta-row">
@@ -653,33 +700,22 @@
   </div>
 </section>
 
-<!-- THE $79 ASSESSMENT -->
+<!-- THE $79 ASSESSMENT (compact deliverable strip; the full sell lives on /ed) -->
 <section>
   <div class="wrap">
     <p class="eyebrow">Verify first</p>
-    <h2>The $79 Assessment: know if the plan holds before the year is committed.</h2>
-    <p class="lead">The Grant Funding Viability Assessment shows:</p>
+    <h2>The $79 Assessment: can grants actually fund your mission? Know before you commit a quarter of staff time to finding out.</h2>
+    <p class="lead">Give us your EIN and your grant goal. In 48 hours, a written Assessment: a decision you can act on, not a status report, every figure sourced to the public record.</p>
     <ul class="assess-list">
-      <li><span class="hp-check">+</span><span>Whether grants can credibly play the role your mission needs them to play</span></li>
-      <li><span class="hp-check">+</span><span>How much verified pipeline your goal requires</span></li>
-      <li><span class="hp-check">+</span><span>Where the current plan is exposed</span></li>
-      <li><span class="hp-check">+</span><span>What your grant and funder pipeline should look like, sized from documented funder activity and award sizes in your priority areas</span></li>
-      <li><span class="hp-check">+</span><span>The first 3 to 5 funders to verify, drawn from funders already backing organizations like yours</span></li>
+      <li><span class="hp-check">+</span><span>Your Funding Gap: how much verified pipeline your goal requires, and how much of it is real today</span></li>
+      <li><span class="hp-check">+</span><span>A clear call on what to do next: build the grant plan, narrow it, or hold, with the first moves for each</span></li>
+      <li><span class="hp-check">+</span><span>The first 3 to 5 funders worth verifying, each already backing organizations like yours</span></li>
     </ul>
-    <p class="assess-emph">One page gives leadership the answer: whether the current grant plan is credible, where it is exposed, and what must be verified next.</p>
-    <p class="after-buy-h">What happens next</p>
-    <ol class="next-steps">
-      <li><b>1</b><span>Send your EIN and grant goal. One line about the organization is enough to begin.</span></li>
-      <li><b>2</b><span>Sharke verifies the public record. We review filings, revenue mix, peer grant patterns, and documented funder behavior.</span></li>
-      <li><b>3</b><span>Receive the Assessment within 48 hours. You know whether the plan holds, where it is exposed, and which funders to verify first.</span></li>
-    </ol>
-    <p class="assess-footnote">Individual opportunities get categorical verdicts: Pursue, Wait, or Move on. The Assessment's 0 to 100 score measures the overall viability of grants in your funding model, not the odds of winning any single grant.</p>
-    <p class="assess-transition">The Assessment tells you whether the path holds. The Verified Pipeline turns that answer into current opportunities, documented decisions, and stronger replacements.</p>
-    <p class="cta-anchor">Your team is already committing the next cycle to the funders on its list. Verify whether that list can actually fund the plan.</p>
     <div class="cta-row">
       <a href="/ed" class="btn-primary">Get the Assessment <span class="arr">&rarr;</span></a>
       <span class="risk-reducers">$79 one time. Board-ready in 48 hours.</span>
     </div>
+    <p class="secondary-offer">See everything it returns and sample reports on the <a href="/ed">Assessment page</a>.</p>
   </div>
 </section>
 
@@ -729,79 +765,47 @@
   <div class="wrap">
     <p class="eyebrow warm">What a verdict looks like</p>
     <h2>This is what verification catches.</h2>
-    <p class="lead">The Assessment answers whether the path is viable. Decision Records answer whether a specific opportunity belongs in it. Two real verdicts: one to pursue, one to walk away from.</p>
+    <p class="lead">The Assessment answers whether the path to funding is viable. Decision Records answer whether a specific opportunity belongs in it. Three real verdicts: pursue, wait, or walk away.</p>
 
-    <div class="rec-grid">
-      <!-- PURSUE -->
-      <div class="record pursue">
-        <div class="rec-head">
-          <div>
-            <div class="rec-brand">Sharke / Decision Record</div>
-            <div class="rec-grant">Community Resilience Fund</div>
-            <div class="rec-meta">Family foundation &middot; $150K to $250K &middot; Southwest</div>
-          </div>
-        </div>
-        <div class="rec-verdict">
-          <div class="rec-verdict-eyebrow">Verdict</div>
-          <span class="rec-badge">Verified fit</span>
-          <div class="rec-line">Pursue.</div>
-        </div>
-        <div class="rec-reasons">
-          <div class="rec-reason">
-            <div class="rec-reason-h"><span class="n">1</span>Repeatedly funds organizations exactly like yours</div>
-            <div class="rec-reason-b">12 of the last 15 awards went to rural youth mental health organizations with budgets of $300K to $600K, in the Southwest. Your size, your geography, your issue.</div>
-            <div class="rec-source">Source: 990-PF Schedule I, 2021 to 2025</div>
-          </div>
-          <div class="rec-reason">
-            <div class="rec-reason-h"><span class="n">2</span>Recent, open, and open to you</div>
-            <div class="rec-reason-b">Funded 4 first-time grantees in the last 2 cycles. The next cycle is open now, and eligibility and geography are verified compatible.</div>
-            <div class="rec-source">Source: published guidelines, recent award recipients</div>
-          </div>
-        </div>
-        <div class="rec-note">
-          <div class="rec-foot"><span class="rec-dot"></span><span class="rec-foot-text">Documented path. Worth your team's hours.</span></div>
-        </div>
+    <div class="decision-dashboard" id="decision-dashboard">
+      <div class="dash-bar">
+        <div class="dash-dots"><span class="dash-dot"></span><span class="dash-dot"></span><span class="dash-dot"></span></div>
+        <span class="dash-title">Sharke / Decision Record</span>
       </div>
-
-      <!-- MOVE ON -->
-      <div class="record moveon">
-        <div class="rec-head">
-          <div>
-            <div class="rec-brand">Sharke / Decision Record</div>
-            <div class="rec-grant">Community Health Fund</div>
-            <div class="rec-meta">2026 cycle &middot; budget floor in effect</div>
+      <div class="dash-content">
+        <div class="dash-top">
+          <div class="dash-ring">
+            <span class="dash-glyph">&#10003;</span>
+            <span class="dash-verdict-label">Pursue</span>
+          </div>
+          <div class="dash-meta">
+            <p class="dash-eyebrow">Verified fit</p>
+            <p class="dash-rank">Top 1% by documented fit</p>
+          </div>
+          <div class="dash-status">
+            <span class="dash-status-dot"></span>
+            <span class="dash-status-text">Worth your hours</span>
           </div>
         </div>
-        <div class="rec-verdict">
-          <div class="rec-verdict-eyebrow">Verdict</div>
-          <span class="rec-badge">Strategic mismatch</span>
-          <div class="rec-line">Move on.</div>
-          <div class="rec-redirect">Redirect those 20 to 30 hours to better-fit opportunities Sharke surfaces in its place, like the Rural Health Innovation Fund and the Southwest Youth Wellness Grant.</div>
+        <div class="dash-funder">
+          <p class="dash-funder-name">Community Resilience Fund</p>
+          <p class="dash-funder-sub">Family foundation &middot; $150K to $250K &middot; Southwest</p>
         </div>
-        <div class="rec-reasons">
-          <div class="rec-reason">
-            <div class="rec-reason-h"><span class="n">1</span>Award history favors much larger budgets</div>
-            <div class="rec-reason-b">Of the last 20 grants (2021 to 2025), 18 went to organizations with budgets above $2M. This org's budget is $410K.</div>
-            <div class="rec-source">Source: 990-PF Schedule I, 2021 to 2025</div>
-          </div>
-          <div class="rec-reason">
-            <div class="rec-reason-h"><span class="n">2</span>No new grantees</div>
-            <div class="rec-reason-b">No first-time grantee funded in the last 4 cycles.</div>
-            <div class="rec-source">Source: 990-PF Schedule I, award recipients</div>
-          </div>
-          <div class="rec-reason">
-            <div class="rec-reason-h"><span class="n">3</span>Geography</div>
-            <div class="rec-reason-b">Zero awards in this org's state across 5 years.</div>
-            <div class="rec-source">Source: 990-PF Schedule I, recipient locations</div>
-          </div>
+        <div class="dash-insight">
+          <p class="dash-insight-label">Funder behavior, not stated focus</p>
+          <p class="dash-insight-text">Stated focus: "General health."<span class="hl">Actual pattern: 12 of the last 15 awards went to rural youth mental health organizations like yours.</span>Your size, your geography, your issue.</p>
         </div>
-        <div class="rec-note">
-          Rests on strong data (5 years of filings). The verdict comes with the better-fit grants and funder relationships those 20 to 30 hours should go to instead.
-        </div>
+        <p class="dash-verify"><span class="dash-verify-icon">&#10003;</span><span class="dash-verify-text">Eligibility and geography: verified compatible (Southwest)</span></p>
+        <p class="dash-source">Source: IRS 990-PF Schedule I, 2021 to 2025</p>
       </div>
     </div>
+    <div class="dash-preview">
+      <span class="dash-pip active" data-index="0"></span>
+      <span class="dash-pip" data-index="1"></span>
+      <span class="dash-pip" data-index="2"></span>
+    </div>
 
-    <p class="categorical-note">Pursue, Wait, or Move on, with the evidence behind the decision. The Move on record above is the kind a team can forward straight to a board.</p>
+    <p class="categorical-note">Pursue, Wait, or Move on, each with the evidence behind the decision. A Move on verdict is the kind a team can forward straight to a board, sourced to five years of public filings.</p>
     <p class="lead" style="margin-top: 26px; font-size: 16px;">After a grant earns its place in the Verified Pipeline, Sharke helps draft and red-teams the application before the funder sees it.</p>
     <blockquote class="rec-quote">
       <p>"I've been around grants long enough to know that not every opportunity is worth pursuing, but we usually don't find that out until we're already deep into the work. The review helped us take a harder look at what was actually realistic and where we should focus our limited time. That alone made it worthwhile."</p>
@@ -816,7 +820,7 @@
     <p class="eyebrow warm">The consequence of delay</p>
     <h2>If your top funder changed priorities tomorrow, how would the mission continue?</h2>
     <p class="lead">Most teams do not find out until it is too late. In 2025 the Chan Zuckerberg Initiative wound down its advocacy and housing grantmaking; organizations that had planned around renewals were told the funding would not continue. And 69% of nonprofits reported funding cuts from at least one source that year.</p>
-    <p class="lead" style="margin-top: 14px;">A verified pipeline is how a mission absorbs a funder pivot: the next path is already known before it is needed. The Assessment shows whether your current plan could absorb that loss and which funders to verify before the board assumes they will be there.</p>
+    <p class="lead" style="margin-top: 14px;">A verified pipeline is how a mission absorbs a funder pivot: the next path to funding is already known before it is needed. The Assessment shows whether your current plan could absorb that loss and which funders to verify before the board assumes they will be there.</p>
     <p class="stat-source" style="max-width: 640px;">Source: Center for Effective Philanthropy, A Sector in Crisis (2026); State of Nonprofits 2026.</p>
   </div>
 </section>
@@ -849,11 +853,11 @@
       </details>
       <details>
         <summary>Why not just use ChatGPT or Claude to find grants?</summary>
-        <p class="faq-body">A chatbot reasons from a grant's description and whatever you paste in. It has no award records, so it cannot check who a funder actually funds, at what sizes, in which states, or how often a first-time applicant gets in. Sharke's verdicts are checked against more than 3.8 million grant award records and the funder's own filings, and when the record shows no real path, Sharke says Move on. A chatbot will happily keep you optimistic.</p>
+        <p class="faq-body">A chatbot reasons from a grant's description and whatever you paste in. It has no award records, so it cannot check who a funder actually funds, at what sizes, in which states, or how often a first-time applicant gets in. Sharke's verdicts are checked against more than 3.8 million grant award records and the funder's own filings, and when the record shows no real path to funding, Sharke says Move on. A chatbot will happily keep you optimistic.</p>
       </details>
       <details>
         <summary>Why not use ChatGPT or Claude to write the application?</summary>
-        <p class="faq-body">For prose, they are genuinely useful. The expensive mistake is not the writing, it is spending 20 to 30 hours writing for a grant that never had a real path. Sharke verifies the grant first, helps draft only what earns a place in the Verified Pipeline, and red-teams the application against the funder's criteria, priorities, and past awards before you submit. Your voice stays yours; the weak spots get caught before a funder sees them.</p>
+        <p class="faq-body">For prose, they are genuinely useful. The expensive mistake is not the writing, it is spending 20 to 30 hours writing for a grant that never had a real path to funding. Sharke verifies the grant first, helps draft only what earns a place in the Verified Pipeline, and red-teams the application against the funder's criteria, priorities, and past awards before you submit. Your voice stays yours; the weak spots get caught before a funder sees them.</p>
       </details>
       <details>
         <summary>Can Sharke surface funders that never publish open calls?</summary>
@@ -861,7 +865,7 @@
       </details>
       <details>
         <summary>Do you guarantee funding?</summary>
-        <p class="faq-body">No. Sharke never predicts awards or promises wins. Verification tells you whether the documented record supports pursuing an opportunity and where the path is weak, incomplete, or closed. On the pipeline plans there is one promise we do make, the Funding Goal Guarantee: If Sharke cannot identify enough verified opportunities and funder relationships to support your funding goal, we continue working at no charge until we do.</p>
+        <p class="faq-body">No. Sharke never predicts awards or promises wins. Verification tells you whether the documented record supports pursuing an opportunity and where the path to funding is weak, incomplete, or closed. On the pipeline plans there is one promise we do make, the Funding Goal Guarantee: If Sharke cannot identify enough verified opportunities and funder relationships to support your funding goal, we continue working at no charge until we do.</p>
       </details>
       <details>
         <summary>What do you need from us?</summary>
@@ -945,6 +949,78 @@
     });
   }, { threshold: 0, rootMargin: '0px 0px -60px 0px' });
   els.forEach(function (el) { el.classList.add('reveal-up'); io.observe(el); });
+})();
+(function () {
+  // Decision dashboard: cycle Pursue / Wait / Move on. Ships showing Pursue (state 0)
+  // in the HTML, so no-JS and reduced-motion users see a complete card. Honors the
+  // page's ?motion=1 review override.
+  var card = document.getElementById('decision-dashboard');
+  if (!card) return;
+  var wrap = card.parentElement;
+  var pips = wrap.querySelectorAll('.dash-pip');
+  var forceMotion = /[?&]motion=1/.test(window.location.search);
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches && !forceMotion;
+  var C = {
+    green: { c: '#4AE3A0', muted: 'rgba(74,227,160,0.12)', bd: 'rgba(74,227,160,0.32)', bg: 'rgba(74,227,160,0.08)' },
+    amber: { c: '#FBBF24', muted: 'rgba(251,191,36,0.12)', bd: 'rgba(251,191,36,0.32)', bg: 'rgba(251,191,36,0.08)' },
+    red:   { c: '#F2766B', muted: 'rgba(242,118,107,0.12)', bd: 'rgba(242,118,107,0.32)', bg: 'rgba(242,118,107,0.08)' }
+  };
+  var states = [
+    { color: 'green', glyph: '✓', verdict: 'Pursue', eyebrow: 'Verified fit', rank: 'Top 1% by documented fit',
+      status: 'Worth your hours', funder: 'Community Resilience Fund', sub: 'Family foundation · $150K to $250K · Southwest',
+      insightLabel: 'Funder behavior, not stated focus',
+      insight: 'Stated focus: "General health."<span class="hl">Actual pattern: 12 of the last 15 awards went to rural youth mental health organizations like yours.</span>Your size, your geography, your issue.',
+      verifyGlyph: '✓', verify: 'Eligibility and geography: verified compatible (Southwest)',
+      source: 'Source: IRS 990-PF Schedule I, 2021 to 2025' },
+    { color: 'amber', glyph: '‖', verdict: 'Wait', eyebrow: 'Not yet', rank: 'Top 15% by documented fit',
+      status: 'Timing risk', funder: 'Youth Development Initiative', sub: 'Regional foundation · $75K to $125K',
+      insightLabel: 'Eligibility concern',
+      insight: 'Funder requires a 3-year track record.<span class="hl">Your org: 2.5 years operating history.</span>Revisit at the Q4 2026 cycle.',
+      verifyGlyph: '✓', verify: 'Budget range: verified compatible ($50K to $150K)',
+      source: 'Source: published guidelines and IRS 990-PF Schedule I' },
+    { color: 'red', glyph: '✕', verdict: 'Move on', eyebrow: 'Strategic mismatch', rank: 'Bottom 30% by documented fit',
+      status: 'Redirect the hours', funder: 'Community Health Fund', sub: 'Regional foundation · $200K to $500K',
+      insightLabel: 'Award history',
+      insight: '18 of the last 20 grants went to organizations above $2M.<span class="hl">This org: $410K, and zero awards in your state in 5 years.</span>Not built for organizations like yours.',
+      verifyGlyph: '✕', verify: 'Entity fit: incompatible at your size',
+      source: 'Source: IRS 990-PF Schedule I, 2021 to 2025' }
+  ];
+  var q = function (s) { return card.querySelector(s); };
+  function apply(i) {
+    var s = states[i], col = C[s.color];
+    card.classList.add('fade-out');
+    setTimeout(function () {
+      var ring = q('.dash-ring'); ring.style.borderColor = col.c; ring.style.background = col.muted;
+      var glyph = q('.dash-glyph'); glyph.textContent = s.glyph; glyph.style.color = col.c;
+      var vl = q('.dash-verdict-label'); vl.textContent = s.verdict; vl.style.color = col.c;
+      var eb = q('.dash-eyebrow'); eb.textContent = s.eyebrow; eb.style.color = col.c;
+      q('.dash-rank').textContent = s.rank;
+      q('.dash-status').style.background = col.muted;
+      q('.dash-status-dot').style.background = col.c;
+      var stt = q('.dash-status-text'); stt.textContent = s.status; stt.style.color = col.c;
+      q('.dash-funder-name').textContent = s.funder;
+      q('.dash-funder-sub').textContent = s.sub;
+      var ib = q('.dash-insight'); ib.style.background = col.bg; ib.style.borderColor = col.bd;
+      var il = q('.dash-insight-label'); il.textContent = s.insightLabel; il.style.color = col.c;
+      q('.dash-insight-text').innerHTML = s.insight;
+      card.querySelectorAll('.hl').forEach(function (h) { h.style.color = col.c; });
+      q('.dash-verify').style.color = col.c;
+      q('.dash-verify-icon').textContent = s.verifyGlyph;
+      q('.dash-verify-text').textContent = s.verify;
+      q('.dash-source').textContent = s.source;
+      pips.forEach(function (p, j) { p.classList.toggle('active', j === i); });
+      card.classList.remove('fade-out');
+    }, 300);
+  }
+  // Rotation: slow (8s), and pause while the reader is hovering the card so a
+  // verdict is never yanked away mid-read. Reduced-motion users get no auto-advance.
+  var idx = 0, timer = null;
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  function restart() { if (reduce) return; stop(); timer = setInterval(function () { idx = (idx + 1) % states.length; apply(idx); }, 8000); }
+  pips.forEach(function (p, i) { p.addEventListener('click', function () { idx = i; apply(i); restart(); }); });
+  card.addEventListener('mouseenter', stop);
+  card.addEventListener('mouseleave', restart);
+  restart();
 })();
 </script>
 

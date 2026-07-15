@@ -501,10 +501,17 @@
     .site-header { padding: 16px 20px; }
     .container   { padding: 0 20px; }
     section      { padding: 52px 0; }
-    .hook        { padding-top: 56px; padding-bottom: 56px; }
+    .hook        { padding-top: 44px; padding-bottom: 56px; }
     .cta-section { padding: 60px 0; }
     .founder-block { padding: 40px 0; }
     .continuation-frame { padding: 28px 0; }
+    /* Fold compression (conversion pass 2026-07-14): the desktop-sized serif h1
+       filled ~70% of the first mobile screen, pushing the offer and CTA below
+       the fold. Same copy, tighter type and rhythm. */
+    .hook .eyebrow { margin-bottom: 14px; }
+    .hook h1 { font-size: 1.62rem; line-height: 1.26; margin-bottom: 18px; }
+    .hook .subhead { font-size: 1.0rem; margin-bottom: 14px; }
+    .hero-cta { margin-top: 18px; }
   }
 
   /* Inline CTA anchor buttons (hero + mid-page), for light backgrounds */
@@ -556,8 +563,92 @@
     color: #26221f;
     line-height: 1.6;
     max-width: 545px;
-    margin: 0 0 6px;
+    margin: 26px 0 6px; /* sits below the hero CTA since the 2026-07-14 reorder */
   }
+
+  /* Hero scar quote (conversion pass 2026-07-14): verbatim excerpt of the
+     testimonial, surfaced in the first two screens. The full quote keeps its
+     place deeper on the page; this is the classic long-form callback. */
+  .hero-scar {
+    max-width: 545px;
+    margin: 26px 0 0;
+    padding: 16px 20px;
+    background: var(--paper);
+    border-left: 3px solid var(--red);
+  }
+  .hero-scar p {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #2a2522;
+    margin: 0 0 8px;
+  }
+  .hero-scar cite {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    font-style: normal;
+  }
+
+  /* Hero deliverable preview (conversion pass 2026-07-14): a compact static
+     FVI dial so the first screens show the product, not only the problem.
+     The full animated dial keeps its place in "What you get". */
+  .fvi-mini {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+    max-width: 545px;
+    margin: 30px 0 0;
+    padding: 20px 22px 18px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+  }
+  .fm-dial { position: relative; width: 116px; flex-shrink: 0; }
+  .fm-dial svg { width: 100%; display: block; }
+  .fm-center { position: absolute; left: 0; right: 0; bottom: 2px; text-align: center; }
+  .fm-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    display: block;
+  }
+  .fm-of {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+  }
+  .fm-side { flex: 1; min-width: 200px; }
+  .fm-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    margin: 0 0 8px;
+  }
+  .fm-line { font-size: 0.9rem; font-weight: 600; color: var(--ink); margin: 0 0 6px; }
+  .fm-sub { font-size: 0.84rem; color: var(--mid-gray); line-height: 1.5; margin: 0; }
+  /* Placed after the base rules (the page's main <=600px block sits earlier in
+     the sheet and would lose the source-order tiebreak). Keeps the dial beside
+     its text on narrow screens: 92 + 16 + 170 fits the 306px card interior. */
+  @media (max-width: 600px) {
+    .fvi-mini { padding: 16px 16px 14px; gap: 16px; }
+    .fm-dial { width: 92px; }
+    .fm-side { min-width: 170px; }
+    .fm-num { font-size: 1.15rem; }
+    .fm-of { font-size: 0.55rem; letter-spacing: 0.04em; }
+  }
+
+  /* Hope beat in the dark CTA section (conversion pass 2026-07-14). */
+  .cta-section .cta-hope strong { color: var(--paper); }
 
   /* Soft frame around the inline Stripe checkout (warm paper on the dark CTA). */
   .checkout-frame {
@@ -577,7 +668,7 @@
   /* 1) Hero funding-gap strip: STATIC three-row before/during/after (founder
      2026-07-06: the animated version told the story only while it played).
      Each row is captioned directly, so the whole arc reads in one glance. */
-  .gap-viz { max-width: 545px; margin: 30px 0 0; }
+  .gap-viz { max-width: 545px; margin: 30px 0 34px; } /* lives in the expensive-mistake section since 2026-07-14 */
   .gap-viz-label {
     font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--mid-gray); margin: 0 0 12px;
@@ -716,6 +807,41 @@
     .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
   }
 
+  /* Sticky mobile CTA bar (conversion pass 2026-07-14): a persistent action path
+     on a ~28-screen mobile page. Light editorial styling to match the page; a
+     small script hides it while the dark checkout section is on screen. */
+  .sticky-cta {
+    display: none;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    background: var(--warm-white);
+    border-top: 1px solid var(--rule);
+    box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.07);
+    padding: 11px 16px;
+    align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .sticky-cta .sc-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.03em; line-height: 1.45;
+    color: var(--mid-gray); margin: 0;
+  }
+  .sticky-cta .sc-note strong { color: var(--ink); font-weight: 500; }
+  .sticky-cta .sc-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; text-decoration: none; white-space: nowrap;
+    color: var(--paper); background: var(--ink);
+    padding: 12px 16px; flex-shrink: 0;
+  }
+  .sticky-cta.sc-hidden { display: none !important; }
+  @media (max-width: 700px) {
+    .sticky-cta { display: flex; padding-bottom: calc(11px + env(safe-area-inset-bottom)); }
+    body { padding-bottom: 66px; }
+  }
+
+  /* Anchor target for action CTAs: land buyers at the after-pay strip, one
+     short screen above the payment form, instead of the top of the pitch. */
+  #checkout { scroll-margin-top: 14px; }
+
 </style>
 </head>
 <body>
@@ -733,32 +859,32 @@
     <div class="container">
       <p class="eyebrow">Executive &amp; Development Directors</p>
       <h1>If one or two funders changed direction next quarter, would you already know which funders could realistically replace them?</h1>
-      <p class="subhead">Most leaders cannot answer that, and the usual response, more applications to more funders, is producing more denials, not more confidence. The Grant Funding Viability Assessment is a board-ready answer on what it would take for grants to play a meaningful role in funding your mission, whether the public record supports that path, and which funders to verify first.</p>
+      <p class="subhead">Most leaders cannot answer that, and the usual response, more applications to more funders, is producing more denials, not more confidence. The Grant Funding Viability Assessment is a board-ready answer on what it would take for grants to play a meaningful role in funding your mission, whether the public record supports that path to funding, and which funders to verify first.</p>
+      <a href="#checkout" class="cta-anchor hero-cta">Get the 48-hour grant funding read &rarr;</a>
       <p class="hero-stakes">The risk is not abstract. It is the next 200 staff hours: researching, sorting, writing, and defending funders that may never have been a real fit for the mission. The Assessment gives you the answer before the hours go in.</p>
-      <a href="#start" class="cta-anchor hero-cta">Get the 48-hour grant funding read &rarr;</a>
+      <div class="hero-scar">
+        <p>"We had names. We did not have a pipeline. That one was on us. That was two years ago. We're still recovering."</p>
+        <cite>Executive Director, $1.6M youth services nonprofit, San Antonio</cite>
+      </div>
       <p class="cta-offer">In 48 hours: the funding behind your mission scored 0 to 100, your months of real runway, the pipeline your goal would take, and named funders that already back organizations like yours. A written report you can put in front of your board.</p>
       <p class="cta-microcopy">$79 one-time, rising to $99 on September 1. Your EIN and one line about your org is all it takes. Delivered within 48 hours of your intake.</p>
-      <div class="gap-viz">
-        <p class="gap-viz-label">Your funding, funder by funder (illustrative)</p>
-        <div class="gv-row">
-          <p class="gv-cap">Today: a few funders carry the budget</p>
-          <div class="gap-bar" aria-hidden="true">
-            <div class="blk b1"></div><div class="blk b2"></div><div class="blk b3"></div><div class="blk b4"></div><div class="blk b5"></div>
+      <div class="fvi-mini">
+        <div class="fm-dial">
+          <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path class="fvi-arc-bg" d="M 20 110 A 80 80 0 0 1 180 110"/>
+            <path class="fvi-arc-val" d="M 20 110 A 80 80 0 0 1 180 110"
+                  stroke-dasharray="251.33" stroke-dashoffset="113.1"/>
+          </svg>
+          <div class="fm-center">
+            <span class="fm-num">55</span>
+            <span class="fm-of">out of 100</span>
           </div>
         </div>
-        <div class="gv-row">
-          <p class="gv-cap">One changes direction</p>
-          <div class="gap-bar" aria-hidden="true">
-            <div class="blk b1"></div><div class="gap-hole b2"></div><div class="blk b3"></div><div class="blk b4"></div><div class="blk b5"></div>
-          </div>
+        <div class="fm-side">
+          <p class="fm-tag">What arrives in 48 hours (sample, details changed)</p>
+          <p class="fm-line">Your position: Pressured but Well-Supported. The call: build against it.</p>
+          <p class="fm-sub">With the pipeline math sized to your revenue and the first funders to verify, each shown with a real grant it made to an organization like yours.</p>
         </div>
-        <div class="gv-row">
-          <p class="gv-cap gv-cap-green">The pipeline that fills the gap</p>
-          <div class="gap-bar" aria-hidden="true">
-            <div class="blk b1"></div><div class="gap-fill b2"><span></span><span></span><span></span></div><div class="blk b3"></div><div class="blk b4"></div><div class="blk b5"></div>
-          </div>
-        </div>
-        <p class="gap-viz-caption">The Assessment sizes that pipeline for your organization, before you need it.</p>
       </div>
       <p class="qualifier" style="margin-top: 22px;">For nonprofits with $150K to $10M in revenue.</p>
     </div>
@@ -784,7 +910,7 @@
         <li><span class="check">&rarr;</span> The funder market at your size: how many funders, how many repeat backers, and realistic award sizes</li>
         <li><span class="check">&rarr;</span> The pipeline math: the annual grant target, wins, applications, and funder relationships it would take</li>
         <li><span class="check">&rarr;</span> A named funder shortlist to verify first, each with a real grant it made to an organization like yours</li>
-        <li><span class="check">&rarr;</span> Your flexible runway: the months of unrestricted cushion you have to build the path</li>
+        <li><span class="check">&rarr;</span> Your flexible runway: the months of unrestricted cushion you have to build the path to funding</li>
         <li><span class="check">&rarr;</span> Where the public record stops and live verification has to begin</li>
       </ul>
       <p>Every line drawn from your own IRS filings, a field cohort of organizations like yours, and the visible institutional grant record.</p>
@@ -800,9 +926,31 @@
       <h3>The expensive mistake</h3>
       <h2>The cost is not a rejected application. It is the program you cut when a funder steps back and nothing is ready behind them.</h2>
       <p>The visible mistake is the wasted cycle: six weeks building a grant calendar around funders who were never a real fit. That costs staff time. The expensive mistake arrives later: a major funder changes direction, the renewal that was in the budget does not come, and there is no pipeline behind it. Now the cost is the mission: programs trimmed, staffing decided under pressure, and a year spent replacing money instead of delivering.</p>
+      <div class="gap-viz">
+        <p class="gap-viz-label">Your funding, funder by funder (illustrative)</p>
+        <div class="gv-row">
+          <p class="gv-cap">Today: a few funders carry the budget</p>
+          <div class="gap-bar" aria-hidden="true">
+            <div class="blk b1"></div><div class="blk b2"></div><div class="blk b3"></div><div class="blk b4"></div><div class="blk b5"></div>
+          </div>
+        </div>
+        <div class="gv-row">
+          <p class="gv-cap">One changes direction</p>
+          <div class="gap-bar" aria-hidden="true">
+            <div class="blk b1"></div><div class="gap-hole b2"></div><div class="blk b3"></div><div class="blk b4"></div><div class="blk b5"></div>
+          </div>
+        </div>
+        <div class="gv-row">
+          <p class="gv-cap gv-cap-green">The pipeline that fills the gap</p>
+          <div class="gap-bar" aria-hidden="true">
+            <div class="blk b1"></div><div class="gap-fill b2"><span></span><span></span><span></span></div><div class="blk b3"></div><div class="blk b4"></div><div class="blk b5"></div>
+          </div>
+        </div>
+        <p class="gap-viz-caption">The Assessment sizes that pipeline for your organization, before you need it.</p>
+      </div>
       <p>And the market is less forgiving than it was: 69% of nonprofits reported funding cuts in 2025, while 87% of foundation leaders report rising demand for the grants they give.</p>
       <p>The clock makes it worse. A new institutional funder relationship takes about six months to develop before an application makes sense; a current funder changing priorities may give you one quarter's notice. So the arithmetic is simple: a funder relationship you do not start this quarter cannot rescue next year's budget.</p>
-      <p>The Assessment shows whether a credible next path exists at your size, at what award sizes, and which named funders to start warming first, while the time to build it is still yours.</p>
+      <p>The Assessment shows whether a credible next path to funding exists at your size, at what award sizes, and which named funders to start warming first, while the time to build it is still yours.</p>
       <p style="font-family:'IBM Plex Mono',monospace; font-size:0.74rem; color:#857f74; margin-top:10px;">Sources: Center for Effective Philanthropy, A Sector in Crisis (2026) and State of Nonprofits 2026.</p>
     </div>
   </section>
@@ -867,12 +1015,12 @@
 
         <div class="sr-finding">
           <div class="sr-finding-title">3. The funder market and your cushion</div>
-          About 130 funders have backed two or more organizations like yours; a typical grant runs about $20K, a large one about $50K to $132K. You hold about 40 months of unrestricted runway, the time to build the path before it is needed.
+          About 130 funders have backed two or more organizations like yours; a typical grant runs about $20K, a large one about $50K to $132K. You hold about 40 months of unrestricted runway, the time to build the path to funding before it is needed.
           <div class="sr-source">Source: Schedule I cohort award sizes, and your own Form 990, Part X.</div>
         </div>
 
         <div class="sr-reframe">
-          The Assessment tells you whether the path is credible. If it is, the next work order is simple: live verification of the first 3 to 5 funders, with pursue, cultivate, or remove decisions before staff time is committed.
+          The Assessment tells you whether the path to funding is credible. If it is, the next work order is simple: live verification of the first 3 to 5 funders, with pursue, cultivate, or remove decisions before staff time is committed.
         </div>
       </div>
 
@@ -906,7 +1054,7 @@
         </div>
       </div>
 
-      <a href="#start" class="cta-anchor midpage-cta" style="margin-top: 30px;">Get your Index and funder shortlist &rarr;</a>
+      <a href="#checkout" class="cta-anchor midpage-cta" style="margin-top: 30px;">Get your Index and funder shortlist &rarr;</a>
     </div>
   </section>
 
@@ -922,7 +1070,7 @@
         </div>
         <div class="decision-card">
           <p class="verdict wait">Narrow the path first</p>
-          <p>Grants can play a role, but not the one assumed: the market at your size is too thin, or real award sizes are too small, to carry the number as stated. The Assessment shows which constraint is binding and the resize that fixes it: a smaller grant role, a longer timeline, or a path that blends the largest foundations with the federal and state programs your field's foundations cannot match.</p>
+          <p>Grants can play a role, but not the one assumed: the market at your size is too thin, or real award sizes are too small, to carry the number as stated. The Assessment shows which constraint is binding and the resize that fixes it: a smaller grant role, a longer timeline, or a path to funding that blends the largest foundations with the federal and state programs your field's foundations cannot match.</p>
         </div>
         <div class="decision-card">
           <p class="verdict move">Do not plan around this yet</p>
@@ -931,8 +1079,8 @@
       </div>
       <p class="verdict-mix">Every call arrives with a named read of your position, Resilient, Thin-Reserve, Pressured but Well-Supported, and the sequenced first moves it points to. And more Assessments come back "narrow" or "not yet" than teams expect. That answer is the protective one: it is the moment leadership avoids building a funding plan around a path the evidence does not support, with months still left to choose.</p>
       <p style="margin-top: 28px;"><strong>You leave with a plan, not a diagnosis.</strong> The Assessment does not stop at whether grants can play that role. It hands leadership the sequenced first moves for the next cycle: the grant target and the wins it implies, the applications and relationships to keep in motion, and the first 3 to 5 funders to verify before staff time is committed. Planning assumptions, not predictions, but enough of a plan that your next conversation starts at "here is where we begin," not "here is what we found."</p>
-      <p><strong>Most teams run the Assessment first. If the path holds, the next step is live verification of the first 3 to 5 funders.</strong></p>
-      <a href="#start" class="cta-anchor midpage-cta" style="margin-top: 26px;">See which call your record points to &rarr;</a>
+      <p><strong>Most teams run the Assessment first. If the path to funding holds, the next step is live verification of the first 3 to 5 funders.</strong></p>
+      <a href="#checkout" class="cta-anchor midpage-cta" style="margin-top: 26px;">See which call your record points to &rarr;</a>
     </div>
   </section>
 
@@ -997,7 +1145,7 @@
         </div>
       </div>
 
-      <a href="#start" class="cta-anchor midpage-cta">Verify the grant path &rarr;</a>
+      <a href="#checkout" class="cta-anchor midpage-cta">Verify the path to funding &rarr;</a>
     </div>
   </section>
 
@@ -1018,7 +1166,7 @@
       <h3>Who runs it</h3>
       <h2>Run the Assessment if one or two funders materially affect your ability to staff, plan, or deliver programs.</h2>
       <ul class="verify-list">
-        <li><span class="check">&rarr;</span> If a major funder changed direction, the mission would be exposed, and you do not have a clear backup path</li>
+        <li><span class="check">&rarr;</span> If a major funder changed direction, the mission would be exposed, and you do not have a clear backup path to funding</li>
         <li><span class="check">&rarr;</span> You know you need to diversify, but not which funders are realistic or how deep the market runs</li>
         <li><span class="check">&rarr;</span> Your board has asked for a funding-resilience plan and you do not have a solid answer</li>
         <li><span class="check">&rarr;</span> You have heard funders are shifting priorities and have not tested whether that risk applies to you</li>
@@ -1051,7 +1199,7 @@
       <p class="faq-a">No. The Assessment is built from the public record: your own IRS Forms 990, a field cohort of roughly 50 organizations at your size and mission, and the visible institutional grant record. You give us your EIN and one line about what your org does. About five minutes of your time, total.</p>
 
       <p class="faq-q">Is this a grant list?</p>
-      <p class="faq-a">No, and that is the point. The funders named in your Assessment have actually backed organizations like yours in the public record, each shown with the real grant behind it. The Assessment tells you whether the path is credible, the pipeline it would take, and which funders to verify first, so staff time goes where the evidence is, not to a keyword match.</p>
+      <p class="faq-a">No, and that is the point. The funders named in your Assessment have actually backed organizations like yours in the public record, each shown with the real grant behind it. The Assessment tells you whether the path to funding is credible, the pipeline it would take, and which funders to verify first, so staff time goes where the evidence is, not to a keyword match.</p>
 
       <p class="faq-q">What if the answer is no?</p>
       <p class="faq-a">Then it protected your next two quarters. The Assessment shows you why: the specific gap between the grant sizes your plan needs and what your field's funders actually pay, how deep the visible market runs at your size, and what it would take to close it. More Assessments come back "narrow" or "not yet" than teams expect. That answer is the one that saves staff time and gives your board evidence instead of an assumption. It is worth $79 to know that early.</p>
@@ -1073,6 +1221,8 @@
         <p>The answer takes 48 hours. Acting on it takes two quarters. The only thing worth doing slowly is the part you cannot speed up.</p>
       </div>
 
+      <p class="cta-hope"><strong>And you leave with a plan, not a diagnosis:</strong> the call, the pipeline math sized to your revenue, and the first funders to verify, each shown with a real grant it made to an organization like yours.</p>
+
       <div class="protect-table">
         <div class="row bordered"><span>A grant role assumed in the budget</span><span>unverified</span></div>
         <div class="row bordered"><span>Staff time to build the calendar</span><span>weeks per cycle</span></div>
@@ -1082,10 +1232,10 @@
       </div>
 
       <p class="price-line"><strong>$79, once. 48-hour turnaround.</strong> A board-ready read of your grant funding: your Funding Viability Index, what it would take for grants to meaningfully fund your mission, the pipeline it would require (target, wins, applications, funder relationships), how much flexible runway you have to build it, and the first funders to verify, every figure drawn from the public record.</p>
-      <p>The Assessment tells you whether the path is credible. If it is, the next step is already defined: verify the first 3 to 5 funders before staff time is committed.</p>
-      <p class="guarantee">Every Assessment ends in a clear call on your grant plan: build against it, narrow it, or do not plan around it yet. If yours does not, tell us and we will take another look.</p>
+      <p>The Assessment tells you whether the path to funding is credible. If it is, the next step is already defined: verify the first 3 to 5 funders before staff time is committed.</p>
+      <p class="guarantee">Delivered within 48 hours of your completed intake, or a full refund. And every Assessment ends in a clear call on your grant plan: build against it, narrow it, or do not plan around it yet. If yours does not, tell us and we will take another look.</p>
 
-      <div class="after-pay">
+      <div class="after-pay" id="checkout">
         <p class="ap-title">What happens after you pay</p>
         <div class="ap-step"><span class="ap-num">1</span><p>Start the Assessment below. <span class="ap-sub">Secure checkout, $79 once.</span></p></div>
         <div class="ap-step"><span class="ap-num">2</span><p>Tell us your organization: your EIN and one line about what you do. <span class="ap-sub">About five minutes.</span></p></div>
@@ -1119,6 +1269,12 @@
 
 </main>
 
+<!-- Sticky mobile CTA bar: shown at <=700px by CSS; the script below hides it while the checkout section is on screen. -->
+<div class="sticky-cta" id="sticky-cta">
+  <p class="sc-note"><strong>$79, once.</strong> Board-ready in 48 hours.</p>
+  <a class="sc-btn" href="#checkout">Get the Assessment</a>
+</div>
+
 <script src="https://js.stripe.com/v3/"></script>
 <script>
   var stripe = Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4');
@@ -1136,6 +1292,7 @@
   checkoutReady.then(function(checkout) {
     document.getElementById('checkout-loading').style.display = 'none';
     checkout.mount('#checkout-container');
+    if (window.skTrack) window.skTrack('checkout_mount');
   }).catch(function(err) {
     document.getElementById('checkout-loading').style.display = 'none';
     var errorDiv = document.getElementById('checkout-error');
@@ -1223,6 +1380,84 @@
     if (arc && num) io.observe(document.querySelector('.fvi-dial-wrap'));
     if (rs) io.observe(document.querySelector('.record-stat'));
     if (pmRow) io.observe(pmRow);
+  })();
+</script>
+
+<script>
+  // Hide the sticky mobile CTA bar while the dark checkout section is on screen
+  // (a "go to checkout" button floating over the payment form is noise).
+  // Runs regardless of reduced-motion: this is visibility, not decoration.
+  // Without IntersectionObserver the bar simply stays, which is safe.
+  (function () {
+    var bar = document.getElementById('sticky-cta');
+    var target = document.querySelector('.cta-section');
+    if (!bar || !target || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        bar.classList.toggle('sc-hidden', entry.isIntersecting);
+      });
+    }, { threshold: 0.02 }).observe(target);
+  })();
+</script>
+
+<script>
+  // First-party, anonymous funnel analytics (conversion pass 2026-07-14).
+  // Counts events only, via /.netlify/functions/track into Netlify Blobs:
+  // no cookies, no identifiers, no IP or UA storage. Honors Do Not Track.
+  (function () {
+    if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+    var send = function (e) {
+      try {
+        var payload = JSON.stringify({ p: 'ed', e: e });
+        if (navigator.sendBeacon) { navigator.sendBeacon('/.netlify/functions/track', payload); }
+        else { fetch('/.netlify/functions/track', { method: 'POST', body: payload, keepalive: true }).catch(function () {}); }
+      } catch (err) {}
+    };
+    window.skTrack = send;
+    var once = {};
+    var sendOnce = function (e) { if (once[e]) return; once[e] = 1; send(e); };
+
+    sendOnce('view');
+
+    // Scroll depth milestones.
+    var marks = [[25, 's25'], [50, 's50'], [75, 's75'], [90, 's90']];
+    var ticking = false;
+    addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        if (max <= 0) return;
+        var pct = 100 * window.scrollY / max;
+        for (var i = 0; i < marks.length; i++) { if (pct >= marks[i][0]) sendOnce(marks[i][1]); }
+      });
+    }, { passive: true });
+
+    // CTA clicks (every click counts; the server aggregates).
+    var wire = function (sel, ev) {
+      var els = document.querySelectorAll(sel);
+      for (var i = 0; i < els.length; i++) {
+        els[i].addEventListener('click', function () { send(ev); });
+      }
+    };
+    wire('.header-cta', 'cta_header');
+    wire('.hero-cta', 'cta_hero');
+    wire('.midpage-cta', 'cta_mid');
+    wire('.sc-btn', 'cta_sticky');
+
+    // Checkout frame entering the viewport.
+    var frame = document.getElementById('checkout-area');
+    if (frame && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          io.disconnect();
+          sendOnce('checkout_view');
+        });
+      }, { threshold: 0.2 });
+      io.observe(frame);
+    }
   })();
 </script>
 
