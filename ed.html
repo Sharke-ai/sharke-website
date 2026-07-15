@@ -694,6 +694,14 @@
   .ct-item svg { flex-shrink: 0; opacity: 0.85; }
   .ct-check { color: #7fb89a; font-weight: 700; }
 
+  /* Downloadable sample Assessment (proof asset 2026-07-15) */
+  .sample-download { margin: 28px 0 0; padding: 18px 20px; border: 1px solid var(--rule); border-radius: 4px; background: #fdfcfa; }
+  .sample-download a { display: inline-flex; align-items: center; gap: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.03em; color: var(--ink); text-decoration: none; }
+  .sample-download a:hover { color: var(--red); }
+  .sample-download a:hover svg { stroke: var(--red); }
+  .sample-download a .sd-tag { color: var(--red); }
+  .sample-download .sd-note { font-size: 0.82rem; color: var(--mid-gray); margin: 8px 0 0; }
+
   /* ---- Animated visuals (GFVA pass 2026-07-06) ---- */
 
   /* 1) Hero funding-gap strip: STATIC three-row before/during/after (founder
@@ -890,9 +898,9 @@
     <div class="container">
       <p class="eyebrow">Executive &amp; Development Directors</p>
       <h1>If one or two funders changed direction next quarter, would you already know which funders could realistically replace them?</h1>
-      <p class="subhead">Most leaders cannot. And more applications to more funders, is producing more denials, not more confidence. The Grant Funding Viability Assessment gives you the answer instead: whether grants can realistically fund your mission, and the names of the funders already backing organizations like yours to start with.</p>
-      <a href="#checkout" class="cta-anchor hero-cta">Get your funder shortlist and the call &rarr;</a>
-      <p class="cta-microcopy">$79 one-time, rising to $99 on September 1. Your EIN and one line about your org is all it takes. In your hands in 48 hours.</p>
+      <p class="subhead">Most leaders cannot. And more applications to more funders, is producing more denials, not more confidence. The Grant Funding Viability Assessment gives you the answer instead: whether grants can realistically fund your mission, and the first funders to verify, each already backing organizations like yours.</p>
+      <a href="#checkout" class="cta-anchor hero-cta">Start the Assessment &rarr;</a>
+      <p class="cta-microcopy">$79 one-time. Your EIN and one line about your org is all it takes. In your hands in 48 hours.</p>
       <p class="hero-guarantee"><svg width="14" height="16" viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 L21 6 v7 c0 6-4 9.3-9 11.3 -5-2-9-5.3-9-11.3 V6 z"/><path d="M8.4 13.6 l2.6 2.6 4.6-5.2"/></svg> In your hands in 48 hours, or a full refund.</p>
       <p class="hero-stakes">$79 and five minutes now, or the next 200 staff hours spent researching, writing, and defending funders that were never a real fit. One of those buys you the answer before the hours go in.</p>
       <div class="hero-scar">
@@ -976,8 +984,8 @@
   <section>
     <div class="container">
       <h3>What you get</h3>
-      <h2>The funders you can start with, and whether the plan behind them holds.</h2>
-      <p>Every $79 Assessment ends with a named shortlist: the first 3 to 5 funders to start with, each already backing organizations like yours, each shown with the real grant it made. Not a keyword match. Funders you could reach out to this week. Around that shortlist, the Assessment gives your board a decision it can actually weigh: your funding scored 0 to 100, the pipeline your goal would take, your real runway in months, and one clear call, build against it, narrow it, or hold. In your hands in 48 hours. Here is what that looks like, in real cases with identifying details changed.</p>
+      <h2>The first funders to verify, and whether the plan behind them holds.</h2>
+      <p>Every $79 Assessment ends with a named shortlist: the first 3 to 5 funders to verify, each supported by a real grant it made to an organization like yours. Not a keyword match: the funders most worth staff time first, with the public record behind each one. Around that shortlist, the Assessment gives your board a decision it can actually weigh: your funding scored 0 to 100, the pipeline your goal would take, your real runway in months, and one clear call, build against it, narrow it, or hold. In your hands in 48 hours. Here is what that looks like, in real cases with identifying details changed.</p>
 
       <div class="fvi-dial-wrap" role="img" aria-label="Sample Funding Viability Index dial showing 55 out of 100. Position: Pressured but Well-Supported. The call: build against it.">
         <div class="fvi-dial">
@@ -1059,7 +1067,14 @@
         </div>
       </div>
 
-      <a href="#checkout" class="cta-anchor midpage-cta" style="margin-top: 30px;">Get your Index and funder shortlist &rarr;</a>
+      <div class="sample-download">
+        <a href="/assets/sample-assessment.pdf" target="_blank" rel="noopener">
+          <svg width="16" height="18" viewBox="0 0 24 26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 12v7M9 16l3 3 3-3"/></svg>
+          See a full sample Assessment <span class="sd-tag">(PDF)</span>
+        </a>
+        <p class="sd-note">The real deliverable, with one organization's identifying details changed. This is what lands in your inbox in 48 hours.</p>
+      </div>
+      <a href="#checkout" class="cta-anchor midpage-cta" style="margin-top: 30px;">Start the Assessment &rarr;</a>
     </div>
   </section>
 
@@ -1121,7 +1136,7 @@
         <p class="pm-foot">Planning assumptions sized to revenue and the cohort's real award sizes, not a prediction of awards.</p>
       </div>
 
-      <a href="#checkout" class="cta-anchor midpage-cta">Verify the path to funding &rarr;</a>
+      <a href="#checkout" class="cta-anchor midpage-cta">Start the Assessment &rarr;</a>
     </div>
   </section>
 
@@ -1180,6 +1195,9 @@
 
       <p class="faq-q">How current is the information?</p>
       <p class="faq-a">The public record runs on filing lag, and it cannot show whether a funder is giving this year. The Assessment is honest about that boundary: every funder arrives marked for verification, and where the public record stops is exactly where live verification, the Verified Pipeline, begins.</p>
+
+      <p class="faq-q">What if we have limited filing history?</p>
+      <p class="faq-a">The Assessment reads strongest when your organization has three or more years of IRS filings behind it. If your record is thinner than that, the Assessment does not pad the gaps: it gives you the read the record supports and says plainly where the record stops. That boundary is part of the answer. It tells leadership how firmly the plan can lean on the public record today, and what has to be built before it can lean harder.</p>
     </div>
   </section>
 
@@ -1200,8 +1218,8 @@
       <p><strong>Get your Funding Viability Index before budget planning closes.</strong> Tell us your organization, and if you know the share of revenue you hope grants can carry, send that too. Your Assessment is in your hands in 48 hours.</p>
 
       <div class="pressure-block">
-        <p>The budget locks either way. When it does, you will either know what role grants can carry, or you will be committing staff time blind. One of those happens.</p>
-        <p>The answer takes 48 hours. Acting on it takes two quarters. The only thing worth doing slowly is the part you cannot speed up.</p>
+        <p>Every week the grant number goes untested, the calendar, the staffing plan, and the cultivation work keep forming around it. The budget locks either way. When it does, you will either know what role grants can carry, or you will be committing staff time blind. One of those happens.</p>
+        <p>Once the calendar is built, reversing course is expensive: development is already in conversations, and the board already knows the number it approved. The answer takes 48 hours. Acting on it takes two quarters. The only thing worth doing slowly is the part you cannot speed up.</p>
       </div>
 
       <div class="protect-table">
@@ -1254,34 +1272,61 @@
 <!-- Sticky mobile CTA bar: shown at <=700px by CSS; the script below hides it while the checkout section is on screen. -->
 <div class="sticky-cta" id="sticky-cta">
   <p class="sc-note"><strong>$79, once.</strong> Board-ready in 48 hours.</p>
-  <a class="sc-btn" href="#checkout">Get the Assessment</a>
+  <a class="sc-btn" href="#checkout">Start the Assessment</a>
 </div>
 
-<script src="https://js.stripe.com/v3/"></script>
 <script>
-  var stripe = Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4');
-  var checkoutReady = stripe.initEmbeddedCheckout({
-    fetchClientSecret: function() {
-      return fetch('/.netlify/functions/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: 'gfvc' })
-      })
-      .then(function(resp) { return resp.json(); })
-      .then(function(data) { if (data.error) throw new Error(data.error); return data.clientSecret; });
+  // Lazy-load Stripe (perf pass 2026-07-15). Stripe.js is ~heavy and the embedded
+  // checkout mints a live session, so we defer both until the visitor nears the
+  // checkout (600px lead) or clicks a buy CTA, instead of on every pageview.
+  (function () {
+    var started = false;
+    var loadingEl = document.getElementById('checkout-loading');
+    function fail() {
+      if (loadingEl) loadingEl.style.display = 'none';
+      var e = document.getElementById('checkout-error');
+      if (e) { e.style.display = 'block'; e.querySelector('p').textContent = 'Something went wrong. Please refresh to try again.'; }
     }
-  });
-  checkoutReady.then(function(checkout) {
-    document.getElementById('checkout-loading').style.display = 'none';
-    checkout.mount('#checkout-container');
-    if (window.skTrack) window.skTrack('checkout_mount');
-  }).catch(function(err) {
-    document.getElementById('checkout-loading').style.display = 'none';
-    var errorDiv = document.getElementById('checkout-error');
-    errorDiv.style.display = 'block';
-    errorDiv.querySelector('p').textContent = 'Something went wrong. Please refresh to try again.';
-    console.error('Checkout error:', err);
-  });
+    function mountCheckout() {
+      if (started) return; started = true;
+      var s = document.createElement('script');
+      s.src = 'https://js.stripe.com/v3/';
+      s.async = true;
+      s.onload = function () {
+        try {
+          var stripe = Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4');
+          stripe.initEmbeddedCheckout({
+            fetchClientSecret: function () {
+              return fetch('/.netlify/functions/create-checkout-session', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: 'gfvc' })
+              }).then(function (r) { return r.json(); }).then(function (d) { if (d.error) throw new Error(d.error); return d.clientSecret; });
+            }
+          }).then(function (checkout) {
+            if (loadingEl) loadingEl.style.display = 'none';
+            checkout.mount('#checkout-container');
+            if (window.skTrack) window.skTrack('checkout_mount');
+          }).catch(function (err) { console.error('Checkout error:', err); fail(); });
+        } catch (err) { console.error('Checkout error:', err); fail(); }
+      };
+      s.onerror = fail;
+      document.head.appendChild(s);
+    }
+    // Trigger 1: checkout area approaching the viewport (load ahead of arrival).
+    var area = document.getElementById('checkout-area');
+    if (area && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { io.disconnect(); mountCheckout(); } });
+      }, { rootMargin: '600px 0px' });
+      io.observe(area);
+    } else if (document.readyState === 'complete') {
+      mountCheckout();
+    } else {
+      window.addEventListener('load', mountCheckout);
+    }
+    // Trigger 2: any CTA that jumps to checkout starts loading immediately.
+    var ctas = document.querySelectorAll('a[href="#checkout"]');
+    for (var i = 0; i < ctas.length; i++) { ctas[i].addEventListener('click', mountCheckout); }
+  })();
 </script>
 
 <script>
