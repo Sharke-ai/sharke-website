@@ -10,10 +10,12 @@
  *    K: Funder Name | L: Funder Type | M: CFDA | N: Grants.gov ID
  *    O: Funder State | P: Search Keyword | Q: Grant Title | R: Grant Stage
  *    S: Status | T: EIN | U: Grant Revenue Share | V: Funding Concern
+ *    W: Tier | X: Funding Goal | Y: Grants In Motion | Z: Notes
  *
- *    Columns T-V carry the plan=gfvc ($79 Check) org-level intake. They are
- *    appended AFTER Status so the original A-S layout is untouched. Until this
- *    script is redeployed with them, the same answers also arrive packed into
+ *    Columns T-V carry the plan=gfvc ($79 Assessment) org-level intake.
+ *    Columns W-Z carry the plan=dfy grant-office intake (2026-07-16). Each set
+ *    is appended AFTER the earlier layout so nothing moves. Until this script
+ *    is redeployed with them, the same answers also arrive packed into
  *    J: Program Summary, so no intake is lost either way.
  *
  * 4. Open Extensions > Apps Script
@@ -25,6 +27,17 @@
  * 10. Click Deploy, authorize when prompted
  * 11. Copy the Web app URL
  * 12. Paste it into review.html replacing REPLACE_WITH_APPS_SCRIPT_WEB_APP_URL
+ *
+ * REDEPLOY INSTRUCTIONS (updating an EXISTING deployment -- the usual case):
+ * 1. Open the Sheet > Extensions > Apps Script
+ * 2. Paste this entire file into Code.gs (replace all)
+ * 3. Add the new headers in row 1 of the Intake sheet (W-Z above)
+ * 4. Click Deploy > MANAGE DEPLOYMENTS (not "New deployment")
+ * 5. Click the pencil (edit) on the active deployment
+ * 6. Version dropdown > "New version" > Deploy
+ * NEVER use Deploy > New deployment to update: it mints a NEW /exec URL and the
+ * hardcoded URL in netlify/functions/submit-intake.mjs starts failing for EVERY
+ * intake product. "Manage deployments > edit > New version" keeps the same URL.
  */
 
 function doPost(e) {
@@ -58,7 +71,11 @@ function doPost(e) {
       "submitted",                        // Status
       data.ein || "",                     // EIN (gfvc)
       data.grant_revenue_share || "",     // Grant Revenue Share (gfvc)
-      data.funding_concern || ""          // Funding Concern (gfvc)
+      data.funding_concern || "",         // Funding Concern (gfvc)
+      data.tier || "",                    // Tier (dfy)
+      data.funding_goal || "",            // Funding Goal (dfy)
+      data.grants_in_motion || "",        // Grants In Motion (dfy)
+      data.notes || ""                    // Notes (dfy)
     ]);
 
     return ContentService
