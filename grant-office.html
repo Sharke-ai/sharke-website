@@ -245,8 +245,23 @@
   .tier-price span { font-size: 0.72rem; font-weight: 400; color: #a09890; }
   .tier-desc { display: block; font-size: 0.8rem; color: #a09890; line-height: 1.5; }
   .tier-help { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: #a09890; letter-spacing: 0.02em; line-height: 1.7; margin: 14px 0 0; }
+  .tier-vol { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.04em; color: var(--off-white); margin: 10px 0 0; padding-top: 8px; border-top: 1px solid #2a2a2a; }
+  @keyframes tierFlash { 0%, 100% { border-color: #2a2a2a; } 50% { border-color: #e57368; } }
+  .tier-select.flash .tier-card input:not(:checked) + label { animation: tierFlash 0.8s ease 2; }
+  .tier-hint.urgent { color: #e57368; }
+  .dfy-note { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--mid-gray); letter-spacing: 0.03em; line-height: 1.8; text-align: center; margin: 0 0 12px; }
+  .dfy-links { text-align: center; margin: 12px 0 0; }
+  .dfy-links button { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.05em; color: var(--mid-gray); background: none; border: none; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .dfy-links button:hover { color: var(--black); }
+  .dfy-retry { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; background: var(--black); color: var(--off-white); border: none; padding: 12px 22px; cursor: pointer; margin: 4px 0 14px; }
+  .dfy-retry:hover { background: var(--red); }
+  .cred-flex { display: flex; gap: 22px; align-items: flex-start; }
+  .founder-photo { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  @media (max-width: 600px) { .founder-photo { width: 68px; height: 68px; } }
   .cta-section button.cta-btn { border: none; cursor: pointer; margin-top: 26px; }
-  .cta-section button.cta-btn:disabled { background: #3a3733; color: #857f74; cursor: not-allowed; }
+  .cta-section button.cta-btn:disabled { background: #3a3733; color: #857f74; cursor: not-allowed; pointer-events: none; }
+  #dfy-start-wrap { display: inline-block; cursor: not-allowed; }
+  @media (max-width: 600px) { #dfy-start-wrap { display: block; width: 100%; } }
   .tier-hint { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: #7a736c; margin: 10px 0 0; }
   .dfy-checkout { display: none; background: var(--warm-white); border: 1px solid #2a2a2a; border-radius: 6px; padding: 16px 16px 26px; margin: 24px 0 0; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35); }
   #dfy-checkout-error p { color: var(--red); }
@@ -376,7 +391,7 @@
 
 <header class="site-header">
   <a class="brandmark" href="https://sharke.ai"><span class="bm-mark"><span class="bm-s">S</span></span><span class="bm-text">Sharke.ai</span></a>
-  <span class="header-tag">Your grant director, done for you</span>
+  <span class="header-tag">Your grant office, done for you</span>
 </header>
 
 <main>
@@ -386,7 +401,7 @@
     <div class="container">
       <p class="eyebrow">Done for you, when your team is at capacity</p>
       <h1>Your team is at capacity, and grants still have to fund the mission.</h1>
-      <p class="subhead">Somewhere on your list right now is a grant with real fit for this cycle. No one has the hours to find out which one. The deadlines you meant to hit pass quietly, while you and your staff are working elsewhere. Sharke becomes your grant director: the whole grant function, run for you.</p>
+      <p class="subhead">Somewhere on your list right now is a grant with real fit for this cycle. No one has the hours to find out which one. The deadlines you meant to hit pass quietly, while you and your staff are working elsewhere. Sharke becomes your grant office: the whole grant function, run for you.</p>
       <a href="#cta-section" class="hook-cta">Start your grant office &rarr;</a>
     </div>
   </section>
@@ -448,7 +463,7 @@
         </li>
         <li>
           <span class="step-num">Step 4</span>
-          <span class="step-text"><strong>Tracks every deadline and submission.</strong> Nothing slips while you run the rest of the organization.</span>
+          <span class="step-text"><strong>Tracks every deadline and handles submission.</strong> We prepare the full package and submit it with your approval. Where a funder's portal requires your organization's own account (many federal and state systems do), we set it up with you and you click submit with everything ready. Nothing slips while you run the rest of the organization.</span>
         </li>
       </ul>
     </div>
@@ -487,7 +502,36 @@
         </div>
         <div class="rec-note">Categorical, never a score, never a win promise.</div>
       </div>
-      <p class="src-note">Illustrative example. Your verdicts are built from each funder's own documented record.</p>
+      <p class="src-note" style="margin-top: 28px;">Verdicts cover every kind of funder: private and community foundations, corporate giving programs, and state and federal agencies.</p>
+      <div class="record pursue" style="margin-top: 18px;">
+        <div class="rec-head">
+          <div>
+            <div class="rec-brand">Sharke / Decision Record</div>
+            <div class="rec-grant">State Trails and Outdoor Recreation Program</div>
+            <div class="rec-meta">2026 cycle &middot; published deadline</div>
+          </div>
+        </div>
+        <div class="rec-verdict">
+          <div class="rec-verdict-eyebrow">Verdict</div>
+          <span class="rec-badge">Documented fit</span>
+          <div class="rec-line">Pursue.</div>
+          <div class="rec-redirect">Drafting begins against the program's published requirements, and the deadline goes on the office calendar.</div>
+        </div>
+        <div class="rec-reasons">
+          <div class="rec-reason">
+            <div class="rec-reason-h"><span class="n">1</span>The program funds on a reliable cycle</div>
+            <div class="rec-reason-b">The cycle opened on schedule with a published deadline, and awards went out on schedule in each of the last three cycles.</div>
+            <div class="rec-source">Source: state agency award records, 2023 to 2026</div>
+          </div>
+          <div class="rec-reason">
+            <div class="rec-reason-h"><span class="n">2</span>Award history matches this organization's size</div>
+            <div class="rec-reason-b">Recent awards ran $10K to $100K, and 9 of the last 20 went to organizations with budgets under $1M, including first-time recipients.</div>
+            <div class="rec-source">Source: state award lists and program reports</div>
+          </div>
+        </div>
+        <div class="rec-note">Categorical, never a score, never a win promise.</div>
+      </div>
+      <p class="src-note">Illustrative examples. Your verdicts are built from each funder's own documented record.</p>
     </div>
   </section>
 
@@ -524,9 +568,12 @@
   <section>
     <div class="container">
       <h3>Who built it</h3>
-      <div class="cred-block">
-        <p>I have spent my career replacing gut calls with data: how the largest financial institutions set their global IT footprint, when mergers and acquisitions create value instead of destroying it, and which grants are worth winning, at for-profit and nonprofit organizations from NIH, NSF, and USDA to Meta and Google. I have done that work across the private sector and the White House Office of Management and Budget, and I sign off on every Sharke verdict myself.</p>
-        <p style="margin-top:14px; font-family:'IBM Plex Mono',monospace; font-size:0.8rem; letter-spacing:0.04em; color:#6b6560;">Collin Brown &nbsp;/&nbsp; Wharton MBA &nbsp;/&nbsp; Founder, Sharke.ai</p>
+      <div class="cred-block cred-flex">
+        <img class="founder-photo" src="/assets/founder-collin.jpg" alt="Collin Brown, founder of Sharke" width="88" height="88" onerror="this.style.display='none';">
+        <div>
+          <p>I have spent my career replacing gut calls with data: how the largest financial institutions set their global IT footprint, when mergers and acquisitions create value instead of destroying it, and which grants are worth winning, at for-profit and nonprofit organizations from NIH, NSF, and USDA to Meta and Google. I have done that work across the private sector and the White House Office of Management and Budget, and I sign off on every Sharke verdict myself.</p>
+          <p style="margin-top:14px; font-family:'IBM Plex Mono',monospace; font-size:0.8rem; letter-spacing:0.04em; color:#6b6560;">Collin Brown &nbsp;/&nbsp; Wharton MBA &nbsp;/&nbsp; Founder, Sharke.ai</p>
+        </div>
       </div>
     </div>
   </section>
@@ -556,6 +603,14 @@
         <p>By how much of your mission income comes from grants: about half is $249, three-quarters is $369, essentially all is $459. Pick the one nearest to what you think. If the first month reads differently, we show you the evidence and you decide.</p>
       </details>
       <details>
+        <summary>What if we already have a grant writer?</summary>
+        <p>Keep them. Sharke becomes the research and verification layer underneath: they receive verdicts with sources and drafts to shape, and their hours move from research to voice and relationships. And before anything goes out, we will still red-team the application against the funder's own record.</p>
+      </details>
+      <details>
+        <summary>How much of our time does it take?</summary>
+        <p>Plan on about an hour a month: reviewing verdicts and drafts, sharing your core materials in week one, taking an introduction when a funder asks for one, and clicking submit where a funder's portal requires your organization's own account. Those are the only parts we cannot do for you.</p>
+      </details>
+      <details>
         <summary>Do we need a call before starting?</summary>
         <p>No. The intake covers what the setup call used to, and a 15-minute kickoff is included in your first week if you want one. If you have a scope question first, book the call: the same 15 minutes, before instead of after.</p>
       </details>
@@ -575,6 +630,7 @@
         <summary>Do we have to sign a contract?</summary>
         <p>No. It is month to month, and you can cancel anytime. To cancel, reply to any Sharke email; it takes effect at the end of the current period.</p>
       </details>
+      <div class="midpage-cta faq-cta"><a href="#cta-section" class="hook-cta">Start your grant office &rarr;</a></div>
     </div>
   </section>
 
@@ -582,42 +638,44 @@
   <section class="cta-section" id="cta-section">
     <div class="container">
       <h2>Start running grants like you have an office.</h2>
-      <p>Somewhere on your list right now is a deadline that closes this cycle, and a funder who will not hear from you before it does. Nothing moves until someone owns it. The median institutional grant in the public record is about $20,000: the expensive thing is not the office, it is the grants with real fit passing while no one owns them. Start below, bring the grants already in motion in a ten-minute intake, and your grant office starts with the pipeline you already have.</p>
+      <p>Somewhere on your list right now is a deadline that closes this cycle, and a funder who will not hear from you before it does. Nothing moves until someone owns it. The median institutional grant in the public record is about $20,000: the expensive thing is not the office, it is the grants with real fit passing while no one owns them. Start below, bring the grants already in motion in a ten-minute intake, and your grant office starts with the pipeline you already have. Foundation, corporate, state, and federal funding are all in scope.</p>
       <p class="action-trigger">Sharke does the grant work. Your team reviews and approves. You do not hire a department, you get one.</p>
 
       <div class="price-ledger">
         <div class="row"><span class="k">Grant work, done properly</span><span class="v">~45 hrs / month</span></div>
         <div class="row"><span class="k">Outsourced to a grant consultant</span><span class="v">$2,250 to $4,500 / mo</span></div>
         <div class="row price"><span class="k">Run by Sharke, your grant office</span><span class="v">$249 to $459 / mo</span></div>
-        <p class="tier">Priced to how much of your mission rides on grants: $249 at about half, $369 at three-quarters, $459 at essentially all.</p>
+        <p class="tier">Priced to how much of your mission rides on grants: $249 at about half, $369 at three-quarters, $459 at essentially all. More of your mission on grants means a bigger office to run: more funders verified, more deadlines tracked, more applications in motion.</p>
         <p class="goal-guarantee"><strong>The Funding Goal Guarantee.</strong> If Sharke cannot identify enough verified opportunities and funder relationships to support your funding goal, we continue working at no charge until we do.</p>
         <p class="terms">No contract. Cancel anytime.</p>
-        <p class="source">Consultant cost: $50 to $100 an hour, mid-level (2025 to 2026), for the work an organization with about half its funding from grants takes on, roughly 1.5 applications a month at 30 hours each. Median institutional grant: public grant record (IRS Schedule I), Sharke analysis.</p>
+        <p class="source">Consultant cost: $50 to $100 an hour, mid-level (2025 to 2026), for the work an organization with about half its funding from grants takes on, roughly 1.3 to 1.5 applications a month at 30 hours each. Median institutional grant: public grant record (IRS Schedule I), Sharke analysis.</p>
       </div>
 
       <div class="tier-select" id="tier-select" role="radiogroup" aria-label="How much of your mission income comes from grants">
         <div class="tier-card">
           <input type="radio" name="dfy-tier" id="tier-half" value="half">
-          <label for="tier-half"><span class="tier-share">About half</span><span class="tier-price">$249<span> / month</span></span><span class="tier-desc">Grants carry about half of your mission income.</span></label>
+          <label for="tier-half"><span class="tier-share">About half</span><span class="tier-price">$249<span> / month</span></span><span class="tier-desc">Grants carry about half of your mission income.</span><span class="tier-vol">About 16 applications a year in motion.</span></label>
         </div>
         <div class="tier-card">
           <input type="radio" name="dfy-tier" id="tier-three-quarters" value="three_quarters">
-          <label for="tier-three-quarters"><span class="tier-share">Three-quarters</span><span class="tier-price">$369<span> / month</span></span><span class="tier-desc">Grants carry about three-quarters of your mission income.</span></label>
+          <label for="tier-three-quarters"><span class="tier-share">Three-quarters</span><span class="tier-price">$369<span> / month</span></span><span class="tier-desc">Grants carry about three-quarters of your mission income.</span><span class="tier-vol">About 24 applications a year in motion.</span></label>
         </div>
         <div class="tier-card">
           <input type="radio" name="dfy-tier" id="tier-all" value="all">
-          <label for="tier-all"><span class="tier-share">Essentially all</span><span class="tier-price">$459<span> / month</span></span><span class="tier-desc">Grants carry essentially all of your mission income.</span></label>
+          <label for="tier-all"><span class="tier-share">Essentially all</span><span class="tier-price">$459<span> / month</span></span><span class="tier-desc">Grants carry essentially all of your mission income.</span><span class="tier-vol">About 32 applications a year in motion.</span></label>
         </div>
       </div>
       <p class="tier-help">Pick the one nearest to what you think. If the first month's work reads a different tier, we show you the evidence and the choice stays yours. You are never billed retroactively.</p>
 
-      <button class="cta-btn" id="dfy-start-btn" onclick="revealDfyCheckout()" disabled>Start your grant office &rarr;</button>
+      <span id="dfy-start-wrap"><button class="cta-btn" id="dfy-start-btn" onclick="revealDfyCheckout()" disabled>Start your grant office &rarr;</button></span>
       <p class="tier-hint" id="tier-hint">Pick the tier closest to your mix to continue.</p>
       <div id="dfy-checkout-area" class="dfy-checkout">
         <p class="ss-stripe"><svg width="11" height="13" viewBox="0 0 24 28" fill="none" stroke="#6b6560" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><rect x="3" y="13" width="18" height="13" rx="2"/><path d="M7 13V9a5 5 0 0 1 10 0v4"/></svg> Secure checkout by Stripe</p>
+        <p class="dfy-note">Month to month. Cancel anytime. The Funding Goal Guarantee applies.<br>Next: a ten-minute intake. Your first funders come back verified within a week.</p>
         <div id="dfy-checkout-loading" class="ss-checkout-msg" style="display:none;"><p>Preparing secure checkout...</p></div>
         <div id="dfy-checkout-container" style="display:none; min-height:350px;"></div>
-        <div id="dfy-checkout-error" class="ss-checkout-msg" style="display:none;"><p></p></div>
+        <div id="dfy-checkout-error" class="ss-checkout-msg" style="display:none;"><p></p><button type="button" class="dfy-retry" onclick="retryDfyCheckout()">Try again</button></div>
+        <p class="dfy-links"><button type="button" onclick="changeDfyTier()">Change tier</button></p>
       </div>
 
       <ul class="after-list">
@@ -635,7 +693,7 @@
 
       <div class="self-serve">
         <p class="ss-label">Not ready for the full office?</p>
-        <p>Start with the Grant Funding Viability Assessment: the funding behind your mission scored 0 to 100, the months of runway leadership actually has, the grant pipeline your funding goal would take, and named funders that already back organizations like yours. Board-ready, before staff time goes in.</p>
+        <p>Start with the Grant Funding Viability Assessment: your Funding Viability Index (one public-record number for how the funding behind your whole mission looks today, distinct from the categorical grant verdicts above), the months of runway leadership actually has, the grant pipeline your funding goal would take, and named funders that already back organizations like yours. Board-ready, before staff time goes in.</p>
         <p class="ss-price">Grant Funding Viability Assessment: $79<span>A board-ready answer in 48 hours.</span></p>
         <a href="/ed" class="ss-btn">Get the Grant Funding Viability Assessment &rarr;</a>
       </div>
@@ -662,7 +720,7 @@
 
 <!-- Sticky mobile CTA bar: shown at <=700px by CSS; hidden while the dark CTA section is on screen. -->
 <div class="sticky-cta" id="sticky-cta">
-  <p class="sc-note"><strong>From $249 a month.</strong> Run for you.</p>
+  <p class="sc-note"><strong>Your grant office, run for you.</strong> From $249 a month.</p>
   <a class="sc-btn" href="#cta-section">Start your grant office</a>
 </div>
 
@@ -674,6 +732,14 @@
   var loadStripePromise = null;
   function loadStripe() {
     if (loadStripePromise) return loadStripePromise;
+    // If stripe.js already loaded (a retry after a session-fetch failure), do
+    // not re-append the script tag; a fresh Stripe instance is still created
+    // so a failed embedded-checkout registration never lingers.
+    if (window.Stripe) {
+      try { loadStripePromise = Promise.resolve(Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4')); }
+      catch (err) { loadStripePromise = Promise.reject(err); }
+      return loadStripePromise;
+    }
     loadStripePromise = new Promise(function (resolve, reject) {
       var s = document.createElement('script');
       s.src = 'https://js.stripe.com/v3/';
@@ -690,7 +756,8 @@
 
   // Tier selector: the buy button stays disabled until a tier is picked, and
   // the selector freezes once checkout is revealed so the mounted session and
-  // the picked tier cannot drift apart.
+  // the picked tier cannot drift apart. A tap on the disabled button flashes
+  // the tier cards instead of doing nothing.
   var dfyTier = '';
   (function () {
     var radios = document.querySelectorAll('input[name="dfy-tier"]');
@@ -704,11 +771,49 @@
         if (window.skTrackOnce) window.skTrackOnce('tier_select');
       });
     }
+    var wrap = document.getElementById('dfy-start-wrap');
+    if (wrap) {
+      wrap.addEventListener('click', function () {
+        if (!btn || !btn.disabled) return;
+        var sel = document.getElementById('tier-select');
+        if (sel) {
+          sel.classList.remove('flash');
+          void sel.offsetWidth;
+          sel.classList.add('flash');
+        }
+        if (hint) { hint.style.display = ''; hint.classList.add('urgent'); }
+        if (radios.length) radios[0].focus();
+        if (window.skTrack) window.skTrack('dfy_disabled_click');
+      });
+    }
   })();
 
+  // Once a buyer opens checkout, the cheaper downsell and the call link leave
+  // the frame (they stay for everyone who has not declared intent); changing
+  // tier or a failed mount restores everything.
+  function setDfyBrowseState(browsing) {
+    var down = document.querySelector('.self-serve');
+    var call = document.querySelector('.scope-call');
+    if (down) down.style.display = browsing ? '' : 'none';
+    if (call) call.style.display = browsing ? '' : 'none';
+  }
+
+  // State machine: dfyBusy makes reveal idempotent while an init is in flight
+  // (a double Try-again cannot double-chain the same promise); dfyGen catches
+  // the change-tier-mid-load race (a stale init that resolves after the buyer
+  // re-picked gets destroyed instead of mounting the wrong price); the Change
+  // tier control is disabled until the init settles, so the race window is
+  // closed at the UI layer too.
   var dfyCheckout = null;
+  var dfyMounted = null;
+  var dfyBusy = false;
+  var dfyGen = 0;
+  function setChangeTierEnabled(on) {
+    var b = document.querySelector('.dfy-links button');
+    if (b) b.disabled = !on;
+  }
   function revealDfyCheckout() {
-    if (!dfyTier) return;
+    if (dfyBusy || !dfyTier) return;
     var btn = document.getElementById('dfy-start-btn');
     var area = document.getElementById('dfy-checkout-area');
     var container = document.getElementById('dfy-checkout-container');
@@ -718,9 +823,16 @@
     area.style.display = 'block';
     loading.style.display = 'block';
     errorDiv.style.display = 'none';
+    setDfyBrowseState(false);
+    setChangeTierEnabled(false);
     var radios = document.querySelectorAll('input[name="dfy-tier"]');
     for (var i = 0; i < radios.length; i++) { radios[i].disabled = true; }
-    if (window.skTrackOnce) window.skTrackOnce('checkout_view');
+    if (window.skTrackOnce) {
+      window.skTrackOnce('checkout_view');
+      window.skTrackOnce('tier_select_' + dfyTier);
+    }
+    dfyBusy = true;
+    var gen = dfyGen;
     if (!dfyCheckout) {
       dfyCheckout = loadStripe().then(function (stripe) {
         return stripe.initEmbeddedCheckout({
@@ -737,16 +849,58 @@
       });
     }
     dfyCheckout.then(function (checkout) {
+      dfyBusy = false;
+      setChangeTierEnabled(true);
+      if (gen !== dfyGen) { try { checkout.destroy(); } catch (e) {} return; }
+      dfyMounted = checkout;
       loading.style.display = 'none';
       container.style.display = 'block';
       checkout.mount('#dfy-checkout-container');
       if (window.skTrackOnce) window.skTrackOnce('checkout_mount');
     }).catch(function (err) {
+      dfyBusy = false;
+      setChangeTierEnabled(true);
+      if (gen !== dfyGen) return;
+      // Clear the cached rejections so Try again gets a clean run, and restore
+      // the alternate paths: a buyer who hits a wall gets every door back.
+      dfyCheckout = null;
+      loadStripePromise = null;
+      setDfyBrowseState(true);
       loading.style.display = 'none';
       errorDiv.style.display = 'block';
-      errorDiv.querySelector('p').textContent = 'Something went wrong. Please refresh to try again.';
+      errorDiv.querySelector('p').textContent = 'Something went wrong. It is not your card: the checkout did not load.';
+      if (window.skTrack) window.skTrack('checkout_error');
       console.error('Grant office checkout error:', err);
     });
+  }
+
+  function retryDfyCheckout() {
+    if (dfyBusy) return;
+    var errorDiv = document.getElementById('dfy-checkout-error');
+    if (errorDiv) errorDiv.style.display = 'none';
+    setDfyBrowseState(false);
+    revealDfyCheckout();
+  }
+
+  function changeDfyTier() {
+    if (dfyBusy) return;
+    dfyGen++;
+    if (dfyMounted) { try { dfyMounted.destroy(); } catch (e) {} }
+    dfyMounted = null;
+    dfyCheckout = null;
+    var area = document.getElementById('dfy-checkout-area');
+    var container = document.getElementById('dfy-checkout-container');
+    var errorDiv = document.getElementById('dfy-checkout-error');
+    var btn = document.getElementById('dfy-start-btn');
+    if (container) { container.style.display = 'none'; container.innerHTML = ''; }
+    if (errorDiv) errorDiv.style.display = 'none';
+    if (area) area.style.display = 'none';
+    if (btn) btn.style.display = '';
+    setDfyBrowseState(true);
+    var radios = document.querySelectorAll('input[name="dfy-tier"]');
+    for (var i = 0; i < radios.length; i++) { radios[i].disabled = false; }
+    var sel = document.getElementById('tier-select');
+    if (sel) sel.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   // Warm the checkout function and prefetch Stripe before the buyer reaches
@@ -823,9 +977,11 @@
       }
     };
     wire('.hook .hook-cta', 'cta_hero');
-    wire('.midpage-cta .hook-cta', 'cta_mid');
+    wire('.midpage-cta:not(.faq-cta) .hook-cta', 'cta_mid');
+    wire('.faq-cta .hook-cta', 'cta_faq');
     wire('.sc-btn', 'cta_sticky');
     wire('#scope-call-link', 'calendly_click');
+    wire('.self-serve .ss-btn', 'downsell_click');
   })();
 </script>
 

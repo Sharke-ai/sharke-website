@@ -14,6 +14,11 @@ const EVENTS = new Set([
   "checkout_view", "checkout_mount",
   // grant-office direct checkout funnel (2026-07-16):
   "calendly_click", "tier_select", "intake_submit", "paid_verified",
+  // conversion pass (2026-07-16 second deploy): per-tier splits, money-moment
+  // failure visibility, downsell and FAQ path counters, intake-seam telemetry
+  "tier_select_half", "tier_select_three_quarters", "tier_select_all",
+  "checkout_error", "dfy_disabled_click", "downsell_click", "cta_faq",
+  "arrived_with_session", "intake_error",
 ]);
 
 export default async (req) => {

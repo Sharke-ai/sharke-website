@@ -307,7 +307,7 @@
     <div class="container">
       <h1>Your grant office starts here.</h1>
       <p class="paid-banner" id="paid-banner" style="display:none;">Payment received.</p>
-      <p class="subhead" id="banner-subhead">Ten minutes. Then verification of your first 3 to 5 funders begins. Tell us who you are, what the goal is, and what is already in motion.</p>
+      <p class="subhead" id="banner-subhead">Four short fields and you are done; everything else is optional. Then verification of your first 3 to 5 funders begins.</p>
       <p class="no-session-note" id="no-session-note">If you have not started yet, begin at <a href="/grant-office">sharke.ai/grant-office</a>. Already checked out? Continue below.</p>
     </div>
   </section>
@@ -318,22 +318,25 @@
 
       <div id="submit-form">
 
-        <!-- CONTACT -->
-        <div class="form-row">
-          <div class="form-group">
-            <label class="field-label" for="first-name">First Name</label>
-            <input type="text" id="first-name" placeholder="First name" autocomplete="given-name">
+        <!-- CONTACT (collapses to a confirm line when Stripe already told us who you are) -->
+        <p id="contact-confirm" style="display:none; font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.04em; color:var(--mid-gray); margin-bottom:18px;">Readouts and your monthly report go to <strong id="confirm-email" style="color:var(--black);"></strong>. <a href="#" id="contact-edit" style="color:var(--red);">Edit</a></p>
+        <div id="contact-block">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="field-label" for="first-name">First Name</label>
+              <input type="text" id="first-name" placeholder="First name" autocomplete="given-name">
+            </div>
+            <div class="form-group">
+              <label class="field-label" for="last-name">Last Name <span class="field-optional">(optional)</span></label>
+              <input type="text" id="last-name" placeholder="Last name" autocomplete="family-name">
+            </div>
           </div>
-          <div class="form-group">
-            <label class="field-label" for="last-name">Last Name <span class="field-optional">(optional)</span></label>
-            <input type="text" id="last-name" placeholder="Last name" autocomplete="family-name">
-          </div>
-        </div>
 
-        <div class="form-group">
-          <label class="field-label" for="email">Email</label>
-          <input type="email" id="email" placeholder="you@yourorg.org" autocomplete="email">
-          <p class="field-note">Your readouts and monthly report are delivered here.</p>
+          <div class="form-group">
+            <label class="field-label" for="email">Email</label>
+            <input type="email" id="email" placeholder="you@yourorg.org" autocomplete="email">
+            <p class="field-note">Your readouts and monthly report are delivered here.</p>
+          </div>
         </div>
 
         <!-- YOUR ORGANIZATION -->
@@ -347,7 +350,7 @@
         <div class="form-group">
           <label class="field-label" for="ein">EIN</label>
           <input type="text" id="ein" placeholder="e.g. 20-5468038" autocomplete="off">
-          <p class="field-note">It is on your IRS filings. Your office is built from your public record, so this one is required.</p>
+          <p class="field-note">It is on your IRS filings. Your office is built from your public record, so this one is required. Do not have it handy? Type LOOK IT UP and we will pull it from the IRS record by your organization name.</p>
         </div>
 
         <!-- YOUR PIPELINE -->
@@ -433,18 +436,43 @@
   // -- First-party, anonymous beacons (pattern from /ed): view / paid_verified /
   //    intake_submit under p:'oi'. Honors Do Not Track. --
   var skTrack = function () {};
+  var skTrackEvery = function () {};
   (function () {
     if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
-    var once = {};
-    skTrack = function (e) {
-      if (once[e]) return; once[e] = 1;
+    var sendRaw = function (e) {
       try {
         var payload = JSON.stringify({ p: 'oi', e: e });
         if (navigator.sendBeacon) { navigator.sendBeacon('/.netlify/functions/track', payload); }
         else { fetch('/.netlify/functions/track', { method: 'POST', body: payload, keepalive: true }).catch(function () {}); }
       } catch (err) {}
     };
+    var once = {};
+    skTrack = function (e) { if (once[e]) return; once[e] = 1; sendRaw(e); };
+    skTrackEvery = sendRaw;
     skTrack('view');
+  })();
+  if (sessionId) skTrack('arrived_with_session');
+
+  // -- Field persistence: a discarded tab must not cost a paying customer their
+  //    answers. Everything is saved locally per session and cleared on submit. --
+  var OI_FIELDS = ['first-name', 'last-name', 'email', 'org-name', 'ein', 'funding-goal', 'grants-in-motion', 'intake-notes'];
+  var OI_KEY = 'sk_oi_' + (sessionId || 'nosession');
+  (function () {
+    // Isolated parses: a corrupted blob must not kill save AND restore; the
+    // next keystroke simply overwrites it.
+    var saved;
+    try { saved = JSON.parse(localStorage.getItem(OI_KEY) || '{}') || {}; } catch (e) { saved = {}; }
+    OI_FIELDS.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (saved[id] && !el.value) el.value = saved[id];
+      el.addEventListener('input', function () {
+        var cur;
+        try { cur = JSON.parse(localStorage.getItem(OI_KEY) || '{}') || {}; } catch (e) { cur = {}; }
+        cur[id] = el.value;
+        try { localStorage.setItem(OI_KEY, JSON.stringify(cur)); } catch (e) {}
+      });
+    });
   })();
 
   // -- Post-payment arrival: confirm the payment landed and prefill what Stripe
@@ -467,7 +495,33 @@
       if (!ln.value && parts.length > 1) ln.value = parts.slice(1).join(' ');
     }
     if (info && info.tier) dfyTier = info.tier;
+    // Stripe already told us who they are: collapse the contact block to a
+    // confirm line so the visible form is just the org fields. Collapse ONLY
+    // when the field that will actually submit equals Stripe's verified email
+    // (a locally-restored different address keeps the block visible).
+    var emailField = document.getElementById('email');
+    if (info && info.email && emailField.value === info.email && document.getElementById('first-name').value) {
+      var block = document.getElementById('contact-block');
+      var confirmLine = document.getElementById('contact-confirm');
+      var confirmEmail = document.getElementById('confirm-email');
+      var editLink = document.getElementById('contact-edit');
+      if (block && confirmLine && confirmEmail) {
+        confirmEmail.textContent = emailField.value;
+        block.style.display = 'none';
+        confirmLine.style.display = 'block';
+        if (editLink) editLink.addEventListener('click', function (ev) {
+          ev.preventDefault();
+          showContactBlock();
+        });
+      }
+    }
     skTrack('paid_verified');
+  }
+  function showContactBlock() {
+    var b = document.getElementById('contact-block');
+    var c = document.getElementById('contact-confirm');
+    if (b) b.style.display = '';
+    if (c) c.style.display = 'none';
   }
   if (sessionId) {
     fetch('/.netlify/functions/session-status', {
@@ -495,12 +549,14 @@
     if (!firstName) {
       err.textContent = 'Enter your first name.';
       err.style.display = 'block';
+      showContactBlock();
       document.getElementById('first-name').focus();
       return;
     }
     if (!email || !email.includes('@')) {
       err.textContent = 'Enter a valid email address.';
       err.style.display = 'block';
+      showContactBlock();
       document.getElementById('email').focus();
       return;
     }
@@ -511,7 +567,7 @@
       return;
     }
     if (!ein) {
-      err.textContent = 'Enter your EIN. It is on your IRS filings.';
+      err.textContent = 'Enter your EIN, or type LOOK IT UP and we will find it from your organization name.';
       err.style.display = 'block';
       document.getElementById('ein').focus();
       return;
@@ -579,11 +635,22 @@
     })
     .then(function() {
       skTrack('intake_submit');
+      // Sweep every intake blob, not just this session's: abandoned sessions
+      // must not leave typed PII in localStorage indefinitely.
+      try {
+        var kill = [];
+        for (var i = 0; i < localStorage.length; i++) {
+          var k = localStorage.key(i);
+          if (k && k.indexOf('sk_oi_') === 0) kill.push(k);
+        }
+        kill.forEach(function (k) { localStorage.removeItem(k); });
+      } catch (e) {}
       document.getElementById('submit-form').style.display = 'none';
       document.getElementById('success-state').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     })
     .catch(function() {
+      skTrackEvery('intake_error');
       var errEl = document.getElementById('form-error');
       errEl.textContent = 'Your submission did not go through, and nothing was lost: your answers are still on this page. Please try again in a moment. If it still fails, email collin@sharke.ai and we will take your intake by reply; your office starts from that email.';
       errEl.style.display = 'block';
