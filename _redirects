@@ -1,6 +1,7 @@
 # Clean URLs for hidden landing pages
 /ed      /ed.html      200
 /check-intake  /check-intake.html  200
+/office-intake  /office-intake.html  200
 /fai     /fai.html     200
 /the-20-billion-hallucination  /The_20_Billion_Hallucination.html  200
 /foundations  /foundations.html  200

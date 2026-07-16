@@ -308,6 +308,25 @@
   /* CREDIBILITY */
   .cred-block { border-left: 3px solid var(--red); padding: 22px 26px; margin-top: 8px; background: var(--off-white); }
   .cred-block p { font-size: 0.95rem; color: #2a2a2a; margin: 0; font-style: italic; }
+  .cred-flex { display: flex; gap: 22px; align-items: flex-start; }
+  .founder-photo { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  @media (max-width: 600px) { .founder-photo { width: 68px; height: 68px; } }
+
+  /* CHECKOUT TRUST ROW (trust pass pattern from /ed, 2026-07-15) */
+  .checkout-trust { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; }
+  .ct-item { font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--mid-gray); display: inline-flex; align-items: center; gap: 6px; }
+  .ct-check { color: var(--verified); font-weight: 700; }
+
+  /* Sticky mobile CTA bar (pattern from /ed, conversion pass 2026-07-14) */
+  .sticky-cta { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: var(--warm-white); border-top: 1px solid var(--rule); box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.07); padding: 11px 16px; align-items: center; justify-content: space-between; gap: 12px; }
+  .sticky-cta .sc-note { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.03em; line-height: 1.45; color: var(--mid-gray); margin: 0; }
+  .sticky-cta .sc-note strong { color: var(--black); font-weight: 500; }
+  .sticky-cta .sc-btn { font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; white-space: nowrap; color: var(--off-white); background: var(--black); padding: 12px 16px; flex-shrink: 0; }
+  .sticky-cta.sc-hidden { display: none !important; }
+  @media (max-width: 700px) {
+    .sticky-cta { display: flex; padding-bottom: calc(11px + env(safe-area-inset-bottom)); }
+    body { padding-bottom: 66px; }
+  }
 
   /* CLOSE */
   .close-section { padding: 72px 0 80px; }
@@ -483,9 +502,12 @@
   <section>
     <div class="container">
       <h3>Who built it</h3>
-      <div class="cred-block">
-        <p>I have spent my career replacing gut calls with data: how the largest financial institutions set their global IT footprint, when mergers and acquisitions create value instead of destroying it, and which grants are worth winning, at for-profit and nonprofit organizations from NIH, NSF, and USDA to Meta and Google. I have done that work across the private sector and the White House Office of Management and Budget, and I sign off on every Sharke verdict myself.</p>
-        <p style="margin-top:14px; font-family:'IBM Plex Mono',monospace; font-size:0.8rem; letter-spacing:0.04em; color:#6b6560;">Collin Brown &nbsp;/&nbsp; Wharton MBA &nbsp;/&nbsp; Founder, Sharke.ai</p>
+      <div class="cred-block cred-flex">
+        <img class="founder-photo" src="/assets/founder-collin.jpg" alt="Collin Brown, founder of Sharke" width="88" height="88" onerror="this.style.display='none';">
+        <div>
+          <p>I have spent my career replacing gut calls with data: how the largest financial institutions set their global IT footprint, when mergers and acquisitions create value instead of destroying it, and which grants are worth winning, at for-profit and nonprofit organizations from NIH, NSF, and USDA to Meta and Google. I have done that work across the private sector and the White House Office of Management and Budget, and I sign off on every Sharke verdict myself.</p>
+          <p style="margin-top:14px; font-family:'IBM Plex Mono',monospace; font-size:0.8rem; letter-spacing:0.04em; color:#6b6560;">Collin Brown &nbsp;/&nbsp; Wharton MBA &nbsp;/&nbsp; Founder, Sharke.ai</p>
+        </div>
       </div>
     </div>
   </section>
@@ -512,12 +534,12 @@
           </ul>
           <button id="ss-checkout-btn" class="fork-cta solid" onclick="revealSelfServeCheckout()">Start self-serve &rarr;</button>
           <div id="ss-checkout-area" class="ss-checkout" style="display:none;">
-            <p class="ss-stripe"><svg width="11" height="13" viewBox="0 0 24 28" fill="none" stroke="#6b6560" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><rect x="3" y="13" width="18" height="13" rx="2"/><path d="M7 13V9a5 5 0 0 1 10 0v4"/></svg> Powered by Stripe &middot; Secure checkout</p>
+            <p class="ss-stripe"><svg width="11" height="13" viewBox="0 0 24 28" fill="none" stroke="#6b6560" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><rect x="3" y="13" width="18" height="13" rx="2"/><path d="M7 13V9a5 5 0 0 1 10 0v4"/></svg> Secure checkout by Stripe</p>
             <div id="ss-checkout-loading" class="ss-checkout-msg" style="display:none;"><p>Preparing secure checkout...</p></div>
             <div id="ss-checkout-container" style="display:none; min-height:350px;"></div>
             <div id="ss-checkout-error" class="ss-checkout-msg" style="display:none;"><p></p></div>
           </div>
-          <p class="fork-terms">No contract. Cancel anytime.</p>
+          <p class="checkout-trust"><span class="ct-item"><span class="ct-check">&#10003;</span> No contract, cancel anytime</span><span class="ct-item"><span class="ct-check">&#10003;</span> Secure checkout by Stripe</span><span class="ct-item"><span class="ct-check">&#10003;</span> Every verdict built from public filings</span><span class="ct-item"><span class="ct-check">&#10003;</span> Workspace live the same day</span></p>
         </div>
 
         <div class="fork-col secondary">
@@ -587,9 +609,34 @@
   </div>
 </footer>
 
-<script src="https://js.stripe.com/v3/"></script>
+<!-- Sticky mobile CTA bar: shown at <=700px by CSS; hidden while the offer section is on screen. -->
+<div class="sticky-cta" id="sticky-cta">
+  <p class="sc-note"><strong>$159 a month.</strong> The grant team your person runs.</p>
+  <a class="sc-btn" href="#offer">Start self-serve</a>
+</div>
+
 <script>
-  var stripe = Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4');
+  // Lazy, promise-gated Stripe (pattern from /ed, perf pass 2026-07-15).
+  // Nothing Stripe loads on pageview; the script is injected when the offer
+  // nears the viewport or the buy CTA is clicked, and the promise gate means
+  // a fast click waits on the same load instead of racing it.
+  var loadStripePromise = null;
+  function loadStripe() {
+    if (loadStripePromise) return loadStripePromise;
+    loadStripePromise = new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = 'https://js.stripe.com/v3/';
+      s.async = true;
+      s.onload = function () {
+        try { resolve(Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4')); }
+        catch (err) { reject(err); }
+      };
+      s.onerror = function () { reject(new Error('stripe.js failed to load')); };
+      document.head.appendChild(s);
+    });
+    return loadStripePromise;
+  }
+
   var ssCheckout = null;
   function revealSelfServeCheckout() {
     var btn = document.getElementById('ss-checkout-btn');
@@ -601,32 +648,38 @@
     area.style.display = 'block';
     loading.style.display = 'block';
     errorDiv.style.display = 'none';
+    if (window.skTrackOnce) window.skTrackOnce('checkout_view');
     if (!ssCheckout) {
-      ssCheckout = stripe.initEmbeddedCheckout({
-        fetchClientSecret: function() {
-          return fetch('/.netlify/functions/create-checkout-session', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ plan: 'self_serve' })
-          })
-          .then(function(resp) { return resp.json(); })
-          .then(function(data) { if (data.error) throw new Error(data.error); return data.clientSecret; });
-        }
+      ssCheckout = loadStripe().then(function (stripe) {
+        return stripe.initEmbeddedCheckout({
+          fetchClientSecret: function () {
+            return fetch('/.netlify/functions/create-checkout-session', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ plan: 'self_serve' })
+            })
+            .then(function (resp) { return resp.json(); })
+            .then(function (data) { if (data.error) throw new Error(data.error); return data.clientSecret; });
+          }
+        });
       });
     }
-    ssCheckout.then(function(checkout) {
+    ssCheckout.then(function (checkout) {
       loading.style.display = 'none';
       container.style.display = 'block';
       checkout.mount('#ss-checkout-container');
-    }).catch(function(err) {
+      if (window.skTrackOnce) window.skTrackOnce('checkout_mount');
+    }).catch(function (err) {
       loading.style.display = 'none';
       errorDiv.style.display = 'block';
       errorDiv.querySelector('p').textContent = 'Something went wrong. Please refresh to try again.';
       console.error('Self-serve checkout error:', err);
     });
   }
-  // Warm the checkout function before the buyer reaches the offer, so the
-  // Stripe form appears fast on click (kills the serverless cold start).
+
+  // Warm the checkout function and prefetch Stripe before the buyer reaches
+  // the offer, so the form appears fast on click (kills the serverless cold
+  // start and the script-load wait).
   (function () {
     var offer = document.getElementById('offer');
     if (!offer || !('IntersectionObserver' in window) || !window.fetch) return;
@@ -636,6 +689,7 @@
         if (entry.isIntersecting && !warmed) {
           warmed = true;
           io.disconnect();
+          loadStripe();
           fetch('/.netlify/functions/create-checkout-session', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -644,6 +698,61 @@
         }
       });
     }, { rootMargin: '800px 0px' }).observe(offer);
+  })();
+
+  // Hide the sticky mobile CTA bar while the offer section is on screen.
+  (function () {
+    var bar = document.getElementById('sticky-cta');
+    var target = document.getElementById('offer');
+    if (!bar || !target || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        bar.classList.toggle('sc-hidden', entry.isIntersecting);
+      });
+    }, { threshold: 0.02 }).observe(target);
+  })();
+
+  // First-party, anonymous funnel analytics (pattern from /ed, 2026-07-14).
+  // Counts events only, via /.netlify/functions/track into Netlify Blobs:
+  // no cookies, no identifiers, no IP or UA storage. Honors Do Not Track.
+  (function () {
+    if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+    var send = function (e) {
+      try {
+        var payload = JSON.stringify({ p: 'gd', e: e });
+        if (navigator.sendBeacon) { navigator.sendBeacon('/.netlify/functions/track', payload); }
+        else { fetch('/.netlify/functions/track', { method: 'POST', body: payload, keepalive: true }).catch(function () {}); }
+      } catch (err) {}
+    };
+    var once = {};
+    var sendOnce = function (e) { if (once[e]) return; once[e] = 1; send(e); };
+    window.skTrack = send;
+    window.skTrackOnce = sendOnce;
+
+    sendOnce('view');
+
+    var marks = [[25, 's25'], [50, 's50'], [75, 's75'], [90, 's90']];
+    var ticking = false;
+    addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        if (max <= 0) return;
+        var pct = 100 * window.scrollY / max;
+        for (var i = 0; i < marks.length; i++) { if (pct >= marks[i][0]) sendOnce(marks[i][1]); }
+      });
+    }, { passive: true });
+
+    var wire = function (sel, ev) {
+      var els = document.querySelectorAll(sel);
+      for (var i = 0; i < els.length; i++) {
+        els[i].addEventListener('click', function () { send(ev); });
+      }
+    };
+    wire('.hook .hook-cta', 'cta_hero');
+    wire('.sc-btn', 'cta_sticky');
   })();
 </script>
 

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharke: Your Grant Office Starts Here</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-white: #f5f2ed;
+    --warm-white: #faf8f4;
+    --red: #c0392b;
+    --mid-gray: #6b6560;
+    --rule: #d0cbc2;
+    --green: #2a9d5c;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; scroll-behavior: smooth; }
+  body {
+    background: var(--warm-white);
+    color: var(--black);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  @media (max-width: 480px) { .site-header .header-tag { display: none; } }
+  .logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+  .logo span { color: var(--red); }
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--mid-gray);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .container { max-width: 640px; margin: 0 auto; padding: 0 32px; }
+  section { padding: 56px 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type { border-bottom: none; }
+
+  /* BANNER */
+  .banner {
+    background: var(--black);
+    color: var(--off-white);
+    padding: 32px 0 28px;
+    border-bottom: none;
+  }
+  .banner h1 {
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+    color: var(--green);
+  }
+  .banner .subhead {
+    font-size: 0.92rem;
+    color: #a09890;
+    line-height: 1.65;
+    max-width: 480px;
+  }
+
+  .paid-banner {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin: 0 0 10px;
+  }
+  .no-session-note {
+    display: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: #a09890;
+    margin: 12px 0 0;
+  }
+  .no-session-note a { color: var(--off-white); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* SECTION HEADERS */
+  .section-head {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+    color: var(--black);
+  }
+
+  /* FIELD LABELS */
+  .field-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .field-optional {
+    color: #a09890;
+    text-transform: none;
+    letter-spacing: 0.04em;
+  }
+  .field-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: #a09890;
+    margin-top: 4px;
+    margin-bottom: 0;
+  }
+
+  /* FORM */
+  .form-group { margin-bottom: 18px; }
+  .form-row {
+    display: flex;
+    gap: 16px;
+  }
+  .form-row .form-group { flex: 1; }
+
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    background: var(--off-white);
+    border: 1px solid var(--rule);
+    border-bottom: 2px solid var(--black);
+    color: var(--black);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 0.9rem;
+    padding: 13px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+    resize: vertical;
+  }
+  input:focus, textarea:focus {
+    border-bottom-color: var(--red);
+  }
+  input::placeholder, textarea::placeholder { color: #a09890; font-style: italic; }
+
+  /* MATERIALS NOTE */
+  .materials-note {
+    border-left: 3px solid var(--rule);
+    padding: 4px 0 4px 18px;
+    margin: 28px 0 22px;
+  }
+  .materials-note p {
+    font-size: 0.85rem;
+    color: var(--mid-gray);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* SUBMIT BUTTON */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    background: var(--black);
+    color: var(--off-white);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 18px 36px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+    text-align: center;
+  }
+  .submit-btn:hover { background: var(--red); }
+  .submit-btn:disabled { background: #555; cursor: not-allowed; }
+
+  .delivery-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: #a09890;
+    margin-top: 14px;
+    text-transform: uppercase;
+  }
+
+  /* FORM ERROR */
+  .form-error {
+    display: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--red);
+    margin-top: 12px;
+    letter-spacing: 0.04em;
+  }
+
+  /* SUCCESS STATE */
+  .success-state {
+    display: none;
+    text-align: center;
+    padding: 48px 0;
+  }
+  .success-state .success-icon {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 20px;
+  }
+  .success-state h2 { margin-bottom: 12px; }
+  .success-state p { color: var(--mid-gray); max-width: 440px; margin: 0 auto 22px; }
+  .kickoff-btn {
+    display: inline-block;
+    background: var(--black);
+    color: var(--off-white);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 15px 28px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .kickoff-btn:hover { background: var(--red); }
+  .kickoff-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #a09890;
+    margin-top: 12px;
+  }
+
+  /* TIMELINE */
+  .next-steps {
+    background: var(--off-white);
+    border-top: 3px solid var(--black);
+  }
+  .next-steps h2 { font-size: 1.2rem; margin-bottom: 28px; }
+  .step-list { list-style: none; }
+  .step-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.93rem;
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    flex-shrink: 0;
+    margin-top: 3px;
+    min-width: 84px;
+  }
+  .step-body strong { display: block; margin-bottom: 4px; }
+  .step-body span { font-size: 0.85rem; color: var(--mid-gray); }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 16px 20px; }
+    .container { padding: 0 20px; }
+    section { padding: 44px 0; }
+    .banner { padding: 24px 0 20px; }
+    .form-row { flex-direction: column; gap: 0; }
+    .step-num { min-width: 64px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="https://sharke.ai">Sharke<span>.</span>ai</a>
+  <span class="header-tag">Your grant office, done for you</span>
+</header>
+
+<main>
+
+  <!-- BANNER -->
+  <section class="banner">
+    <div class="container">
+      <h1>Your grant office starts here.</h1>
+      <p class="paid-banner" id="paid-banner" style="display:none;">Payment received.</p>
+      <p class="subhead" id="banner-subhead">Ten minutes. Then verification of your first 3 to 5 funders begins. Tell us who you are, what the goal is, and what is already in motion.</p>
+      <p class="no-session-note" id="no-session-note">If you have not started yet, begin at <a href="/grant-office">sharke.ai/grant-office</a>. Already checked out? Continue below.</p>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="submit-section">
+    <div class="container">
+
+      <div id="submit-form">
+
+        <!-- CONTACT -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="field-label" for="first-name">First Name</label>
+            <input type="text" id="first-name" placeholder="First name" autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label class="field-label" for="last-name">Last Name <span class="field-optional">(optional)</span></label>
+            <input type="text" id="last-name" placeholder="Last name" autocomplete="family-name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="email">Email</label>
+          <input type="email" id="email" placeholder="you@yourorg.org" autocomplete="email">
+          <p class="field-note">Your readouts and monthly report are delivered here.</p>
+        </div>
+
+        <!-- YOUR ORGANIZATION -->
+        <h2 class="section-head" style="margin-top: 36px;">Your Organization</h2>
+
+        <div class="form-group">
+          <label class="field-label" for="org-name">Organization Name</label>
+          <input type="text" id="org-name" placeholder="Organization name" autocomplete="organization">
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="ein">EIN</label>
+          <input type="text" id="ein" placeholder="e.g. 20-5468038" autocomplete="off">
+          <p class="field-note">It is on your IRS filings. Your office is built from your public record, so this one is required.</p>
+        </div>
+
+        <!-- YOUR PIPELINE -->
+        <h2 class="section-head" style="margin-top: 36px;">Your Pipeline</h2>
+
+        <div class="form-group">
+          <label class="field-label" for="funding-goal">Annual Funding Goal From Grants <span class="field-optional">(optional)</span></label>
+          <input type="text" id="funding-goal" placeholder="e.g. $400,000, or 'about half our budget'" autocomplete="off">
+          <p class="field-note">The goal your monthly report measures the pipeline against. A rough number is fine; we confirm it together.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="grants-in-motion">Grants Already In Motion <span class="field-optional">(optional)</span></label>
+          <textarea id="grants-in-motion" rows="4" placeholder="List anything you are tracking or applying to now: funder names, program names, deadlines if you know them"></textarea>
+          <p class="field-note">Starting from zero is the common case; we begin from a verified shortlist instead.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="intake-notes">Anything Else We Should Know <span class="field-optional">(optional)</span></label>
+          <textarea id="intake-notes" rows="3" placeholder="e.g. A funder is winding down, a program is growing, a deadline is close"></textarea>
+        </div>
+
+        <div class="materials-note">
+          <p>During your first week we will ask for the core materials your office runs on: mission, programs, and budget basics. The Funding Goal Guarantee assumes your team can share materials and take an introduction when a funder asks for one. That is the only part we cannot do for you.</p>
+        </div>
+
+        <button class="submit-btn" id="submit-btn" onclick="submitForm()">Start my grant office</button>
+        <p class="form-error" id="form-error"></p>
+        <p class="delivery-note">First readout within a week of this intake</p>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="success-state" id="success-state">
+        <p class="success-icon">Submitted</p>
+        <h2>Your office is starting.</h2>
+        <p>Verification of your first 3 to 5 funders begins within one business day, and your first readout arrives within a week. Want the kickoff call now? Pick a time below.</p>
+        <a class="kickoff-btn" id="kickoff-link" href="https://calendly.com/collin-sharke?utm_source=website&amp;utm_campaign=grant_office_kickoff">Book the 15-minute kickoff &rarr;</a>
+        <p class="kickoff-note">Optional. The work does not wait for it.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHAT HAPPENS FROM HERE -->
+  <section class="next-steps">
+    <div class="container">
+      <h2>What happens from here</h2>
+      <ul class="step-list">
+        <li>
+          <span class="step-num">Now</span>
+          <span class="step-body">
+            <strong>Your office is set up</strong>
+            <span>We build your workspace from your public record and the pipeline you brought, and verification of your first 3 to 5 funders begins.</span>
+          </span>
+        </li>
+        <li>
+          <span class="step-num">Week 1</span>
+          <span class="step-body">
+            <strong>Your first readout</strong>
+            <span>Your first 3 to 5 funders verified, each with a Pursue, Wait, or Move on call and the sources behind it. The optional kickoff call happens this week too, if you booked one.</span>
+          </span>
+        </li>
+        <li>
+          <span class="step-num">Monthly</span>
+          <span class="step-body">
+            <strong>Your board-ready pipeline report</strong>
+            <span>Every verdict delivered with its sources, what Sharke surfaced and why, every deadline in the next 30 days, drafts in motion, and where your pipeline stands against your funding goal.</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // -- Stripe return params (plan defaults to dfy: this page belongs to the grant office) --
+  var params = new URLSearchParams(window.location.search);
+  var sessionId = params.get('session_id') || '';
+  var plan = params.get('plan') || 'dfy';
+  var dfyTier = '';
+
+  // -- First-party, anonymous beacons (pattern from /ed): view / paid_verified /
+  //    intake_submit under p:'oi'. Honors Do Not Track. --
+  var skTrack = function () {};
+  (function () {
+    if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+    var once = {};
+    skTrack = function (e) {
+      if (once[e]) return; once[e] = 1;
+      try {
+        var payload = JSON.stringify({ p: 'oi', e: e });
+        if (navigator.sendBeacon) { navigator.sendBeacon('/.netlify/functions/track', payload); }
+        else { fetch('/.netlify/functions/track', { method: 'POST', body: payload, keepalive: true }).catch(function () {}); }
+      } catch (err) {}
+    };
+    skTrack('view');
+  })();
+
+  // -- Post-payment arrival: confirm the payment landed and prefill what Stripe
+  //    already collected (email + name + tier). Fails open: any error, non-paid
+  //    session, or transient hiccup leaves the page usable with no greeting and
+  //    NO assertion of non-payment. The begin-at-/grant-office note shows only
+  //    when there is no session_id at all. --
+  function applyPaidState(info) {
+    var banner = document.getElementById('paid-banner');
+    banner.style.display = 'block';
+    if (info && info.email) {
+      var emailEl = document.getElementById('email');
+      if (!emailEl.value) emailEl.value = info.email;
+    }
+    if (info && info.name) {
+      var fn = document.getElementById('first-name');
+      var ln = document.getElementById('last-name');
+      var parts = info.name.trim().split(/\s+/);
+      if (!fn.value && parts.length > 0) fn.value = parts[0];
+      if (!ln.value && parts.length > 1) ln.value = parts.slice(1).join(' ');
+    }
+    if (info && info.tier) dfyTier = info.tier;
+    skTrack('paid_verified');
+  }
+  if (sessionId) {
+    fetch('/.netlify/functions/session-status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sessionId })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) { if (data && data.paid) applyPaidState(data); })
+    .catch(function() {});
+  } else {
+    var note = document.getElementById('no-session-note');
+    if (note) note.style.display = 'block';
+  }
+
+  // -- Form submission --
+  function submitForm() {
+    var firstName = document.getElementById('first-name').value.trim();
+    var lastName  = document.getElementById('last-name').value.trim();
+    var email     = document.getElementById('email').value.trim();
+    var orgName   = document.getElementById('org-name').value.trim();
+    var ein       = document.getElementById('ein').value.trim();
+    var err       = document.getElementById('form-error');
+
+    if (!firstName) {
+      err.textContent = 'Enter your first name.';
+      err.style.display = 'block';
+      document.getElementById('first-name').focus();
+      return;
+    }
+    if (!email || !email.includes('@')) {
+      err.textContent = 'Enter a valid email address.';
+      err.style.display = 'block';
+      document.getElementById('email').focus();
+      return;
+    }
+    if (!orgName) {
+      err.textContent = 'Enter your organization name.';
+      err.style.display = 'block';
+      document.getElementById('org-name').focus();
+      return;
+    }
+    if (!ein) {
+      err.textContent = 'Enter your EIN. It is on your IRS filings.';
+      err.style.display = 'block';
+      document.getElementById('ein').focus();
+      return;
+    }
+    err.style.display = 'none';
+
+    var btn = document.getElementById('submit-btn');
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+
+    // The grant-office answers go out as their own keys AND packed into
+    // program_summary, so nothing is lost before the Apps Script gains the new
+    // columns (same no-data-loss fallback /check-intake uses).
+    var fundingGoal = document.getElementById('funding-goal').value.trim();
+    var grantsInMotion = document.getElementById('grants-in-motion').value.trim();
+    var notes = document.getElementById('intake-notes').value.trim();
+    var programSummary = 'Plan: dfy grant office';
+    if (dfyTier) programSummary += '\nTier: ' + dfyTier;
+    if (fundingGoal) programSummary += '\nFunding goal: ' + fundingGoal;
+    if (grantsInMotion) programSummary += '\nGrants in motion: ' + grantsInMotion;
+    if (notes) programSummary += '\nNotes: ' + notes;
+
+    // Same payload shape as /check-intake so the shared Apps Script column
+    // mapping (A-V) stays aligned; the grant-verdict fields are simply empty.
+    // The funding goal rides in grant_revenue_share (that column's semantics:
+    // a percent of budget or a dollar target).
+    var payload = {
+      stripe_session_id: sessionId,
+      plan: plan,
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
+      org_name: orgName,
+      org_state: '',
+      org_website: '',
+      program_summary: programSummary,
+      funder_name: '',
+      funder_type: '',
+      cfda: '',
+      grants_gov_id: '',
+      funder_state: '',
+      search_keyword: '',
+      grant_title: '',
+      grant_stage: '',
+      ein: ein,
+      grant_revenue_share: fundingGoal,
+      funding_concern: '',
+      tier: dfyTier,
+      funding_goal: fundingGoal,
+      grants_in_motion: grantsInMotion,
+      notes: notes,
+      submitted_at: new Date().toISOString()
+    };
+
+    fetch('/.netlify/functions/submit-intake', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res) {
+      return res.json().catch(function() { return { ok: false }; }).then(function(data) {
+        if (res.ok && data && data.ok === true) return true;
+        throw new Error((data && data.error) || ('HTTP ' + res.status));
+      });
+    })
+    .then(function() {
+      skTrack('intake_submit');
+      document.getElementById('submit-form').style.display = 'none';
+      document.getElementById('success-state').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    })
+    .catch(function() {
+      var errEl = document.getElementById('form-error');
+      errEl.textContent = 'Your submission did not go through, and nothing was lost: your answers are still on this page. Please try again in a moment. If it still fails, email collin@sharke.ai and we will take your intake by reply; your office starts from that email.';
+      errEl.style.display = 'block';
+      btn.textContent = 'Start my grant office';
+      btn.disabled = false;
+    });
+  }
+</script>
+
+</body>
+</html>

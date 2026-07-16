@@ -230,6 +230,54 @@
   .ss-stripe { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--mid-gray); letter-spacing: 0.04em; margin: 0 0 12px; text-align: center; }
   .beta-badge { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: var(--red); padding: 6px 12px; margin: 0 0 14px; }
 
+  /* TIER SELECTOR (direct checkout pass 2026-07-16) */
+  .tier-select { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 28px 0 0; }
+  @media (max-width: 640px) { .tier-select { grid-template-columns: 1fr; } }
+  .tier-card { position: relative; }
+  .tier-card input { position: absolute; opacity: 0; pointer-events: none; }
+  .tier-card label { display: block; height: 100%; border: 1px solid #2a2a2a; background: #111; padding: 16px 16px 14px; cursor: pointer; transition: border-color 0.15s; }
+  .tier-card label:hover { border-color: #6b6560; }
+  .tier-card input:checked + label { border-color: var(--off-white); box-shadow: inset 0 0 0 1px var(--off-white); }
+  .tier-card input:focus-visible + label { outline: 2px solid #e57368; outline-offset: 2px; }
+  .tier-card input:disabled + label { cursor: default; opacity: 0.75; }
+  .tier-share { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: #e57368; margin: 0 0 8px; }
+  .tier-price { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--off-white); margin: 0 0 6px; }
+  .tier-price span { font-size: 0.72rem; font-weight: 400; color: #a09890; }
+  .tier-desc { display: block; font-size: 0.8rem; color: #a09890; line-height: 1.5; }
+  .tier-help { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: #a09890; letter-spacing: 0.02em; line-height: 1.7; margin: 14px 0 0; }
+  .cta-section button.cta-btn { border: none; cursor: pointer; margin-top: 26px; }
+  .cta-section button.cta-btn:disabled { background: #3a3733; color: #857f74; cursor: not-allowed; }
+  .tier-hint { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: #7a736c; margin: 10px 0 0; }
+  .dfy-checkout { display: none; background: var(--warm-white); border: 1px solid #2a2a2a; border-radius: 6px; padding: 16px 16px 26px; margin: 24px 0 0; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35); }
+  #dfy-checkout-error p { color: var(--red); }
+
+  /* AFTER-YOU-START scope list (dark CTA section) */
+  .after-list { list-style: none; margin: 34px 0 0; border-top: 1px solid #2a2a2a; }
+  .after-list li { display: flex; align-items: flex-start; gap: 18px; padding: 15px 0; border-bottom: 1px solid #2a2a2a; }
+  .after-list .al-when { font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: #e57368; flex-shrink: 0; min-width: 96px; padding-top: 4px; }
+  .after-list .al-text { font-size: 0.9rem; color: #a09890; line-height: 1.55; }
+  .after-list .al-text strong { color: var(--off-white); font-weight: 500; }
+  @media (max-width: 600px) { .after-list .al-when { min-width: 78px; } }
+
+  /* HONESTY NOTE + demoted scope call */
+  .honest-note { border-left: 3px solid #6b6560; padding: 4px 0 4px 18px; margin: 28px 0 0; }
+  .honest-note p { font-size: 0.92rem; color: #a09890; line-height: 1.6; margin: 0; }
+  .honest-note strong { color: var(--off-white); font-weight: 500; }
+  .scope-call { font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; color: #a09890; letter-spacing: 0.02em; line-height: 1.8; margin: 28px 0 0; text-align: center; }
+  .scope-call a { color: var(--off-white); text-decoration: underline; text-underline-offset: 3px; }
+  .scope-call a:hover { color: #fff; }
+
+  /* Sticky mobile CTA bar (pattern from /ed, conversion pass 2026-07-14) */
+  .sticky-cta { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: var(--warm-white); border-top: 1px solid var(--rule); box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.07); padding: 11px 16px; align-items: center; justify-content: space-between; gap: 12px; }
+  .sticky-cta .sc-note { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.03em; line-height: 1.45; color: var(--mid-gray); margin: 0; }
+  .sticky-cta .sc-note strong { color: var(--black); font-weight: 500; }
+  .sticky-cta .sc-btn { font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; white-space: nowrap; color: var(--off-white); background: var(--black); padding: 12px 16px; flex-shrink: 0; }
+  .sticky-cta.sc-hidden { display: none !important; }
+  @media (max-width: 700px) {
+    .sticky-cta { display: flex; padding-bottom: calc(11px + env(safe-area-inset-bottom)); }
+    body { padding-bottom: 66px; }
+  }
+
   /* DECISION RECORD (shared paper-card component, identical to homepage) */
   .record {
     background: var(--paper); color: var(--paper-ink);
@@ -339,7 +387,7 @@
       <p class="eyebrow">Done for you, when your team is at capacity</p>
       <h1>Your team is at capacity, and grants still have to fund the mission.</h1>
       <p class="subhead">Somewhere on your list right now is a grant with real fit for this cycle. No one has the hours to find out which one. The deadlines you meant to hit pass quietly, while you and your staff are working elsewhere. Sharke becomes your grant director: the whole grant function, run for you.</p>
-      <a href="#cta-section" class="hook-cta">Set up your grant office &rarr;</a>
+      <a href="#cta-section" class="hook-cta">Start your grant office &rarr;</a>
     </div>
   </section>
 
@@ -501,7 +549,15 @@
       <h2>Before you decide</h2>
       <details>
         <summary>When can we start?</summary>
-        <p>Book the setup call today, and your first grants come back verified within the first week. Prefer to run it yourself? Self-serve is open on its own page: the full workspace that finds, verifies, drafts, and tracks, for $159 a month.</p>
+        <p>Today. Start below, complete the ten-minute intake, and your office starts the same business day. Your first grants come back verified within the first week. Prefer to run it yourself? Self-serve is open on its own page: the full workspace that finds, verifies, drafts, and tracks, for $159 a month.</p>
+      </details>
+      <details>
+        <summary>How do we pick the right tier?</summary>
+        <p>By how much of your mission income comes from grants: about half is $249, three-quarters is $369, essentially all is $459. It is readable from your 990, and close is good enough. Your rate never changes unless you choose to change it: if the first month reads differently, we show you the evidence and you decide.</p>
+      </details>
+      <details>
+        <summary>Do we need a call before starting?</summary>
+        <p>No. The intake covers what the setup call used to, and a 15-minute kickoff is included in your first week if you want one. If you have a scope question first, book the call: the same 15 minutes, before instead of after.</p>
       </details>
       <details>
         <summary>What if we have not identified any grants yet?</summary>
@@ -517,7 +573,7 @@
       </details>
       <details>
         <summary>Do we have to sign a contract?</summary>
-        <p>No. It is month to month, and you can cancel anytime.</p>
+        <p>No. It is month to month, and you can cancel anytime. To cancel, reply to any Sharke email; it takes effect at the end of the current period.</p>
       </details>
     </div>
   </section>
@@ -526,21 +582,56 @@
   <section class="cta-section" id="cta-section">
     <div class="container">
       <h2>Start running grants like you have an office.</h2>
-      <p>Somewhere on your list right now is a deadline that closes this cycle, and a funder who will not hear from you before it does. Nothing moves until someone owns it. The median institutional grant in the public record is about $20,000: the expensive thing is not the office, it is the grants with real fit passing while no one owns them. Book the setup call, bring the grants already in motion, and your grant office starts with the pipeline you already have.</p>
+      <p>Somewhere on your list right now is a deadline that closes this cycle, and a funder who will not hear from you before it does. Nothing moves until someone owns it. The median institutional grant in the public record is about $20,000: the expensive thing is not the office, it is the grants with real fit passing while no one owns them. Start below, bring the grants already in motion in a ten-minute intake, and your grant office starts with the pipeline you already have.</p>
       <p class="action-trigger">Sharke does the grant work. Your team reviews and approves. You do not hire a department, you get one.</p>
 
       <div class="price-ledger">
         <div class="row"><span class="k">Grant work, done properly</span><span class="v">~45 hrs / month</span></div>
         <div class="row"><span class="k">Outsourced to a grant consultant</span><span class="v">$2,250 to $4,500 / mo</span></div>
         <div class="row price"><span class="k">Run by Sharke, your grant office</span><span class="v">$249 to $459 / mo</span></div>
-        <p class="tier">Priced to how much of your mission rides on grants: $249 at about half, $369 at three-quarters, $459 at essentially all. Federal grants over $100k added per application.</p>
+        <p class="tier">Priced to how much of your mission rides on grants: $249 at about half, $369 at three-quarters, $459 at essentially all.</p>
         <p class="goal-guarantee"><strong>The Funding Goal Guarantee.</strong> If Sharke cannot identify enough verified opportunities and funder relationships to support your funding goal, we continue working at no charge until we do.</p>
         <p class="terms">No contract. Cancel anytime.</p>
         <p class="source">Consultant cost: $50 to $100 an hour, mid-level (2025 to 2026), for the work an organization with about half its funding from grants takes on, roughly 1.5 applications a month at 30 hours each. Median institutional grant: public grant record (IRS Schedule I), Sharke analysis.</p>
       </div>
 
-      <a href="https://calendly.com/collin-sharke?utm_source=website&amp;utm_campaign=grant_office" class="cta-btn">Set up your grant office &rarr;</a>
-      <p class="cta-meta">A 15-minute setup call. Bring the grants already in motion: we scope your pipeline together, and verification of your first 3 to 5 funders starts the same week.</p>
+      <div class="tier-select" id="tier-select" role="radiogroup" aria-label="How much of your mission income comes from grants">
+        <div class="tier-card">
+          <input type="radio" name="dfy-tier" id="tier-half" value="half">
+          <label for="tier-half"><span class="tier-share">About half</span><span class="tier-price">$249<span> / month</span></span><span class="tier-desc">Grants carry about half of your mission income.</span></label>
+        </div>
+        <div class="tier-card">
+          <input type="radio" name="dfy-tier" id="tier-three-quarters" value="three_quarters">
+          <label for="tier-three-quarters"><span class="tier-share">Three-quarters</span><span class="tier-price">$369<span> / month</span></span><span class="tier-desc">Grants carry about three-quarters of your mission income.</span></label>
+        </div>
+        <div class="tier-card">
+          <input type="radio" name="dfy-tier" id="tier-all" value="all">
+          <label for="tier-all"><span class="tier-share">Essentially all</span><span class="tier-price">$459<span> / month</span></span><span class="tier-desc">Grants carry essentially all of your mission income.</span></label>
+        </div>
+      </div>
+      <p class="tier-help">It is readable from your 990, and close is good enough: pick the nearest. Your rate never changes unless you choose to change it. If the first month's work reads a different tier, we show you the evidence and the choice stays yours. You are never billed retroactively.</p>
+
+      <button class="cta-btn" id="dfy-start-btn" onclick="revealDfyCheckout()" disabled>Start your grant office &rarr;</button>
+      <p class="tier-hint" id="tier-hint">Pick the tier closest to your mix to continue.</p>
+      <div id="dfy-checkout-area" class="dfy-checkout">
+        <p class="ss-stripe"><svg width="11" height="13" viewBox="0 0 24 28" fill="none" stroke="#6b6560" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><rect x="3" y="13" width="18" height="13" rx="2"/><path d="M7 13V9a5 5 0 0 1 10 0v4"/></svg> Secure checkout by Stripe</p>
+        <div id="dfy-checkout-loading" class="ss-checkout-msg" style="display:none;"><p>Preparing secure checkout...</p></div>
+        <div id="dfy-checkout-container" style="display:none; min-height:350px;"></div>
+        <div id="dfy-checkout-error" class="ss-checkout-msg" style="display:none;"><p></p></div>
+      </div>
+
+      <ul class="after-list">
+        <li><span class="al-when">Today</span><span class="al-text"><strong>A ten-minute intake.</strong> Your EIN, your funding goal, and the grants already in motion. Your office starts when it is complete.</span></li>
+        <li><span class="al-when">Week one</span><span class="al-text"><strong>Your first 3 to 5 funders come back verified,</strong> each with a Pursue, Wait, or Move on call and the sources behind it. We will ask for your core materials this week. A 15-minute kickoff call is included if you want one; the work does not wait for it.</span></li>
+        <li><span class="al-when">Every month</span><span class="al-text"><strong>A board-ready pipeline report.</strong> Every verdict delivered with its sources, what Sharke surfaced and why, the invite-only funders worth building toward, every deadline in the next 30 days, drafts in motion, and where your pipeline stands against your funding goal.</span></li>
+        <li><span class="al-when">If you leave</span><span class="al-text"><strong>It is month to month, cancel anytime.</strong> The pipeline, the verdicts, and every Decision Record stay yours.</span></li>
+      </ul>
+
+      <div class="honest-note">
+        <p><strong>One more thing to know before you start:</strong> if the verified record says grants cannot carry the share of your mission you hoped, your first monthly report says so plainly, with the sources. If that happens, we work with you to set a goal the record supports, and the Funding Goal Guarantee holds against it. You are buying a reliable read on the path, not a promise that every funder fits.</p>
+      </div>
+
+      <p class="scope-call">Questions about scope first? <a id="scope-call-link" href="https://calendly.com/collin-sharke?utm_source=website&amp;utm_campaign=grant_office">Book a 15-minute call</a>. If you are ready, starting is faster: the same conversation happens at your kickoff, included.</p>
 
       <div class="self-serve">
         <p class="ss-label">Not ready for the full office?</p>
@@ -569,44 +660,173 @@
   </div>
 </footer>
 
-<script src="https://js.stripe.com/v3/"></script>
+<!-- Sticky mobile CTA bar: shown at <=700px by CSS; hidden while the dark CTA section is on screen. -->
+<div class="sticky-cta" id="sticky-cta">
+  <p class="sc-note"><strong>From $249 a month.</strong> Run for you.</p>
+  <a class="sc-btn" href="#cta-section">Start your grant office</a>
+</div>
+
 <script>
-  var stripe = Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4');
-  var ssCheckout = null;
-  function revealSelfServeCheckout() {
-    var btn = document.getElementById('ss-checkout-btn');
-    var area = document.getElementById('ss-checkout-area');
-    var container = document.getElementById('ss-checkout-container');
-    var loading = document.getElementById('ss-checkout-loading');
-    var errorDiv = document.getElementById('ss-checkout-error');
+  // Lazy, promise-gated Stripe (pattern from /ed, perf pass 2026-07-15).
+  // Nothing Stripe loads on pageview; the script is injected when the offer
+  // nears the viewport or the buy CTA is clicked, and the promise gate means
+  // a fast click waits on the same load instead of racing it.
+  var loadStripePromise = null;
+  function loadStripe() {
+    if (loadStripePromise) return loadStripePromise;
+    loadStripePromise = new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = 'https://js.stripe.com/v3/';
+      s.async = true;
+      s.onload = function () {
+        try { resolve(Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4')); }
+        catch (err) { reject(err); }
+      };
+      s.onerror = function () { reject(new Error('stripe.js failed to load')); };
+      document.head.appendChild(s);
+    });
+    return loadStripePromise;
+  }
+
+  // Tier selector: the buy button stays disabled until a tier is picked, and
+  // the selector freezes once checkout is revealed so the mounted session and
+  // the picked tier cannot drift apart.
+  var dfyTier = '';
+  (function () {
+    var radios = document.querySelectorAll('input[name="dfy-tier"]');
+    var btn = document.getElementById('dfy-start-btn');
+    var hint = document.getElementById('tier-hint');
+    for (var i = 0; i < radios.length; i++) {
+      radios[i].addEventListener('change', function () {
+        dfyTier = this.value;
+        if (btn) btn.disabled = false;
+        if (hint) hint.style.display = 'none';
+        if (window.skTrackOnce) window.skTrackOnce('tier_select');
+      });
+    }
+  })();
+
+  var dfyCheckout = null;
+  function revealDfyCheckout() {
+    if (!dfyTier) return;
+    var btn = document.getElementById('dfy-start-btn');
+    var area = document.getElementById('dfy-checkout-area');
+    var container = document.getElementById('dfy-checkout-container');
+    var loading = document.getElementById('dfy-checkout-loading');
+    var errorDiv = document.getElementById('dfy-checkout-error');
     btn.style.display = 'none';
     area.style.display = 'block';
     loading.style.display = 'block';
     errorDiv.style.display = 'none';
-    if (!ssCheckout) {
-      ssCheckout = stripe.initEmbeddedCheckout({
-        fetchClientSecret: function() {
-          return fetch('/.netlify/functions/create-checkout-session', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ plan: 'self_serve' })
-          })
-          .then(function(resp) { return resp.json(); })
-          .then(function(data) { if (data.error) throw new Error(data.error); return data.clientSecret; });
-        }
+    var radios = document.querySelectorAll('input[name="dfy-tier"]');
+    for (var i = 0; i < radios.length; i++) { radios[i].disabled = true; }
+    if (window.skTrackOnce) window.skTrackOnce('checkout_view');
+    if (!dfyCheckout) {
+      dfyCheckout = loadStripe().then(function (stripe) {
+        return stripe.initEmbeddedCheckout({
+          fetchClientSecret: function () {
+            return fetch('/.netlify/functions/create-checkout-session', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ plan: 'dfy', tier: dfyTier })
+            })
+            .then(function (resp) { return resp.json(); })
+            .then(function (data) { if (data.error) throw new Error(data.error); return data.clientSecret; });
+          }
+        });
       });
     }
-    ssCheckout.then(function(checkout) {
+    dfyCheckout.then(function (checkout) {
       loading.style.display = 'none';
       container.style.display = 'block';
-      checkout.mount('#ss-checkout-container');
-    }).catch(function(err) {
+      checkout.mount('#dfy-checkout-container');
+      if (window.skTrackOnce) window.skTrackOnce('checkout_mount');
+    }).catch(function (err) {
       loading.style.display = 'none';
       errorDiv.style.display = 'block';
       errorDiv.querySelector('p').textContent = 'Something went wrong. Please refresh to try again.';
-      console.error('Self-serve checkout error:', err);
+      console.error('Grant office checkout error:', err);
     });
   }
+
+  // Warm the checkout function and prefetch Stripe before the buyer reaches
+  // the offer (kills the serverless cold start and the script-load wait).
+  (function () {
+    var offer = document.getElementById('cta-section');
+    if (!offer || !('IntersectionObserver' in window) || !window.fetch) return;
+    var warmed = false;
+    new IntersectionObserver(function (entries, io) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !warmed) {
+          warmed = true;
+          io.disconnect();
+          loadStripe();
+          fetch('/.netlify/functions/create-checkout-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ warm: true })
+          }).catch(function () {});
+        }
+      });
+    }, { rootMargin: '600px 0px' }).observe(offer);
+  })();
+
+  // Hide the sticky mobile CTA bar while the dark CTA section is on screen.
+  (function () {
+    var bar = document.getElementById('sticky-cta');
+    var target = document.getElementById('cta-section');
+    if (!bar || !target || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        bar.classList.toggle('sc-hidden', entry.isIntersecting);
+      });
+    }, { threshold: 0.02 }).observe(target);
+  })();
+
+  // First-party, anonymous funnel analytics (pattern from /ed, 2026-07-14).
+  // Counts events only, via /.netlify/functions/track into Netlify Blobs:
+  // no cookies, no identifiers, no IP or UA storage. Honors Do Not Track.
+  (function () {
+    if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+    var send = function (e) {
+      try {
+        var payload = JSON.stringify({ p: 'go', e: e });
+        if (navigator.sendBeacon) { navigator.sendBeacon('/.netlify/functions/track', payload); }
+        else { fetch('/.netlify/functions/track', { method: 'POST', body: payload, keepalive: true }).catch(function () {}); }
+      } catch (err) {}
+    };
+    var once = {};
+    var sendOnce = function (e) { if (once[e]) return; once[e] = 1; send(e); };
+    window.skTrack = send;
+    window.skTrackOnce = sendOnce;
+
+    sendOnce('view');
+
+    var marks = [[25, 's25'], [50, 's50'], [75, 's75'], [90, 's90']];
+    var ticking = false;
+    addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        if (max <= 0) return;
+        var pct = 100 * window.scrollY / max;
+        for (var i = 0; i < marks.length; i++) { if (pct >= marks[i][0]) sendOnce(marks[i][1]); }
+      });
+    }, { passive: true });
+
+    var wire = function (sel, ev) {
+      var els = document.querySelectorAll(sel);
+      for (var i = 0; i < els.length; i++) {
+        els[i].addEventListener('click', function () { send(ev); });
+      }
+    };
+    wire('.hook .hook-cta', 'cta_hero');
+    wire('.midpage-cta .hook-cta', 'cta_mid');
+    wire('.sc-btn', 'cta_sticky');
+    wire('#scope-call-link', 'calendly_click');
+  })();
 </script>
 
 </body>

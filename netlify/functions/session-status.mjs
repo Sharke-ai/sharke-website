@@ -2,8 +2,9 @@
 // the session_id Stripe put in the return URL; we confirm the payment landed and
 // hand back just enough to greet the buyer and prefill the form. Read-only against
 // Stripe; returns the minimal field set (never amounts, ids, or card data) and only
-// for the one-time intake products (gfvc/grb), so it cannot be used to probe other
-// checkout sessions.
+// for the intake products (gfvc/grb one-time, dfy grant-office subscription), so it
+// cannot be used to probe other checkout sessions. dfy responses also carry the
+// buyer's selected tier from session metadata, for the /office-intake prefill.
 export default async (req) => {
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
@@ -47,7 +48,10 @@ export default async (req) => {
     const session = await resp.json();
 
     const plan = session && session.metadata ? session.metadata.plan : null;
-    const isIntakeProduct = plan === "gfvc" || plan === "grb";
+    // dfy is a subscription, but a completed no-trial subscription session is
+    // also payment_status "paid", and a future trial would fail closed here,
+    // which is the safe direction. One predicate covers all three plans.
+    const isIntakeProduct = plan === "gfvc" || plan === "grb" || plan === "dfy";
     const paid = isIntakeProduct && session.payment_status === "paid";
 
     if (!paid) {
@@ -58,12 +62,16 @@ export default async (req) => {
     }
 
     const details = session.customer_details || {};
+    const out = {
+      paid: true,
+      email: details.email || session.customer_email || "",
+      name: details.name || "",
+    };
+    if (plan === "dfy" && session.metadata && session.metadata.tier) {
+      out.tier = session.metadata.tier;
+    }
     return new Response(
-      JSON.stringify({
-        paid: true,
-        email: details.email || session.customer_email || "",
-        name: details.name || "",
-      }),
+      JSON.stringify(out),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
   } catch (err) {

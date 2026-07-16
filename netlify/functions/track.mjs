@@ -12,6 +12,8 @@ const EVENTS = new Set([
   "view", "s25", "s50", "s75", "s90",
   "cta_header", "cta_hero", "cta_mid", "cta_sticky",
   "checkout_view", "checkout_mount",
+  // grant-office direct checkout funnel (2026-07-16):
+  "calendly_click", "tier_select", "intake_submit", "paid_verified",
 ]);
 
 export default async (req) => {
