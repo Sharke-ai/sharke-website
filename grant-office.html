@@ -385,6 +385,33 @@
   .faq details[open] summary::after { content: '\2212'; }
   .faq details p { margin: 0 0 18px; font-size: 0.95rem; color: #2a2a2a; line-height: 1.6; }
   .faq details:not([open]) p { display: none; }
+  /* Pipeline board (illustrative workspace view) */
+  .pipeline-board { border: 1px solid var(--rule); border-radius: 8px; background: #fff; overflow: hidden; margin: 8px 0 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .pb-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 15px 20px; border-bottom: 1px solid var(--rule); flex-wrap: wrap; }
+  .pb-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--black); }
+  .pb-title span { display: block; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mid-gray); font-weight: 400; margin-top: 4px; }
+  .pb-stat { text-align: right; }
+  .pb-pct { font-family: var(--mono); font-size: 1.35rem; font-weight: 700; color: var(--black); vertical-align: middle; }
+  .pb-pace { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--verified); background: var(--verified-bg); border: 1px solid var(--verified-border); padding: 3px 7px; border-radius: 3px; margin-left: 8px; vertical-align: middle; }
+  .pb-label { display: block; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mid-gray); margin-top: 4px; }
+  .pb-row { display: grid; grid-template-columns: 1fr auto 92px; gap: 10px 18px; align-items: center; padding: 13px 20px; border-bottom: 1px solid var(--rule); }
+  .pb-row:last-child { border-bottom: none; }
+  .pb-grant { font-weight: 600; color: var(--black); font-size: 0.92rem; }
+  .pb-new { display: inline-block; font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--verified); border: 1px solid var(--verified-border); border-radius: 3px; padding: 1px 5px; margin-left: 8px; vertical-align: 1px; }
+  .pb-funder { display: block; color: var(--mid-gray); font-size: 0.76rem; font-weight: 400; margin-top: 2px; }
+  .pb-meta { font-family: var(--mono); font-size: 0.74rem; color: var(--mid-gray); white-space: nowrap; text-align: right; line-height: 1.35; font-variant-numeric: tabular-nums; }
+  .pb-chip { font-family: var(--mono); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.04em; padding: 4px 0; border-radius: 3px; text-align: center; }
+  .pb-chip.pursue { color: var(--verified); background: var(--verified-bg); border: 1px solid var(--verified-border); }
+  .pb-chip.wait { color: #8a6415; background: rgba(138,100,21,0.09); border: 1px solid rgba(138,100,21,0.28); }
+  .pb-chip.moveon { color: var(--rec-red); background: var(--rec-red-bg); border: 1px solid #e6c0c0; }
+  .pb-cap { font-family: var(--mono); font-size: 0.66rem; color: var(--mid-gray); letter-spacing: 0.02em; margin: 0 0 8px; }
+  /* Packet proof block */
+  .packet-proof { background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 28px 32px; margin-top: 8px; }
+  .packet-proof p { color: var(--paper-ink-2); font-size: 0.97rem; margin-bottom: 18px; max-width: 64ch; }
+  .pp-btn { display: inline-flex; align-items: center; gap: 9px; background: var(--black); color: var(--warm-white); text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 13px 24px; border-radius: 6px; }
+  .pp-btn:hover { background: #23201c; }
+  .pp-note { font-family: var(--mono); font-size: 0.66rem; color: var(--mid-gray); margin-top: 14px; letter-spacing: 0.02em; }
+  @media (max-width: 640px) { .pb-row { grid-template-columns: 1fr 82px; } .pb-meta { display: none; } }
 </style>
 </head>
 <body>
@@ -399,9 +426,9 @@
   <!-- HOOK -->
   <section class="hook">
     <div class="container">
-      <p class="eyebrow">Done for you, when your team is at capacity</p>
-      <h1>Your team is at capacity, and grants still have to fund the mission.</h1>
-      <p class="subhead">Somewhere on your list right now is a grant with real fit for this cycle. No one has the hours to find out which one. The deadlines you meant to hit pass quietly, while you and your staff are working elsewhere. Sharke becomes your grant office: the whole grant function, run for you.</p>
+      <p class="eyebrow">Done for you, for teams with no grant staff</p>
+      <h1>Your team is at capacity. Sharke becomes the grant office you cannot afford to hire.</h1>
+      <p class="subhead">Right now, grants with real fit are slipping past unworked while your team is heads-down elsewhere, and the deadlines pass quietly. Sharke becomes your funding arm: it finds the funders that actually fund work like yours, verifies them against their own record, drafts the applications worth pursuing, and tracks every deadline. The whole grant function, run for you.</p>
       <a href="#cta-section" class="hook-cta">Start your grant office &rarr;</a>
     </div>
   </section>
@@ -455,7 +482,7 @@
         </li>
         <li>
           <span class="step-num">Step 2</span>
-          <span class="step-text"><strong>Surfaces the grants and funders worth your time.</strong> Sharke watches the funders that match your mission and surfaces better-fit grants you are not tracking, each one carrying its own verdict, plus the funder relationships worth building toward now. You add only what has verified fit, never a longer list to triage.</span>
+          <span class="step-text"><strong>Surfaces the grants and funders worth your time.</strong> Sharke watches the funders whose record fits your mission and surfaces better-fit grants you are not tracking, each one carrying its own verdict, plus the funder relationships worth building toward now. You add only what has verified fit, never a longer list to triage.</span>
         </li>
         <li>
           <span class="step-num">Step 3</span>
@@ -472,8 +499,35 @@
   <!-- WHAT A VERDICT LOOKS LIKE -->
   <section>
     <div class="container">
-      <h3>What a verdict looks like</h3>
-      <h2>A real verdict, with the sources behind it.</h2>
+      <h3>The pipeline, run for you</h3>
+      <h2>Your whole pipeline, and the record behind every call.</h2>
+      <div class="pipeline-board">
+        <div class="pb-top">
+          <div class="pb-title">Grant Pipeline<span>Run for you, updated every month</span></div>
+          <div class="pb-stat"><span class="pb-pct">81%</span><span class="pb-pace">Ahead of pace</span><span class="pb-label">of this year's goal covered</span></div>
+        </div>
+        <div class="pb-row">
+          <div><span class="pb-grant">Youth Opportunity Fund<span class="pb-new">New</span></span><span class="pb-funder">Regional family foundation, funds organizations at your budget</span></div>
+          <div class="pb-meta">$85K<br>due Oct 15</div>
+          <span class="pb-chip pursue">Pursue</span>
+        </div>
+        <div class="pb-row">
+          <div><span class="pb-grant">Community Resilience Grant<span class="pb-new">New</span></span><span class="pb-funder">State agency, backs first-time applicants</span></div>
+          <div class="pb-meta">$60K<br>due Nov 1</div>
+          <span class="pb-chip pursue">Pursue</span>
+        </div>
+        <div class="pb-row">
+          <div><span class="pb-grant">Rural Capacity Program</span><span class="pb-funder">Federal, funding this cycle, confirm eligibility</span></div>
+          <div class="pb-meta">$120K<br>LOI first</div>
+          <span class="pb-chip wait">Wait</span>
+        </div>
+        <div class="pb-row">
+          <div><span class="pb-grant">Metro Health Coalition Grant</span><span class="pb-funder">Community foundation, funds larger budgets only</span></div>
+          <div class="pb-meta">$50K<br>due Oct 20</div>
+          <span class="pb-chip moveon">Move on</span>
+        </div>
+      </div>
+      <p class="pb-cap">Illustrative view of the pipeline Sharke runs for you. Open any grant for the verdict up close:</p>
       <div class="record moveon">
         <div class="rec-head">
           <div>
@@ -571,7 +625,7 @@
       <div class="cred-block cred-flex">
         <img class="founder-photo" src="/assets/founder-collin.jpg" alt="Collin Brown, founder of Sharke" width="88" height="88" onerror="this.style.display='none';">
         <div>
-          <p>I have spent my career replacing gut calls with data: how the largest financial institutions set their global IT footprint, when mergers and acquisitions create value instead of destroying it, and which grants are worth winning, at for-profit and nonprofit organizations from NIH, NSF, and USDA to Meta and Google. I have done that work across the private sector and the White House Office of Management and Budget, and I sign off on every Sharke verdict myself.</p>
+          <p>I have spent my career replacing gut calls with data: how the largest financial institutions set their global IT footprint, when mergers and acquisitions create value instead of destroying it, and which grants are worth pursuing, at for-profit and nonprofit organizations from NIH, NSF, and USDA to Meta and Google. I have done that work across the private sector and the White House Office of Management and Budget, and I sign off on every Sharke verdict myself.</p>
           <p style="margin-top:14px; font-family:'IBM Plex Mono',monospace; font-size:0.8rem; letter-spacing:0.04em; color:#6b6560;">Collin Brown &nbsp;/&nbsp; Wharton MBA &nbsp;/&nbsp; Founder, Sharke.ai</p>
         </div>
       </div>
@@ -581,10 +635,15 @@
   <!-- PROOF -->
   <section>
     <div class="container">
-      <h3>From a team that ran it</h3>
-      <div class="quote">
-        <p>"What hit me was realizing how much time we were putting into grants that were never really live opportunities for us. We had a couple that looked completely reasonable on the surface, but once we dug into who the funder actually supported, it changed the conversation pretty fast. I'd rather know that before my staff disappears into another month of work."</p>
-        <cite>Executive Director, Community health nonprofit, $850K budget</cite>
+      <h3>See the deliverable</h3>
+      <h2>The packet that lands on your board's desk.</h2>
+      <div class="packet-proof">
+        <p>Every month, your grant office sends one board-ready packet: where your funding goal stands, the pipeline with the funders new to you this cycle, the verdicts up close, and exactly what was done and what is next. Here is a full sample, the same format and rigor you receive.</p>
+        <a class="pp-btn" href="/assets/sample-monthly-packet.pdf" target="_blank" rel="noopener">
+          <svg width="16" height="18" viewBox="0 0 24 26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 12v7M9 16l3 3 3-3"/></svg>
+          See a sample monthly packet
+        </a>
+        <p class="pp-note">Illustrative organization and figures. The format, the method, and the sources are what you receive.</p>
       </div>
     </div>
   </section>
@@ -627,6 +686,14 @@
         <p>Both. Sharke does the research and drafting, and every verdict is built from documented funder filings, 990s, award history, and eligibility, not AI guesses. With the grant office plan, the Sharke team manages the work for you.</p>
       </details>
       <details>
+        <summary>Why not just hire someone to do this?</summary>
+        <p>A grant hire is a full salary, months of recruiting, and, on average, a departure inside two years that takes the pipeline with it. Sharke is the whole grant function for a fraction of a salary, always on, and the pipeline stays with your organization no matter who comes or goes. You also get verified fit on every grant, a measurement layer a single generalist hire cannot bring.</p>
+      </details>
+      <details>
+        <summary>Who sees the financials and documents we share?</summary>
+        <p>Only Sharke, and only to find, verify, and draft grants for your organization. Your materials are never shared or sold, and they are not used to train anything. Everything Sharke builds, the pipeline, the verdicts, and the drafts, stays yours.</p>
+      </details>
+      <details>
         <summary>Do we have to sign a contract?</summary>
         <p>No. It is month to month, and you can cancel anytime. To cancel, reply to any Sharke email; it takes effect at the end of the current period.</p>
       </details>
@@ -637,9 +704,9 @@
   <!-- CTA -->
   <section class="cta-section" id="cta-section">
     <div class="container">
-      <h2>Start running grants like you have an office.</h2>
+      <h2>Get the grant office you cannot afford to hire.</h2>
       <p>Somewhere on your list right now is a deadline that closes this cycle, and a funder who will not hear from you before it does. Nothing moves until someone owns it. The median institutional grant in the public record is about $20,000: the expensive thing is not the office, it is the grants with real fit passing while no one owns them. Foundation, corporate, state, and federal funding are all in scope.</p>
-      <p class="action-trigger">Sharke does the grant work. Your team reviews and approves. You do not hire a department, you get one.</p>
+      <p class="action-trigger">Sharke does the grant work. You approve every draft, and nothing goes out under your name until you say so. You do not hire a department, you get one.</p>
 
       <div class="price-ledger">
         <div class="row"><span class="k">Grant work, done properly</span><span class="v">~45 hrs / month</span></div>
@@ -650,6 +717,8 @@
         <p class="terms">No contract. Cancel anytime.</p>
         <p class="source">Consultant cost: $50 to $100 an hour, mid-level (2025 to 2026), for the work an organization with about half its funding from grants takes on, roughly 1.3 to 1.5 applications a month at 30 hours each. Median institutional grant: public grant record (IRS Schedule I), Sharke analysis.</p>
       </div>
+
+      <p class="free-onramp" style="margin-top:20px;"><a href="/assets/sample-monthly-packet.pdf" target="_blank" rel="noopener">See a sample monthly packet</a>, the exact board-ready format you receive each month.</p>
 
       <div class="tier-select" id="tier-select" role="radiogroup" aria-label="How much of your mission income comes from grants">
         <div class="tier-card">
@@ -665,7 +734,7 @@
           <label for="tier-all"><span class="tier-share">Essentially all</span><span class="tier-price">$459<span> / month</span></span><span class="tier-desc">Grants carry essentially all of your mission income.</span><span class="tier-vol">About 32 applications a year in motion.</span></label>
         </div>
       </div>
-      <p class="tier-help">Pick the one nearest to what you think. If the first month's work reads a different tier, we show you the evidence and the choice stays yours. You are never billed retroactively.</p>
+      <p class="tier-help">Not sure which one? Read it off your last 990: grant revenue divided by total revenue. Pick the one nearest to that. If the first month's work reads a different tier, we show you the evidence and the choice stays yours. You are never billed retroactively.</p>
 
       <span id="dfy-start-wrap"><button class="cta-btn" id="dfy-start-btn" onclick="revealDfyCheckout()" disabled>Start your grant office &rarr;</button></span>
       <p class="tier-hint" id="tier-hint">Pick the tier closest to your mix to continue.</p>
@@ -680,7 +749,7 @@
 
       <ul class="after-list">
         <li><span class="al-when">Today</span><span class="al-text"><strong>A ten-minute intake.</strong> Your EIN, your funding goal, and the grants already in motion. Your office starts when it is complete.</span></li>
-        <li><span class="al-when">Week one</span><span class="al-text"><strong>Your first 3 to 5 funders come back verified,</strong> each with a Pursue, Wait, or Move on call and the sources behind it. We will ask for your core materials this week. A 15-minute kickoff call is included if you want one; the work does not wait for it.</span></li>
+        <li><span class="al-when">Week one</span><span class="al-text"><strong>Your first 3 to 5 funders come back verified,</strong> each with a Pursue, Wait, or Move on call and the sources behind it. We will ask for your core materials this week (your most recent 990, a few program descriptions, and your current budget). A 15-minute kickoff call is included if you want one; the work does not wait for it.</span></li>
         <li><span class="al-when">Every month</span><span class="al-text"><strong>A board-ready pipeline report.</strong> Every verdict delivered with its sources, what Sharke surfaced and why, the invite-only funders worth building toward, every deadline in the next 30 days, drafts in motion, and where your pipeline stands against your funding goal.</span></li>
         <li><span class="al-when">If you leave</span><span class="al-text"><strong>It is month to month, cancel anytime.</strong> The pipeline, the verdicts, and every Decision Record stay yours.</span></li>
       </ul>
