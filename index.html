@@ -549,19 +549,15 @@
         <line x1="400" y1="152" x2="400" y2="160" stroke="rgba(74,227,160,0.35)" stroke-width="1.5"/>
         <polygon points="400,168 396,160 404,160" fill="#4AE3A0" opacity="0.7"/>
 
-        <!-- main axis source -->
-        <rect x="20" y="170" width="190" height="44" rx="9" fill="#1a2236" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
-        <text x="115" y="197" text-anchor="middle" class="pa-eyebrow" fill="#9CA3AF">GRANTS YOU UNLOCK</text>
+        <!-- main axis source: box painted AFTER the dots (see end of svg) so
+             traveling dots pass under it instead of over its label text -->
 
         <!-- inflow track along the main axis -->
         <path d="M 216 192 H 520" fill="none" stroke="rgba(255,255,255,0.13)" stroke-width="1.5" stroke-dasharray="2 7">
           <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/>
         </path>
 
-        <!-- single intake -->
-        <rect x="270" y="170" width="170" height="44" rx="9" fill="#1a2236" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
-        <text x="355" y="197" text-anchor="middle" class="pa-eyebrow" fill="#9CA3AF">GRANTS IDENTIFIED</text>
-        <text x="270" y="232" class="pa-sub" fill="#6B7280">including grants you already track</text>
+        <!-- single intake: painted after the dots, see end of svg -->
 
         <!-- verification gate -->
         <text x="531" y="78" text-anchor="middle" class="pa-eyebrow" fill="#4AE3A0">SHARKE VERIFIES</text>
@@ -584,13 +580,7 @@
           <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/>
         </line>
 
-        <!-- downstream chips -->
-        <rect x="642" y="182" width="56" height="20" rx="10" fill="#1a2236" stroke="rgba(74,227,160,0.35)" stroke-width="1.5"/>
-        <text x="670" y="196" text-anchor="middle" class="pa-sub" fill="#4AE3A0">DRAFT</text>
-        <rect x="719" y="182" width="76" height="20" rx="10" fill="#1a2236" stroke="rgba(74,227,160,0.35)" stroke-width="1.5"/>
-        <text x="757" y="196" text-anchor="middle" class="pa-sub" fill="#4AE3A0">RED TEAM</text>
-        <rect x="816" y="182" width="62" height="20" rx="10" fill="#1a2236" stroke="rgba(74,227,160,0.35)" stroke-width="1.5"/>
-        <text x="847" y="196" text-anchor="middle" class="pa-sub" fill="#4AE3A0">SUBMIT</text>
+        <!-- downstream chips: painted after the dots, see end of svg -->
 
         <!-- grant dots: 14 per cycle, 5 pass, 9 ruled out -->
         <circle r="5" fill="#9CA3AF"><animateMotion path="M 400 154 L 400 192 L 531 192 L 538 294" dur="7s" begin="0s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0.623;0.623;1;1" keyTimes="0;0.4;0.49;0.78;1"/><animate attributeName="fill" calcMode="discrete" values="#9CA3AF;#F2766B" keyTimes="0;0.48" dur="7s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0.85;0;0" keyTimes="0;0.05;0.49;0.7;0.78;1" dur="7s" begin="0s" repeatCount="indefinite"/></circle>
@@ -607,20 +597,32 @@
         <circle r="5" fill="#9CA3AF"><animateMotion path="M 216 192 L 531 192 L 538 294" dur="7s" begin="-5.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0.755;0.755;1;1" keyTimes="0;0.4;0.49;0.78;1"/><animate attributeName="fill" calcMode="discrete" values="#9CA3AF;#F2766B" keyTimes="0;0.48" dur="7s" begin="-5.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0.85;0;0" keyTimes="0;0.05;0.49;0.7;0.78;1" dur="7s" begin="-5.5s" repeatCount="indefinite"/></circle>
         <circle r="5" fill="#9CA3AF"><animateMotion path="M 400 154 L 400 192 L 531 192 L 538 294" dur="7s" begin="-6s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0.623;0.623;1;1" keyTimes="0;0.4;0.49;0.78;1"/><animate attributeName="fill" calcMode="discrete" values="#9CA3AF;#F2766B" keyTimes="0;0.48" dur="7s" begin="-6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0.85;0;0" keyTimes="0;0.05;0.49;0.7;0.78;1" dur="7s" begin="-6s" repeatCount="indefinite"/></circle>
         <circle r="5" fill="#9CA3AF"><animateMotion path="M 216 192 H 884" dur="7s" begin="-6.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0.472;0.472;1" keyTimes="0;0.4;0.49;1"/><animate attributeName="fill" calcMode="discrete" values="#9CA3AF;#4AE3A0" keyTimes="0;0.48" dur="7s" begin="-6.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.05;0.49;0.94;1" dur="7s" begin="-6.5s" repeatCount="indefinite"/></circle>
+
+        <!-- boxes and chips painted last so the traveling dots pass UNDER them
+             (overlap fix 2026-07-22): dots stay visible on the open track and
+             crossing the verification gate, never on top of label text -->
+        <rect x="20" y="170" width="190" height="44" rx="9" fill="#1a2236" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <text x="115" y="197" text-anchor="middle" class="pa-eyebrow" fill="#9CA3AF">GRANTS YOU UNLOCK</text>
+        <rect x="270" y="170" width="170" height="44" rx="9" fill="#1a2236" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <text x="355" y="197" text-anchor="middle" class="pa-eyebrow" fill="#9CA3AF">GRANTS IDENTIFIED</text>
+        <text x="270" y="232" class="pa-sub" fill="#6B7280">including grants you already track</text>
+        <rect x="642" y="182" width="56" height="20" rx="10" fill="#1a2236" stroke="rgba(74,227,160,0.35)" stroke-width="1.5"/>
+        <text x="670" y="196" text-anchor="middle" class="pa-sub" fill="#4AE3A0">DRAFT</text>
+        <rect x="719" y="182" width="76" height="20" rx="10" fill="#1a2236" stroke="rgba(74,227,160,0.35)" stroke-width="1.5"/>
+        <text x="757" y="196" text-anchor="middle" class="pa-sub" fill="#4AE3A0">RED TEAM</text>
+        <rect x="816" y="182" width="62" height="20" rx="10" fill="#1a2236" stroke="rgba(74,227,160,0.35)" stroke-width="1.5"/>
+        <text x="847" y="196" text-anchor="middle" class="pa-sub" fill="#4AE3A0">SUBMIT</text>
       </svg>
       <svg id="pipeFlowM" viewBox="0 0 360 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram. Grants identified: Sharke finds the grants and surfaces the invite-only funders relationships unlock, alongside grants you already track. Sharke verifies each one against eligibility, award history, geography, and timing. Weak fits are ruled out, giving you back about 25 hours of staff time each. What passes moves down the Verified Pipeline, developed and managed by Sharke, through drafting, Red Team review, and submission, to funding.">
   <line x1="46" y1="16" x2="46" y2="368" stroke="rgba(74,227,160,0.5)" stroke-width="2"/>
   <polygon points="41,368 51,368 46,376" fill="#4AE3A0" opacity="0.75"/>
 
-  <circle cx="46" cy="46" r="6" fill="#0a0f1a" stroke="#4AE3A0" stroke-width="2"/>
+  <!-- axis node painted after the dots (overlap fix 2026-07-22), see end of svg -->
   <text x="68" y="42" font-size="12" letter-spacing="0.08em" fill="#4AE3A0" font-weight="500">GRANTS IDENTIFIED</text>
   <text x="68" y="58" font-size="10" letter-spacing="0.03em" fill="#9CA3AF">Sharke finds the grants and surfaces the</text>
   <text x="68" y="72" font-size="10" letter-spacing="0.03em" fill="#9CA3AF">invite-only funders relationships unlock.</text>
 
-  <rect x="32" y="130" width="28" height="14" rx="7" fill="#1a2236" stroke="rgba(74,227,160,0.6)" stroke-width="1.5"/>
-  <rect x="36" y="133" width="5" height="8" rx="2.5" fill="#4AE3A0" opacity="0.9">
-    <animate attributeName="x" values="36;51;36" dur="2.6s" repeatCount="indefinite"/>
-  </rect>
+  <!-- verify gate painted after the dots, see end of svg -->
   <text x="68" y="128" font-size="12" letter-spacing="0.08em" fill="#4AE3A0" font-weight="500">SHARKE VERIFIES</text>
   <text x="68" y="144" font-size="10" letter-spacing="0.03em" fill="#9CA3AF">Checked against eligibility, award</text>
   <text x="68" y="158" font-size="10" letter-spacing="0.03em" fill="#9CA3AF">history, geography, and timing.</text>
@@ -629,18 +631,11 @@
   <text x="138" y="204" font-size="9.5" letter-spacing="0.06em" fill="#F2766B" font-weight="500">RULED OUT</text>
   <text x="138" y="217" font-size="9.5" letter-spacing="0.03em" fill="#6B7280">about 25 hours back, each</text>
 
-  <circle cx="46" cy="248" r="6" fill="#0a0f1a" stroke="#4AE3A0" stroke-width="2"/>
+  <!-- axis node painted after the dots, see end of svg -->
   <text x="68" y="244" font-size="12" letter-spacing="0.08em" fill="#4AE3A0" font-weight="500">VERIFIED PIPELINE</text>
   <text x="68" y="260" font-size="10" letter-spacing="0.03em" fill="#9CA3AF">Developed and managed by Sharke.</text>
 
-  <g font-size="10" letter-spacing="0.06em">
-    <rect x="20" y="274" width="52" height="20" rx="10" fill="#101826" stroke="rgba(74,227,160,0.32)"/>
-    <text x="46" y="287" text-anchor="middle" fill="#D1D5DB">DRAFT</text>
-    <rect x="10" y="304" width="72" height="20" rx="10" fill="#101826" stroke="rgba(74,227,160,0.32)"/>
-    <text x="46" y="317" text-anchor="middle" fill="#D1D5DB">RED TEAM</text>
-    <rect x="17" y="334" width="58" height="20" rx="10" fill="#101826" stroke="rgba(74,227,160,0.32)"/>
-    <text x="46" y="347" text-anchor="middle" fill="#D1D5DB">SUBMIT</text>
-  </g>
+  <!-- chips painted after the dots, see end of svg -->
 
   <rect x="30" y="376" width="32" height="18" rx="9" fill="#4AE3A0"/>
   <text x="74" y="389" font-size="12" letter-spacing="0.08em" fill="#4AE3A0" font-weight="500">FUNDING</text>
@@ -654,6 +649,24 @@
     <circle r="4" fill="#9CA3AF"><animateMotion path="M 46 12 V 137 Q 82 192 128 206" dur="7s" begin="-4.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0.532;0.532;1;1" keyTimes="0;0.4;0.49;0.78;1"/><animate attributeName="fill" calcMode="discrete" values="#9CA3AF;#F2766B" keyTimes="0;0.48" dur="7s" begin="-4.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;1;0;0" keyTimes="0;0.04;0.49;0.7;0.8;1" dur="7s" begin="-4.5s" repeatCount="indefinite"/></circle>
     <circle r="4" fill="#9CA3AF"><animateMotion path="M 46 12 V 137 L 46 366" dur="7s" begin="-5.4s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0.353;0.353;1" keyTimes="0;0.4;0.49;1"/><animate attributeName="fill" calcMode="discrete" values="#9CA3AF;#4AE3A0" keyTimes="0;0.48" dur="7s" begin="-5.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.04;0.49;0.94;1" dur="7s" begin="-5.4s" repeatCount="indefinite"/></circle>
     <circle r="4" fill="#9CA3AF"><animateMotion path="M 46 12 V 137 Q 82 192 128 206" dur="7s" begin="-6.3s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0.532;0.532;1;1" keyTimes="0;0.4;0.49;0.78;1"/><animate attributeName="fill" calcMode="discrete" values="#9CA3AF;#F2766B" keyTimes="0;0.48" dur="7s" begin="-6.3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;1;0;0" keyTimes="0;0.04;0.49;0.7;0.8;1" dur="7s" begin="-6.3s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <!-- nodes, gate, and chips painted last so the traveling dots pass UNDER
+       them (overlap fix 2026-07-22): the vertical dot track at x=46 crosses
+       all of these; label text must always win -->
+  <circle cx="46" cy="46" r="6" fill="#0a0f1a" stroke="#4AE3A0" stroke-width="2"/>
+  <rect x="32" y="130" width="28" height="14" rx="7" fill="#1a2236" stroke="rgba(74,227,160,0.6)" stroke-width="1.5"/>
+  <rect x="36" y="133" width="5" height="8" rx="2.5" fill="#4AE3A0" opacity="0.9">
+    <animate attributeName="x" values="36;51;36" dur="2.6s" repeatCount="indefinite"/>
+  </rect>
+  <circle cx="46" cy="248" r="6" fill="#0a0f1a" stroke="#4AE3A0" stroke-width="2"/>
+  <g font-size="10" letter-spacing="0.06em">
+    <rect x="20" y="274" width="52" height="20" rx="10" fill="#101826" stroke="rgba(74,227,160,0.32)"/>
+    <text x="46" y="287" text-anchor="middle" fill="#D1D5DB">DRAFT</text>
+    <rect x="10" y="304" width="72" height="20" rx="10" fill="#101826" stroke="rgba(74,227,160,0.32)"/>
+    <text x="46" y="317" text-anchor="middle" fill="#D1D5DB">RED TEAM</text>
+    <rect x="17" y="334" width="58" height="20" rx="10" fill="#101826" stroke="rgba(74,227,160,0.32)"/>
+    <text x="46" y="347" text-anchor="middle" fill="#D1D5DB">SUBMIT</text>
   </g>
 </svg>
     </div>
