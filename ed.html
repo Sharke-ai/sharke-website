@@ -845,6 +845,10 @@
     .fvi-arc-val { transition: none !important; }
     .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
   }
+  @media print {
+    /* Un-scrolled reveals must never print blank (zero-state fix 2026-07-22). */
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
 
   /* Sticky mobile CTA bar (conversion pass 2026-07-14): a persistent action path
      on a ~28-screen mobile page. Light editorial styling to match the page; a
@@ -1119,7 +1123,7 @@
     <div class="container">
       <h3>Where the read comes from</h3>
       <h2>One EIN in. A full funding analysis out: your position, your field, and the funder market at your size.</h2>
-      <p class="record-stat"><span class="rs-num" id="rs-num" data-target="3.8">3.8</span><span class="rs-num">M+</span><span class="rs-label">grant award records behind the funder-market read</span></p>
+      <p class="record-stat"><span class="rs-num" id="rs-num" data-target="6.3">6.3</span><span class="rs-num">M+</span><span class="rs-label">grant award records behind the funder-market read</span></p>
       <p>We start from your EIN and one line on what your org does. The Assessment then builds three reads and runs them against each other: your own multi-year filings; a field cohort of roughly 50 organizations at your size and mission; and the record of who actually funded organizations like yours, at what sizes, how recently, and whether they came back. No single one of those is hard to find. Reading them against each other is the analysis: your runway against your field's, the market's real award sizes against the grant your pipeline needs, funder depth against the pipeline math. That is what turns public records into a decision. Every figure cites the source it came from, so you can check it yourself, and it reaches past the 990s everyone stops at: federal and state award records, and the institutional grant record of who actually funded organizations like yours. Where the public record is too thin to be honest, the Assessment says so, instead of dressing it up.</p>
 
       <div class="pipe-math">
@@ -1349,28 +1353,30 @@
       requestAnimationFrame(frame);
     };
 
-    // FVI dial: rewind to 0, sweep to the sample value on first view.
+    // FVI dial: the page HOLDS its shipped final state (55, full arc) until the
+    // dial first enters view; only then does it rewind and sweep. Zero-state
+    // fix 2026-07-22: the old load-time rewind stranded "0 out of 100" for any
+    // consumer whose IntersectionObserver never fires (print, captures,
+    // prerender, suspended renderers).
     var ARC_LEN = 251.33;
     var arc = document.getElementById('fvi-arc');
     var num = document.getElementById('fvi-num');
     var dialTarget = num ? parseInt(num.getAttribute('data-target'), 10) : 0;
-    if (arc && num) {
+    var runDial = function () {
       arc.style.transition = 'none';
       arc.style.strokeDashoffset = ARC_LEN;
       num.textContent = '0';
-    }
-    var runDial = function () {
-      arc.style.transition = '';
       // Force a style flush so the rewound offset is the transition start point.
       void arc.getBoundingClientRect();
+      arc.style.transition = '';
       arc.style.strokeDashoffset = ARC_LEN * (1 - dialTarget / 100);
       tween(1400, function (p) { num.textContent = Math.round(dialTarget * p); });
     };
 
-    // Record-count stat: rewind to 0.0, count to the locked figure.
+    // Record-count stat: same just-in-time pattern; markup keeps the real
+    // figure until first view, then the count-up runs.
     var rs = document.getElementById('rs-num');
     var rsTarget = rs ? parseFloat(rs.getAttribute('data-target')) : 0;
-    if (rs) rs.textContent = '0.0';
     var runStat = function () {
       tween(1200, function (p) { rs.textContent = (rsTarget * p).toFixed(1); },
         function () { rs.textContent = rsTarget.toFixed(1); });

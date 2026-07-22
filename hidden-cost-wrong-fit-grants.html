@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Zero-state guard (2026-07-22): mark the doc JS-capable only when the reveal
+       machinery exists. The fade-in hide below is scoped to html.js, so no-JS
+       visitors always see the full article. -->
+  <script>if ('IntersectionObserver' in window) document.documentElement.classList.add('js');</script>
   <style>
     :root {
       --text-primary: #FFFFFF;
@@ -206,15 +210,22 @@
       margin-bottom: 48px;
     }
 
-    /* Fade-in sections */
-    .fade-section {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+    /* Fade-in sections (zero-state fix 2026-07-22: the hide is an enhancement,
+       scoped to JS-capable, motion-allowing visitors; no-JS, reduced-motion,
+       and print always render the finished article) */
+    @media (prefers-reduced-motion: no-preference) {
+      html.js .fade-section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      html.js .fade-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    .fade-section.visible {
-      opacity: 1;
-      transform: translateY(0);
+    @media print {
+      .fade-section { opacity: 1 !important; transform: none !important; }
     }
 
     /* Stats grid */
@@ -710,18 +721,24 @@
       document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Fade-in sections on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+    // Fade-in sections on scroll (guarded: without IntersectionObserver the
+    // head guard never hides them; the else-branch is a second belt)
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-section').forEach(section => {
+        observer.observe(section);
       });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-section').forEach(section => {
-      observer.observe(section);
-    });
+    } else {
+      document.querySelectorAll('.fade-section').forEach(section => {
+        section.classList.add('visible');
+      });
+    }
   </script>
 
 </body>
