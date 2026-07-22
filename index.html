@@ -391,6 +391,7 @@
   }
   .sticky-cta span { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
   .sticky-cta a { font-size: 14px; font-weight: 600; padding: 11px 18px; }
+  .sticky-cta.sc-hidden { display: none; }
 
   /* NEW BLOCKS: cta anchors, ladder, assessment section, gap equation, FAQ, svg headline */
   .cta-anchor { margin-top: 26px; font-size: 15px; color: var(--ink-2); max-width: 680px; }
@@ -485,6 +486,18 @@
     <p class="eyebrow">For nonprofits counting on grants to fund the mission</p>
     <h1 style="font-size: clamp(27px, 3.4vw, 40px);">We find the grants worth pursuing. We screen out the ones you have no real shot at. <span style="color: var(--accent);">What survives is your Verified Pipeline.</span></h1>
     <p class="lead">Every grant is checked against eligibility, funder history, and real fit before it earns a place in your pipeline.</p>
+    <div class="cta-row">
+      <a href="/ed" class="btn-primary">Get the Assessment <span class="arr">&rarr;</span></a>
+      <span class="risk-reducers">The Grant Funding Viability Assessment: $79 one time. Board-ready in 48 hours.</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT SHARKE DOES (fold restructure 2026-07-22: the four cards, the
+     footnote, and the source strip moved below the fold; copy and styling
+     unchanged, only position) -->
+<section>
+  <div class="wrap">
     <ul class="hero-points">
       <li class="bento-card">
         <div class="bento-inner">
@@ -520,10 +533,6 @@
         <span class="src-chip"><span class="src-dot"></span>IRS FILINGS</span>
       </div>
       <p class="trust-line">Not just the 990s everyone reads. Every verdict draws on federal and state award records, live funder pages and open RFPs, eligibility criteria, and primary-source IRS filings.</p>
-    </div>
-    <div class="cta-row">
-      <a href="/ed" class="btn-primary">Get the Assessment <span class="arr">&rarr;</span></a>
-      <span class="risk-reducers">The Grant Funding Viability Assessment: $79 one time. Board-ready in 48 hours.</span>
     </div>
   </div>
 </section>
@@ -921,6 +930,23 @@
   <span>$79 one time. Board-ready in 48 hours.</span>
   <a href="/ed" class="btn-primary">Get the Assessment <span class="arr">&rarr;</span></a>
 </div>
+
+<script>
+  // Hide the sticky mobile CTA while the hero's own CTA is on screen (fold
+  // restructure 2026-07-22 put the hero CTA in the first viewport; two
+  // identical buttons at once is noise). Same pattern as /ed's checkout bar.
+  // Without IntersectionObserver the bar simply stays, which is safe.
+  (function () {
+    var bar = document.querySelector('.sticky-cta');
+    var target = document.querySelector('.hero .cta-row');
+    if (!bar || !target || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        bar.classList.toggle('sc-hidden', entry.isIntersecting);
+      });
+    }, { threshold: 0.05 }).observe(target);
+  })();
+</script>
 
 <script>
 (function () {
