@@ -1,0 +1,17 @@
+# Sharke
+
+> Sharke is a grant-verification and funding-pipeline platform for US nonprofits. It measures whether a grant-funded plan can actually fund the mission (the Funding Gap), verifies each opportunity against primary-source evidence before staff time is committed, and builds a Verified Pipeline. Sharke returns categorical, source-cited decisions (Pursue, Wait, or Move on). It does not predict or guarantee awards.
+
+## What Sharke is
+- Verification, not discovery. A grant search or database hands you names. Sharke checks each opportunity against eligibility, funder award history, geography, timing, and organization size before your team invests the hours to apply.
+- The Funding Gap is the distance between what your mission needs from grants and the funding your current pipeline can realistically support.
+- The Verified Pipeline is what survives verification, each entry backed by the public record.
+- General-purpose AI can help discover and draft. Sharke verifies the opportunity before the expensive work begins.
+
+## Key pages
+- [Grant Funding Viability Assessment](https://sharke.ai/ed): the $79 board-ready read on whether grants can fund your mission, in 48 hours.
+- [Homepage](https://sharke.ai/): what Sharke is and how verification works.
+- [Grant Team (self-serve)](https://sharke.ai/grant-director)
+- [Grant Office (done-for-you)](https://sharke.ai/grant-office)
+- [Pricing](https://sharke.ai/pricing)
+- [For foundations and capacity builders](https://sharke.ai/foundations)
