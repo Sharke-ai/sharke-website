@@ -93,6 +93,10 @@
     max-width: 580px;
     font-style: italic;
   }
+  /* Inline text links (subhead price jumps + FAQ answers): same treatment
+     as grant-director's free-onramp links */
+  .hook .subhead a, .faq details p a { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
+  .hook .subhead a:hover, .faq details p a:hover { color: var(--black); }
 
   /* BODY TEXT */
   p { margin-bottom: 1.3em; font-size: 1rem; color: #1a1a1a; }
@@ -119,7 +123,8 @@
     width: 1px;
     background: var(--rule);
   }
-  .rung-wrap { position: relative; padding-left: 52px; }
+  /* scroll-margin gives the subhead anchor jumps breathing room at the top */
+  .rung-wrap { position: relative; padding-left: 52px; scroll-margin-top: 24px; }
   .rung-wrap + .rung-wrap { margin-top: 26px; }
   .rung-step {
     position: absolute;
@@ -287,7 +292,7 @@
     <div class="container">
       <p class="eyebrow">Pricing</p>
       <h1>Your grant work, done with your team or for you.</h1>
-      <p class="subhead">See where the funding behind your mission stands first, free or for $79. Then it is $159 a month for the workspace your own person runs, or from $249 for the whole grant office, run entirely by Sharke.</p>
+      <p class="subhead">See where the funding behind your mission stands first, <a href="#rung-1">free</a> or for <a href="#rung-2">$79</a>. Then it is <a href="#rung-3">$159 a month</a> for the workspace your own person runs, or <a href="#rung-4">from $249</a> for the whole grant office, run entirely by Sharke.</p>
     </div>
   </section>
 
@@ -299,7 +304,7 @@
       <ol class="ladder">
 
         <!-- RUNG 1 -->
-        <li class="rung-wrap w1">
+        <li class="rung-wrap w1" id="rung-1">
           <span class="rung-step" aria-hidden="true">1</span>
           <div class="rung">
             <p class="rung-label">Free</p>
@@ -311,7 +316,7 @@
         </li>
 
         <!-- RUNG 2 -->
-        <li class="rung-wrap w2">
+        <li class="rung-wrap w2" id="rung-2">
           <span class="rung-step" aria-hidden="true">2</span>
           <div class="rung">
             <span class="rung-flag">Most start here</span>
@@ -323,7 +328,7 @@
         </li>
 
         <!-- RUNG 3 -->
-        <li class="rung-wrap w3">
+        <li class="rung-wrap w3" id="rung-3">
           <span class="rung-step" aria-hidden="true">3</span>
           <div class="rung">
             <p class="rung-label">$159 / month</p>
@@ -335,7 +340,7 @@
         </li>
 
         <!-- RUNG 4 -->
-        <li class="rung-wrap w4">
+        <li class="rung-wrap w4" id="rung-4">
           <span class="rung-step" aria-hidden="true">4</span>
           <div class="rung">
             <p class="rung-label">$249 to $459 / month</p>
@@ -373,7 +378,7 @@
       </details>
       <details>
         <summary>Self-serve or done-for-you: which one is us?</summary>
-        <p>It comes down to who owns grants. If someone on your team can do the work while Sharke does the finding, verifying, and drafting, that is self-serve, $159 a month. If no one on your team owns grants and you need the whole function handled, that is done for you, from $249 a month. Not sure you have a funding gap at all? Run the free Checkup first; it shows you in about five minutes.</p>
+        <p>It comes down to who owns grants. If someone on your team can do the work while Sharke does the finding, verifying, and drafting, that is self-serve, <a href="/grant-director">$159 a month</a>. If no one on your team owns grants and you need the whole function handled, that is done for you, <a href="/grant-office">from $249 a month</a>. Not sure you have a funding gap at all? Run the <a href="/funding-gap">free Checkup</a> first; it shows you in about five minutes.</p>
       </details>
     </div>
   </section>
@@ -387,6 +392,41 @@
     <p class="footer-legal">&copy; 2026 Sharke.ai &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
   </div>
 </footer>
+
+<script>
+  // First-party, anonymous funnel analytics (pattern from /grant-director, 2026-07-14).
+  // Counts events only, via /.netlify/functions/track into Netlify Blobs:
+  // no cookies, no identifiers, no IP or UA storage. Honors Do Not Track.
+  // track.mjs allowlists event names, so the per-rung CTA clicks reuse the
+  // positional cta_* labels under the "pricing" page key:
+  // rung 1 (free Checkup) = cta_hero, rung 2 ($79 Assessment) = cta_mid,
+  // rung 3 (self-serve $159) = cta_sticky, rung 4 (grant office) = cta_faq.
+  (function () {
+    if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+    var send = function (e) {
+      try {
+        var payload = JSON.stringify({ p: 'pricing', e: e });
+        if (navigator.sendBeacon) { navigator.sendBeacon('/.netlify/functions/track', payload); }
+        else { fetch('/.netlify/functions/track', { method: 'POST', body: payload, keepalive: true }).catch(function () {}); }
+      } catch (err) {}
+    };
+    var once = {};
+    var sendOnce = function (e) { if (once[e]) return; once[e] = 1; send(e); };
+
+    sendOnce('view');
+
+    var wire = function (sel, ev) {
+      var els = document.querySelectorAll(sel);
+      for (var i = 0; i < els.length; i++) {
+        els[i].addEventListener('click', function () { send(ev); });
+      }
+    };
+    wire('#rung-1 .rung-cta', 'cta_hero');
+    wire('#rung-2 .rung-cta', 'cta_mid');
+    wire('#rung-3 .rung-cta', 'cta_sticky');
+    wire('#rung-4 .rung-cta', 'cta_faq');
+  })();
+</script>
 
 </body>
 </html>

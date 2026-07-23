@@ -22,7 +22,7 @@
   CTA WIRING: inline embedded Stripe checkout (plan gfvc, $79 one-time) auto-mounts in
   the CTA section and returns to /check-intake (the Assessment's own org-level intake), which
   captures intake to the Google Sheet via the deployed Apps Script. fulfill.py then
-  builds + delivers the Assessment. (/review belongs to the $49 grb grant-verdict product.)
+  builds + delivers the Assessment.
 -->
 
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -54,7 +54,14 @@
   /* Headlines: Libre Baskerville. Eyebrows + labels: IBM Plex Mono. Body: IBM Plex Sans. */
   .serif { font-family: 'Libre Baskerville', Georgia, serif; }
 
+  /* Persistent header (sticky pass 2026-07-23): the action path stays in view
+     on a ~28-screen page. Same rule as the base header; z-index clears the
+     in-flow content (the bottom sticky-cta bar sits at 50). */
   .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: var(--warm-white);
     border-bottom: 1px solid var(--rule);
     padding: 18px 40px;
     display: flex;
@@ -701,6 +708,10 @@
   .sample-download a:hover svg { stroke: var(--red); }
   .sample-download a .sd-tag { color: var(--red); }
   .sample-download .sd-note { font-size: 0.82rem; color: var(--mid-gray); margin: 8px 0 0; }
+  /* Same card repeated inside the dark CTA section (checkout proof pass 2026-07-23):
+     the guarantee above already carries 32px of bottom margin, so the card only
+     needs air below, before the after-pay strip. */
+  .cta-section .sample-download { margin: 0 0 28px; }
 
   /* ---- Animated visuals (GFVA pass 2026-07-06) ---- */
 
@@ -852,7 +863,8 @@
 
   /* Sticky mobile CTA bar (conversion pass 2026-07-14): a persistent action path
      on a ~28-screen mobile page. Light editorial styling to match the page; a
-     small script hides it while the dark checkout section is on screen. */
+     small script hides it while the dark checkout section or the hero's inline
+     CTA is on screen. */
   .sticky-cta {
     display: none;
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
@@ -882,8 +894,12 @@
   }
 
   /* Anchor target for action CTAs: land buyers at the after-pay strip, one
-     short screen above the payment form, instead of the top of the pitch. */
-  #checkout { scroll-margin-top: 14px; }
+     short screen above the payment form, instead of the top of the pitch.
+     Offsets include ~76px for the sticky header (sticky pass 2026-07-23);
+     #start stays a valid deep-link target for drips even though the header
+     CTA now points at #checkout. */
+  #checkout { scroll-margin-top: 90px; }
+  #start { scroll-margin-top: 76px; }
 
 </style>
 </head>
@@ -892,7 +908,7 @@
 <header class="site-header">
   <a class="logo" href="https://sharke.ai">Sharke<span>.</span>ai</a>
   <span class="header-tag">Know what role grants can carry, before the hours go in</span>
-  <a class="header-cta" href="#start">Start &middot; $79</a>
+  <a class="header-cta" href="#checkout">Start &middot; $79</a>
 </header>
 
 <main>
@@ -1237,6 +1253,15 @@
       <p class="price-line"><strong>$79, once. In your hands in 48 hours.</strong> Less than a rounding error on the grant budget you are about to build, and it tells you whether that budget is real before you commit a quarter of staff time to it.</p>
       <p class="guarantee">Delivered within 48 hours of your completed intake, or a full refund. And every Assessment ends in a clear call on your grant plan: build against it, narrow it, or do not plan around it yet. If yours does not, tell us and we will take another look.</p>
 
+      <!-- Sample Assessment download, repeated verbatim from "What you get" (checkout proof pass 2026-07-23). -->
+      <div class="sample-download">
+        <a href="/assets/sample-assessment.pdf" target="_blank" rel="noopener">
+          <svg width="16" height="18" viewBox="0 0 24 26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 12v7M9 16l3 3 3-3"/></svg>
+          See a full sample Assessment <span class="sd-tag">(PDF)</span>
+        </a>
+        <p class="sd-note">The real deliverable, with one organization's identifying details changed. This is what lands in your inbox in 48 hours.</p>
+      </div>
+
       <div class="after-pay" id="checkout">
         <p class="ap-title">What happens after you pay</p>
         <div class="ap-step"><span class="ap-num">1</span><p>Start the Assessment below. <span class="ap-sub">Secure checkout, $79 once.</span></p></div>
@@ -1273,7 +1298,7 @@
 
 </main>
 
-<!-- Sticky mobile CTA bar: shown at <=700px by CSS; the script below hides it while the checkout section is on screen. -->
+<!-- Sticky mobile CTA bar: shown at <=700px by CSS; the script below hides it while the checkout section or the hero CTA is on screen. -->
 <div class="sticky-cta" id="sticky-cta">
   <p class="sc-note"><strong>$79, once.</strong> Board-ready in 48 hours.</p>
   <a class="sc-btn" href="#checkout">Start the Assessment</a>
@@ -1418,18 +1443,29 @@
 
 <script>
   // Hide the sticky mobile CTA bar while the dark checkout section is on screen
-  // (a "go to checkout" button floating over the payment form is noise).
+  // (a "go to checkout" button floating over the payment form is noise), and
+  // while the hero's inline CTA is on screen (two CTAs at first paint on a
+  // 390px viewport is noise too; sticky pass 2026-07-23).
   // Runs regardless of reduced-motion: this is visibility, not decoration.
   // Without IntersectionObserver the bar simply stays, which is safe.
   (function () {
     var bar = document.getElementById('sticky-cta');
-    var target = document.querySelector('.cta-section');
-    if (!bar || !target || !('IntersectionObserver' in window)) return;
+    var checkout = document.querySelector('.cta-section');
+    var heroCta = document.querySelector('.hero-cta');
+    if (!bar || !checkout || !('IntersectionObserver' in window)) return;
+    var overCheckout = false;
+    var overHero = false;
+    var apply = function () { bar.classList.toggle('sc-hidden', overCheckout || overHero); };
     new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        bar.classList.toggle('sc-hidden', entry.isIntersecting);
-      });
-    }, { threshold: 0.02 }).observe(target);
+      entries.forEach(function (entry) { overCheckout = entry.isIntersecting; });
+      apply();
+    }, { threshold: 0.02 }).observe(checkout);
+    if (heroCta) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) { overHero = entry.isIntersecting; });
+        apply();
+      }, { threshold: 0.02 }).observe(heroCta);
+    }
   })();
 </script>
 

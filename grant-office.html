@@ -231,7 +231,7 @@
   .beta-badge { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: var(--red); padding: 6px 12px; margin: 0 0 14px; }
 
   /* TIER SELECTOR (direct checkout pass 2026-07-16) */
-  .tier-select { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 28px 0 0; }
+  .tier-select { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 28px 0 0; scroll-margin-top: 24px; }
   @media (max-width: 640px) { .tier-select { grid-template-columns: 1fr; } }
   .tier-card { position: relative; }
   .tier-card input { position: absolute; opacity: 0; pointer-events: none; }
@@ -429,7 +429,7 @@
       <p class="eyebrow">Done for you, for teams with no grant staff</p>
       <h1>Your team is at capacity. Sharke becomes the grant office you cannot afford to hire.</h1>
       <p class="subhead">Right now, grants with real fit are slipping past unworked while your team is heads-down elsewhere, and the deadlines pass quietly. Sharke becomes your funding arm: it finds the funders that actually fund work like yours, verifies them against their own record, drafts the applications worth pursuing, and tracks every deadline. The whole grant function, run for you.</p>
-      <a href="#cta-section" class="hook-cta">Start your grant office &rarr;</a>
+      <a href="#tier-select" class="hook-cta">Start your grant office &rarr;</a>
     </div>
   </section>
 
@@ -586,6 +586,7 @@
         <div class="rec-note">Categorical, never a score, never a win promise.</div>
       </div>
       <p class="src-note">Illustrative examples. Your verdicts are built from each funder's own documented record.</p>
+      <div class="midpage-cta"><a href="#tier-select" class="hook-cta">Start your grant office &rarr;</a></div>
     </div>
   </section>
 
@@ -596,7 +597,7 @@
       <h2>A verified pipeline that de-risks your mission's funding.</h2>
       <p>You get the output of a grant office: a pipeline where every grant has been checked for a real path, decisions you can defend to your board, and drafts ready for you to review. The funding behind your programs stops resting on grants no one verified.</p>
       <p>You do not get another hire to manage, another salary to cover, or another system to keep running.</p>
-      <div class="midpage-cta"><a href="#cta-section" class="hook-cta">See your options &rarr;</a></div>
+      <div class="midpage-cta"><a href="#tier-select" class="hook-cta">See your options &rarr;</a></div>
     </div>
   </section>
 
@@ -697,7 +698,7 @@
         <summary>Do we have to sign a contract?</summary>
         <p>No. It is month to month, and you can cancel anytime. To cancel, reply to any Sharke email; it takes effect at the end of the current period.</p>
       </details>
-      <div class="midpage-cta faq-cta"><a href="#cta-section" class="hook-cta">Start your grant office &rarr;</a></div>
+      <div class="midpage-cta faq-cta"><a href="#tier-select" class="hook-cta">Start your grant office &rarr;</a></div>
     </div>
   </section>
 
@@ -790,7 +791,7 @@
 <!-- Sticky mobile CTA bar: shown at <=700px by CSS; hidden while the dark CTA section is on screen. -->
 <div class="sticky-cta" id="sticky-cta">
   <p class="sc-note"><strong>Your grant office, run for you.</strong> From $249 a month.</p>
-  <a class="sc-btn" href="#cta-section">Start your grant office</a>
+  <a class="sc-btn" href="#tier-select">Start your grant office</a>
 </div>
 
 <script>
@@ -835,7 +836,18 @@
     for (var i = 0; i < radios.length; i++) {
       radios[i].addEventListener('change', function () {
         dfyTier = this.value;
-        if (btn) btn.disabled = false;
+        if (btn) {
+          btn.disabled = false;
+          // Moment of intent: on mobile the stacked tier cards push the start
+          // button off screen, so bring it into view once it is enabled. Skips
+          // when the button is already visible; reduced motion jumps instantly.
+          var r = btn.getBoundingClientRect();
+          var vh = window.innerHeight || document.documentElement.clientHeight;
+          if (r.top < 0 || r.bottom > vh) {
+            var instant = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            btn.scrollIntoView({ block: 'nearest', behavior: instant ? 'auto' : 'smooth' });
+          }
+        }
         if (hint) hint.style.display = 'none';
         if (window.skTrackOnce) window.skTrackOnce('tier_select');
       });

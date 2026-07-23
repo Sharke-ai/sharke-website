@@ -168,6 +168,8 @@
     flex-direction: column;
   }
   .fork-col.lead { border-color: var(--black); border-width: 1.5px; background: var(--warm-white); }
+  /* Anchor target for the buy CTAs: land with the price and buy button in view */
+  #ss-price-card { scroll-margin-top: 28px; }
   .fork-rec {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.62rem;
@@ -414,7 +416,7 @@
       <h1>Grants fund the work. Right now you are chasing them blind.</h1>
       <p class="subhead">You are the development shop, on top of running the org. And the funders who will fund you next year are choosing their nonprofit partners now, months before the grant ever posts.</p>
       <p class="hook-solution">Sharke is the grant team you cannot afford to hire. It does the research and verifies which funders actually fund work like yours, so you can stop chasing and start building a pipeline that closes the funding gap. Self-serve, $159 a month.</p>
-      <a href="#offer" class="hook-cta">Start self-serve, $159 a month &rarr;</a>
+      <a href="#ss-price-card" class="hook-cta">Start self-serve, $159 a month &rarr;</a>
       <p class="hook-note">No contract. Cancel anytime. Your workspace is live the same day.</p>
     </div>
   </section>
@@ -540,6 +542,7 @@
           <span class="verdict-chip">Move on</span>
         </span>
       </div>
+      <a href="#ss-price-card" class="hook-cta" id="mid-cta" style="margin-top:32px;">Start self-serve, $159 a month &rarr;</a>
       <p class="src-note">Every verdict is built from the funder's own documented filings.</p>
     </div>
   </section>
@@ -594,7 +597,7 @@
       <p class="fork-intro">Every month this stays on your spare hours, the same three things happen: time goes to grants that were never going to fund you, deadlines you would have hit pass unnoticed, and the funder relationships behind next year's grants never get started. Sharke turns all three around, from the day you sign up.</p>
 
       <div class="fork-stack">
-        <div class="fork-col lead">
+        <div class="fork-col lead" id="ss-price-card">
           <span class="fork-rec">Self-serve</span>
           <div class="fork-label">Grant Team</div>
           <div class="fork-title">Sharke as the team you run</div>
@@ -695,7 +698,7 @@
 <!-- Sticky mobile CTA bar: shown at <=700px by CSS; hidden while the offer section is on screen. -->
 <div class="sticky-cta" id="sticky-cta">
   <p class="sc-note"><strong>$159 a month.</strong> The grant team you run.</p>
-  <a class="sc-btn" href="#offer">Start self-serve</a>
+  <a class="sc-btn" href="#ss-price-card">Start self-serve</a>
 </div>
 
 <script>
@@ -714,7 +717,7 @@
         try { resolve(Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4')); }
         catch (err) { reject(err); }
       };
-      s.onerror = function () { reject(new Error('stripe.js failed to load')); };
+      s.onerror = function () { loadStripePromise = null; reject(new Error('stripe.js failed to load')); };
       document.head.appendChild(s);
     });
     return loadStripePromise;
@@ -757,6 +760,11 @@
       errorDiv.style.display = 'block';
       errorDiv.querySelector('p').textContent = 'Something went wrong. Please refresh to try again.';
       console.error('Self-serve checkout error:', err);
+      // Drop the failed attempt and re-show the buy button so it doubles as
+      // the retry path (a fresh click re-runs the whole checkout reveal).
+      ssCheckout = null;
+      area.style.display = 'none';
+      btn.style.display = '';
     });
   }
 
@@ -835,6 +843,7 @@
       }
     };
     wire('.hook .hook-cta', 'cta_hero');
+    wire('#mid-cta', 'cta_mid');
     wire('.sc-btn', 'cta_sticky');
   })();
 </script>

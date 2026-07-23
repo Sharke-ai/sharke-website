@@ -290,7 +290,9 @@
   .dash-verify-icon { display: inline-flex; font-weight: 700; flex-shrink: 0; }
   .dash-source { font-family: var(--mono); font-size: 10px; letter-spacing: 0.02em; color: var(--ink-4); text-align: center; margin: 13px 0 0; }
   .dash-preview { display: flex; gap: 8px; justify-content: center; margin-top: 22px; }
-  .dash-pip { width: 8px; height: 8px; border-radius: 50%; background: var(--rule-2); cursor: pointer; transition: background 0.2s; border: none; padding: 0; }
+  /* 8px visual dot, ~30px hit area (touch-target fix 2026-07-22): transparent
+     border expands the tap zone; background-clip keeps the painted dot small. */
+  .dash-pip { box-sizing: content-box; width: 8px; height: 8px; border-radius: 50%; background: var(--rule-2); background-clip: padding-box; cursor: pointer; transition: background 0.2s; border: 11px solid transparent; padding: 0; }
   .dash-pip.active { background: var(--accent); }
   @media (max-width: 600px) {
     .dash-top { flex-direction: column; align-items: flex-start; gap: 14px; }
@@ -421,8 +423,8 @@
   .compare-caption { margin-top: 14px; font-family: var(--mono); font-size: 12px; color: var(--ink-4); max-width: 680px; line-height: 1.6; }
 
   /* â”€â”€ ROUTE LINKS ROW â”€â”€ */
-  .route-links { margin-top: 18px; font-family: var(--mono); font-size: 12px; color: var(--ink-4); }
-  .route-links a { color: var(--ink-4); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+  .route-links { margin-top: 18px; font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+  .route-links a { color: var(--ink-3); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
   .route-links a:hover { color: var(--accent); }
 
   /* â”€â”€ RESPONSIVE â”€â”€ */
@@ -761,7 +763,8 @@
       </div>
     </div>
 
-    <p class="motions">A verification-first workflow with human review. Run it yourself for $159 a month, or <a href="/grant-office" style="color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px;">Sharke runs it for you from $249 a month</a>, priced by how much of your mission rides on grants. <a href="/pricing" style="color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px;">See plans and scope</a>.</p>
+    <p class="motions">A verification-first workflow with human review. <a href="/grant-director" style="color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px;">Run it yourself for $159 a month</a>, or <a href="/grant-office" style="color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px;">Sharke runs it for you from $249 a month</a>, priced by how much of your mission rides on grants. <a href="/pricing" style="color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px;">See plans and scope</a>.</p>
+    <p class="route-links"><a href="/grant-director">Grant teams: the self-serve workspace</a> <span aria-hidden="true">|</span> <a href="/grant-office">Done for you: your grant office</a> <span aria-hidden="true">|</span> <a href="/foundations">Capacity builders</a></p>
 
     <div style="overflow-x:auto;">
       <table class="compare">
@@ -831,6 +834,13 @@
       <p>"I've been around grants long enough to know that not every opportunity is worth pursuing, but we usually don't find that out until we're already deep into the work. The review helped us take a harder look at what was actually realistic and where we should focus our limited time. That alone made it worthwhile."</p>
       <cite>Director of Development &middot; Workforce development nonprofit &middot; $1.2M annual budget</cite>
     </blockquote>
+    <!-- CTA at the proof moment (conversion pass 2026-07-22): verbatim reuse of
+         the existing CTA block; previously a ~5,000px desktop stretch held the
+         page's best evidence with nothing actionable near it. -->
+    <div class="cta-row" style="margin-top:26px;">
+      <a href="/ed" class="btn-primary">Get the Assessment <span class="arr">&rarr;</span></a>
+      <span class="risk-reducers">$79 one time. Board-ready in 48 hours.</span>
+    </div>
   </div>
 </section>
 
@@ -928,19 +938,23 @@
 </div>
 
 <script>
-  // Hide the sticky mobile CTA while the hero's own CTA is on screen (fold
-  // restructure 2026-07-22 put the hero CTA in the first viewport; two
-  // identical buttons at once is noise). Same pattern as /ed's checkout bar.
-  // Without IntersectionObserver the bar simply stays, which is safe.
+  // Hide the sticky mobile CTA while ANY inline CTA is on screen (two
+  // identical buttons at once is noise). Set-based so multiple observed
+  // targets cannot drift out of sync. Without IntersectionObserver the bar
+  // simply stays, which is safe.
   (function () {
     var bar = document.querySelector('.sticky-cta');
-    var target = document.querySelector('.hero .cta-row');
-    if (!bar || !target || !('IntersectionObserver' in window)) return;
-    new IntersectionObserver(function (entries) {
+    if (!bar || !('IntersectionObserver' in window)) return;
+    var targets = document.querySelectorAll('.cta-row, .final .btn-primary');
+    if (!targets.length) return;
+    var visible = new Set();
+    var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        bar.classList.toggle('sc-hidden', entry.isIntersecting);
+        if (entry.isIntersecting) { visible.add(entry.target); } else { visible.delete(entry.target); }
       });
-    }, { threshold: 0.05 }).observe(target);
+      bar.classList.toggle('sc-hidden', visible.size > 0);
+    }, { threshold: 0.05 });
+    targets.forEach(function (t) { io.observe(t); });
   })();
 </script>
 
