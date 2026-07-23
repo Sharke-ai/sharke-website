@@ -139,6 +139,21 @@
   .hero-points { list-style: none; margin-top: 11px; display: grid; grid-template-columns: 1.06fr 0.94fr; gap: 10px 12px; }
   .hero-footnote { margin-top: 7px; font-family: var(--sans); font-size: 11px; letter-spacing: 0.02em; color: var(--ink-4); }
   .hero-footnote .stat-token { font-size: 10.5px; }
+
+  /* hero shark ambient (stand-in, replace with optimized asset) */
+  .hero { position: relative; overflow: hidden; }
+  .hero > .wrap { position: relative; z-index: 1; }
+  .hero-shark { position: absolute; top: 10%; right: -4%; width: min(52vw, 660px); z-index: 0; opacity: 0.07; pointer-events: none; filter: blur(1.5px); animation: sharkDrift 30s ease-in-out infinite; }
+  .hero-shark svg { width: 100%; height: auto; display: block; }
+  .hero-shark path { fill: var(--accent); }
+  @keyframes sharkDrift { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(-30px, 16px); } }
+  @media (prefers-reduced-motion: reduce) { .hero-shark { animation: none; } }
+  @media (max-width: 640px) { .hero-shark { display: none; } }
+
+  /* hero trust chips */
+  .hero-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 9px 10px; margin-top: 20px; }
+  .hero-chips li { display: inline-flex; align-items: center; gap: 8px; font-family: var(--sans); font-size: 12.5px; color: var(--ink-3); border: 1px solid var(--rule); border-radius: 8px; padding: 7px 12px; }
+  .hero-chips li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
   .bento-card {
     position: relative; border-radius: 12px; padding: 1px;
     background: rgba(255,255,255,0.10);
@@ -481,14 +496,20 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-shark" aria-hidden="true"><svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg"><path d="M14,68 C60,50 104,42 146,40 L162,10 L192,44 C224,45 246,46 262,47 L296,16 L268,60 L294,98 L258,64 C226,66 202,67 190,68 L160,100 L136,70 C100,74 58,76 14,68 Z"/></svg></div>
   <div class="wrap">
     <p class="eyebrow">Verification-first grant funding</p>
     <h1>Build a funding pipeline that can <span style="color: var(--accent);">fund your mission</span></h1>
     <p class="lead" style="font-family: var(--serif); font-size: clamp(20px, 2.5vw, 28px); line-height: 1.22; color: var(--ink); max-width: 720px;">We find the grants worth pursuing. We screen out the ones you have no real shot at. What survives is your Verified Pipeline.</p>
     <div class="cta-row">
       <a href="/ed" class="btn-primary">Get the Assessment <span class="arr">&rarr;</span></a>
-      <span class="risk-reducers">The Grant Funding Viability Assessment: $79 one time. Board-ready in 48 hours.</span>
+      <span class="risk-reducers">The Grant Funding Viability Assessment: $79 one time.</span>
     </div>
+    <ul class="hero-chips">
+      <li>Board-ready in 48 hours</li>
+      <li>Source-cited decisions</li>
+      <li>Human-reviewed</li>
+    </ul>
   </div>
 </section>
 
