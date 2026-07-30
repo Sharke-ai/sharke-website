@@ -36,10 +36,11 @@ export default async (req) => {
 
   const { plan, tier } = body;
 
+  // grb ($49 Grant Review Brief) retired 2026-07-13; plan=grb now rejects as
+  // Invalid plan. session-status.mjs still recognizes historical grb sessions.
   const prices = {
     ed: "price_1TJKNZIGfptARFHlZbLdWWzK",
     gw: "price_1TJKOGIGfptARFHllj5VyBdo",
-    grb: "price_1THu9XIGfptARFHlaeWt01oW",
   };
 
   // Nonprofit self-serve uses its own inline $159/mo price with a distinct
@@ -70,8 +71,8 @@ export default async (req) => {
     });
   }
 
-  // GRB and the GFVC Assessment are one-time payments; ed/gw/self_serve/dfy are subscriptions
-  const mode = (plan === "grb" || plan === "gfvc") ? "payment" : "subscription";
+  // The GFVC Assessment is a one-time payment; ed/gw/self_serve/dfy are subscriptions
+  const mode = plan === "gfvc" ? "payment" : "subscription";
 
   // Build Stripe API request (form-encoded)
   const params = new URLSearchParams();
@@ -99,12 +100,10 @@ export default async (req) => {
   }
   params.append("line_items[0][quantity]", "1");
   // Subscriptions go to MVP signup; one-time products go to their own intake:
-  // GRB ($49 grant verdict) -> /review, GFVC Assessment ($79 org-level) -> /check-intake.
+  // GFVC Assessment ($79 org-level) -> /check-intake.
   // DFY is the exception among subscriptions: fulfillment is run by the Sharke
   // team, so it returns to its own marketing-site intake, not app signup.
-  const returnUrl = plan === "grb"
-    ? `https://sharke.ai/review?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`
-    : plan === "gfvc"
+  const returnUrl = plan === "gfvc"
     ? `https://sharke.ai/check-intake?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`
     : isDfy
     ? `https://sharke.ai/office-intake?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`
