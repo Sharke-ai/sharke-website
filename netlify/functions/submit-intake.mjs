@@ -100,11 +100,14 @@ export default async (req) => {
 
     // duplicate:true means this stripe_session_id was already recorded. The
     // order exists, so this is a success for the buyer, not a second row.
-    if (verdict.duplicate === true) {
+    const duplicate = verdict.duplicate === true;
+    if (duplicate) {
       console.warn("[submit-intake] duplicate submission for", payload.stripe_session_id || "(no session)");
     }
 
-    return new Response(JSON.stringify({ ok: true }), {
+    // `duplicate` is echoed so the de-duplication can be verified from outside
+    // without opening the sheet. Callers key on ok === true and ignore it.
+    return new Response(JSON.stringify({ ok: true, duplicate }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
