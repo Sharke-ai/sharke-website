@@ -41,6 +41,22 @@
  */
 
 function doPost(e) {
+  // IDEMPOTENCY, added 2026-07-31 alongside the submit-intake.mjs verdict fix.
+  // Before that fix a failed append reported success and the buyer never
+  // retried. Now failures are visible, so buyers WILL retry, and a request that
+  // timed out on the caller's side may already have written its row. Keying on
+  // stripe_session_id makes a retry safe. The lock makes the check atomic;
+  // without it two concurrent submissions can both read "not present" and both
+  // append.
+  var lock = LockService.getScriptLock();
+  try {
+    lock.waitLock(15000);
+  } catch (lockErr) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: "error", message: "intake busy, please retry" }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Intake");
     if (!sheet) {
@@ -48,6 +64,23 @@ function doPost(e) {
     }
 
     var data = JSON.parse(e.postData.contents);
+
+    // Column B is Stripe Session ID. A submission without one cannot be
+    // de-duplicated, so it appends as before rather than being refused.
+    var sessionId = String(data.stripe_session_id || "").trim();
+    if (sessionId) {
+      var lastRow = sheet.getLastRow();
+      if (lastRow > 1) {
+        var existing = sheet.getRange(2, 2, lastRow - 1, 1).getValues();
+        for (var i = 0; i < existing.length; i++) {
+          if (String(existing[i][0]).trim() === sessionId) {
+            return ContentService
+              .createTextOutput(JSON.stringify({ status: "success", duplicate: true }))
+              .setMimeType(ContentService.MimeType.JSON);
+          }
+        }
+      }
+    }
 
     sheet.appendRow([
       new Date().toISOString(),           // Timestamp
@@ -83,9 +116,14 @@ function doPost(e) {
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
+    // ⛔ This branch still answers HTTP 200, because ContentService cannot do
+    // anything else. That is exactly why submit-intake.mjs must read this body
+    // and must treat anything other than status "success" as a lost row.
     return ContentService
       .createTextOutput(JSON.stringify({ status: "error", message: err.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
+  } finally {
+    lock.releaseLock();
   }
 }
 

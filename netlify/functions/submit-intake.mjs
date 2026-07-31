@@ -39,12 +39,20 @@ export default async (req) => {
     });
   }
 
+  // 8s, not 20s: a Netlify function is killed at 10s, so a 20s abort never
+  // fires and the platform's generic failure replaces our own error path.
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 20000);
+  const timer = setTimeout(() => controller.abort(), 8000);
   try {
     // Apps Script answers with a 302 to script.googleusercontent.com; fetch
-    // follows it. Any 2xx terminal response = the doPost ran and the row
-    // append was reached.
+    // follows it.
+    // ⛔ A 2xx proves ONLY that Google replied. ContentService ALWAYS returns
+    // HTTP 200, including from doPost's own catch branch, so a failed
+    // appendRow arrives here as a 200 carrying {"status":"error"}. A stale
+    // deployment URL likewise serves an HTML sign-in page with a 200. The row
+    // append is confirmed by the BODY and by nothing else. The buyer has
+    // already paid at this point (the payload carries stripe_session_id), so
+    // a false ok:true takes money and records no order.
     const res = await fetch(GOOGLE_SHEET_URL, {
       method: "POST",
       headers: { "Content-Type": "text/plain" },
@@ -55,10 +63,45 @@ export default async (req) => {
     clearTimeout(timer);
 
     if (!res.ok) {
+      console.error("[submit-intake] non-2xx from intake store", res.status);
       return new Response(
         JSON.stringify({ ok: false, error: "Intake store rejected the submission (" + res.status + ")" }),
         { status: 502, headers: { "Content-Type": "application/json" } }
       );
+    }
+
+    const raw = await res.text();
+    let verdict;
+    try {
+      verdict = JSON.parse(raw);
+    } catch {
+      // Not JSON. Almost always Google serving an HTML sign-in or error page
+      // with a 200, which means the deployment URL is stale or its access
+      // changed. No row was written.
+      console.error("[submit-intake] unreadable body from intake store", raw.slice(0, 300));
+      return new Response(
+        JSON.stringify({ ok: false, error: "Intake store returned an unreadable response" }),
+        { status: 502, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
+    if (!verdict || verdict.status !== "success") {
+      // Real reason to the log, generic message to the buyer. Never render an
+      // upstream exception into anything a customer reads.
+      console.error(
+        "[submit-intake] intake store did not record the row",
+        JSON.stringify({ verdict, session: payload.stripe_session_id || null, email: payload.email })
+      );
+      return new Response(
+        JSON.stringify({ ok: false, error: "Intake store did not record the submission" }),
+        { status: 502, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
+    // duplicate:true means this stripe_session_id was already recorded. The
+    // order exists, so this is a success for the buyer, not a second row.
+    if (verdict.duplicate === true) {
+      console.warn("[submit-intake] duplicate submission for", payload.stripe_session_id || "(no session)");
     }
 
     return new Response(JSON.stringify({ ok: true }), {
