@@ -558,6 +558,27 @@
   }
   .sample-report.pursue { border-color: var(--green); background: rgba(26, 102, 64, 0.04); }
 
+  /* First-door evidence (2026-08-03). Sits AHEAD of the shortlist paragraph so the
+     section leads with funder behaviour read from the award record, which is the
+     page's strongest and most defensible evidence, rather than with the named
+     shortlist. It makes no claim about shortlist quality. */
+  .first-door {
+    margin: 26px 0 6px;
+    padding: 22px 24px;
+    border-left: 3px solid var(--green);
+    background: rgba(26, 102, 64, 0.04);
+  }
+  .first-door .fd-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin: 0 0 10px;
+  }
+  .first-door p { margin: 0; }
+  .first-door p + p { margin-top: 12px; }
+
   .cta-offer {
     font-size: 1.02rem;
     line-height: 1.62;
@@ -1014,6 +1035,13 @@
     <div class="container">
       <h3>What you get</h3>
       <h2>The first funders to verify, and whether the plan behind them holds.</h2>
+
+      <div class="first-door">
+        <p class="fd-eyebrow">Before the shortlist: the door test</p>
+        <p>A funder list tells you who gives. It cannot tell you whether the door is open. So for every funder the Assessment names, it reads that funder's own award record and reports how often its grants went to organizations it had not funded before.</p>
+        <p>The difference never shows up in a list. A funder that has not backed a first-time grantee in four cycles and a funder that takes on new organizations every year sit side by side looking identical. Only the award history separates them, and that is the difference between a name and a real opening.</p>
+      </div>
+
       <p>Every $79 Assessment ends with a named shortlist: the first 3 to 5 funders to verify, each supported by a real grant it made to an organization like yours. Not a keyword match: the funders most worth staff time first, with the public record behind each one. Around that shortlist, the Assessment gives your board a decision it can actually weigh: your funding scored 0 to 100, the pipeline your goal would take, your real runway in months, and one clear call, build against it, narrow it, or hold. In your hands in 48 hours. Here is what that looks like, in real cases with identifying details changed.</p>
 
       <div class="fvi-dial-wrap" role="img" aria-label="Sample Funding Viability Index dial showing 55 out of 100. Position: Pressured but Well-Supported. The call: build against it.">
@@ -1484,14 +1512,43 @@
 </script>
 
 <script>
-  // First-party, anonymous funnel analytics (conversion pass 2026-07-14).
-  // Counts events only, via /.netlify/functions/track into Netlify Blobs:
-  // no cookies, no identifiers, no IP or UA storage. Honors Do Not Track.
+  // First-party, anonymous funnel analytics (conversion pass 2026-07-14;
+  // source + visitor added 2026-08-03). Counts events only, via
+  // /.netlify/functions/track into Netlify Blobs: no cookies, no IP or UA
+  // storage, no identity. Honors Do Not Track.
+  //
+  // Two fields were added because the page could count arrivals but not answer
+  // either question that matters: where did they come from, and is this one
+  // person or ten.
+  //   s = source, read once from ?src= (the app's checkup and read links set it)
+  //       and then held for the tab, so it survives the hop through Stripe to
+  //       /check-intake and the purchase is still attributable.
+  //   v = visitor, a random per-tab value that distinguishes a new person from
+  //       the same person reloading. It is random, never joined to an email, and
+  //       never read from the URL.
   (function () {
     if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+
+    // sessionStorage, not localStorage: this should last a visit, not follow anyone
+    // across visits. Wrapped because Safari private mode throws on access.
+    var mem = function (key, make) {
+      try {
+        var v = sessionStorage.getItem(key);
+        if (!v) { v = make(); if (v) sessionStorage.setItem(key, v); }
+        return v || '';
+      } catch (err) { return make() || ''; }
+    };
+    var src = mem('sk_src', function () {
+      var m = /[?&]src=([a-z0-9_-]{1,24})\b/i.exec(location.search);
+      return m ? m[1].toLowerCase() : '';
+    });
+    var vid = mem('sk_vid', function () {
+      return Math.random().toString(36).slice(2, 12) + Math.random().toString(36).slice(2, 6);
+    });
+
     var send = function (e) {
       try {
-        var payload = JSON.stringify({ p: 'ed', e: e });
+        var payload = JSON.stringify({ p: 'ed', e: e, s: src, v: vid });
         if (navigator.sendBeacon) { navigator.sendBeacon('/.netlify/functions/track', payload); }
         else { fetch('/.netlify/functions/track', { method: 'POST', body: payload, keepalive: true }).catch(function () {}); }
       } catch (err) {}

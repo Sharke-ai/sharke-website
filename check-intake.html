@@ -390,6 +390,33 @@
   var sessionId = params.get('session_id') || '';
   var plan = params.get('plan') || 'gfvc';
 
+  // -- Funnel analytics (2026-08-03). THE MONEY MOMENT IS ON THIS PAGE, NOT ON /ed.
+  //    Stripe's embedded checkout redirects the top-level page to this return_url when
+  //    payment succeeds, so /ed is already unloaded by the time money changes hands and
+  //    can never fire a purchase event. Until now nothing fired here at all, which is
+  //    why a sale was invisible on the site: /ed counted people reaching the form and
+  //    the funnel stopped there.
+  //    Anonymous, same contract as /ed: an event name, a page, the source label carried
+  //    over from the landing page, and a random per-tab visitor id. Honors Do Not Track.
+  var track = function () {};
+  (function () {
+    if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+    var get = function (k) { try { return sessionStorage.getItem(k) || ''; } catch (e) { return ''; } };
+    // Both were set on /ed and survive the Stripe hop because this is the same origin
+    // and the same tab. A direct visit has neither, and sends the event unattributed.
+    var src = get('sk_src');
+    var vid = get('sk_vid');
+    track = function (e) {
+      try {
+        var payload = JSON.stringify({ p: 'check-intake', e: e, s: src, v: vid });
+        if (navigator.sendBeacon) { navigator.sendBeacon('/.netlify/functions/track', payload); }
+        else { fetch('/.netlify/functions/track', { method: 'POST', body: payload, keepalive: true }).catch(function () {}); }
+      } catch (err) {}
+    };
+    track('view');
+    if (sessionId) track('arrived_with_session');
+  })();
+
   // -- Pre-populate from sessionStorage (if coming from the landing page) --
   try {
     var raw = sessionStorage.getItem('sharke_intake');
@@ -430,7 +457,15 @@
       body: JSON.stringify({ session_id: sessionId })
     })
     .then(function(r) { return r.json(); })
-    .then(function(data) { if (data && data.paid) applyPaidState(data); })
+    .then(function(data) {
+      if (data && data.paid) {
+        applyPaidState(data);
+        // The money moment, and it is SERVER-VERIFIED: session-status confirmed the
+        // Stripe session is paid. Deliberately not fired on arrival alone, because a
+        // redirect with a session_id in the URL is not a payment.
+        track('purchase');
+      }
+    })
     .catch(function() {});
   }
 
@@ -519,11 +554,17 @@
       });
     })
     .then(function() {
+      // Fired only on a real ok:true from the relay, never on the optimistic path.
+      // This page once reported success to the buyer while the order row silently
+      // never landed; an event fired before the relay confirms would have recorded
+      // that same lie.
+      track('intake_submit');
       document.getElementById('submit-form').style.display = 'none';
       document.getElementById('success-state').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     })
     .catch(function() {
+      track('intake_error');
       var errEl = document.getElementById('form-error');
       errEl.textContent = 'Your submission did not go through, and nothing was lost: your answers are still on this page. Please try again in a moment. If it still fails, email collin@sharke.ai and we will take your intake by reply; your 48-hour clock starts from that email.';
       errEl.style.display = 'block';
