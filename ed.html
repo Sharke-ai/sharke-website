@@ -558,26 +558,12 @@
   }
   .sample-report.pursue { border-color: var(--green); background: rgba(26, 102, 64, 0.04); }
 
-  /* First-door evidence (2026-08-03). Sits AHEAD of the shortlist paragraph so the
-     section leads with funder behaviour read from the award record, which is the
-     page's strongest and most defensible evidence, rather than with the named
-     shortlist. It makes no claim about shortlist quality. */
-  .first-door {
-    margin: 26px 0 6px;
-    padding: 22px 24px;
-    border-left: 3px solid var(--green);
-    background: rgba(26, 102, 64, 0.04);
-  }
-  .first-door .fd-eyebrow {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin: 0 0 10px;
-  }
-  .first-door p { margin: 0; }
-  .first-door p + p { margin-top: 12px; }
+  /* Item 5 (first-door "door test" block) was staged here on 2026-08-03 and BACKED OUT
+     the same session at the Coordinator's hold. It is preserved whole on branch
+     hold/item5-first-door at 87ce31c and reapplies in one cherry-pick. It was removed
+     from the working folder rather than left dormant because THIS SITE DEPLOYS THE
+     FOLDER ON DISK: a held change left sitting here ships on the next unrelated
+     `netlify deploy --prod`. On this repo, "staged but held" is not a safe state. */
 
   .cta-offer {
     font-size: 1.02rem;
@@ -1035,12 +1021,6 @@
     <div class="container">
       <h3>What you get</h3>
       <h2>The first funders to verify, and whether the plan behind them holds.</h2>
-
-      <div class="first-door">
-        <p class="fd-eyebrow">Before the shortlist: the door test</p>
-        <p>A funder list tells you who gives. It cannot tell you whether the door is open. So for every funder the Assessment names, it reads that funder's own award record and reports how often its grants went to organizations it had not funded before.</p>
-        <p>The difference never shows up in a list. A funder that has not backed a first-time grantee in four cycles and a funder that takes on new organizations every year sit side by side looking identical. Only the award history separates them, and that is the difference between a name and a real opening.</p>
-      </div>
 
       <p>Every $79 Assessment ends with a named shortlist: the first 3 to 5 funders to verify, each supported by a real grant it made to an organization like yours. Not a keyword match: the funders most worth staff time first, with the public record behind each one. Around that shortlist, the Assessment gives your board a decision it can actually weigh: your funding scored 0 to 100, the pipeline your goal would take, your real runway in months, and one clear call, build against it, narrow it, or hold. In your hands in 48 hours. Here is what that looks like, in real cases with identifying details changed.</p>
 
