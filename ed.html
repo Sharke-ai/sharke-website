@@ -1329,54 +1329,88 @@
 </div>
 
 <script>
-  // Lazy-load Stripe (perf pass 2026-07-15). Stripe.js is ~heavy and the embedded
-  // checkout mints a live session, so we defer both until the visitor nears the
-  // checkout (600px lead) or clicks a buy CTA, instead of on every pageview.
+  // Lazy-load Stripe (perf pass 2026-07-15, split 2026-08-08 for D108).
+  // Two stages now. PREP (cheap, no session): load Stripe.js and warm the
+  // serverless function. MOUNT (mints a LIVE Stripe session): only when the
+  // checkout area is actually on screen or a buy CTA is clicked. The old
+  // single-stage version minted a real session for anyone who merely
+  // scrolled within 600px, which polluted Stripe with one new customer per
+  // scroller and made the checkout_mount event a scroll metric (D108).
   (function () {
-    var started = false;
     var loadingEl = document.getElementById('checkout-loading');
+    var prepped = false, stripeReady = false, started = false, wantMount = false;
     function fail() {
       if (loadingEl) loadingEl.style.display = 'none';
       var e = document.getElementById('checkout-error');
       if (e) { e.style.display = 'block'; e.querySelector('p').textContent = 'Something went wrong. Please refresh to try again.'; }
     }
-    function mountCheckout() {
-      if (started) return; started = true;
+    // Stage 1: cheap prep. Loads Stripe.js and warms the function. No session.
+    function prepCheckout() {
+      if (prepped) return; prepped = true;
       var s = document.createElement('script');
       s.src = 'https://js.stripe.com/v3/';
       s.async = true;
-      s.onload = function () {
-        try {
-          var stripe = Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4');
-          stripe.initEmbeddedCheckout({
-            fetchClientSecret: function () {
-              return fetch('/.netlify/functions/create-checkout-session', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: 'gfvc' })
-              }).then(function (r) { return r.json(); }).then(function (d) { if (d.error) throw new Error(d.error); return d.clientSecret; });
-            }
-          }).then(function (checkout) {
-            if (loadingEl) loadingEl.style.display = 'none';
-            checkout.mount('#checkout-container');
-            if (window.skTrack) window.skTrack('checkout_mount');
-          }).catch(function (err) { console.error('Checkout error:', err); fail(); });
-        } catch (err) { console.error('Checkout error:', err); fail(); }
-      };
+      s.onload = function () { stripeReady = true; if (wantMount) initCheckout(); };
       s.onerror = fail;
       document.head.appendChild(s);
+      try {
+        fetch('/.netlify/functions/create-checkout-session', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ warm: true })
+        }).catch(function () {});
+      } catch (e) {}
     }
-    // Trigger 1: checkout area approaching the viewport (load ahead of arrival).
+    // Stage 2: mint the live session and mount. Runs once.
+    function initCheckout() {
+      if (started) return; started = true;
+      try {
+        var stripe = Stripe('pk_live_51SeldyIGfptARFHlmwDW2fSKXaLczRV7pxTezrcSqmZXsv0NAUi5u8kxrl4xu0kxBOXMn8yJcJH2OArWJb18oiHw00hv5lHUK4');
+        stripe.initEmbeddedCheckout({
+          fetchClientSecret: function () {
+            return fetch('/.netlify/functions/create-checkout-session', {
+              method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: 'gfvc' })
+            }).then(function (r) { return r.json(); }).then(function (d) { if (d.error) throw new Error(d.error); return d.clientSecret; });
+          }
+        }).then(function (checkout) {
+          if (loadingEl) loadingEl.style.display = 'none';
+          checkout.mount('#checkout-container');
+          if (window.skTrack) window.skTrack('checkout_mount');
+        }).catch(function (err) { console.error('Checkout error:', err); fail(); });
+      } catch (err) { console.error('Checkout error:', err); fail(); }
+    }
+    // Mount request: prep if needed, init the moment Stripe.js is ready.
+    function mountCheckout() {
+      wantMount = true;
+      if (!prepped) prepCheckout();
+      if (stripeReady) initCheckout();
+    }
     var area = document.getElementById('checkout-area');
     if (area && 'IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { if (e.isIntersecting) { io.disconnect(); mountCheckout(); } });
+      // Trigger 1a (600px lead): PREP only. Mere scrollers cost no session.
+      var prepIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { prepIo.disconnect(); prepCheckout(); } });
       }, { rootMargin: '600px 0px' });
-      io.observe(area);
-    } else if (document.readyState === 'complete') {
-      mountCheckout();
-    } else {
-      window.addEventListener('load', mountCheckout);
+      prepIo.observe(area);
+      // Trigger 1b (actual arrival): checkout area on screen, mint and mount.
+      var mountIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { mountIo.disconnect(); mountCheckout(); } });
+      }, { rootMargin: '0px' });
+      mountIo.observe(area);
+    } else if (area) {
+      // No-IntersectionObserver fallback: prep on load, mount on near-arrival.
+      // (The old fallback minted a session on EVERY pageview in these browsers.)
+      var onScrollCheck = function () {
+        var r = area.getBoundingClientRect();
+        if (r.top < window.innerHeight + 200) {
+          window.removeEventListener('scroll', onScrollCheck);
+          mountCheckout();
+        }
+      };
+      var prepAndCheck = function () { prepCheckout(); onScrollCheck(); };
+      window.addEventListener('scroll', onScrollCheck);
+      if (document.readyState === 'complete') { prepAndCheck(); }
+      else { window.addEventListener('load', prepAndCheck); }
     }
-    // Trigger 2: any CTA that jumps to checkout starts loading immediately.
+    // Trigger 2: any CTA that jumps to checkout is explicit intent, mount now.
     var ctas = document.querySelectorAll('a[href="#checkout"]');
     for (var i = 0; i < ctas.length; i++) { ctas[i].addEventListener('click', mountCheckout); }
   })();
