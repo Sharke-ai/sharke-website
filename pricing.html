@@ -309,7 +309,12 @@
           <div class="rung">
             <p class="rung-label">Free</p>
             <p class="rung-name">Funding Path Checkup</p>
-            <p class="rung-body">The gap between what your mission needs and what your pipeline can actually fund, in about five minutes. No account, nothing leaves your browser.</p>
+            <!-- "nothing leaves your browser" was the same false claim the app page carried at
+                 FundingStrategyDiagnostic.tsx:229 and it is about the same tool. The answers
+                 genuinely stay client-side, the verdict is arithmetic on them, but pressing
+                 through fires a tool_used event carrying visitor_id and referrer. Corrected
+                 2026-08-14 with D4; keep this wording and the app page's in step. -->
+            <p class="rung-body">The gap between what your mission needs and what your pipeline can actually fund, in about five minutes. No account, and your answers stay in your browser.</p>
             <a href="/funding-gap" class="rung-cta subtle">Run the free Checkup &rarr;</a>
             <p class="rung-meta">Free. No signup. About five minutes.</p>
           </div>
