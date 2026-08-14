@@ -36,6 +36,17 @@ export default async (req) => {
 
   const { plan, tier } = body;
 
+  // COUNTABILITY 2026-08-14, option C. The funnel labels the page keeps in
+  // sessionStorage are stamped into Stripe session metadata so they survive the
+  // cross-origin hop to app signup, which sessionStorage cannot. Validated
+  // against the SAME shapes track.mjs enforces, so nothing reaches the counter
+  // that the counter would have rejected. Absent or malformed reads as empty:
+  // an unattributed purchase is worth more than an uncounted one.
+  const SOURCE_RE = /^[a-z0-9_-]{1,24}$/;
+  const VISITOR_RE = /^[a-z0-9]{1,32}$/;
+  const funnelSrc = typeof body.s === "string" && SOURCE_RE.test(body.s) ? body.s : "";
+  const funnelVid = typeof body.v === "string" && VISITOR_RE.test(body.v) ? body.v : "";
+
   // grb ($49 Grant Review Brief) retired 2026-07-13; plan=grb now rejects as
   // Invalid plan. session-status.mjs still recognizes historical grb sessions.
   const prices = {
@@ -110,6 +121,8 @@ export default async (req) => {
     : `https://sharke-app.netlify.app/signup?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`;
   params.append("return_url", returnUrl);
   params.append("metadata[plan]", plan);
+  if (funnelSrc) params.append("metadata[src]", funnelSrc);
+  if (funnelVid) params.append("metadata[vid]", funnelVid);
   if (isDfy) {
     params.append("metadata[tier]", tier);
     // Session metadata does NOT propagate to the Subscription object; label the
