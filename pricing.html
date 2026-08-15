@@ -309,11 +309,18 @@
           <div class="rung">
             <p class="rung-label">Free</p>
             <p class="rung-name">Funding Path Checkup</p>
-            <!-- "nothing leaves your browser" was the same false claim the app page carried at
-                 FundingStrategyDiagnostic.tsx:229 and it is about the same tool. The answers
-                 genuinely stay client-side, the verdict is arithmetic on them, but pressing
-                 through fires a tool_used event carrying visitor_id and referrer. Corrected
-                 2026-08-14 with D4; keep this wording and the app page's in step. -->
+            <!-- D4, 2026-08-14. This line used to make the same false claim the app page
+                 carried at FundingStrategyDiagnostic.tsx:229, about the same tool: that no
+                 data at all left the visitor's browser. The answers genuinely do stay
+                 client-side and the verdict is arithmetic on them, but pressing through to
+                 the verdict fires a tool_used event carrying visitor_id and referrer, so the
+                 old wording was broader than the thing that was true. Keep this line and the
+                 app page's in step.
+                 ⛔ AND DO NOT QUOTE THE OLD SENTENCE HERE TO EXPLAIN IT. The first version of
+                 this comment did, which put the banned phrase back into the live page source:
+                 harmless to a reader, but it means any later sweep for that phrase hits
+                 sharke.ai and reads as still-broken. A comment that defeats the check on the
+                 thing it documents is worse than no comment. -->
             <p class="rung-body">The gap between what your mission needs and what your pipeline can actually fund, in about five minutes. No account, and your answers stay in your browser.</p>
             <a href="/funding-gap" class="rung-cta subtle">Run the free Checkup &rarr;</a>
             <p class="rung-meta">Free. No signup. About five minutes.</p>
