@@ -1,7 +1,13 @@
 /**
  * Prove the checkout now collects a billing address, a PO number and an invoice.
  *
- *   node netlify/functions/_test_checkout_fields.mjs
+ * NOT under netlify/functions/ on purpose. Anything in that directory is bundled and
+ * DEPLOYED as a public endpoint: this file was there for one deploy on 2026-08-19 and
+ * shipped as https://sharke.ai/.netlify/functions/_test_checkout_fields, which answered
+ * 502 with a stack trace because there is no .env on the runtime. It failed safe, having
+ * no Stripe key, but a test harness must never be reachable from the internet.
+ *
+ *   node tests/checkout_fields.test.mjs
  *
  * Runs the REAL handler from create-checkout-session.mjs, not a copy of its logic,
  * with STRIPE_SECRET_KEY set to the sk_test_ key. Test mode only: it refuses to run
@@ -17,7 +23,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(HERE, "..", "..", "..");
+const ROOT = path.resolve(HERE, "..", "..");
 
 const env = fs.readFileSync(path.join(ROOT, ".env"), "utf8");
 const testKey = (env.match(/^STRIPE_TEST_KEY=(.*)$/m) || [])[1]?.trim().replace(/^["']|["']$/g, "");
@@ -27,7 +33,7 @@ if (!testKey || !testKey.startsWith("sk_test_")) {
 }
 process.env.STRIPE_SECRET_KEY = testKey;
 
-const { default: handler } = await import("./create-checkout-session.mjs");
+const { default: handler } = await import("../netlify/functions/create-checkout-session.mjs");
 
 let failures = 0;
 const check = (name, ok, detail = "") => {
