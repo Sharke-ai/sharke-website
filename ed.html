@@ -1275,7 +1275,7 @@
       </div>
 
       <p class="price-line"><strong>$79, once. In your hands in 48 hours.</strong> Less than a rounding error on the grant budget you are about to build, and it tells you whether that budget is real before you commit a quarter of staff time to it.</p>
-      <p class="guarantee">Delivered within 48 hours of your completed intake, or a full refund. And every Assessment ends in a clear call on your grant plan: build against it, narrow it, or do not plan around it yet. If yours does not, tell us and we will take another look.</p>
+      <p class="guarantee">Delivered within 48 hours of your completed intake, or a full refund. And every Assessment ends in a clear call on your grant plan: build against it, narrow it, or do not plan around it yet. If yours does not, email collin@sharke.ai and we will take another look.</p>
 
       <!-- Sample Assessment download, repeated verbatim from "What you get" (checkout proof pass 2026-07-23). -->
       <div class="sample-download">
@@ -1616,6 +1616,42 @@
     }
   })();
 </script>
+
+<!--
+  Footer added 2026-08-19 (founder). This was the ONLY paid page on the site without
+  one: index, pricing, grant-director and grant-office all carried Privacy, Terms and
+  the legal line, and the single page that asks for a card number named nobody.
+  Same three lines as pricing.html, plus the contact address, because the guarantee
+  above says "tell us" and until now the page gave no way to.
+  Palette uses the page's own vars so it inherits the light editorial theme.
+-->
+<style>
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    margin-top: 64px;
+    padding: 32px 24px 40px;
+    background: var(--warm-white);
+    color: var(--mid-gray);
+    font-size: 13px;
+    line-height: 1.6;
+    text-align: center;
+  }
+  .site-footer p { margin: 0 0 8px; }
+  .site-footer a { color: var(--mid-gray); text-decoration: underline; }
+  .site-footer a:hover { color: var(--ink); }
+  .site-footer .footer-contact { color: var(--ink); }
+  @media (max-width: 700px) {
+    .site-footer { padding-bottom: 96px; }
+  }
+</style>
+<footer class="site-footer">
+  <div class="container">
+    <p class="footer-badge">Member, NVIDIA Inception Program</p>
+    <p class="footer-contact">Questions about your order, or the guarantee above: <a href="mailto:collin@sharke.ai">collin@sharke.ai</a></p>
+    <p class="footer-data">Your information is used only to find, verify, and draft grants for your organization. See our Privacy Policy for details.</p>
+    <p class="footer-legal">&copy; 2026 Sharke.ai &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a></p>
+  </div>
+</footer>
 
 </body>
 </html>

@@ -132,6 +132,37 @@ export default async (req) => {
     params.append("subscription_data[metadata][tier]", tier);
   }
 
+  // Purchasing mechanics for a nonprofit buyer (founder 2026-08-19).
+  //
+  // Before this, the checkout collected a card and nothing else, so an organization
+  // that pays against a purchase order, or whose finance office needs an invoice to
+  // file, could not complete the purchase at all and the site offered no fallback on
+  // any page. That is an excluded buyer, not a lost one.
+  //
+  // 1. Billing address is REQUIRED. Card processing wants it for AVS anyway, and the
+  //    invoice below is not worth much to a finance office without an address on it.
+  params.append("billing_address_collection", "required");
+
+  // 2. Purchase order number, OPTIONAL, on every plan. A buyer who does not use POs
+  //    sees one extra field they can skip; a buyer who needs one can no longer be
+  //    blocked by its absence. Stripe caps custom_fields at 3 and the label at 50
+  //    characters. The value lands on the session and on the invoice.
+  params.append("custom_fields[0][key]", "po_number");
+  params.append("custom_fields[0][type]", "text");
+  params.append("custom_fields[0][label][type]", "custom");
+  params.append("custom_fields[0][label][custom]", "Purchase order number");
+  params.append("custom_fields[0][optional]", "true");
+
+  // 3. Invoice. Stripe only accepts invoice_creation on mode=payment; subscriptions
+  //    already generate an invoice per cycle on their own, so setting it there is an
+  //    API error rather than a no-op. Today that means the $79 Assessment.
+  if (mode === "payment") {
+    params.append("invoice_creation[enabled]", "true");
+  }
+
+  // W-9 and tax ID are deliberately NOT collected here (founder 2026-08-19: hold).
+  // If that changes, tax_id_collection[enabled] is the switch.
+
   // Branding -- self-serve and the grant office use the light editorial theme
   // (their checkouts mount in a light card); others stay dark
   params.append("branding_settings[background_color]", (isSelfServe || isDfy) ? "#faf8f4" : "#0a0a0a");
