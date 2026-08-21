@@ -9,8 +9,9 @@
  * Runs the REAL handler with the sk_test_ key, so it tests the code that ships rather
  * than a restatement of it. Test mode only; it refuses a live key and moves no money.
  *
- * D123 (founder 2026-08-20): under $1M = $99/mo, $1M to $3M = $159/mo, over $3M has NO
- * self-serve tier and is routed to the grant office instead.
+ * Tiers: under $1M = $99/mo, $1M to $3M = $159/mo, over $3M = $249/mo. The last one
+ * AMENDS D123, which had refused it to stop the ladder inverting; the grant office
+ * moving to $399+ removes that reason.
  *
  * The controls are the point. A tier test that only checks the happy path would pass
  * just as happily if the handler ignored the tier and charged $159 to everyone, which
@@ -76,19 +77,29 @@ check("the tier rides the session metadata", under.metadata?.tier === "under_1m"
 console.log();
 console.log("   CONTROL: the amounts must actually DIFFER. Equal amounts would mean the");
 console.log("   handler ignored the tier, and every assertion above would still pass.");
-check("the two tiers are not the same price", under.amount !== mid.amount,
+check("the tiers are not the same price", under.amount !== mid.amount,
   `both came back ${under.amount}, so the tier is being ignored`);
 
 console.log();
 console.log("=".repeat(72));
-console.log("2. OVER $3M IS REFUSED, NOT SOLD (D123: routed to the grant office)");
+console.log("2. OVER $3M IS A REAL TIER AT $249 (founder 2026-08-20, amending D123)");
 console.log("=".repeat(72));
-const over = await mint({ plan: "self_serve", tier: "over_3m" });
-console.log(`   over_3m -> HTTP ${over.status} ${JSON.stringify(over.json).slice(0, 90)}`);
-check("over $3M cannot buy a self-serve tier", over.status === 400,
-  "it minted a session, so an over-$3M buyer is being charged a self-serve price");
+console.log("   D123 originally refused this tier to protect the ladder. The office moving");
+console.log("   to $399+ retires that reason, so $249 now sits BELOW the office floor.");
+const over = await amountOf({ plan: "self_serve", tier: "over_3m" });
+console.log(`   over_3m -> HTTP ${over.status}, amount ${over.amount}`);
+check("over $3M is $249/mo", over.amount === 24900, `got ${over.amount}`);
+check("and it is a subscription", over.mode === "subscription");
+check("it stays BELOW the grant office floor of $39900", over.amount < 39900,
+  `${over.amount} would invert the ladder`);
 const junk = await mint({ plan: "self_serve", tier: "not_a_tier" });
-check("a garbage tier is refused", junk.status === 400, `got ${junk.status}`);
+check("a garbage tier is still refused", junk.status === 400, `got ${junk.status}`);
+
+console.log();
+console.log("   CONTROL: all THREE self-serve tiers must be distinct, ascending amounts.");
+check("the three tiers ascend and differ",
+  under.amount < mid.amount && mid.amount < over.amount,
+  `got ${under.amount}, ${mid.amount}, ${over.amount}`);
 
 console.log();
 console.log("=".repeat(72));

@@ -71,13 +71,18 @@ export default async (req) => {
   const isDfy = plan === "dfy";
   const DFY_TIERS = { half: 24900, three_quarters: 36900, all: 45900 };
 
-  // D123 (founder 2026-08-20): self-serve is revenue-tiered, month to month.
-  // Under $1M: $99. $1M to $3M: $159. OVER $3M has NO self-serve tier and never
-  // reaches this checkout: grant-director.html routes those buyers to /grant-office,
-  // because a third self-serve tier would sit under the office's middle tier and
-  // invert the ladder. There is deliberately no over_3m key here, so an attempt to
-  // buy one is an explicit 400 rather than a silent charge at the wrong price.
-  const SELF_SERVE_TIERS = { under_1m: 9900, one_to_three_m: 15900 };
+  // Self-serve is revenue-tiered, month to month.
+  //   under $1M      $99      D123, founder 2026-08-20
+  //   $1M to $3M     $159     D123
+  //   over $3M       $249     founder 2026-08-20, AMENDING D123
+  //
+  // D123 originally gave over-$3M NO self-serve tier and routed those buyers to the
+  // grant office, on the reasoning that a third tier would sit under the office's
+  // middle tier and invert the ladder. That reasoning is retired by the same
+  // instruction: the office moves up to $399+, so $249 now sits cleanly BELOW the
+  // office's floor instead of inside its range. The ladder is preserved by repricing
+  // the office, not by refusing the tier.
+  const SELF_SERVE_TIERS = { under_1m: 9900, one_to_three_m: 15900, over_3m: 24900 };
   const priceId = prices[plan];
   if (!priceId && !isSelfServe && !isGfvc && !isDfy) {
     return new Response(JSON.stringify({ error: "Invalid plan" }), {

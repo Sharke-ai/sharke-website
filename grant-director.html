@@ -630,7 +630,7 @@
           <ul class="fork-list">
             <li><span class="check">&rarr;</span> A verdict on every grant you are tracking, before the hours go in</li>
             <li><span class="check">&rarr;</span> Better-fit grants and funders surfaced continuously, each verified</li>
-            <li><span class="check">&rarr;</span> Drafting grounded in your organization's own materials</li>
+            <li><span class="check">&rarr;</span> The first draft of the application, grounded in your organization's own materials</li>
             <li><span class="check">&rarr;</span> The whole pipeline in one place, board-ready, not in one person's head</li>
           </ul>
           <div class="ss-tier" id="ss-tier" role="radiogroup" aria-label="Your organization's annual revenue">
@@ -644,7 +644,7 @@
             </div>
             <div class="ss-tier-card">
               <input type="radio" name="ss-tier" id="ss-tier-over" value="over_3m">
-              <label for="ss-tier-over"><span class="ss-tier-band">Over $3M</span><span class="ss-tier-note">The grant office is built for you.</span></label>
+              <label for="ss-tier-over"><span class="ss-tier-band">Over $3M</span><span class="ss-tier-price">$249<span> / month</span></span></label>
             </div>
           </div>
           <p class="ss-tier-help">Your tier is read from your public 990 at signup. Month to month.</p>
@@ -791,13 +791,13 @@
     if (!radios.length || !btn || !office || !hint) return;
     Array.prototype.forEach.call(radios, function (r) {
       r.addEventListener('change', function () {
-        var over = r.value === 'over_3m';
-        office.style.display = over ? '' : 'none';
-        btn.style.display = over ? 'none' : '';
-        btn.disabled = over;
-        hint.textContent = over
-          ? 'Over $3M is handled by the grant office.'
-          : 'Month to month. Cancel anytime.';
+        // 2026-08-20: over $3M is a real $249 tier now, so no band routes away from
+        // this checkout. The office link stays in the DOM but is never revealed here;
+        // the office is a different service (it submits) sold on its own page.
+        office.style.display = 'none';
+        btn.style.display = '';
+        btn.disabled = false;
+        hint.textContent = 'Month to month. Cancel anytime.';
         // A tier change after the checkout has already mounted must not leave the
         // buyer looking at the previous tier's price. The memoized checkout is torn
         // down so the next click re-mints at the price now selected.
