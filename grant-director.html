@@ -211,6 +211,30 @@
     line-height: 1.45;
   }
   .fork-list li:last-child { border-bottom: none; }
+
+  /* D123 revenue tiers (2026-08-20). Mirrors the grant-office tier picker's structure
+     (radio + label, button gated until a tier is chosen) but in this page's light
+     palette, since grant-office is the dark surface and this one is paper. */
+  .ss-tier { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 4px 0 0; }
+  @media (max-width: 560px) { .ss-tier { grid-template-columns: 1fr; } }
+  .ss-tier-card { position: relative; }
+  .ss-tier-card input { position: absolute; opacity: 0; pointer-events: none; }
+  .ss-tier-card label { display: block; height: 100%; border: 1px solid var(--paper-rule);
+    background: #fff; padding: 12px 12px 11px; cursor: pointer; transition: border-color 0.15s; }
+  .ss-tier-card label:hover { border-color: var(--paper-ink-3); }
+  .ss-tier-card input:checked + label { border-color: var(--black); box-shadow: inset 0 0 0 1px var(--black); }
+  .ss-tier-card input:focus-visible + label { outline: 2px solid var(--red); outline-offset: 2px; }
+  .ss-tier-band { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin: 0 0 7px; }
+  .ss-tier-price { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 1.05rem;
+    font-weight: 700; color: var(--paper-ink); }
+  .ss-tier-price span { font-size: 0.7rem; font-weight: 400; color: var(--paper-ink-3); }
+  .ss-tier-note { display: block; font-size: 0.78rem; color: var(--paper-ink-3); line-height: 1.45; }
+  .ss-tier-help { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+    color: var(--paper-ink-3); letter-spacing: 0.02em; line-height: 1.7; margin: 12px 0 18px; }
+  .ss-tier-hint { font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--paper-ink-3); margin: 10px 0 0; }
+  .fork-cta.solid[disabled] { opacity: 0.45; cursor: default; }
   .fork-list .check { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--red); flex-shrink: 0; padding-top: 3px; }
   .fork-cta {
     margin-top: auto;
@@ -415,8 +439,8 @@
       <p class="eyebrow">For the development shop of one</p>
       <h1>Grants fund the work. Right now you are chasing them blind.</h1>
       <p class="subhead">You are the development shop, on top of running the org. And the funders who will fund you next year are choosing their nonprofit partners now, months before the grant ever posts.</p>
-      <p class="hook-solution">Sharke is the grant team you cannot afford to hire. It does the research and verifies which funders actually fund work like yours, so you can stop chasing and start building a pipeline that closes the funding gap. Self-serve, $159 a month.</p>
-      <a href="#ss-price-card" class="hook-cta">Start self-serve, $159 a month &rarr;</a>
+      <p class="hook-solution">Sharke is the grant team you cannot afford to hire. It does the research and verifies which funders actually fund work like yours, so you can stop chasing and start building a pipeline that closes the funding gap. Self-serve, starting at $99 a month.</p>
+      <a href="#ss-price-card" class="hook-cta">Start self-serve, from $99 a month &rarr;</a>
       <p class="hook-note">No contract. Cancel anytime. Your workspace is live the same day.</p>
     </div>
   </section>
@@ -542,7 +566,7 @@
           <span class="verdict-chip">Move on</span>
         </span>
       </div>
-      <a href="#ss-price-card" class="hook-cta" id="mid-cta" style="margin-top:32px;">Start self-serve, $159 a month &rarr;</a>
+      <a href="#ss-price-card" class="hook-cta" id="mid-cta" style="margin-top:32px;">Start self-serve, from $99 a month &rarr;</a>
       <p class="src-note">Every verdict is built from the funder's own documented filings.</p>
     </div>
   </section>
@@ -601,7 +625,7 @@
           <span class="fork-rec">Self-serve</span>
           <div class="fork-label">Grant Team</div>
           <div class="fork-title">Sharke as the team you run</div>
-          <div class="fork-price"><span class="amt">$159</span><span class="per"> / month</span></div>
+          <div class="fork-price"><span class="amt">From $99</span><span class="per"> / month</span></div>
           <p>You keep the work in-house, with Sharke doing the finding and verifying before any hours go in. No onboarding, no new system to learn. You verify grants before a tool would have finished installing, and you stop pouring hours into grants that were never going to fund you.</p>
           <ul class="fork-list">
             <li><span class="check">&rarr;</span> A source-cited verdict on every grant, before the hours go in</li>
@@ -609,7 +633,24 @@
             <li><span class="check">&rarr;</span> Drafting grounded in your organization's own materials</li>
             <li><span class="check">&rarr;</span> The whole pipeline in one place, board-ready, not in one person's head</li>
           </ul>
-          <button id="ss-checkout-btn" class="fork-cta solid" onclick="revealSelfServeCheckout()">Start self-serve &rarr;</button>
+          <div class="ss-tier" id="ss-tier" role="radiogroup" aria-label="Your organization's annual revenue">
+            <div class="ss-tier-card">
+              <input type="radio" name="ss-tier" id="ss-tier-under" value="under_1m">
+              <label for="ss-tier-under"><span class="ss-tier-band">Under $1M</span><span class="ss-tier-price">$99<span> / month</span></span></label>
+            </div>
+            <div class="ss-tier-card">
+              <input type="radio" name="ss-tier" id="ss-tier-mid" value="one_to_three_m">
+              <label for="ss-tier-mid"><span class="ss-tier-band">$1M to $3M</span><span class="ss-tier-price">$159<span> / month</span></span></label>
+            </div>
+            <div class="ss-tier-card">
+              <input type="radio" name="ss-tier" id="ss-tier-over" value="over_3m">
+              <label for="ss-tier-over"><span class="ss-tier-band">Over $3M</span><span class="ss-tier-note">The grant office is built for you.</span></label>
+            </div>
+          </div>
+          <p class="ss-tier-help">Your tier is read from your public 990 at signup. Month to month.</p>
+          <button id="ss-checkout-btn" class="fork-cta solid" onclick="revealSelfServeCheckout()" disabled>Start self-serve &rarr;</button>
+          <a href="/grant-office" id="ss-office-link" class="fork-cta solid" style="display:none;">See the grant office &rarr;</a>
+          <p class="ss-tier-hint" id="ss-tier-hint">Pick your revenue band to continue.</p>
           <div id="ss-checkout-area" class="ss-checkout" style="display:none;">
             <p class="ss-stripe"><svg width="11" height="13" viewBox="0 0 24 28" fill="none" stroke="#6b6560" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><rect x="3" y="13" width="18" height="13" rx="2"/><path d="M7 13V9a5 5 0 0 1 10 0v4"/></svg> Secure checkout by Stripe</p>
             <div id="ss-checkout-loading" class="ss-checkout-msg" style="display:none;"><p>Preparing secure checkout...</p></div>
@@ -629,11 +670,11 @@
         <p>The first is the hours, and the market prices them plainly: freelance grant writers run $35 to $60 an hour, flat-fee proposals $1,000 to $8,000 each, a matching database that only finds grants $179 to $299 a month.</p>
         <p>The second cost never shows up anywhere: the grants with real fit that pass every cycle because no one had the hours to find them, verify them, and get an application in. The median institutional grant in the public record is about $20,000.</p>
         <p style="font-size:1.08rem;"><strong>Miss one a year where the fit was documented and no one applied, and doing nothing has already cost more than ten times what Sharke does.</strong></p>
-        <p>Self-serve is $159 a month: the finding, the verifying, the drafting support, and the pipeline. Priced like a tool, doing the job of the hours you cannot hire.</p>
+        <p>Self-serve starts at $99 a month, priced by your organization's size: the finding, the verifying, the drafting support, and the pipeline. Priced like a tool, doing the job of the hours you cannot hire.</p>
         <p class="roi-source">Freelance rates and flat-fee ranges: Upwork grant-writer rate data and 2026 market guides. Database pricing: published 2026 plans. Median institutional grant: public grant record (IRS Schedule I), Sharke analysis.</p>
       </div>
 
-      <p class="price-foot">Self-serve is $159 a month. The Grant Funding Viability Assessment is $79, one-time. Done for you, on its own page, starts at $249 a month, priced to how much of your mission rides on grants.</p>
+      <p class="price-foot">Self-serve starts at $99 a month, priced by your organization's size. The Grant Funding Viability Assessment is $79, one-time. Done for you, on its own page, starts at $249 a month, priced to how much of your mission rides on grants.</p>
     </div>
   </section>
 
@@ -697,7 +738,7 @@
 
 <!-- Sticky mobile CTA bar: shown at <=700px by CSS; hidden while the offer section is on screen. -->
 <div class="sticky-cta" id="sticky-cta">
-  <p class="sc-note"><strong>$159 a month.</strong> The grant team you run.</p>
+  <p class="sc-note"><strong>Starting at $99 a month.</strong> The grant team you run.</p>
   <a class="sc-btn" href="#ss-price-card">Start self-serve</a>
 </div>
 
@@ -733,6 +774,47 @@
   }
 
   var ssCheckout = null;
+  // ---- D123 revenue tiers ----
+  // The price is decided BEFORE the checkout mints, so the button stays disabled until
+  // a band is chosen. Over $3M has no self-serve tier at all: that card swaps the buy
+  // button for a link to the grant office rather than minting anything.
+  function ssSelectedTier() {
+    var el = document.querySelector('input[name="ss-tier"]:checked');
+    return el ? el.value : '';
+  }
+
+  (function () {
+    var radios = document.querySelectorAll('input[name="ss-tier"]');
+    var btn = document.getElementById('ss-checkout-btn');
+    var office = document.getElementById('ss-office-link');
+    var hint = document.getElementById('ss-tier-hint');
+    if (!radios.length || !btn || !office || !hint) return;
+    Array.prototype.forEach.call(radios, function (r) {
+      r.addEventListener('change', function () {
+        var over = r.value === 'over_3m';
+        office.style.display = over ? '' : 'none';
+        btn.style.display = over ? 'none' : '';
+        btn.disabled = over;
+        hint.textContent = over
+          ? 'Over $3M is handled by the grant office.'
+          : 'Month to month. Cancel anytime.';
+        // A tier change after the checkout has already mounted must not leave the
+        // buyer looking at the previous tier's price. The memoized checkout is torn
+        // down so the next click re-mints at the price now selected.
+        if (ssCheckout) {
+          try {
+            ssCheckout.then(function (c) { if (c && c.destroy) c.destroy(); });
+          } catch (e) { /* nothing to tear down */ }
+          ssCheckout = null;
+          var area = document.getElementById('ss-checkout-area');
+          var container = document.getElementById('ss-checkout-container');
+          if (area) area.style.display = 'none';
+          if (container) { container.style.display = 'none'; container.innerHTML = ''; }
+        }
+      });
+    });
+  })();
+
   function revealSelfServeCheckout() {
     var btn = document.getElementById('ss-checkout-btn');
     var area = document.getElementById('ss-checkout-area');
@@ -754,7 +836,7 @@
               // COUNTABILITY 2026-08-14, option C. s and v ride the Stripe session
               // metadata instead of the browser, because the buyer leaves this origin
               // at payment and sessionStorage does not follow them to app signup.
-              body: JSON.stringify({ plan: 'self_serve', s: skFunnel('sk_src'), v: skFunnel('sk_vid') })
+              body: JSON.stringify({ plan: 'self_serve', tier: ssSelectedTier(), s: skFunnel('sk_src'), v: skFunnel('sk_vid') })
             })
             .then(function (resp) { return resp.json(); })
             .then(function (data) { if (data.error) throw new Error(data.error); return data.clientSecret; });
@@ -777,6 +859,9 @@
       ssCheckout = null;
       area.style.display = 'none';
       btn.style.display = '';
+      // The retry button must stay usable: a tier is still selected at this point,
+      // so re-enable rather than leaving the buyer with a dead control.
+      btn.disabled = !ssSelectedTier();
     });
   }
 
