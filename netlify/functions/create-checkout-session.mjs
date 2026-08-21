@@ -69,7 +69,10 @@ export default async (req) => {
   const isSelfServe = plan === "self_serve";
   const isGfvc = plan === "gfvc";
   const isDfy = plan === "dfy";
-  const DFY_TIERS = { half: 24900, three_quarters: 36900, all: 45900 };
+  // Grant office repriced 2026-08-20 (founder): $399 / $549 / $699, up from
+  // $249 / $369 / $459. This is what lets over-$3M exist as a $249 SELF-SERVE
+  // tier without inverting the ladder: the office floor now sits $150 above it.
+  const DFY_TIERS = { half: 39900, three_quarters: 54900, all: 69900 };
 
   // Self-serve is revenue-tiered, month to month.
   //   under $1M      $99      D123, founder 2026-08-20

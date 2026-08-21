@@ -118,7 +118,12 @@ console.log("=".repeat(72));
 const gfvc = await amountOf({ plan: "gfvc" });
 check("the $79 Assessment is still $79", gfvc.amount === 7900, `got ${gfvc.amount}`);
 const dfy = await amountOf({ plan: "dfy", tier: "half" });
-check("the grant office half tier is still $249", dfy.amount === 24900, `got ${dfy.amount}`);
+check("the grant office half tier is $399", dfy.amount === 39900, `got ${dfy.amount}`);
+const dfyAll = await amountOf({ plan: "dfy", tier: "all" });
+check("the grant office top tier is $699", dfyAll.amount === 69900, `got ${dfyAll.amount}`);
+check("THE LADDER HOLDS: the office floor is above the top self-serve tier",
+  dfy.amount > over.amount,
+  `office floor ${dfy.amount} is not above self-serve top ${over.amount}, the ladder is inverted`);
 const dfyBad = await mint({ plan: "dfy", tier: "under_1m" });
 check("a self-serve tier cannot be used to buy the grant office", dfyBad.status === 400,
   `got ${dfyBad.status}`);
