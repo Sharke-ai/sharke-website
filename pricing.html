@@ -417,7 +417,7 @@
   // track.mjs allowlists event names, so the per-rung CTA clicks reuse the
   // positional cta_* labels under the "pricing" page key:
   // rung 1 (free Checkup) = cta_hero, rung 2 ($79 Assessment) = cta_mid,
-  // rung 3 (self-serve $159) = cta_sticky, rung 4 (grant office) = cta_faq.
+  // rung 3 (self-serve, tiered from $99 per D123) = cta_sticky, rung 4 (grant office) = cta_faq.
   (function () {
     if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
     var send = function (e) {
