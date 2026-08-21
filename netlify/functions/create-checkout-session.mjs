@@ -54,10 +54,12 @@ export default async (req) => {
     gw: "price_1TJKOGIGfptARFHllj5VyBdo",
   };
 
-  // Nonprofit self-serve uses its own inline $159/mo price with a distinct
+  // Nonprofit self-serve uses its own inline monthly price with a distinct
   // display name, so the checkout reads "Sharke Self-Serve" (not the
   // grant-writers product) and is never tied to the gw price/amount.
-  // $159/mo is flat per the 2026-07-13 pricing canon; no scheduled increase.
+  // The amount is REVENUE-TIERED per D123 (2026-08-20), superseding the flat
+  // $159 of the 2026-07-13 pricing canon. Still no scheduled increase: D103
+  // bars a price deadline on any surface.
   // GFVC = the Grant Funding Viability Assessment, an inline $79 one-time price.
   // DFY = the done-for-you grant office, an inline monthly subscription priced
   // by the buyer's self-selected tier (share of mission income from grants).
@@ -68,6 +70,14 @@ export default async (req) => {
   const isGfvc = plan === "gfvc";
   const isDfy = plan === "dfy";
   const DFY_TIERS = { half: 24900, three_quarters: 36900, all: 45900 };
+
+  // D123 (founder 2026-08-20): self-serve is revenue-tiered, month to month.
+  // Under $1M: $99. $1M to $3M: $159. OVER $3M has NO self-serve tier and never
+  // reaches this checkout: grant-director.html routes those buyers to /grant-office,
+  // because a third self-serve tier would sit under the office's middle tier and
+  // invert the ladder. There is deliberately no over_3m key here, so an attempt to
+  // buy one is an explicit 400 rather than a silent charge at the wrong price.
+  const SELF_SERVE_TIERS = { under_1m: 9900, one_to_three_m: 15900 };
   const priceId = prices[plan];
   if (!priceId && !isSelfServe && !isGfvc && !isDfy) {
     return new Response(JSON.stringify({ error: "Invalid plan" }), {
@@ -82,6 +92,56 @@ export default async (req) => {
     });
   }
 
+  // A self-serve tier is validated only when one is SENT. A missing tier falls back to
+  // $159, which is exactly what the page charged before D123, so a browser holding the
+  // pre-D123 page cached still checks out at the price that page displays. Rejecting a
+  // missing tier would break those visitors; rejecting a WRONG one is still correct.
+  const ssTier = isSelfServe && tier ? tier : null;
+  if (isSelfServe && ssTier && !Object.prototype.hasOwnProperty.call(SELF_SERVE_TIERS, ssTier)) {
+    return new Response(JSON.stringify({ error: "Invalid tier" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+  const ssAmount = ssTier ? SELF_SERVE_TIERS[ssTier] : SELF_SERVE_TIERS.one_to_three_m;
+
+  // ---- D121 credit: the $79 Assessment applies to the first subscription month ----
+  // Founder 2026-08-20: "We will let the customer apply the $79 spent to their first
+  // month should they choose to subscribe."
+  //
+  // The credit is claimed by passing the Stripe checkout session id of the Assessment
+  // the buyer already paid for. That id is the proof, and it is verified AGAINST STRIPE
+  // here rather than trusted from the browser: a forged id fails the lookup, and an
+  // unpaid or non-Assessment session fails the checks. This needs no new datastore,
+  // which is why it is the id and not the email that travels.
+  //
+  // KNOWN BOUND, deliberately not solved here: nothing stops the same Assessment session
+  // being credited twice if a buyer subscribes, cancels and subscribes again. Detecting
+  // that needs a store of spent credits. The session id is stamped into the subscription
+  // metadata below so a duplicate is at least visible after the fact.
+  const CREDIT_COUPON = "GFVA_CREDIT_79";
+  let creditApplied = false;
+  const creditSession = typeof body.credit_session === "string" ? body.credit_session.trim() : "";
+  if (creditSession && plan !== "gfvc" && /^cs_(live|test)_[A-Za-z0-9]+$/.test(creditSession)) {
+    try {
+      const look = await fetch(
+        "https://api.stripe.com/v1/checkout/sessions/" + encodeURIComponent(creditSession),
+        { headers: { Authorization: "Bearer " + STRIPE_SECRET_KEY } }
+      );
+      if (look.ok) {
+        const paid = await look.json();
+        creditApplied = paid.payment_status === "paid" &&
+                        paid.mode === "payment" &&
+                        paid.metadata &&
+                        paid.metadata.plan === "gfvc";
+      }
+    } catch {
+      // A credit lookup must never block a sale. Full price is recoverable;
+      // a checkout that will not mint is not.
+      creditApplied = false;
+    }
+  }
+
   // The GFVC Assessment is a one-time payment; ed/gw/self_serve/dfy are subscriptions
   const mode = plan === "gfvc" ? "payment" : "subscription";
 
@@ -90,9 +150,9 @@ export default async (req) => {
   params.append("mode", mode);
   params.append("ui_mode", "embedded");
   if (isSelfServe) {
-    // Inline $159.00/month price, named for the checkout header
+    // Inline tiered monthly price (D123), named for the checkout header
     params.append("line_items[0][price_data][currency]", "usd");
-    params.append("line_items[0][price_data][unit_amount]", "15900");
+    params.append("line_items[0][price_data][unit_amount]", String(ssAmount));
     params.append("line_items[0][price_data][recurring][interval]", "month");
     params.append("line_items[0][price_data][product_data][name]", "Sharke Self-Serve");
   } else if (isGfvc) {
@@ -123,6 +183,11 @@ export default async (req) => {
   params.append("metadata[plan]", plan);
   if (funnelSrc) params.append("metadata[src]", funnelSrc);
   if (funnelVid) params.append("metadata[vid]", funnelVid);
+  if (isSelfServe && ssTier) {
+    params.append("metadata[tier]", ssTier);
+    params.append("subscription_data[metadata][plan]", plan);
+    params.append("subscription_data[metadata][tier]", ssTier);
+  }
   if (isDfy) {
     params.append("metadata[tier]", tier);
     // Session metadata does NOT propagate to the Subscription object; label the
@@ -130,6 +195,12 @@ export default async (req) => {
     // MP-1 webhook) can read plan/tier without digging up the session.
     params.append("subscription_data[metadata][plan]", plan);
     params.append("subscription_data[metadata][tier]", tier);
+  }
+
+  if (creditApplied) {
+    params.append("discounts[0][coupon]", CREDIT_COUPON);
+    params.append("metadata[credit_session]", creditSession);
+    params.append("subscription_data[metadata][credit_session]", creditSession);
   }
 
   // Purchasing mechanics for a nonprofit buyer (founder 2026-08-19).
@@ -194,8 +265,11 @@ export default async (req) => {
       );
     }
 
+    // creditApplied is reported back so the page can say whether the $79 came off.
+    // A buyer who was promised a credit and silently paid full price is a refund
+    // request; telling the page lets it show the truth either way.
     return new Response(
-      JSON.stringify({ clientSecret: session.client_secret }),
+      JSON.stringify({ clientSecret: session.client_secret, creditApplied: creditApplied }),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
   } catch (err) {
