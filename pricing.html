@@ -296,7 +296,7 @@
     <div class="container">
       <p class="eyebrow">Pricing</p>
       <h1>Your grant work, done with your team or for you.</h1>
-      <p class="subhead">See where the funding behind your mission stands first, <a href="#rung-1">free</a> or for <a href="#rung-2">$79</a>. Then it starts at <a href="#rung-3">$99 a month</a> for the workspace your own person runs, or <a href="#rung-4">from $399</a> for the whole grant office, run entirely by Sharke.</p>
+      <p class="subhead">See where the funding behind your mission stands first, <a href="#rung-1">free</a> or for <a href="#rung-2">$79</a>. Then Sharke does the grant work either way: <a href="#rung-3">from $99 a month</a> on the grant team, where you approve and send, or <a href="#rung-4">from $399</a> for the grant office, which submits for you.</p>
     </div>
   </section>
 
@@ -394,8 +394,12 @@
         <p>No. Subscriptions are month to month, and you can cancel anytime. The Assessment is a one-time purchase.</p>
       </details>
       <details>
-        <summary>Self-serve or done-for-you: which one is us?</summary>
-        <p>It comes down to who submits. Under $3M in revenue, Sharke does the work and you approve it and send it, <a href="/grant-director">starting at $99 a month</a>. Over $3M, Sharke prepares the full package and submits it with your approval, <a href="/grant-office">from $399 a month</a>. Not sure you have a funding gap at all? Run the <a href="/funding-gap">free Checkup</a> first; it shows you in about five minutes.</p>
+        <summary>We already run a CRM. Do we have to move anything?</summary>
+        <p>No. Keep your CRM: Sharke is not one and is not asking you to move anything. What comes out of Sharke is a decision on each grant with the funder's record behind it, and your verdicts, funders, and deadlines export whenever you want them.</p>
+      </details>
+      <details>
+        <summary>The grant team or the grant office: which one is us?</summary>
+        <p>It comes down to who submits, and how far the work goes. On the grant team, Sharke does the work through the first draft of the application, and you approve it and send it, <a href="/grant-director">starting at $99 a month</a>. In the grant office, Sharke prepares the full application package and submits it with your approval, <a href="/grant-office">from $399 a month</a>. Both are priced by your organization, not by who is on staff. Not sure you have a funding gap at all? Run the <a href="/funding-gap">free Checkup</a> first; it shows you in about five minutes.</p>
       </details>
     </div>
   </section>
@@ -417,7 +421,7 @@
   // track.mjs allowlists event names, so the per-rung CTA clicks reuse the
   // positional cta_* labels under the "pricing" page key:
   // rung 1 (free Checkup) = cta_hero, rung 2 ($79 Assessment) = cta_mid,
-  // rung 3 (self-serve, tiered from $99 per D123) = cta_sticky, rung 4 (grant office) = cta_faq.
+  // rung 3 (the grant team, tiered from $99 per D123) = cta_sticky, rung 4 (grant office) = cta_faq.
   (function () {
     if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
     var send = function (e) {
