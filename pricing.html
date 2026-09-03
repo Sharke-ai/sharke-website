@@ -429,9 +429,35 @@
   // rung 3 (the grant team, tiered from $99 per D123) = cta_sticky, rung 4 (grant office) = cta_faq.
   (function () {
     if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+
+    // Same two labels /ed and /grant-director keep, same contract (added 2026-09-03).
+    // This page had the beacon but neither label, so every arrival here was
+    // unattributable AND undedupable: no `s` meant a click from the drip looked
+    // identical to a stranger, and no `v` meant one person reloading looked
+    // identical to two people. That is why the traffic claim on this page could
+    // not be falsified either way. sessionStorage, not localStorage: this lasts a
+    // visit, it does not follow anyone between visits. Wrapped because Safari
+    // private mode throws on access.
+    //   s = a coarse source label, read once from ?src= and then held for the tab.
+    //   v = a random per-tab value that tells a new person from the same person
+    //       reloading. Random, never joined to an email, never read from the URL.
+    var mem = function (key, make) {
+      try {
+        var val = sessionStorage.getItem(key);
+        if (!val) { val = make(); if (val) sessionStorage.setItem(key, val); }
+        return val || '';
+      } catch (err) { return make() || ''; }
+    };
+    var src = mem('sk_src', function () {
+      var m = /[?&]src=([a-z0-9_-]{1,24})\b/i.exec(location.search);
+      return m ? m[1].toLowerCase() : '';
+    });
+    var vid = mem('sk_vid', function () {
+      return Math.random().toString(36).slice(2, 12) + Math.random().toString(36).slice(2, 6);
+    });
     var send = function (e) {
       try {
-        var payload = JSON.stringify({ p: 'pricing', e: e });
+        var payload = JSON.stringify({ p: 'pricing', e: e, s: src, v: vid });
         if (navigator.sendBeacon) { navigator.sendBeacon('/.netlify/functions/track', payload); }
         else { fetch('/.netlify/functions/track', { method: 'POST', body: payload, keepalive: true }).catch(function () {}); }
       } catch (err) {}
