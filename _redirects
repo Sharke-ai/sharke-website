@@ -36,5 +36,9 @@
 /review.html      /ed  301!
 /thank-you        /ed  301!
 /thank-you.html   /ed  301!
+# Sharke Research release 01, published 2026-09-22. Clean route first, bare alias kept
+# because the LinkedIn carousel and the PDF both print sharke.ai without a path.
+/research/single-funder  /single-funder.html  200
+/single-funder           /single-funder.html  200
 /privacy /privacy.html 200
 /terms   /terms.html   200
