@@ -35,8 +35,10 @@
   .small { font-size: 13px; color: var(--muted); }
   .pipe-table th { white-space: normal; vertical-align: bottom; }
   .pipe-table td:first-child { white-space: nowrap; }
-  td.fill { min-width: 64px; }
-  td.fill::after { content: ""; display: block; height: 12px; border-bottom: 1px dashed var(--muted); }
+  td.ill { font-style: italic; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pipe-table tr.sub th { border-bottom: 2px solid var(--ink); padding-top: 0; font-size: 10px; letter-spacing: 0.04em; text-transform: none; font-style: italic; }
+  .pipe-table thead tr:first-child th { border-bottom: none; }
+  .illus { border: 1px dashed var(--muted); padding: 12px 16px; margin-top: 18px; font-size: 14px; }
   .cta { margin-top: 24px; }
   .cta a { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 18px; }
 </style>
@@ -58,36 +60,40 @@
     <h1>What a cohort of 10 nonprofits would look like.</h1>
     <p>This is the brief you would receive: every organization in your cohort on one page, measured the same way, so you can show your board and funders where each one starts and, a year later, what changed.</p>
     <div class="notice">
-      <strong>Sample.</strong> The figures come from the public records of 10 real nonprofits, with their names removed. Your cohort's numbers will be its own.
+      <strong>Sample.</strong> The figures come from the public records of 10 real nonprofits, with their names removed. The one exception is the three "built" columns in section 1, which are an illustration. Your cohort's numbers will be its own.
     </div>
   </div>
 </section>
 
 <!-- D288: the before-and-after leads. "Needs" is each organization's own Assessment
      (resilience_review.py pipeline_resilience), re-run 2026-09-23; every score in section 4
-     matched that run. The built columns are measured during a real cohort, never filled here. -->
+     matched that run. The built columns are an ILLUSTRATION the founder asked for on 2026-09-24:
+     invented numbers, labeled as such in the section and the page notice. Replace them with a real
+     cohort's measurements the day one exists, and never drop the labels while they are invented. -->
 <section>
   <div class="container">
     <h2>1. The before-and-after you report</h2>
     <p>For every organization, you see how big a pipeline its funding needs and how much of it is built, at the start of the year, at month six, and again at the end. Every organization is measured the same way, so you can compare them on one page.</p>
+    <div class="illus"><strong>Illustration.</strong> The "needs" columns come from each organization's real public records. The three "built" columns are made up to show how this table reads during a cohort. No cohort has reached month six yet, and these numbers are not a forecast.</div>
     <div class="table-wrap">
       <table class="pipe-table">
-        <thead><tr><th>Organization</th><th>Grants it needs a year</th><th>Funders it needs</th><th>Built at start</th><th>Built at month six</th><th>Built at month twelve</th></tr></thead>
+        <thead><tr><th>Organization</th><th>Grants it needs a year</th><th>Funders it needs</th><th>Built at start</th><th>Built at month six</th><th>Built at month twelve</th></tr>
+        <tr class="sub"><th></th><th></th><th></th><th colspan="3">grants / funders, illustration</th></tr></thead>
         <tbody>
-          <tr><td>Organization A</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
-          <tr><td>Organization B</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
-          <tr><td>Organization C</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
-          <tr><td>Organization D</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
-          <tr><td>Organization E</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
-          <tr><td>Organization F</td><td class="num">24</td><td class="num">13</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
-          <tr><td>Organization G</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
-          <tr><td>Organization H</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
-          <tr><td>Organization I</td><td class="num">16</td><td class="num">9</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
-          <tr><td>Organization J</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+          <tr><td>Organization A</td><td class="num">20</td><td class="num">11</td><td class="ill">2 / 3</td><td class="ill">11 / 6</td><td class="ill">18 / 10</td></tr>
+          <tr><td>Organization B</td><td class="num">20</td><td class="num">11</td><td class="ill">4 / 5</td><td class="ill">13 / 7</td><td class="ill">20 / 11</td></tr>
+          <tr><td>Organization C</td><td class="num">20</td><td class="num">11</td><td class="ill">3 / 4</td><td class="ill">12 / 7</td><td class="ill">17 / 10</td></tr>
+          <tr><td>Organization D</td><td class="num">20</td><td class="num">11</td><td class="ill">1 / 2</td><td class="ill">9 / 5</td><td class="ill">15 / 8</td></tr>
+          <tr><td>Organization E</td><td class="num">20</td><td class="num">11</td><td class="ill">2 / 2</td><td class="ill">10 / 5</td><td class="ill">16 / 9</td></tr>
+          <tr><td>Organization F</td><td class="num">24</td><td class="num">13</td><td class="ill">0 / 1</td><td class="ill">8 / 4</td><td class="ill">14 / 8</td></tr>
+          <tr><td>Organization G</td><td class="num">20</td><td class="num">11</td><td class="ill">5 / 4</td><td class="ill">14 / 8</td><td class="ill">21 / 11</td></tr>
+          <tr><td>Organization H</td><td class="num">20</td><td class="num">11</td><td class="ill">2 / 3</td><td class="ill">10 / 6</td><td class="ill">16 / 9</td></tr>
+          <tr><td>Organization I</td><td class="num">16</td><td class="num">9</td><td class="ill">1 / 1</td><td class="ill">6 / 4</td><td class="ill">10 / 6</td></tr>
+          <tr><td>Organization J</td><td class="num">20</td><td class="num">11</td><td class="ill">3 / 2</td><td class="ill">11 / 6</td><td class="ill">17 / 9</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="small">How big a pipeline each organization needs comes from its own Assessment: enough grants in motion to carry about half its funding, with no single grant carrying too much. The three built columns fill in during your cohort.</p>
+    <p class="small">How big a pipeline each organization needs comes from its own Assessment: enough grants in motion to carry about half its funding, with no single grant carrying too much. In your cohort, the three built columns are measured, not illustrated.</p>
   </div>
 </section>
 
