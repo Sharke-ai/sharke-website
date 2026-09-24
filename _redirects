@@ -5,6 +5,8 @@
 /fai     /fai.html     200
 /the-20-billion-hallucination  /The_20_Billion_Hallucination.html  200
 /foundations  /foundations.html  200
+# associations and nonprofit centers get their own page again, 2026-09-23 (D288); was 301 -> /foundations
+/associations  /associations.html  200
 /cohort-brief-sample  /cohort-brief-sample.html  200
 /grant-office  /grant-office.html  200
 /grant-director  /grant-director.html  200
@@ -18,7 +20,7 @@
 /subscribe-ed       /grant-office  301!
 /subscribe-ed.html  /grant-office  301!
 # Segment pages retired 2026-07-07: sold the retired $49 / 24-hour per-grant "check", off the locked ladder.
-# EDs + consultants -> the $79 GFVA (/ed); associations/intermediaries -> capacity builders (/foundations).
+# EDs + consultants -> the $79 GFVA (/ed). (associations/intermediaries went to /foundations until 2026-09-23; see /associations above.)
 # /gw retired 2026-07-07 (same $49/24h motion; confirmed no live drip links it) -> /ed.
 /executive-directors       /ed           301!
 /executive-directors.html  /ed           301!
@@ -26,8 +28,6 @@
 /grant-writers.html        /ed           301!
 /gw                        /ed           301!
 /gw.html                   /ed           301!
-/associations              /foundations  301!
-/associations.html         /foundations  301!
 # subscribe-gw retired with the gw motion 2026-07-09: force both forms to /gw's destination
 /subscribe-gw       /ed  301!
 /subscribe-gw.html  /ed  301!

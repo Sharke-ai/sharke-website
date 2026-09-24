@@ -33,6 +33,10 @@
   td { padding: 8px 10px; border-bottom: 1px solid var(--rule); }
   td.num { text-align: right; font-variant-numeric: tabular-nums; }
   .small { font-size: 13px; color: var(--muted); }
+  .pipe-table th { white-space: normal; vertical-align: bottom; }
+  .pipe-table td:first-child { white-space: nowrap; }
+  td.fill { min-width: 64px; }
+  td.fill::after { content: ""; display: block; height: 12px; border-bottom: 1px dashed var(--muted); }
   .cta { margin-top: 24px; }
   .cta a { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 18px; }
 </style>
@@ -59,9 +63,37 @@
   </div>
 </section>
 
+<!-- D288: the before-and-after leads. "Needs" is each organization's own Assessment
+     (resilience_review.py pipeline_resilience), re-run 2026-09-23; every score in section 4
+     matched that run. The built columns are measured during a real cohort, never filled here. -->
 <section>
   <div class="container">
-    <h2>1. What we would screen before anyone spends staff time</h2>
+    <h2>1. The before-and-after you report</h2>
+    <p>For every organization, you see how big a pipeline its funding needs and how much of it is built, at the start of the year, at month six, and again at the end. Every organization is measured the same way, so you can compare them on one page.</p>
+    <div class="table-wrap">
+      <table class="pipe-table">
+        <thead><tr><th>Organization</th><th>Grants it needs a year</th><th>Funders it needs</th><th>Built at start</th><th>Built at month six</th><th>Built at month twelve</th></tr></thead>
+        <tbody>
+          <tr><td>Organization A</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+          <tr><td>Organization B</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+          <tr><td>Organization C</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+          <tr><td>Organization D</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+          <tr><td>Organization E</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+          <tr><td>Organization F</td><td class="num">24</td><td class="num">13</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+          <tr><td>Organization G</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+          <tr><td>Organization H</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+          <tr><td>Organization I</td><td class="num">16</td><td class="num">9</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+          <tr><td>Organization J</td><td class="num">20</td><td class="num">11</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small">How big a pipeline each organization needs comes from its own Assessment: enough grants in motion to carry about half its funding, with no single grant carrying too much. The three built columns fill in during your cohort.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>2. What we would screen before anyone spends staff time</h2>
     <p>Across the 10 organizations, we would screen 7,889 funders that have already funded organizations of the same focus, size and state.</p>
     <div class="stats">
       <div class="stat"><div class="n">5,884</div><div class="l">can be applied to</div></div>
@@ -92,7 +124,7 @@
 
 <section>
   <div class="container">
-    <h2>2. Why funders would be screened out</h2>
+    <h2>3. Why funders would be screened out</h2>
     <p>These are facts about what each funder is, not judgments about your organizations.</p>
     <div class="table-wrap">
       <table>
@@ -115,7 +147,7 @@
 
 <section>
   <div class="container">
-    <h2>3. Where each organization would start</h2>
+    <h2>4. Where each organization would start</h2>
     <p>Each organization gets one score out of 100 for how the funding behind its mission looks today, built from its own public filings. In this sample the cohort runs from 60 to 65, with a middle value of 64.5.</p>
     <div class="table-wrap">
       <table>
@@ -140,8 +172,8 @@
 
 <section>
   <div class="container">
-    <h2>4. The starting line</h2>
-    <p>This is your baseline. At the end of the year we run the brief again for the same 10 organizations, and the change for each one is what you report to your board and funders.</p>
+    <h2>5. The starting line</h2>
+    <p>This is your baseline. At month six and again at the end of the year, we run the brief for the same 10 organizations. The change in each one's pipeline, against what its funding needs, is what you report to your board and funders.</p>
     <p class="small">Sources: each organization's own public filings, and funder award records.</p>
     <div class="cta"><a href="/foundations#start">Start a cohort</a></div>
   </div>
