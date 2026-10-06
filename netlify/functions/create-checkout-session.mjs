@@ -69,6 +69,14 @@ export default async (req) => {
   const isSelfServe = plan === "self_serve";
   const isGfvc = plan === "gfvc";
   const isDfy = plan === "dfy";
+  // ANNUAL = the annual edition of the funder data report, sold alone (D322) at an
+  // inline $2,500 one-time price, to foundations and associations (D333). Card
+  // checkout per D338; a call stays the fallback for invoice buyers (D332). The
+  // buyer's kind rides in metadata so the intake page can ask for a member list
+  // instead of reading grants. Validated for membership only, like a tier.
+  const isAnnual = plan === "annual_edition";
+  const ANNUAL_AUDIENCES = ["foundation", "association"];
+  const annualAudience = isAnnual && ANNUAL_AUDIENCES.includes(body.audience) ? body.audience : "";
   // Grant office repriced 2026-08-20 (founder): $399 / $549 / $699, up from
   // $249 / $369 / $459. This is what lets over-$3M exist as a $249 SELF-SERVE
   // tier without inverting the ladder: the office floor now sits $150 above it.
@@ -87,7 +95,7 @@ export default async (req) => {
   // the office, not by refusing the tier.
   const SELF_SERVE_TIERS = { under_1m: 9900, one_to_three_m: 15900, over_3m: 24900 };
   const priceId = prices[plan];
-  if (!priceId && !isSelfServe && !isGfvc && !isDfy) {
+  if (!priceId && !isSelfServe && !isGfvc && !isDfy && !isAnnual) {
     return new Response(JSON.stringify({ error: "Invalid plan" }), {
       status: 400,
       headers: { "Content-Type": "application/json" },
@@ -130,7 +138,9 @@ export default async (req) => {
   const CREDIT_COUPON = "GFVA_CREDIT_79";
   let creditApplied = false;
   const creditSession = typeof body.credit_session === "string" ? body.credit_session.trim() : "";
-  if (creditSession && plan !== "gfvc" && /^cs_(live|test)_[A-Za-z0-9]+$/.test(creditSession)) {
+  // The $79 credit is for a first subscription month, so it never applies to the
+  // annual edition either.
+  if (creditSession && plan !== "gfvc" && !isAnnual && /^cs_(live|test)_[A-Za-z0-9]+$/.test(creditSession)) {
     try {
       const look = await fetch(
         "https://api.stripe.com/v1/checkout/sessions/" + encodeURIComponent(creditSession),
@@ -150,8 +160,9 @@ export default async (req) => {
     }
   }
 
-  // The GFVC Assessment is a one-time payment; ed/gw/self_serve/dfy are subscriptions
-  const mode = plan === "gfvc" ? "payment" : "subscription";
+  // The GFVC Assessment and the annual edition are one-time payments;
+  // ed/gw/self_serve/dfy are subscriptions
+  const mode = (plan === "gfvc" || isAnnual) ? "payment" : "subscription";
 
   // Build Stripe API request (form-encoded)
   const params = new URLSearchParams();
@@ -168,6 +179,11 @@ export default async (req) => {
     params.append("line_items[0][price_data][currency]", "usd");
     params.append("line_items[0][price_data][unit_amount]", "7900");
     params.append("line_items[0][price_data][product_data][name]", "Grant Funding Viability Assessment");
+  } else if (isAnnual) {
+    // Inline $2,500.00 one-time price for the annual edition (D322)
+    params.append("line_items[0][price_data][currency]", "usd");
+    params.append("line_items[0][price_data][unit_amount]", "250000");
+    params.append("line_items[0][price_data][product_data][name]", "Sharke Annual Edition");
   } else if (isDfy) {
     // Inline monthly price for the done-for-you grant office, by selected tier
     params.append("line_items[0][price_data][currency]", "usd");
@@ -184,6 +200,8 @@ export default async (req) => {
   // team, so it returns to its own marketing-site intake, not app signup.
   const returnUrl = plan === "gfvc"
     ? `https://sharke.ai/check-intake?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`
+    : isAnnual
+    ? `https://sharke.ai/annual-edition-intake?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`
     : isDfy
     ? `https://sharke.ai/office-intake?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`
     : `https://sharke-app.netlify.app/signup?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`;
@@ -191,6 +209,7 @@ export default async (req) => {
   params.append("metadata[plan]", plan);
   if (funnelSrc) params.append("metadata[src]", funnelSrc);
   if (funnelVid) params.append("metadata[vid]", funnelVid);
+  if (annualAudience) params.append("metadata[audience]", annualAudience);
   if (isSelfServe && ssTier) {
     params.append("metadata[tier]", ssTier);
     params.append("subscription_data[metadata][plan]", plan);
@@ -244,7 +263,7 @@ export default async (req) => {
 
   // Branding -- self-serve and the grant office use the light editorial theme
   // (their checkouts mount in a light card); others stay dark
-  params.append("branding_settings[background_color]", (isSelfServe || isDfy) ? "#faf8f4" : "#0a0a0a");
+  params.append("branding_settings[background_color]", (isSelfServe || isDfy || isAnnual) ? "#faf8f4" : "#0a0a0a");
   params.append("branding_settings[button_color]", "#c0392b");
   params.append("branding_settings[font_family]", "inconsolata");
   params.append("branding_settings[border_style]", "rectangular");

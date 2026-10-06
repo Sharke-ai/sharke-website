@@ -51,7 +51,7 @@ export default async (req) => {
     // dfy is a subscription, but a completed no-trial subscription session is
     // also payment_status "paid", and a future trial would fail closed here,
     // which is the safe direction. One predicate covers all three plans.
-    const isIntakeProduct = plan === "gfvc" || plan === "grb" || plan === "dfy";
+    const isIntakeProduct = plan === "gfvc" || plan === "grb" || plan === "dfy" || plan === "annual_edition";
     const paid = isIntakeProduct && session.payment_status === "paid";
 
     if (!paid) {
@@ -69,6 +69,11 @@ export default async (req) => {
     };
     if (plan === "dfy" && session.metadata && session.metadata.tier) {
       out.tier = session.metadata.tier;
+    }
+    // The annual edition's buyer kind (foundation or association) tells
+    // /annual-edition-intake whether to ask for a member list (D333).
+    if (plan === "annual_edition" && session.metadata && session.metadata.audience) {
+      out.audience = session.metadata.audience;
     }
     return new Response(
       JSON.stringify(out),
