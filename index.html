@@ -160,9 +160,20 @@
   .header-cta:hover { transform: translateY(-1px); }
   .header-cta .cta-short { display: none; }
   @media (max-width: 480px) {
-    .header-cta { padding: 8px 12px; font-size: 11.5px; }
+    .header-inner { padding-left: 16px; padding-right: 16px; gap: 8px; }
+    .header-right { gap: 10px; }
+    .header-right .header-login { min-height: 44px; display: inline-flex; align-items: center; }
+    .header-cta { padding: 8px 12px; font-size: 11.5px; min-height: 44px; display: inline-flex; align-items: center; }
     .header-cta .cta-full { display: none; }
     .header-cta .cta-short { display: inline; }
+  }
+  @media (max-width: 380px) {
+    .header-inner { padding-left: 12px; padding-right: 12px; }
+    .logo { gap: 6px; }
+    .logo-text { font-size: 15px; }
+    .header-right { gap: 8px; }
+    .header-right .header-login { font-size: 12px; }
+    .header-cta { padding-left: 8px; padding-right: 8px; }
   }
   .header-login { font-size: 13px; color: var(--ink-3); text-decoration: none; white-space: nowrap; }
   .header-login:hover { color: var(--ink); }
@@ -542,12 +553,72 @@
       <a href="/grant-director" class="btn-primary">Start with the grant team, from $99 a month <span class="arr">&rarr;</span></a>
       <span class="risk-reducers">No contract. Cancel anytime. Your workspace is live the same day.</span>
     </div>
-    <p class="secondary-offer">Want to see where the funding behind your mission stands first? <a href="/ed">The $79 Assessment</a>: board-ready, in 48 hours.</p>
+    <p class="secondary-offer">Prefer a <a href="/ed">one-time assessment</a>? $79. Board-ready in 48 hours.</p>
     <ul class="hero-chips">
       <li>Live the same day</li>
       <li>Source-cited decisions</li>
       <li>Human-reviewed</li>
     </ul>
+  </div>
+</section>
+
+<!-- DECISION RECORD (moved up, labeled, both verdicts shown) -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow warm">What a verdict looks like</p>
+    <h2>This is what verification catches.</h2>
+    <p class="lead">See whether a grant belongs in your Verified Pipeline, with the evidence behind the decision. The funders shown are illustrative.</p>
+
+    <div class="decision-dashboard" id="decision-dashboard">
+      <div class="dash-bar">
+        <span class="dash-title">Sharke / Decision Record</span>
+      </div>
+      <div class="dash-content">
+        <div class="dash-top">
+          <div class="dash-ring">
+            <span class="dash-glyph">&#10003;</span>
+            <span class="dash-verdict-label">Pursue</span>
+          </div>
+          <div class="dash-meta">
+            <p class="dash-eyebrow">Verified fit</p>
+            <p class="dash-rank">The record backs a first ask at your size</p>
+          </div>
+          <div class="dash-status">
+            <span class="dash-status-dot"></span>
+            <span class="dash-status-text">Worth your hours</span>
+          </div>
+        </div>
+        <div class="dash-funder">
+          <p class="dash-funder-name">Community Resilience Fund</p>
+          <p class="dash-funder-sub">Family foundation &middot; $150K to $250K &middot; Southwest</p>
+        </div>
+        <div class="dash-insight">
+          <p class="dash-insight-label">Funder behavior, not stated focus</p>
+          <p class="dash-insight-text">Stated focus: "General health."<span class="hl">Actual pattern: 12 of the last 15 awards went to rural youth mental health organizations like yours.</span>Your size, your geography, your issue.</p>
+        </div>
+        <p class="dash-verify"><span class="dash-verify-icon">&#10003;</span><span class="dash-verify-text">Eligibility and geography: verified compatible (Southwest)</span></p>
+        <p class="dash-source">Source: IRS 990-PF Schedule I, 2021 to 2025</p>
+      </div>
+    </div>
+    <div class="dash-preview">
+      <span class="dash-pip active" data-index="0"></span>
+      <span class="dash-pip" data-index="1"></span>
+      <span class="dash-pip" data-index="2"></span>
+    </div>
+
+    <p class="categorical-note">Pursue, Wait, or Move on, each with the evidence behind the decision. A Move on verdict is the kind a team can forward straight to a board, sourced to five years of public filings.</p>
+    <p class="lead" style="margin-top: 26px; font-size: 16px;">After a grant earns its place in the Verified Pipeline, Sharke helps draft and red-teams the application before the funder sees it.</p>
+    <blockquote class="rec-quote">
+      <p>"I've been around grants long enough to know that not every opportunity is worth pursuing, but we usually don't find that out until we're already deep into the work. The review helped us take a harder look at what was actually realistic and where we should focus our limited time. That alone made it worthwhile."</p>
+      <cite>Director of Development &middot; Workforce development nonprofit &middot; $1.2M annual budget</cite>
+    </blockquote>
+    <!-- CTA at the proof moment (conversion pass 2026-07-22): verbatim reuse of
+         the existing CTA block; previously a ~5,000px desktop stretch held the
+         page's best evidence with nothing actionable near it. -->
+    <div class="cta-row" style="margin-top:26px;">
+      <a href="/grant-director" class="btn-primary">Start with the grant team, from $99 a month <span class="arr">&rarr;</span></a>
+      <span class="risk-reducers">No contract. Cancel anytime.</span>
+    </div>
   </div>
 </section>
 
@@ -693,6 +764,7 @@
   </g>
 </svg>
     </div>
+    <p class="compare-caption">Sharke sizes the pipeline to your grant goal, replaces weak fits, and keeps it current as cycles change.</p>
   </div>
 </section>
 
@@ -783,23 +855,8 @@
 <!-- HOW VERIFIED COVERAGE WORKS -->
 <section id="how">
   <div class="wrap">
-    <p class="eyebrow">How the Verified Pipeline gets built</p>
-    <h2>Verify the plan. Rule grants in or out. Fill and maintain the gap.</h2>
-
-    <div class="steps steps-3">
-      <div class="step">
-        <div class="step-num">01 / Verify the plan</div>
-        <p>Determine how much documented pipeline the grant goal requires.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">02 / Rule grants in or out</div>
-        <p>Check current opportunities against eligibility, funder behavior, geography, and timing.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">03 / Fill and maintain the gap</div>
-        <p>Replace weak fits with stronger opportunities and keep the pipeline current as cycles change.</p>
-      </div>
-    </div>
+    <p class="eyebrow">Before staff time goes in</p>
+    <h2>Grant search and the Verified Pipeline.</h2>
 
     <p class="motions">A verification-first workflow with human review. <a href="/grant-director" style="color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px;">The grant team, from $99 a month: you approve and send</a>, or <a href="/grant-office" style="color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px;">the grant office, from $399 a month: we submit for you</a>, each priced by your organization. <a href="/pricing" style="color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px;">See plans and scope</a>.</p>
     <p class="route-links"><a href="/grant-director">The grant team: you approve and send</a> <span aria-hidden="true">|</span> <a href="/grant-office">The grant office: we submit for you</a> <span aria-hidden="true">|</span> <a href="/foundations">Capacity builders</a></p>
@@ -822,93 +879,14 @@
   </div>
 </section>
 
-<!-- THE $79 ASSESSMENT (compact deliverable strip; the full sell lives on /ed) -->
-<section>
-  <div class="wrap">
-    <p class="eyebrow">Not sure yet? Verify first</p>
-    <h2>The $79 Assessment: can grants actually fund your mission? Know before you commit a quarter of staff time to finding out.</h2>
-    <p class="lead">Give us your EIN and your grant goal. In 48 hours, a written Assessment: a decision you can act on, not a status report, every figure sourced to the public record.</p>
-    <ul class="assess-list">
-      <li><span class="hp-check">+</span><span>Your Funding Gap: how much verified pipeline your goal requires</span></li>
-      <li><span class="hp-check">+</span><span>A clear call on what to do next: build the grant plan, narrow it, or hold, with the first moves for each</span></li>
-      <li><span class="hp-check">+</span><span>The first 3 to 5 funders, each already backing organizations like yours</span></li>
-    </ul>
-    <div class="cta-row">
-      <a href="/ed" class="btn-primary">Get the Assessment <span class="arr">&rarr;</span></a>
-      <span class="risk-reducers">$79 one time. Board-ready in 48 hours.</span>
-    </div>
-    <p class="secondary-offer">See everything it returns and sample reports on the <a href="/ed">Assessment page</a>.</p>
-  </div>
-</section>
-
-<!-- DECISION RECORD (moved up, labeled, both verdicts shown) -->
-<section>
-  <div class="wrap">
-    <p class="eyebrow warm">What a verdict looks like</p>
-    <h2>This is what verification catches.</h2>
-    <p class="lead">The Assessment answers whether the path to funding is viable. Decision Records answer whether a specific opportunity belongs in it. Three verdicts, the way they arrive: pursue, wait, or walk away. The funders shown are illustrative.</p>
-
-    <div class="decision-dashboard" id="decision-dashboard">
-      <div class="dash-bar">
-        <span class="dash-title">Sharke / Decision Record</span>
-      </div>
-      <div class="dash-content">
-        <div class="dash-top">
-          <div class="dash-ring">
-            <span class="dash-glyph">&#10003;</span>
-            <span class="dash-verdict-label">Pursue</span>
-          </div>
-          <div class="dash-meta">
-            <p class="dash-eyebrow">Verified fit</p>
-            <p class="dash-rank">The record backs a first ask at your size</p>
-          </div>
-          <div class="dash-status">
-            <span class="dash-status-dot"></span>
-            <span class="dash-status-text">Worth your hours</span>
-          </div>
-        </div>
-        <div class="dash-funder">
-          <p class="dash-funder-name">Community Resilience Fund</p>
-          <p class="dash-funder-sub">Family foundation &middot; $150K to $250K &middot; Southwest</p>
-        </div>
-        <div class="dash-insight">
-          <p class="dash-insight-label">Funder behavior, not stated focus</p>
-          <p class="dash-insight-text">Stated focus: "General health."<span class="hl">Actual pattern: 12 of the last 15 awards went to rural youth mental health organizations like yours.</span>Your size, your geography, your issue.</p>
-        </div>
-        <p class="dash-verify"><span class="dash-verify-icon">&#10003;</span><span class="dash-verify-text">Eligibility and geography: verified compatible (Southwest)</span></p>
-        <p class="dash-source">Source: IRS 990-PF Schedule I, 2021 to 2025</p>
-      </div>
-    </div>
-    <div class="dash-preview">
-      <span class="dash-pip active" data-index="0"></span>
-      <span class="dash-pip" data-index="1"></span>
-      <span class="dash-pip" data-index="2"></span>
-    </div>
-
-    <p class="categorical-note">Pursue, Wait, or Move on, each with the evidence behind the decision. A Move on verdict is the kind a team can forward straight to a board, sourced to five years of public filings.</p>
-    <p class="lead" style="margin-top: 26px; font-size: 16px;">After a grant earns its place in the Verified Pipeline, Sharke helps draft and red-teams the application before the funder sees it.</p>
-    <blockquote class="rec-quote">
-      <p>"I've been around grants long enough to know that not every opportunity is worth pursuing, but we usually don't find that out until we're already deep into the work. The review helped us take a harder look at what was actually realistic and where we should focus our limited time. That alone made it worthwhile."</p>
-      <cite>Director of Development &middot; Workforce development nonprofit &middot; $1.2M annual budget</cite>
-    </blockquote>
-    <!-- CTA at the proof moment (conversion pass 2026-07-22): verbatim reuse of
-         the existing CTA block; previously a ~5,000px desktop stretch held the
-         page's best evidence with nothing actionable near it. -->
-    <div class="cta-row" style="margin-top:26px;">
-      <a href="/grant-director" class="btn-primary">Start with the grant team, from $99 a month <span class="arr">&rarr;</span></a>
-      <span class="risk-reducers">No contract. Cancel anytime.</span>
-    </div>
-  </div>
-</section>
-
 <!-- CONSEQUENCE OF DELAY -->
-<section>
+<section id="funding-continuity">
   <div class="wrap narrow">
     <p class="eyebrow warm">The consequence of delay</p>
-    <h2>If your top funder changed priorities tomorrow, how would the mission continue?</h2>
-    <p class="lead">Most teams do not find out until it is too late. In 2025 the Chan Zuckerberg Initiative wound down its advocacy and housing grantmaking; organizations that had planned around renewals were told the funding would not continue. And 69% of nonprofits reported funding cuts from at least one source that year.</p>
-    <p class="lead" style="margin-top: 14px;">A verified pipeline is how a mission absorbs a funder pivot: the next path to funding is already known before it is needed. The Assessment shows whether your current plan could absorb that loss and which funders to verify before the board assumes they will be there.</p>
-    <p class="stat-source" style="max-width: 640px;">Source: Center for Effective Philanthropy, A Sector in Crisis (2026); State of Nonprofits 2026.</p>
+    <h2>Your next funder cannot be a last-minute plan.</h2>
+    <p class="lead">Among the nonprofits in Sharke's study, <strong>76% received most of their reported grant dollars from a single funder.</strong> In a separate two-year comparison, <strong>45% of funding relationships were not recorded again</strong> in the later filings.</p>
+    <p class="lead" style="margin-top: 14px;">An expiring grant leaves a hole in the budget, even when it ends exactly as planned. Sharke helps you build toward the next source of funding while the current one is still there, with grants worth pursuing now and funder relationships worth cultivating for the next cycle.</p>
+    <p class="stat-source" style="max-width: 640px;">Sharke Research, The Single Funder Problem. Concentration covers 101,118 nonprofits receiving $100,000 to $5 million in itemized grants in tax year 2023, not their total revenue. The separate relationship comparison includes one-time grants. <a href="/research/single-funder">Read the findings and method</a>.</p>
   </div>
 </section>
 
@@ -916,10 +894,9 @@
 <section class="founder">
   <div class="wrap narrow">
     <p class="eyebrow">Who built Sharke</p>
-    <p class="founder-narrative"><a href="https://www.linkedin.com/in/collinbrowniii/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:4px;">Collin Brown</a> has spent his career building ways to measure things people thought could only be judged by intuition. In mergers and acquisitions, his framework for measuring acquisitiveness helped companies distinguish between deals that created value and deals that destroyed it. The work is still cited in M&amp;A research today.</p>
-    <p class="founder-narrative" style="margin-top:18px;">In grant-seeking, he saw the same problem: organizations were making major funding decisions without a way to measure whether their pipeline had a path to the funding they needed.</p>
-    <p class="founder-narrative" style="margin-top:14px;"><strong style="color:var(--accent);font-weight:500;">Your Funding Gap is that measurement.</strong></p>
-    <p class="founder-support" style="margin-top:22px;">He has won grants at both for-profit and nonprofit organizations, from <strong>NIH, NSF, and USDA</strong> to <strong>Meta and Google</strong>, including <strong>$1M+ in federal awards</strong>, and he served in the White House Office of Management and Budget. Wharton MBA. Trained at Duke Sanford School of Public Policy. Author of "AI You Can Actually Trust" (Amazon Top 50 Business Bestseller).</p>
+    <p class="founder-narrative"><a href="https://www.linkedin.com/in/collinbrowniii/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:4px;">Collin Brown</a> brings experience as a strategy consultant and investor. He has helped major American and European companies decide where to put their time and money. That work requires putting numbers and timing behind each opportunity, testing the evidence for both, and building a plan that still holds if the largest opportunity falls through.</p>
+    <p class="founder-narrative" style="margin-top:18px;">He built Sharke to bring that discipline to nonprofit funding: a pipeline capable of funding the mission, with each grant checked before your team commits the hours.</p>
+    <p class="founder-support" style="margin-top:22px;">His grant wins span <strong>NIH, NSF, and USDA</strong> to <strong>Meta and Google</strong>, including <strong>$1M+ in federal awards</strong>. He served in the White House Office of Management and Budget. Wharton MBA. Trained at Duke Sanford School of Public Policy. Author of "AI You Can Actually Trust" (Amazon Top 50 Business Bestseller).</p>
     <div class="founder-nvidia">Selected for the <b>2026 NVIDIA Inception Program</b></div>
   </div>
 </section>
@@ -1028,11 +1005,11 @@
 <!-- FINAL CTA -->
 <section class="final">
   <div class="wrap">
-    <p class="final-urgency">The hours are already being spent. The only question is whether they are going to the right grants.</p>
-    <p class="final-inev">See whether your pipeline can actually reach your funding goal, before the year decides for you.</p>
+    <h2 class="final-urgency">Put a grant team behind your mission.</h2>
+    <p class="final-inev">Sharke builds and maintains your funding pipeline and prepares the applications. You approve and send.</p>
     <a href="/grant-director" class="btn-primary">Start with the grant team, from $99 a month <span class="arr">&rarr;</span></a>
     <p class="risk-reducers">No contract. Cancel anytime. Your workspace is live the same day.</p>
-    <p class="secondary-offer">Want to see where the funding behind your mission stands first? <a href="/ed">The $79 Grant Funding Viability Assessment</a>: board-ready, in 48 hours. Or <a href="/funding-gap">measure your Funding Gap free.</a></p>
+    <p class="secondary-offer">Prefer a <a href="/ed">one-time assessment</a>? $79. Board-ready in 48 hours. Or <a href="/funding-gap">measure your Funding Gap free.</a></p>
     <p class="route-links"><a href="/grant-director">The grant team: you approve and send</a> <span aria-hidden="true">|</span> <a href="/grant-office">The grant office: we submit for you</a> <span aria-hidden="true">|</span> <a href="/foundations">Capacity builders</a></p>
   </div>
 </section>
