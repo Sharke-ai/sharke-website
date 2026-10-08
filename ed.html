@@ -908,6 +908,16 @@
   #checkout { scroll-margin-top: 90px; }
   #start { scroll-margin-top: 76px; }
 
+
+  .review-details { margin: 20px 0; padding: 18px 0; border-top: 1px solid var(--rule); }
+  .review-details summary { cursor: pointer; font-weight: 600; padding: 8px 0; }
+  .review-details p { margin-top: 14px; }
+  .clear-list { padding-left: 22px; line-height: 1.7; }
+  .clear-list li { margin: 12px 0; }
+  .hook .subhead, .hook .eyebrow, .hook h1 { animation: none; opacity: 1; }
+  .hook { padding-top: 52px; padding-bottom: 44px; }
+  a:focus-visible, summary:focus-visible, button:focus-visible { outline: 3px solid #b85b38; outline-offset: 4px; }
+
 </style>
 </head>
 <body>
@@ -919,407 +929,92 @@
 </header>
 
 <main>
-
-  <!-- HOOK: the Grant Funding Viability Assessment. Decision-moment hero, board assumption, action in view. -->
-  <section class="hook">
-    <div class="container">
-      <p class="eyebrow">Executive &amp; Development Directors</p>
-      <h1>Your grant budget rests on a handful of funders. What happens if one of them changes priorities?</h1>
-      <p class="subhead">Most cannot say, and more applications to more funders is producing more denials, not more confidence. The Grant Funding Viability Assessment answers it instead: whether grants can realistically fund your mission, and the first funders to verify, each already backing organizations like yours.</p>
-      <a href="#checkout" class="cta-anchor hero-cta">Start the Assessment &rarr;</a>
-      <p class="cta-microcopy">$79 one-time. Your EIN and one line about your org is all it takes. In your hands in 48 hours.</p>
-      <p class="hero-guarantee"><svg width="14" height="16" viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 L21 6 v7 c0 6-4 9.3-9 11.3 -5-2-9-5.3-9-11.3 V6 z"/><path d="M8.4 13.6 l2.6 2.6 4.6-5.2"/></svg> In your hands in 48 hours, or a full refund.</p>
-      <p class="hero-stakes">$79 and five minutes now, or the next 200 staff hours spent researching, writing, and defending funders that were never a real fit. For $79 you know which funders deserve staff time before your team spends it.</p>
-      <div class="hero-scar">
-        <p>"We had names in Salesforce and no one we could actually call to fill the gap. We trimmed a program to make the year work."</p>
-        <cite>Executive Director, $1.6M youth services nonprofit, San Antonio</cite>
-      </div>
-      <div class="fvi-mini">
-        <div class="fm-dial">
-          <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path class="fvi-arc-bg" d="M 20 110 A 80 80 0 0 1 180 110"/>
-            <path class="fvi-arc-val" d="M 20 110 A 80 80 0 0 1 180 110"
-                  stroke-dasharray="251.33" stroke-dashoffset="113.1"/>
-          </svg>
-          <div class="fm-center">
-            <span class="fm-num">55</span>
-            <span class="fm-of">out of 100</span>
-          </div>
-        </div>
-        <div class="fm-side">
-          <p class="fm-tag">What arrives in 48 hours (sample, details changed)</p>
-          <p class="fm-line">Your position: Pressured but Well-Supported. The call: build against it.</p>
-          <p class="fm-sub">With the pipeline math sized to your revenue and the first funders to verify, each shown with a real grant it made to an organization like yours.</p>
-        </div>
-      </div>
-      <p class="qualifier" style="margin-top: 22px;">For nonprofits with $150K to $10M in revenue.</p>
-    </div>
-  </section>
-
-  <!-- SEASON PRESSURE: the cost of choosing funders by habit, present tense.
-       Rewritten 2026-08-01. The previous copy asked the reader to give one question "an
-       hour of focused thought", which demands the scarcest thing she has before giving
-       her anything, and is self-defeating for a product that exists so she does not spend
-       that hour. It also stacked two X-not-Y pairs. STOP: The close must claim only what the
-       Assessment does: it names the first funders worth verifying and says whether the
-       plan holds. It does NOT review grants already in flight, because check-intake.html
-       never collects them (office-intake.html, the $249 DFY, does collect "Grants in
-       motion"; that is the deliberate product boundary). An earlier draft said "tells you
-       which is which" and the founder caught it as a false claim. -->
-  <section class="continuation-frame">
-    <div class="container">
-      <p>Grant season is here. Your team will spend its hours on the funders that came to mind first, and the grants that could have funded your mission will go unwritten. The Assessment names the first funders worth verifying and tells you whether the plan behind them holds, before staff time is committed.</p>
-    </div>
-  </section>
-
-  <!-- THE REFRAME: a list is not a plan -->
-  <section>
-    <div class="container">
-      <h3>The reframe</h3>
-      <h2>A funder list tells you funders exist. It cannot tell you whether the math works.</h2>
-      <p>Any database can hand you names, and the newest ones will shortlist them and draft your first letter too. That changes the speed, not the arithmetic. What no list can show: whether funders at your size actually give at sizes that matter, how many of them have backed organizations like yours more than once, how many wins, applications, and warm relationships a meaningful grant role would take, and whether your runway covers the time it takes to build that. A list is a pile of possibilities. The Assessment is the analysis that turns it into a decision, and it says plainly what the record supports, including when the answer is no. Every tool in this category answers one question: is this grant a fit. The Assessment answers the one your board asks: whether grants can fund this mission at all, and what happens when the funder carrying most of the budget steps back.</p>
-    </div>
-  </section>
-
-  <!-- THE EXPENSIVE MISTAKE + THE CLOCK (merged with the continuity section, founder 2026-07-06) -->
-  <section>
-    <div class="container">
-      <h3>The expensive mistake</h3>
-      <h2>The cost is not a rejected application. It is the program you cut when a funder steps back and nothing is ready behind them.</h2>
-      <p>The visible mistake is the wasted cycle: six weeks building a grant calendar around funders who were never a real fit. That costs staff time. The expensive mistake arrives later: a major funder changes direction, the renewal that was in the budget does not come, and there is no pipeline behind it. Now the cost is the mission: programs trimmed, staffing decided under pressure, and a year spent replacing money instead of delivering.</p>
-      <div class="gap-viz">
-        <p class="gap-viz-label">Your funding, funder by funder (illustrative)</p>
-        <div class="gv-row">
-          <p class="gv-cap">Today: a few funders carry the budget</p>
-          <div class="gap-bar" aria-hidden="true">
-            <div class="blk b1"></div><div class="blk b2"></div><div class="blk b3"></div><div class="blk b4"></div><div class="blk b5"></div>
-          </div>
-        </div>
-        <div class="gv-row">
-          <p class="gv-cap">One changes direction</p>
-          <div class="gap-bar" aria-hidden="true">
-            <div class="blk b1"></div><div class="gap-hole b2"></div><div class="blk b3"></div><div class="blk b4"></div><div class="blk b5"></div>
-          </div>
-        </div>
-        <div class="gv-row">
-          <p class="gv-cap gv-cap-green">The pipeline that fills the gap</p>
-          <div class="gap-bar" aria-hidden="true">
-            <div class="blk b1"></div><div class="gap-fill b2"><span></span><span></span><span></span></div><div class="blk b3"></div><div class="blk b4"></div><div class="blk b5"></div>
-          </div>
-        </div>
-        <p class="gap-viz-caption">The Assessment sizes that pipeline for your organization, before you need it.</p>
-      </div>
-      <p>And the market is less forgiving than it was: 69% of nonprofits reported funding cuts in 2025, while 87% of foundation leaders report rising demand for the grants they give. Sources: State of Nonprofits 2026; Center for Effective Philanthropy, A Sector in Crisis, 2026.</p>
-      <p>When a funder leaves, you get about three months' notice. Building a new funder relationship takes about six months.</p>
-      <p>Your key funder tells you in September their priorities have changed. Your mission is counting on that money in January. You start looking for a new funder in October, and the earliest their money could arrive is April. For three months, that program runs on reserves or it does not run.</p>
-      <p>And that assumes the new funder says yes. One prospect is not a replacement, it is a bet. That is why you build a pipeline of funders who can fund your mission instead of chasing one name.</p>
-      <p>The Assessment shows whether a credible next path to funding exists at your size, at what award sizes, and which named funders to start warming first, while the time to build it is still yours.</p>
-      <p style="font-family:'IBM Plex Mono',monospace; font-size:0.74rem; color:#857f74; margin-top:10px;">Sources: Center for Effective Philanthropy, A Sector in Crisis (2026) and State of Nonprofits 2026.</p>
-    </div>
-  </section>
-
-  <!-- WHAT YOU GET: lead with the named funders (the cravable deliverable), then the analysis behind them -->
-  <section>
-    <div class="container">
-      <h3>What you get</h3>
-      <h2>The first funders to verify, and whether the plan behind them holds.</h2>
-
-      <p>Every $79 Assessment ends with a named shortlist: the first 3 to 5 funders to verify, each supported by a real grant it made to an organization like yours. Not a keyword match: the funders most worth staff time first, with the public record behind each one. Around that shortlist, the Assessment gives your board a decision it can actually weigh: your funding scored 0 to 100, the pipeline your goal would take, your real runway in months, and one clear call, build against it, narrow it, or hold. In your hands in 48 hours. Here is what that looks like, in real cases with identifying details changed.</p>
-
-      <div class="fvi-dial-wrap" role="img" aria-label="Sample Funding Viability Index dial showing 55 out of 100. Position: Pressured but Well-Supported. The call: build against it.">
-        <div class="fvi-dial">
-          <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path class="fvi-arc-bg" d="M 20 110 A 80 80 0 0 1 180 110"/>
-            <path class="fvi-arc-val" id="fvi-arc" d="M 20 110 A 80 80 0 0 1 180 110"
-                  stroke-dasharray="251.33" stroke-dashoffset="113.1"/>
-          </svg>
-          <div class="fvi-center">
-            <span class="fvi-num" id="fvi-num" data-target="55">55</span>
-            <span class="fvi-of">out of 100</span>
-          </div>
-        </div>
-        <div class="fvi-side">
-          <p class="fvi-tag">Sample Assessment / details changed</p>
-          <p class="fvi-title">Your Funding Viability Index</p>
-          <p>One public-record number for how the funding behind your mission looks today, a plain-English read of what it means, and the first moves it points to.</p>
-          <p class="fvi-posture">Your position: Pressured but Well-Supported. The call: build against it.</p>
-        </div>
-      </div>
-
-      <p class="sr-context">When Sharke's read of the evidence supports a credible grant-funded path, the Assessment says build against it, and hands you the call, the math, and the named funders to start with:</p>
-      <div class="sample-report pursue">
-        <div class="sr-header">
+<section class="hook"><div class="container">
+<p class="eyebrow">For nonprofit leaders</p>
+<h1>Your grant budget rests on a handful of funders. What happens if one of them changes priorities?</h1>
+<p class="subhead">Get a clear assessment of the role grants can play in your funding plan, the pipeline your goal would take, and the first funders to verify.</p>
+<a href="#checkout" class="cta-anchor hero-cta">Start the Assessment &rarr;</a>
+<p class="hook-note">$79 one-time. About five minutes of your time. Delivered within 48 hours of your completed intake, or a full refund.</p>
+</div></section>
+<section ><div class="container">
+<h3>What arrives</h3><h2>A funding plan your board can weigh.</h2>
+<ul class="clear-list"><li><strong>A clear call:</strong> build against the grant plan, narrow it first, or do not plan around it yet.</li>
+<li><strong>Your funding position:</strong> a Funding Viability Index out of 100, explained in plain language, and your unrestricted runway in months.</li>
+<li><strong>The pipeline your goal would take:</strong> planning targets for applications and funder relationships, sized to your organization.</li>
+<li><strong>The first 3 to 5 funders to verify:</strong> each supported by a real grant to an organization like yours.</li></ul>
+<p>You provide your organization and a short description of its work. We build the Assessment from public records; you do not need to gather documents.</p>
+</div></section>
+<section ><div class="container">
+<h3>See the deliverable</h3><h2>One example, from decision to next steps.</h2><p>Sample Assessment with identifying details changed. Planning targets are not predictions of awards.</p><div class="sample-report pursue">
+<div class="sr-header">
           GRANT FUNDING VIABILITY ASSESSMENT &nbsp;/&nbsp; illustrative, details changed &nbsp;/&nbsp; HUMAN SERVICES, $2.6M REVENUE
         </div>
-        <div class="sr-verdict" style="color: var(--green);">FUNDING VIABILITY INDEX 55 / 100. THE CALL: BUILD AGAINST IT (Pressured but Well-Supported).</div>
-
-        <div class="sr-finding">
-          <div class="sr-finding-title">1. The decision</div>
+<div class="sr-verdict" style="color: var(--green);">FUNDING VIABILITY INDEX 55 / 100. THE CALL: BUILD AGAINST IT (Pressured but Well-Supported).</div>
+<div class="sr-finding">
+<div class="sr-finding-title">1. The decision</div>
           Revenue is trending down while the field grows, but the visible institutional funder market is broad. Diversification is a numbers game you can play. Build the pipeline against the named funders before the slide compounds.
           <div class="sr-source">Source: your IRS Forms 990 measured against a field cohort, and the visible institutional grant record (Schedule I).</div>
-        </div>
-
-        <div class="sr-finding">
-          <div class="sr-finding-title">2. The pipeline math</div>
+</div>
+<div class="sr-finding">
+<div class="sr-finding-title">2. The pipeline math</div>
           Grants carrying about half the budget is about $1.3M a year: roughly 4 repeatable wins, about 20 applications, and about 11 funder relationships in cultivation.
           <div class="sr-source">Source: your revenue and the cohort's real award sizes; planning assumptions, not a prediction of awards.</div>
-        </div>
-
-        <div class="sr-finding">
-          <div class="sr-finding-title">3. The funder market and your cushion</div>
+</div>
+<div class="sr-finding">
+<div class="sr-finding-title">3. The funder market and your cushion</div>
           About 130 funders have backed two or more organizations like yours; a typical grant runs about $20K, a large one about $50K to $132K. You hold about 40 months of unrestricted runway, the time to build the path to funding before it is needed.
           <div class="sr-source">Source: Schedule I cohort award sizes, and your own Form 990, Part X.</div>
+</div>
+<div class="sr-reframe">
+          The Assessment tells you whether the path to funding is credible. If it is, the next step is live verification of the first 3 to 5 funders, with pursue, cultivate, or remove decisions before staff time is committed.
         </div>
-
-        <div class="sr-reframe">
-          The Assessment tells you whether the path to funding is credible. If it is, the next work order is simple: live verification of the first 3 to 5 funders, with pursue, cultivate, or remove decisions before staff time is committed.
-        </div>
-      </div>
-
-      <p class="sr-context">The same call reads differently at a different size and in a different field. Here it is for a smaller education nonprofit:</p>
-      <div class="sample-report pursue">
-        <div class="sr-header">
-          GRANT FUNDING VIABILITY ASSESSMENT &nbsp;/&nbsp; illustrative, details changed &nbsp;/&nbsp; EDUCATION, $1.6M REVENUE
-        </div>
-        <div class="sr-verdict" style="color: var(--green);">FUNDING VIABILITY INDEX 60 / 100. THE CALL: BUILD AGAINST IT (Resilient).</div>
-
-        <div class="sr-finding">
-          <div class="sr-finding-title">1. The decision</div>
-          Your funding position is sound, and the grant dollars visible in your field are spread across many funders rather than concentrated in a few. Press the advantage: lock in multi-year commitments while the position is strong, rather than building the pipeline later under pressure.
-          <div class="sr-source">Source: your IRS Forms 990 measured against a field cohort, and the visible institutional grant record (Schedule I).</div>
-        </div>
-
-        <div class="sr-finding">
-          <div class="sr-finding-title">2. The pipeline math</div>
-          Grants carrying about half your funding is about $799K a year: roughly 4 repeatable wins, about 20 applications, and about 11 funder relationships in cultivation. A grant big enough to matter at your size, without any single grant carrying too much of the budget, runs about $48K to $240K.
-          <div class="sr-source">Source: your revenue and the cohort's real award sizes; planning assumptions, not a prediction of awards.</div>
-        </div>
-
-        <div class="sr-finding">
-          <div class="sr-finding-title">3. The funder market and your cushion</div>
-          About 75 funders have backed two or more organizations like yours; a typical grant runs about $23K, a large one about $55K to $159K. Two funders on your starting shortlist have backed education nonprofits in your own state at about $260K and about $530K. You hold about 8 months of unrestricted runway.
-          <div class="sr-source">Source: Schedule I cohort award sizes, and your own Form 990, Part X.</div>
-        </div>
-
-        <div class="sr-reframe">
-          Two organizations, two sizes, the same call. What changes is the size of the pipeline it takes and how long you have to build it. The next work order is the same either way: live verification of the first 3 to 5 funders, with pursue, cultivate, or remove decisions before staff time is committed.
-        </div>
-      </div>
-
-      <div class="sample-download">
-        <a href="/assets/sample-assessment.pdf" target="_blank" rel="noopener">
-          <svg width="16" height="18" viewBox="0 0 24 26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 12v7M9 16l3 3 3-3"/></svg>
+</div><div class="sample-download">
+<a href="/assets/sample-assessment.pdf" rel="noopener" target="_blank">
+<svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 26" width="16"><path d="M14 2H6a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M12 12v7M9 16l3 3 3-3"></path></svg>
           See a full sample Assessment <span class="sd-tag">(PDF)</span>
-        </a>
-        <p class="sd-note">The real deliverable, with one organization's identifying details changed. This is what lands in your inbox in 48 hours.</p>
-      </div>
-      <a href="#checkout" class="cta-anchor midpage-cta" style="margin-top: 30px;">Start the Assessment &rarr;</a>
-    </div>
-  </section>
-
-  <!-- THE THREE CALLS -->
-  <section>
-    <div class="container">
-      <h3>The decision you receive</h3>
-      <h2>One call on whether grants can fund your mission: build against it, narrow the path first, or do not plan around this yet.</h2>
-      <div class="decision-grid">
-        <div class="decision-card">
-          <p class="verdict pursue">Build against it</p>
-          <p>Sharke's read supports a credible grant-funded path, and the Assessment names the move: press the advantage. Build the pipeline against the named funders deliberately, not under pressure, and work toward multi-year commitments while the position is strong. Live verification of the first 3 to 5 funders turns the shortlist into a pursuit path.</p>
-        </div>
-        <div class="decision-card">
-          <p class="verdict wait">Narrow the path first</p>
-          <p>Grants can play a role, but not the one assumed: the market at your size is too thin, or real award sizes are too small, to carry the number as stated. The Assessment shows which constraint is binding and the resize that fixes it: a smaller grant role, a longer timeline, or a path to funding that blends the largest foundations with the federal and state programs your field's foundations cannot match.</p>
-        </div>
-        <div class="decision-card">
-          <p class="verdict move">Do not plan around this yet</p>
-          <p>The evidence does not support grants playing a significant role yet, and the Assessment says so plainly, with what to protect first: extend the unrestricted runway, stabilize the near-term clock, and reshape the funding plan before staff time is committed. You keep the public-record starting point to build from when the position is stronger.</p>
-        </div>
-      </div>
-      <p class="verdict-mix">Every call arrives with a named read of your position, Resilient, Thin-Reserve, Pressured but Well-Supported, and the sequenced first moves it points to. And more Assessments come back "narrow" or "not yet" than teams expect. That answer is the protective one: it is the moment leadership avoids building a funding plan around a path the evidence does not support, with months still left to choose.</p>
-      <p style="margin-top: 28px;"><strong>You leave with a plan, not a diagnosis.</strong> Not "here is what we found," but "here is where we begin": the call, the first moves for the next cycle, and the first 3 to 5 funders to verify. Planning assumptions, not predictions.</p>
-      <a href="#checkout" class="cta-anchor midpage-cta" style="margin-top: 26px;">See which call your record points to &rarr;</a>
-    </div>
-  </section>
-
-  <!-- WHERE THE READ COMES FROM -->
-  <section>
-    <div class="container">
-      <h3>Where the read comes from</h3>
-      <h2>One EIN in. A full funding analysis out: your position, your field, and the funder market at your size.</h2>
-      <p class="record-stat"><span class="rs-num" id="rs-num" data-target="6.1">6.1</span><span class="rs-num">M+</span><span class="rs-label">grant award records behind the funder-market read</span></p>
-      <p>We start from your EIN and one line on what your org does. The Assessment then builds three reads and runs them against each other: your own multi-year filings; a field cohort of roughly 50 organizations at your size and mission; and the record of who actually funded organizations like yours, at what sizes, how recently, and whether they came back. No single one of those is hard to find. Reading them against each other is the analysis: your runway against your field's, the market's real award sizes against the grant your pipeline needs, funder depth against the pipeline math. That is what turns public records into a decision. Every figure cites the source it came from, so you can check it yourself, and it reaches past the 990s everyone stops at: federal and state award records, and the institutional grant record of who actually funded organizations like yours. Where the public record is too thin to be honest, the Assessment says so, instead of dressing it up.</p>
-
-      <div class="pipe-math">
-        <p class="pm-label">The pipeline math, from a real Assessment (details changed)</p>
-        <div class="pm-row" id="pm-row">
-          <div class="pm-step"><span class="pm-num">$1.3M</span><span class="pm-desc">annual grant target, about half the budget</span></div>
-          <div class="pm-arrow" aria-hidden="true">&rarr;</div>
-          <div class="pm-step"><span class="pm-num">4</span><span class="pm-desc">repeatable wins</span></div>
-          <div class="pm-arrow" aria-hidden="true">&rarr;</div>
-          <div class="pm-step"><span class="pm-num">20</span><span class="pm-desc">applications, at typical grant-seeking odds</span></div>
-          <div class="pm-arrow" aria-hidden="true">&rarr;</div>
-          <div class="pm-step"><span class="pm-num">11</span><span class="pm-desc">funder relationships in cultivation</span></div>
-        </div>
-        <p class="pm-foot">Planning assumptions sized to revenue and the cohort's real award sizes, not a prediction of awards.</p>
-      </div>
-
-      <a href="#checkout" class="cta-anchor midpage-cta">Start the Assessment &rarr;</a>
-    </div>
-  </section>
-
-  <!-- FOUNDER: credibility and founder authority -->
-  <section class="founder-block">
-    <div class="container">
-      <img class="founder-photo" src="/assets/founder-collin.jpg" alt="Collin Brown, founder of Sharke" width="88" height="88" onerror="this.style.display='none'; var m=document.getElementById('founder-mark-fb'); if(m) m.style.display='flex';">
-      <div class="founder-mark" id="founder-mark-fb" style="display:none;">CB</div>
-      <div>
-        <p><span class="founder-lead">I sign off on every Sharke read myself.</span> I was a strategy consultant to major American and European companies, helping them put their time and money where it would pay off. Now I'm the founder of Sharke, and we do the same for nonprofits. We help them build a pipeline capable of funding their mission, and we check every grant and funder in it before anyone puts time into it.</p>
-        <span class="founder-creds">Collin Brown &nbsp;/&nbsp; Wharton MBA &nbsp;/&nbsp; Author, "AI You Can Actually Trust" (Amazon Top 50 Business Bestseller) &nbsp;/&nbsp; Selected for NVIDIA Inception 2026</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHO IT IS FOR: self-identification -->
-  <section>
-    <div class="container">
-      <h3>Who runs it</h3>
-      <h2>Run the Assessment if one or two funders materially affect your ability to staff, plan, or deliver programs.</h2>
-      <ul class="verify-list">
-        <li><span class="check">&rarr;</span> If a major funder changed direction, the mission would be exposed, and you do not have a clear backup path to funding</li>
-        <li><span class="check">&rarr;</span> You know you need to diversify, but not which funders are realistic or how deep the market runs</li>
-        <li><span class="check">&rarr;</span> Your board has asked for a funding-resilience plan and you do not have a solid answer</li>
-        <li><span class="check">&rarr;</span> You have heard funders are shifting priorities and have not tested whether that risk applies to you</li>
-        <li><span class="check">&rarr;</span> You want to know, before the budget is locked, what it would take for grants to meaningfully fund your mission</li>
-      </ul>
-
-      <div class="before-after" style="margin-top: 32px;">
-        <div class="ba-col">
-          <div class="ba-label">If you are the Executive Director</div>
-          <p>You need to know whether the funding plan underneath the mission is real, before the board, budget, or staffing plan locks in.</p>
-        </div>
-        <div class="ba-col">
-          <div class="ba-label">If you lead development</div>
-          <p>You need evidence to tell leadership which funders deserve staff time, which require cultivation, and which to not build the calendar around.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ: the questions that make buyers email-and-abandon, answered straight -->
-  <section>
-    <div class="container">
-      <h3>Before you start</h3>
-      <h2>The questions buyers ask first, answered straight.</h2>
-
-      <p class="faq-q">Do I have to gather documents?</p>
-      <p class="faq-a">No. The Assessment is built from the public record: your own IRS Forms 990, a field cohort of roughly 50 organizations at your size and mission, and the visible institutional grant record. You give us your EIN and one line about what your org does. About five minutes of your time, total.</p>
-
-      <p class="faq-q">Is this a grant list?</p>
-      <p class="faq-a">No, and that is the point. The funders named in your Assessment have actually backed organizations like yours in the public record, each shown with the real grant behind it. The Assessment tells you whether the path to funding is credible, the pipeline it would take, and which funders to verify first, so staff time goes where the evidence is, not to a keyword match.</p>
-
-      <p class="faq-q">What if the answer is no?</p>
-      <p class="faq-a">Then it protected your next two quarters. The Assessment shows you why: the specific gap between the grant sizes your plan needs and what your field's funders actually pay, how deep the visible market runs at your size, and what it would take to close it. More Assessments come back "narrow" or "not yet" than teams expect. That answer is the one that saves staff time and gives your board evidence instead of an assumption. It is worth $79 to know that early.</p>
-
-      <p class="faq-q">How current is the information?</p>
-      <p class="faq-a">The public record runs on filing lag, and it cannot show whether a funder is giving this year. The Assessment is honest about that boundary: every funder arrives marked for verification, and where the public record stops is exactly where live verification, the Verified Pipeline, begins.</p>
-
-      <p class="faq-q">What if we have limited filing history?</p>
-      <p class="faq-a">The Assessment reads strongest when your organization has three or more years of IRS filings behind it. If your record is thinner than that, the Assessment does not pad the gaps: it gives you the read the record supports and says plainly where the record stops. That boundary is part of the answer. It tells leadership how firmly the plan can lean on the public record today, and what has to be built before it can lean harder.</p>
-    </div>
-  </section>
-
-  <!-- THE AFTER: the transformation beat, right before the buy -->
-  <section>
-    <div class="container">
-      <h3>Two Mondays from now</h3>
-      <h2>You walk into the next board meeting with a plan, not a hope.</h2>
-      <p>Not "we are working on diversifying." A number your board can weigh, a clear call on the grant plan, and three to five funders already backing organizations like yours, each with the real grant they made. The room stops asking whether the funding is real and starts deciding what to do about it. That is what $79 and five minutes buys you.</p>
-    </div>
-  </section>
-
-  <!-- OUTCOME TESTIMONIAL: a real beta participant, the deliverable in a real voice.
-       MOVED 2026-07-31 (founder request): was after "What you get", twelve sections above
-       the price. The landing audit's finding is that proof must sit ADJACENT TO PRICE, not
-       in a distant section, so it now runs straight into the CTA. Copy is byte-identical to
-       its previous position; this is a placement change only. The hero scar-quote excerpt is
-       unchanged and still carries the callback in the first two screens. -->
-  <section>
-    <div class="container">
-      <h3>From a beta participant</h3>
-      <div class="testimonial-block">
-        <p>"Our largest renewal did not come through. We had names in Salesforce and no one we could actually call to fill the gap. We trimmed a program to make the year work. That was eighteen months ago. I still feel like I disappointed the community. I was part of the beta with Sharke and this time I got named funders already backing organizations like ours... and a straight answer on whether the numbers worked at our size before we built another calendar. That is what I wish I had eighteen months ago."</p>
-        <cite>Executive Director, $2.1M human services nonprofit, Dallas, TX</cite>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA: pressure, math, price, guarantee, form. -->
-  <section class="cta-section" id="start">
-    <div class="container">
-      <h2>Start the Grant Funding Viability Assessment.</h2>
-
-      <p><strong>Get your Funding Viability Index before budget planning closes.</strong> Tell us your organization, and if you know the share of revenue you hope grants can carry, send that too. Your Assessment is in your hands in 48 hours.</p>
-
-      <div class="pressure-block">
-        <p>Every week the grant number goes untested, the calendar, the staffing plan, and the cultivation work keep forming around it. The budget locks either way. When it does, you will either know what role grants can carry, or you will be committing staff time blind. One of those happens.</p>
-        <p>Once the calendar is built, reversing course is expensive: development is already in conversations, and the board already knows the number it approved. The answer takes 48 hours. Acting on it takes two quarters. The only thing worth doing slowly is the part you cannot speed up.</p>
-      </div>
-
-      <div class="protect-table">
-        <div class="row bordered"><span>A grant role assumed in the budget</span><span>unverified</span></div>
-        <div class="row bordered"><span>Staff time to build the calendar</span><span>weeks per cycle</span></div>
-        <div class="row bordered"><span>A typical grant in the public record</span><span>about $10,000</span></div>
-        <div class="row"><span>The Grant Funding Viability Assessment</span><span>$79 one-time</span></div>
-        <p class="foot">A board-ready answer before the cycle is locked in. $79 one-time, not a subscription. A monthly tool still needs someone to run it. Median grant: 4.6 million grants in the public Schedule I record, Sharke analysis, September 2026.</p>
-      </div>
-
-      <p class="price-line"><strong>$79, once. In your hands in 48 hours.</strong> Less than a rounding error on the grant budget you are about to build, and it tells you whether that budget is real before you commit a quarter of staff time to it.</p>
-      <p class="guarantee">Delivered within 48 hours of your completed intake, or a full refund. And every Assessment ends in a clear call on your grant plan: build against it, narrow it, or do not plan around it yet. If yours does not, email collin@sharke.ai and we will take another look.</p>
-
-      <!-- Sample Assessment download, repeated verbatim from "What you get" (checkout proof pass 2026-07-23). -->
-      <div class="sample-download">
-        <a href="/assets/sample-assessment.pdf" target="_blank" rel="noopener">
-          <svg width="16" height="18" viewBox="0 0 24 26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 12v7M9 16l3 3 3-3"/></svg>
-          See a full sample Assessment <span class="sd-tag">(PDF)</span>
-        </a>
-        <p class="sd-note">The real deliverable, with one organization's identifying details changed. This is what lands in your inbox in 48 hours.</p>
-      </div>
-
-      <div class="after-pay" id="checkout">
-        <p class="ap-title">What happens after you pay</p>
-        <div class="ap-step"><span class="ap-num">1</span><p>Start the Assessment below. <span class="ap-sub">Secure checkout, $79 once.</span></p></div>
-        <div class="ap-step"><span class="ap-num">2</span><p>Tell us your organization: your EIN and one line about what you do. <span class="ap-sub">About five minutes.</span></p></div>
-        <div class="ap-step"><span class="ap-num">3</span><p>Within 48 hours your Assessment arrives: your Index, the call, the pipeline math, and the funder shortlist to verify. <span class="ap-sub">Board-ready.</span></p></div>
-      </div>
-
-      <!-- Inline Stripe checkout (embedded), plan gfvc ($79 one-time). Auto-mounts; returns to /check-intake, which captures intake to the Google Sheet. -->
-      <div id="checkout-area" class="checkout-frame">
-        <div id="checkout-loading" style="text-align:center; padding:36px 0;">
-          <p style="color:#a8a098; font-family:'IBM Plex Mono',monospace; font-size:0.82rem; letter-spacing:0.04em; margin:0;">Loading secure checkout...</p>
-        </div>
-        <div id="checkout-container" style="min-height:350px;"></div>
-        <div id="checkout-error" style="display:none; text-align:center; padding:16px 0;">
-          <p style="color:var(--red); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; margin:0;"></p>
-        </div>
-      </div>
-      <div class="checkout-trust">
-        <span class="ct-item"><svg width="12" height="14" viewBox="0 0 24 28" fill="none" stroke="#a8a098" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="13" width="18" height="13" rx="2"/><path d="M7 13V9a5 5 0 0 1 10 0v4"/></svg>Secure checkout by Stripe</span>
-        <span class="ct-item"><span class="ct-check">&#10003;</span> 48 hours or a full refund</span>
-        <span class="ct-item"><span class="ct-check">&#10003;</span> No account to create</span>
-        <span class="ct-item"><span class="ct-check">&#10003;</span> Built only from public filings</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- CLOSE: on the asymmetry -->
-  <section class="close-section">
-    <div class="container">
-      <p>Before the next grant calendar is built, leadership needs one answer: what role can grants actually carry?</p>
-      <p class="final-line">In 48 hours, you will know whether to build against it, narrow it, or not plan around it yet. That changes the next board conversation.</p>
-    </div>
-  </section>
-
+</a>
+<p class="sd-note">The real deliverable, with one organization's identifying details changed. This is what lands in your inbox in 48 hours.</p>
+</div>
+</div></section>
+<section ><div class="container">
+<h3>From a beta participant</h3><div class="testimonial-block">
+<p>"Our largest renewal did not come through. We had names in Salesforce and no one we could actually call to fill the gap. We trimmed a program to make the year work. That was eighteen months ago. I still feel like I disappointed the community. I was part of the beta with Sharke and this time I got named funders already backing organizations like ours... and a straight answer on whether the numbers worked at our size before we built another calendar. That is what I wish I had eighteen months ago."</p>
+<cite>Executive Director, $2.1M human services nonprofit, Dallas, TX</cite>
+</div>
+</div></section>
+<section class="cta-section" id="start"><div class="container">
+<h2>Start the Grant Funding Viability Assessment.</h2><p class="price-line"><strong>$79 one-time. A board-ready answer in 48 hours.</strong></p>
+<p class="guarantee">Delivered within 48 hours of your completed intake, or a full refund. Every Assessment ends in a clear call on your grant plan. If yours does not, email collin@sharke.ai and we will take another look.</p><div class="after-pay" id="checkout">
+<p class="ap-title">What happens after you pay</p>
+<div class="ap-step"><span class="ap-num">1</span><p>Start the Assessment below. <span class="ap-sub">Secure checkout, $79 once.</span></p></div>
+<div class="ap-step"><span class="ap-num">2</span><p>Tell us your organization: your EIN and one line about what you do. <span class="ap-sub">About five minutes.</span></p></div>
+<div class="ap-step"><span class="ap-num">3</span><p>Within 48 hours your Assessment arrives: your Index, the call, the pipeline math, and the funder shortlist to verify. <span class="ap-sub">Board-ready.</span></p></div>
+</div><div class="checkout-frame" id="checkout-area">
+<div id="checkout-loading" style="text-align:center; padding:36px 0;">
+<p style="color:#a8a098; font-family:'IBM Plex Mono',monospace; font-size:0.82rem; letter-spacing:0.04em; margin:0;">Loading secure checkout...</p>
+</div>
+<div id="checkout-container" style="min-height:350px;"></div>
+<div id="checkout-error" style="display:none; text-align:center; padding:16px 0;">
+<p style="color:var(--red); font-family:'IBM Plex Mono',monospace; font-size:0.82rem; margin:0;"></p>
+</div>
+</div><div class="checkout-trust">
+<span class="ct-item"><svg aria-hidden="true" fill="none" height="14" stroke="#a8a098" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 28" width="12"><rect height="13" rx="2" width="18" x="3" y="13"></rect><path d="M7 13V9a5 5 0 0 1 10 0v4"></path></svg>Secure checkout by Stripe</span>
+<span class="ct-item"><span class="ct-check">&#10003;</span> 48 hours or a full refund</span>
+<span class="ct-item"><span class="ct-check">&#10003;</span> No account to create</span>
+<span class="ct-item"><span class="ct-check">&#10003;</span> Built only from public filings</span>
+</div>
+</div></section>
+<section ><div class="container">
+<h3>Before you start</h3><h2>What the Assessment can tell you.</h2>
+<details class="review-details"><summary>Where does the evidence come from?</summary><p>We compare your IRS filings with organizations of similar size and mission, then examine visible funder award history. Your report cites its sources and explains where the record is incomplete.</p></details>
+<details class="review-details"><summary>Does this verify that a funder is accepting applications now?</summary><p>No. Public filings run behind current activity. The Assessment identifies funders worth verifying and sizes the funding plan. Current eligibility, application cycles and live fit are checked in the next stage of work.</p></details>
+<details class="review-details"><summary>What if the evidence does not support our plan?</summary><p>The report explains the constraint and the next steps: for example, adjusting the timeline or considering a different mix of funding. You receive a clear call and its supporting evidence.</p></details>
+<details class="review-details"><summary>What if we have limited filing history?</summary><p>The Assessment is strongest with three or more years of IRS filings. A thinner record is identified as a limitation; missing evidence is not filled in.</p></details>
+<details class="review-details"><summary>Is this a subscription?</summary><p>No. The Assessment costs $79 once. If you later want Sharke to build and maintain the pipeline, the <a href="/grant-director">grant team</a> and <a href="/grant-office">grant office</a> are separate monthly services.</p></details>
+</div></section>
+<section ><div class="container">
+<h3>Who built Sharke</h3><p>As a strategy consultant and investor, Collin Brown helped major American and European companies decide where to put their time and money. That meant testing the evidence behind each opportunity, weighing its costs and timing, and building a portfolio that could reach the goal without depending on one outcome.</p><p>He brought that discipline to Sharke's grant pipelines. Collin served in the White House Office of Management and Budget and has won more than $1 million in federal grants. He reviews every Sharke recommendation before it reaches you.</p>
+</div></section>
 </main>
 
 <!-- Sticky mobile CTA bar: shown at <=700px by CSS; the script below hides it while the checkout section or the hero CTA is on screen. -->
