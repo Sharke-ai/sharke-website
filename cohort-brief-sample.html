@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sharke: Sample Cohort Brief</title>
+<title>Sharke: Sample Quarterly Cohort Report</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -41,6 +41,7 @@
   .illus { border: 1px dashed var(--muted); padding: 12px 16px; margin-top: 18px; font-size: 14px; }
   .cta { margin-top: 24px; }
   .cta a { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 18px; }
+.report-tools{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:20px 0}.report-tools button{padding:12px 18px;font:inherit;cursor:pointer;border:1px solid #555;background:#fff;color:#111}.report-tools span{font-size:13px}.planning-note{padding:18px;border:1px solid #aaa;margin:20px 0}.planning-note ul{padding-left:22px}.planning-note li+li{margin-top:10px}caption{text-align:left;font-weight:600;padding:8px 0} @media print{@page{size:A4 landscape;margin:14mm}body{background:#fff;color:#111;font-size:11px}.container{max-width:none;padding:0}header,nav,.report-tools,.cta{display:none}section{padding:18px 0}h1{font-size:24px}h2{font-size:18px;break-after:avoid}h3,caption{break-after:avoid}thead{display:table-header-group}tr{break-inside:avoid}table{width:100%;font-size:10px;break-inside:auto!important}th,td{padding:5px;white-space:normal!important}.table-wrap,.table-scroll{overflow:visible!important}details>*{display:block!important}details summary{font-weight:bold}}
 </style>
 </head>
 <body>
@@ -49,18 +50,19 @@
   <div class="container">
     <div class="header-inner">
       <a href="/" class="wordmark">Sharke.ai</a>
-      <a href="/foundations" class="back">Back to cohorts</a>
+      <a href="/foundations" class="back">Foundations</a><a href="/associations" class="back">Associations</a>
     </div>
   </div>
 </header>
 
 <section>
   <div class="container">
-    <p class="eyebrow">Sample cohort brief</p>
-    <h1>What a cohort of 10 nonprofits would look like.</h1>
-    <p>This is the brief you would receive: every organization in your cohort on one page, measured the same way, so you can show your board and funders where each one starts and, a year later, what changed.</p>
+    <p class="eyebrow">Sample quarterly cohort report</p>
+    <h1>See the pipeline being built across your cohort.</h1>
+    <p>Use the organization-by-organization view to see where the pipeline stands and decide what support comes next. This sample illustrates reporting at the start and at months three, six, nine and twelve.</p>
+<div class="report-tools"><button type="button" onclick="window.print()">Print / save as PDF</button><span>Choose Save as PDF in your browser's print dialog.</span></div>
     <div class="notice">
-      <strong>Sample.</strong> The figures come from the public records of 10 real nonprofits, with their names removed. The one exception is the five "built" columns in the cohort table in section 1, which are an illustration. Your cohort's numbers will be its own.
+      <strong>Historical sample, not a current customer progress report.</strong> Targets and background figures use anonymized public-record assessments rerun September 23, 2026. The five pipeline-progress columns are invented to show the format. Separate first-pass examples were compiled September 24, 2026; they do not establish that those opportunities remain open today.
     </div>
   </div>
 </section>
@@ -75,24 +77,12 @@
 <section>
   <div class="container">
     <h2>1. The before-and-after you report</h2>
-    <p><!-- [Q] D301 -->For every organization, you see how big a pipeline its funding needs and how much of it is built, every quarter, at the start and at months three, six, nine and twelve. Every organization is measured the same way, so you can compare them on one page.</p>
+    <p><!-- [Q] D301 -->For every organization, compare the pipeline its funding goal requires with the grants and funder relationships in place. The table shows the reporting format across a year; its progress figures are illustrative.</p>
     <!-- D299: two REAL first passes, built 2026-09-24. Parenting Cottage (Lubbock, drawn at random,
          outputs/_gtm/BEFORE_AFTER_PARENTING_COTTAGE_2026_09_24.md) and Myotonic Dystrophy Foundation (D295,
          anonymized use agreed 2026-07-16). Grants = open with a published date or rolling, checked on the
          funder's own page; funders include relationships the organization already has. -->
-    <p><strong>Two real organizations, first pass.</strong> We built the start of the pipeline for two real nonprofits from their public records and each funder's own pages. Their names are removed.</p>
-    <div class="table-wrap">
-      <table class="pipe-table">
-        <thead><tr><th>Organization</th><th>Grants it needs a year</th><th>Funders it needs</th><th>Built in the first pass</th></tr>
-        <tr class="sub"><th></th><th></th><th></th><th>grants / funders, real</th></tr></thead>
-        <tbody>
-          <tr><td>A family-support nonprofit in West Texas, about $1.1 million in revenue</td><td class="num">20</td><td class="num">11</td><td class="num">13 / 19</td></tr>
-          <tr><td>A rare-disease research foundation in California</td><td class="num">20</td><td class="num">11</td><td class="num">4 / 7</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="small">A built grant is an open grant with a published deadline or a rolling application, checked on the funder's own page. A built funder is a relationship the organization has or can start, including the ones it already has.</p>
-    <div class="illus"><strong>Illustration.</strong> The "needs" columns come from each organization's real public records. The five "built" columns are made up to show how this table reads during a cohort. No cohort has reached month three yet, and these numbers are not a forecast.</div><!-- [Q] D301 -->
+    <div class="illus"><strong>Illustration.</strong> The "needs" columns come from each organization's real public records. The five "built" columns are made up to show how this table reads during a cohort. These are not measured customer results or a forecast.</div><!-- [Q] D301 -->
     <div class="table-wrap">
       <table class="pipe-table">
         <thead><tr><th>Organization</th><th>Grants it needs a year</th><th>Funders it needs</th><th>Built at start</th><th>Built at month three</th><th>Built at month six</th><th>Built at month nine</th><th>Built at month twelve</th></tr>
@@ -111,13 +101,25 @@
         </tbody>
       </table>
     </div>
-    <p class="small">How big a pipeline each organization needs comes from its own Assessment: enough grants in motion to carry about half its funding, with no single grant carrying too much. In your cohort, the five built columns are measured, not illustrated.</p>
+<div class="planning-note"><h3>What needs attention next</h3><p>Examples of how to use the illustrated month-three column, not recommendations for real customers:</p><ul><li><strong>Organization F:</strong> 3 grants and 2 funder relationships are in place against targets of 24 and 13. Review which opportunities and relationships should be developed next.</li><li><strong>Organization G:</strong> 9 grants and 6 relationships are in place against targets of 20 and 11. Check current fit and deadlines before treating the growing pipeline as usable coverage.</li><li><strong>Across the cohort:</strong> agree the next action and owner for each organization, then review what changed at the next reporting point. A count alone does not establish funding secured.</li></ul></div>    <p class="small">How big a pipeline each organization needs comes from its own Assessment: enough grants in motion to carry about half its funding, with no single grant carrying too much. In your cohort, the five built columns are measured, not illustrated.</p>
   </div>
 </section>
 
 <section>
   <div class="container">
-    <h2>2. What we would screen before anyone spends staff time</h2>
+    <h2>2. Historical first-pass and screening context</h2><p class="small">Examples compiled September 24, 2026. Recheck current availability before acting.</p>    <p><strong>Two real organizations, first pass.</strong> We built the start of the pipeline for two real nonprofits from their public records and each funder's own pages. Their names are removed.</p>
+    <div class="table-wrap">
+      <table class="pipe-table">
+        <thead><tr><th>Organization</th><th>Grants it needs a year</th><th>Funders it needs</th><th>Built in the first pass</th></tr>
+        <tr class="sub"><th></th><th></th><th></th><th>grants / funders, real</th></tr></thead>
+        <tbody>
+          <tr><td>A family-support nonprofit in West Texas, about $1.1 million in revenue</td><td class="num">20</td><td class="num">11</td><td class="num">13 / 19</td></tr>
+          <tr><td>A rare-disease research foundation in California</td><td class="num">20</td><td class="num">11</td><td class="num">4 / 7</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small">A built grant is an open grant with a published deadline or a rolling application, checked on the funder's own page. A built funder is a relationship the organization has or can start, including the ones it already has.</p>
+<h3>Background screening from the sample assessment</h3>
     <p>Across the 10 organizations, we would screen 7,889 funders that have already funded organizations of the same focus, size and state.</p>
     <div class="stats">
       <div class="stat"><div class="n">5,884</div><div class="l">can be applied to</div></div>
@@ -197,8 +199,8 @@
 <section>
   <div class="container">
     <h2>5. The starting line</h2>
-    <p><!-- [Q] D301 -->This is your baseline. At months three, six, nine and twelve, we run the brief again for the same 10 organizations. The change in each one's pipeline, against what its funding needs, is what you report to your board and funders.</p>
-    <p class="small">Sources: each organization's own public filings, and funder award records.</p>
+    <p><!-- [Q] D301 -->The quarterly core tracks each organization's pipeline against its funding goal. Filing-based facts refresh only when new filings arrive; otherwise they retain their prior source date and are marked as having no new filing. The annual edition adds the broader funding and need analysis once a year, timed to your planning meeting.</p>
+    <p><strong>For foundations:</strong> use progress to target grantee support and inform funding discussions. <strong>For associations:</strong> use it to focus member assistance and show sponsors what capacity is being built.</p><p><a href="/assets/sample-annual-edition.html">Read the sample annual edition</a></p><p class="small">Historical sample sources: organization public filings and funder award records, assessed September 2026. These are not refreshed live.</p>
     <div class="cta"><a href="/foundations#start">Start a cohort</a></div>
   </div>
 </section>
