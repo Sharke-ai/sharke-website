@@ -184,7 +184,7 @@
 
 <main class="container" style="padding-top:48px;padding-bottom:64px">
 <p class="eyebrow">A year of grant pipeline support</p><h1>Start with your cohort scope.</h1>
-<p>Choose five or ten organizations. We will email your personalized scope so you can review it before committing. No call or payment is required to start.</p>
+<p>Choose five or ten organizations. We will email a scope showing each organization's starting point and the work we will deliver. Approve the scope and payment terms, and we begin. No call required.</p>
 <form id="cohort-form" class="cohort-form">
 <label for="audience">Who is funding the cohort?</label><select id="audience" name="audience" required><option value="foundation">Foundation</option><option value="association">Association or nonprofit center</option></select>
 <fieldset><legend>Choose your cohort</legend><label class="choice"><input type="radio" name="size" value="5" required> Five organizations: $5,025 for one year</label><label class="choice"><input type="radio" name="size" value="10" required> Ten organizations: $9,500 for one year</label></fieldset>
@@ -194,7 +194,8 @@
 <label for="email">Your work email</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" required>
 <details><summary>Add organization details (optional)</summary><label for="website">Organization website</label><input id="website" name="org_website" type="url" placeholder="https://" maxlength="500"><label for="members">Organizations you would like to include</label><textarea id="members" name="members" rows="4" maxlength="5000" aria-describedby="members-help"></textarea><p id="members-help">Names or EINs are enough. You can send the list later. For a foundation, we can propose grantees from public filings. Please do not include private information about people you serve.</p><label for="notes">Anything you would like us to know?</label><textarea id="notes" name="notes" rows="3" maxlength="2000"></textarea></details>
 <p>Your information is used to prepare and follow up on this request. <a href="/privacy">Privacy policy</a>.</p>
-<button type="submit" id="submit-scope">Request my cohort scope</button><p id="request-status" role="status" tabindex="-1"></p>
+<p id="commitment-note"><strong>No payment or commitment at this step.</strong></p>
+<button type="submit" id="submit-scope" aria-describedby="commitment-note">Request my cohort scope</button><p id="request-status" role="status" tabindex="-1"></p>
 </form>
 <section id="request-success" hidden tabindex="-1"><h2>Your scope request is recorded.</h2><p>We will follow up at <strong id="confirmation-email"></strong> to prepare your scope. You have not been charged or enrolled.</p><p>Before you sign, you will see the proposed organizations and each one's starting point. If you did not supply a member list, we will ask for it by email. Sharke handles enrollment after the scope is agreed.</p><p id="request-reference"></p></section>
 <p>Questions first? <a href="https://calendly.com/collin-sharke?utm_source=website&amp;utm_campaign=cohort_start">Book an optional 15-minute call</a> or <a href="mailto:collin@sharke.ai">email Collin</a>.</p>
