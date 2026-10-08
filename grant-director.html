@@ -466,6 +466,79 @@
     html { scroll-behavior: auto; }
     .hook h1, .hook .subhead, .hook .eyebrow { animation: none; }
   }
+  /* Static homepage example: the same card, without the carousel. */
+  .decision-dashboard {
+    --bg: #0a0f1a;
+    --bg-2: #111827;
+    --bg-3: #1a2236;
+    --accent: #4AE3A0;
+    --accent-soft: rgba(74,227,160,0.12);
+    --accent-border: rgba(74,227,160,0.32);
+    --warm: #FBBF24;
+    --warm-soft: rgba(251,191,36,0.10);
+    --danger: #F2766B;
+    --ink: #FFFFFF;
+    --ink-2: #D1D5DB;
+    --ink-3: #9CA3AF;
+    --ink-4: #6B7280;
+    --rule: rgba(255,255,255,0.10);
+    --rule-2: rgba(255,255,255,0.18);
+
+    /* Decision Record paper tokens */
+    --paper: #f6f4ef;
+    --paper-ink: #16140f;
+    --paper-ink-2: #403d35;
+    --paper-ink-3: #857f74;
+    --paper-rule: #ddd8cf;
+    --rec-green: #1f6b42;
+    --rec-green-bg: #eef6f0;
+    --rec-red: #8f2424;
+    --rec-red-bg: #fbf1f1;
+
+    --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  .decision-dashboard {
+    border: 1px solid var(--rule); background: var(--bg-2);
+    transition: opacity 0.3s ease; border-radius: 8px; overflow: hidden;
+    text-align: left; max-width: 640px; margin: 30px auto 0;
+  }
+  .decision-dashboard.fade-out { opacity: 0; }
+  .dash-bar {
+    display: flex; align-items: center; justify-content: center; position: relative;
+    padding: 12px 18px; background: rgba(0,0,0,0.3); border-bottom: 1px solid var(--rule);
+  }
+  .dash-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--ink-3); }
+  .dash-content { padding: 26px 28px; }
+  .dash-top { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-bottom: 26px; }
+  .dash-ring {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    width: 74px; height: 74px; border: 2px solid var(--accent); background: var(--accent-soft);
+    flex-shrink: 0; border-radius: 50%;
+  }
+  .dash-glyph { font-size: 1.7rem; font-weight: 700; color: var(--accent); line-height: 1; }
+  .dash-verdict-label { font-family: var(--mono); font-size: 8.5px; color: var(--accent); margin-top: 4px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; text-align: center; line-height: 1.1; }
+  .dash-meta { flex: 1; }
+  .dash-eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 5px; line-height: 1.3; }
+  .dash-rank { font-size: 13px; color: var(--ink-3); margin: 0; line-height: 1.4; }
+  .dash-status { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-soft); padding: 6px 14px; border-radius: 6px; flex-shrink: 0; }
+  .dash-status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .dash-status-text { font-family: var(--mono); font-size: 11px; color: var(--accent); font-weight: 500; white-space: nowrap; }
+  .dash-funder { text-align: center; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 20px 0; margin-bottom: 20px; }
+  .dash-funder-name { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 5px; line-height: 1.2; }
+  .dash-funder-sub { font-size: 13px; color: var(--ink-3); margin: 0; }
+  .dash-insight { background: var(--accent-soft); border: 1px solid var(--accent-border); padding: 20px 22px; margin-bottom: 20px; border-radius: 5px; text-align: center; }
+  .dash-insight-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; font-weight: 500; }
+  .dash-insight-text { font-size: 14.5px; color: var(--ink); line-height: 1.55; }
+  .dash-insight-text .hl { font-weight: 600; color: var(--accent); display: block; margin: 5px 0; }
+  .dash-verify { display: flex; align-items: center; justify-content: center; gap: 9px; font-size: 13px; color: var(--accent); margin: 0; }
+  .dash-verify-icon { display: inline-flex; font-weight: 700; flex-shrink: 0; }
+  .dash-source { font-family: var(--mono); font-size: 10px; letter-spacing: 0.02em; color: var(--ink-4); text-align: center; margin: 13px 0 0; }
+  @media (max-width: 600px) {
+    .dash-top { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .dash-content { padding: 22px 18px; }
+  }
 </style>
 </head>
 <body>
@@ -481,7 +554,7 @@
     <div class="container">
       <p class="eyebrow">The grant team you can afford</p>
       <h1>Put a grant team behind your mission.</h1>
-      <p class="subhead">You know there are grants that could fund your mission. You don't have time to find and evaluate them, and you can't afford to hire someone who will. So we built the grant team you can afford.</p>
+      <p class="subhead">Sharke builds and maintains a grant pipeline around your funding goal, with grants worth pursuing now and funder relationships to develop for the future.</p>
       <p class="hook-solution">It finds the grants, checks each one against the funder's own record, tracks every deadline, and hands you the first draft of the application. You approve it and you send it.</p>
       <a href="#ss-price-card" class="hook-cta">Start the grant team &rarr;</a>
       <p class="hook-note">From $99 a month for organizations with annual revenue under $1M. Month to month. Cancel anytime.</p>
@@ -490,34 +563,41 @@
 
   <section aria-labelledby="example-title">
     <div class="container">
-      <h3>From opportunity to application</h3>
-      <h2 id="example-title">See why a grant is worth pursuing.</h2>
-      <p class="example-context">Illustrative example: a nonprofit providing school-based mental health support for teens. The organization, opportunity and evidence below are fictional.</p>
-      <div class="record pursue">
-        <div class="rec-head">
-          <div>
-            <div class="rec-brand">Example opportunity</div>
-            <div class="rec-grant">Youth Wellbeing Grant</div>
-            <div class="rec-meta">Support for school-based mental health services</div>
-          </div>
-        </div>
-        <div class="rec-verdict">
-          <span class="rec-badge">Worth pursuing</span>
-          <div class="rec-redirect">Supports the same work this organization delivers: helping teens access mental health care at school.</div>
-        </div>
-        <div class="rec-reasons">
-          <div class="rec-reason">
-            <div class="rec-reason-h">What supports the fit</div>
-            <div class="rec-reason-b">The program guidelines include school-based counseling. Past awards include youth mental health programs.</div>
-          </div>
-          <div class="rec-reason">
-            <div class="rec-reason-h">What still needs confirmation</div>
-            <div class="rec-reason-b">The organization's service area and proposed program must meet the current application requirements.</div>
-          </div>
-        </div>
-        <div class="rec-note">An illustration of the explanation, not a live recommendation or a promise of funding.</div>
+      <h3>What belongs in your pipeline</h3>
+      <h2 id="example-title">See the evidence behind the opportunity.</h2>
+      <p class="example-context">Illustrative example. The funder, figures and award history below are fictional.</p>
+    <div class="decision-dashboard" id="decision-dashboard">
+      <div class="dash-bar">
+        <span class="dash-title">Sharke / Decision Record</span>
       </div>
-      <p class="example-next"><strong>Then the application gets a first draft.</strong> Sharke uses your organization's materials and the funder's requirements. You check the facts, refine the draft and submit.</p>
+      <div class="dash-content">
+        <div class="dash-top">
+          <div class="dash-ring">
+            <span class="dash-glyph">&#10003;</span>
+            <span class="dash-verdict-label">Pursue</span>
+          </div>
+          <div class="dash-meta">
+            <p class="dash-eyebrow">Verified fit</p>
+            <p class="dash-rank">The record backs a first ask at your size</p>
+          </div>
+          <div class="dash-status">
+            <span class="dash-status-dot"></span>
+            <span class="dash-status-text">Worth your hours</span>
+          </div>
+        </div>
+        <div class="dash-funder">
+          <p class="dash-funder-name">Community Resilience Fund</p>
+          <p class="dash-funder-sub">Family foundation &middot; $150K to $250K &middot; Southwest</p>
+        </div>
+        <div class="dash-insight">
+          <p class="dash-insight-label">Funder behavior, not stated focus</p>
+          <p class="dash-insight-text">Stated focus: "General health."<span class="hl">Actual pattern: 12 of the last 15 awards went to rural youth mental health organizations like yours.</span>Your size, your geography, your issue.</p>
+        </div>
+        <p class="dash-verify"><span class="dash-verify-icon">&#10003;</span><span class="dash-verify-text">Eligibility and geography: verified compatible (Southwest)</span></p>
+        <p class="dash-source">Source: IRS 990-PF Schedule I, 2021 to 2025</p>
+      </div>
+    </div>
+      <p class="example-next"><strong>From your pipeline to your application.</strong> Sharke tracks the deadline and prepares the first draft using your materials and the funder's requirements. You confirm your organization's program and impact details, review the draft and submit.</p>
       <a href="#ss-price-card" class="hook-cta" id="mid-cta">Start the grant team &rarr;</a>
     </div>
   </section>
@@ -530,7 +610,7 @@
         <div class="fork-col lead" id="ss-price-card">
           <span class="fork-rec">You approve and send</span>
           <h2 class="fork-title">The grant team you can afford</h2>
-          <p class="offer-summary">Grant research, fit checks, deadline tracking and first application drafts, with your pipeline in one place.</p>
+          <p class="offer-summary">A grant pipeline built around your funding goal, with research, fit checks, deadline tracking and first application drafts.</p>
           <h3 class="tier-heading" id="tier-heading">Your organization's annual revenue</h3>
           <div class="ss-tier" id="ss-tier" role="radiogroup" aria-label="Your organization's annual revenue">
             <div class="ss-tier-card">
@@ -562,9 +642,9 @@
       <div class="getting-started">
         <h3 class="start-heading">After you sign up</h3>
         <ol class="start-steps">
-          <li><strong>Confirm your organization.</strong> Add your mission, location and budget.</li>
+          <li><strong>Confirm your organization.</strong> Add your mission, location, budget and materials for drafting.</li>
           <li><strong>Review your pipeline.</strong> See the opportunities and the evidence behind each recommendation.</li>
-          <li><strong>Review and submit.</strong> Add your materials for drafting, check the application and send it.</li>
+          <li><strong>Review and submit.</strong> You confirm your organization's program and impact details, review the draft and submit.</li>
         </ol>
       </div>
       <p class="free-onramp">Need the full application package prepared and submitted with your approval? <a href="/grant-office">See the grant office</a>, from $399 a month.</p>
@@ -574,9 +654,9 @@
   <section aria-labelledby="support-title">
     <div class="container">
       <h3>Support for your funding plan</h3>
-      <h2 id="support-title">Put your time into the grants worth pursuing.</h2>
-      <p>Application requirements tell you who can apply. Award history helps show which work a funder has supported. Sharke brings that evidence into your pipeline so you can decide where to put your time.</p>
-      <p>Some opportunities are ready for an application; others need a relationship first. Building that pipeline before funding is urgent gives you time to evaluate both.</p>
+      <h2 id="support-title">A pipeline built around your funding goal.</h2>
+      <p>You know there are grants that could fund your mission. You don't have time to find and evaluate them, and you can't afford to hire someone who will. So we built the grant team you can afford.</p>
+      <p>Sharke sizes the pipeline to your grant goal, replaces weak fits, and keeps it current as cycles change.</p>
       <ul class="walk-list">
         <li><span class="step-num">Research</span><span class="step-text"><strong>A reason behind each recommendation.</strong> See the evidence supporting an opportunity and the questions that still need an answer.</span></li>
         <li><span class="step-num">Prepare</span><span class="step-text"><strong>A first draft to work from.</strong> Your materials inform the application, with a review against the funder's criteria before you send.</span></li>
@@ -609,7 +689,7 @@
       <h2>Before you start</h2>
       <details>
         <summary>What work will I still need to do?</summary>
-        <p>Confirm your organization's profile, provide the materials for drafting, and decide which opportunities to pursue. Sharke handles research, fit checks, deadline tracking and the first draft. You check the facts, make any edits and submit the application.</p>
+        <p>Confirm your organization's profile, provide the materials for drafting, and decide which opportunities to pursue. Sharke handles research, fit checks, deadline tracking and the first draft. You confirm your organization's program and impact details, review the draft and submit.</p>
       </details>
       <details>
         <summary>What happens after I sign up?</summary>
