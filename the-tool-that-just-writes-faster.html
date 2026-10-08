@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Switching from a grant tool that just writes faster | Sharke.ai</title>
-  <meta name="description" content="A faster grant tool writes more applications. It does not tell you which can fund your mission. Sharke does the work and builds the Verified Pipeline that closes your Funding Gap, grounded in award history.">
+  <title>Put the pipeline before the draft. | Sharke.ai</title>
+  <meta name="description" content="Drafting support is useful once you know which opportunities belong in your funding plan. Start with fit, evidence and timing, then prepare the application.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -511,7 +511,17 @@
       .cta-section { padding: 60px 24px 40px; }
       .cta-section h2 { font-size: 24px; }
     }
-  </style>
+
+  .review-details { margin: 20px 0; padding: 18px 0; border-top: 1px solid var(--rule); }
+  .review-details summary { cursor: pointer; font-weight: 600; padding: 8px 0; }
+  .review-details p { margin-top: 14px; }
+  .clear-list { padding-left: 22px; line-height: 1.7; }
+  .clear-list li { margin: 12px 0; }
+  .hook .subhead, .hook .eyebrow, .hook h1 { animation: none; opacity: 1; }
+  .hook { padding-top: 52px; padding-bottom: 44px; }
+  a:focus-visible, summary:focus-visible, button:focus-visible { outline: 3px solid #b85b38; outline-offset: 4px; }
+
+</style>
 </head>
 <body>
 
@@ -530,105 +540,18 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero">
-    <div class="hero-label">Switching tools</div>
-    <h1>A faster way to write the wrong grant is still the wrong grant.</h1>
-    <p>If your grant tool makes you quicker but you still cannot tell which grants will fund your mission, you do not need another tool. You need the work done, and the judgment behind it.</p>
-  </section>
-
-  <!-- Section 1: The Math Nobody Does -->
-  <div class="section-divider"></div>
-  <div class="section-spacer"></div>
-
-  <section class="fade-section">
-    <div class="section-content">
-      <div class="section-label">The trap</div>
-      <h2 class="section-title">Faster is not funded</h2>
-      <p class="section-subtitle">AI tools promise speed: 5x faster applications, more grants found, a whole AI team in one tab. But volume is not funding. Writing more applications to grants you cannot fund just loses the same hours, faster. Three things a faster tool does not do:</p>
-
-      <div class="cost-grid">
-        <div class="cost-card">
-          <div class="cost-icon">&bull;</div>
-          <div class="cost-title">It does not tell you what to pursue</div>
-          <div class="cost-desc">A faster tool writes more applications. It does not read award history to tell you which grants have a documented path to funding for an organization like yours. Selection decides the money, not speed, and that is the part it skips.</div>
-        </div>
-        <div class="cost-card">
-          <div class="cost-icon">&bull;</div>
-          <div class="cost-title">It does not do the work</div>
-          <div class="cost-desc">The tool does not do the work: you still do it, only faster. For a team already wearing six hats, a faster tool is one more tab to run, not the time you actually need. The hours still have to come from somewhere.</div>
-        </div>
-        <div class="cost-card">
-          <div class="cost-icon">&bull;</div>
-          <div class="cost-title">It does not learn your funders</div>
-          <div class="cost-desc">A rented prompt gives an opinion from zero every time, with no memory of what actually got funded. It cannot get sharper about the funders who could fund you, because it never learns from how they award.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 2: Five Costs Beyond the Application -->
-  <div class="section-divider warm"></div>
-  <div class="section-spacer"></div>
-
-  <section class="fade-section" style="background: var(--bg-secondary);">
-    <div class="section-content">
-      <div class="section-label">What you actually need</div>
-      <h2 class="section-title">Not a faster tool. The team that does the work.</h2>
-      <p class="section-subtitle">Sharke is the grants department for organizations that cannot afford one. It does not hand you a faster way to write. It builds the Verified Pipeline that funds your mission, and does the work to get there.</p>
-
-      <div class="examples-list">
-        <div class="example-item">
-          <div class="example-icon" style="color: var(--accent);">&check;</div>
-          <div class="example-text"><strong>Measure your Funding Gap.</strong> How much funding your mission needs, and how much of your current pipeline actually has a documented path to funding.</div>
-        </div>
-        <div class="example-item">
-          <div class="example-icon" style="color: var(--accent);">&check;</div>
-          <div class="example-text"><strong>Verify every grant against the funder&rsquo;s own record.</strong> Eligibility, geography, budget fit, and three years of award history, the way the funder actually applies them. A Pursue, Wait, or Move on verdict.</div>
-        </div>
-        <div class="example-item">
-          <div class="example-icon" style="color: var(--accent);">&check;</div>
-          <div class="example-text"><strong>Replace what does not belong, and do the work.</strong> Better-fit grants with a documented path, written and submitted for you, not handed back to your already-full week.</div>
-        </div>
-      </div>
-
-      <div class="examples-footer">
-        <p>The hard part of grant work is not the writing. It is knowing which grants are worth your hours, before those hours go in.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 3: What Wrong-Fit Actually Looks Like -->
-  <div class="section-divider"></div>
-  <div class="section-spacer"></div>
-
-  <section class="fade-section">
-    <div class="section-content">
-      <div class="section-label">Why it works</div>
-      <h2 class="section-title">A tool that just writes faster is the same next year. Sharke is not.</h2>
-      <p class="section-subtitle">Sharke is built on a model of how funders actually behave. It is ours, not a rented prompt, and it gets sharper every grant we run. The faster tool gives you an opinion from zero. Sharke brings the record of what actually gets funded.</p>
-
-      <div class="roi-pullquote">
-        <p>&ldquo;The most valuable grant decision your team makes might be the one they do not pursue.&rdquo;</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <div class="section-divider"></div>
-  <div class="section-spacer"></div>
-
-  <section class="fade-section">
-    <div class="cta-section">
-      <h2>Stop paying for speed. Get a read you can act on.</h2>
-      <p>The free Funding Path Checkup shows the gap between what your mission needs and what your pipeline can actually fund.</p>
-      <a href="/funding-gap" class="cta-button">Find your funding gap</a>
-      <p style="margin-top: 16px; margin-bottom: 0; font-size: 14px; color: var(--text-muted);">Free. No signup. About five minutes.</p>
-      <p style="margin-top: 32px; margin-bottom: 0; font-size: 15px;">Want the board-ready read? The Grant Funding Viability Assessment: the funding behind your mission scored 0 to 100, in your hands in 48 hours. $79 one-time, not a subscription. <a href="/ed" class="cta-secondary-link">See the Assessment</a></p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
+  <main>
+<section class="hero"><div class="container">
+<p class="eyebrow">Grant planning</p><h1>Put the pipeline before the draft.</h1><p>Drafting support is useful once you know which opportunities belong in your funding plan. Start with fit, evidence and timing, then prepare the application.</p>
+</div></section><section ><div class="container">
+<h2>Build the decision from evidence.</h2><ul class="clear-list"><li><strong>Eligibility:</strong> read the current program requirements, including geography, applicant type and any fiscal-sponsorship rules.</li><li><strong>Funder history:</strong> look at the work and organizations the funder has supported. Past awards are evidence to consider, not a guarantee or an automatic eligibility rule.</li><li><strong>Timing:</strong> confirm the current deadline and whether an invitation or conversation is needed before applying.</li><li><strong>Your capacity:</strong> consider the application work, required partnerships and delivery obligations alongside your other opportunities.</li></ul>
+</div></section><section ><div class="container">
+<h2>Keep uncertainty visible.</h2><p>If a requirement or funding pattern cannot be confirmed, record the question and resolve it before relying on the opportunity. A convincing description is not a substitute for current program requirements.</p><p>A pipeline brings those decisions together: what to pursue now, what needs cultivation and what needs more evidence. That gives drafting work a clear purpose.</p>
+</div></section><section ><div class="container">
+<h2>Let Sharke build and maintain the pipeline.</h2><p>The grant team researches opportunities, checks fit, tracks deadlines and prepares first application drafts. You confirm your organization's program and impact details, review the draft and submit.</p><p>The grant office prepares the full application package and submits with your approval, with your participation where a portal requires it.</p><p><a href="/grant-director">See the grant team, from $99 a month</a> &nbsp; <a href="/grant-office">See the grant office, from $399 a month</a></p><p>Want to assess the funding plan first? <a href="/ed">The Grant Funding Viability Assessment</a> is $79 one-time, delivered within 48 hours of your completed intake.</p>
+</div></section>
+</main>
+<footer class="footer">
     <p>&copy; 2026 <a href="/">Sharke.ai</a> | Build a funding pipeline that can fund your mission</p>
     <p style="margin-top: 8px;">Questions? <a href="mailto:angelica@sharke.ai">angelica@sharke.ai</a> &middot; 512-253-1537</p>
   </footer>

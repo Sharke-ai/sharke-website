@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>Sharke Readiness Assessment</title>
-<meta name="description" content="Find out whether grants actually fit your organization. Five minutes, no signup, no email, free.">
+<meta name="description" content="See what to strengthen before you pursue grants. Answer a short, free questionnaire for a readiness score and practical recommendations. No signup required.">
 <meta property="og:title" content="Sharke Readiness Assessment">
-<meta property="og:description" content="Find out whether grants actually fit your organization. Five minutes, no signup, no email, free.">
+<meta property="og:description" content="See what to strengthen before you pursue grants. Answer a short, free questionnaire for a readiness score and practical recommendations. No signup required.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sharke.ai/readiness">
 <meta property="og:site_name" content="Sharke">
 <meta property="og:image" content="https://sharke.ai/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Sharke Readiness Assessment">
-<meta name="twitter:description" content="Find out whether grants actually fit your organization. Five minutes, no signup, no email, free.">
+<meta name="twitter:description" content="See what to strengthen before you pursue grants. Answer a short, free questionnaire for a readiness score and practical recommendations. No signup required.">
 <meta name="twitter:image" content="https://sharke.ai/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -362,6 +362,16 @@
     .btn-primary { width: 100%; padding: 18px 24px; }
     .cta-friction span + span::before { padding: 0 6px; }
   }
+
+  .review-details { margin: 20px 0; padding: 18px 0; border-top: 1px solid var(--rule); }
+  .review-details summary { cursor: pointer; font-weight: 600; padding: 8px 0; }
+  .review-details p { margin-top: 14px; }
+  .clear-list { padding-left: 22px; line-height: 1.7; }
+  .clear-list li { margin: 12px 0; }
+  .hook .subhead, .hook .eyebrow, .hook h1 { animation: none; opacity: 1; }
+  .hook { padding-top: 52px; padding-bottom: 44px; }
+  a:focus-visible, summary:focus-visible, button:focus-visible { outline: 3px solid #b85b38; outline-offset: 4px; }
+
 </style>
 </head>
 <body>
@@ -376,98 +386,15 @@
 </header>
 
 <!-- HOOK -->
-<section class="hook">
-  <div class="container">
-    <p class="hook-eyebrow">Before another quarter gets decided by default</p>
-    <h1>Your organization is <em>already building</em> around a funding model. Nobody has verified whether grants belong in it.</h1>
-    <p class="pivot">Not which grant to apply for. Whether grants are the right channel at all.</p>
-    <p class="hook-tighten">Most nonprofits never decide. The direction hardens anyway.</p>
-    <a href="https://sharke-app.netlify.app/free-tools/grant-readiness" class="hook-cta">Close the Question<span class="arrow">&rarr;</span></a>
-  </div>
-</section>
-
-<!-- THE WOUND -->
-<section>
-  <div class="container">
-    <h3>The decision being made by default</h3>
-    <h2>Nobody chose this. The organization is choosing it anyway.</h2>
-    <div class="wound-body">
-      <p>The org keeps drifting toward one funding model without ever stopping to check whether grants actually fit at this size and mission. Another quarter passes. Grants stay unexplored, or the team chases them without knowing whether the path is real.</p>
-      <p>By the time the direction is visible, it is already strategy. <strong>Nobody decided. It just hardened.</strong></p>
-    </div>
-  </div>
-</section>
-
-<!-- DIAGNOSTIC: the emotional core -->
-<section class="diagnostic">
-  <div class="container">
-    <h3>The assumptions running the room</h3>
-    <h2>Right now, the organization is probably operating on assumptions like these.</h2>
-    <p class="diagnostic-intro">Not stated out loud. Not on a slide. Just sitting underneath every conversation about what to pursue next.</p>
-
-    <div class="assumptions">
-      <div class="assumption"><span class="assumption-text">We&rsquo;re probably too small to compete.</span></div>
-      <div class="assumption"><span class="assumption-text">Federal funding probably isn&rsquo;t realistic for an org our size.</span></div>
-      <div class="assumption"><span class="assumption-text">Foundations that fund work like ours probably already have their relationships.</span></div>
-    </div>
-
-    <p class="diagnostic-turn">The problem is not whether those assumptions are true. Some are. Some aren&rsquo;t. <strong>The problem is the funding strategy is already being built on them, and none have been checked against what funders actually do.</strong></p>
-  </div>
-</section>
-
-<!-- INEVITABILITY BRIDGE -->
-<section class="bridge">
-  <div class="container">
-    <p class="bridge-line">This is already happening. The only question is whether the organization names the direction <em>deliberately</em>, or drifts into it by default.</p>
-    <p class="bridge-sub">The Readiness Assessment closes the question in five minutes. No signup, no email.</p>
-  </div>
-</section>
-
-<!-- WHY + WHAT YOU GET -->
-<section>
-  <div class="container">
-    <h3>What the assessment does</h3>
-    <p class="why-line">The Readiness Assessment exists because most nonprofits spend the year moving toward or away from grants without verifying whether grants actually fit.</p>
-
-    <h3 style="margin-top:8px;">What you walk away with</h3>
-    <ul class="deliverable-list">
-      <li>
-        <span class="dl-marker">01</span>
-        <span class="dl-text">A <strong>Ready / Strengthen Then Apply / Not Yet</strong> verdict on grants for your org, at this size, mission, and geography.</span>
-      </li>
-      <li>
-        <span class="dl-marker">02</span>
-        <span class="dl-text">The reasoning behind the verdict, source-cited.</span>
-      </li>
-      <li>
-        <span class="dl-marker">03</span>
-        <span class="dl-text">A preview of the funder universe your org actually matches against, with reasoning.</span>
-      </li>
-    </ul>
-
-    <p class="trust-line"><strong>The assessment compares your org against documented funder behavior, eligibility patterns, and award history.</strong> Not generic nonprofit assumptions, not vibes-based scoring.</p>
-  </div>
-</section>
-
-<!-- PRIMARY CTA -->
-<section class="cta-section">
-  <div class="container">
-    <p class="cta-friction"><span>5 minutes</span><span>No login</span><span>No email</span><span>Free</span></p>
-    <p class="cta-statement">Settle the question your org has been answering by default. <em>Today.</em></p>
-    <a href="https://sharke-app.netlify.app/free-tools/grant-readiness" class="btn-primary">Close the Question<span class="arrow">&rarr;</span></a>
-    <p class="cta-meta">Opens the assessment. Nothing to install.</p>
-  </div>
-</section>
-
-<!-- CLOSING -->
-<section class="closing">
-  <div class="container">
-    <p class="closing-line">Not running the assessment is still a decision.</p>
-    <p class="closing-sub">It just commits the year before you know what you committed to.</p>
-    <a href="https://sharke-app.netlify.app/free-tools/grant-readiness" class="btn-primary dark-on-light">Close the Question<span class="arrow">&rarr;</span></a>
-  </div>
-</section>
-
+<main>
+<section class="hook"><div class="container">
+<p class="eyebrow">Free Grant Readiness Assessment</p><h1>See what to strengthen before you pursue grants.</h1><p class="subhead">Answer a short questionnaire about your organization and receive a scored assessment with actionable recommendations.</p><p>No account or email required.</p><a class="text-link" href="https://sharke-app.netlify.app/free-tools/grant-readiness">Check your grant readiness &rarr;</a>
+</div></section><section ><div class="container">
+<h3>What you receive</h3><h2>A practical starting point.</h2><ul class="clear-list"><li>A readiness score based on your answers.</li><li>Recommendations for the areas to strengthen.</li><li>Optional calculators to explore the scale of your grant pipeline.</li></ul><p>This questionnaire is a starting point. It does not confirm your eligibility for a specific grant or that a funder is accepting applications.</p>
+</div></section><section ><div class="container">
+<h2>Start with your organization.</h2><p>Have your mission, organization size and operating history in mind. The tool guides you through the questions.</p><a class="text-link" href="https://sharke-app.netlify.app/free-tools/grant-readiness">Check your grant readiness &rarr;</a><p>Want a funding analysis built from public records? <a href="/ed">See the Grant Funding Viability Assessment</a>, $79 one-time.</p>
+</div></section>
+</main>
 <footer>
   <div class="container">
     <div class="footer-inner">
