@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start your cohort | Sharke.ai</title>
+<meta name="description" content="Choose your cohort and request a personalized scope. No call, payment or organization list required to start.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght,wdth@9..40,400..800,75..100&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0f1a;
+    --bg-elevated: #111827;
+    --bg-elevated-2: #1a2236;
+    --accent: #4AE3A0;
+    --accent-muted: rgba(74, 227, 160, 0.12);
+    --accent-border: rgba(74, 227, 160, 0.3);
+    --text-primary: #FFFFFF;
+    --text-secondary: #D1D5DB;
+    --text-muted: #9CA3AF;
+    --rule: rgba(255, 255, 255, 0.1);
+    --rule-strong: rgba(255, 255, 255, 0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 18px; scroll-behavior: smooth; }
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: var(--bg-primary);
+    z-index: 100;
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .logo-s { color: var(--bg-primary); font-size: 16px; font-weight: 600; line-height: 1; }
+  .logo-text { font-size: 17px; font-weight: 500; color: var(--text-primary); line-height: 1; }
+  .header-right { display: flex; align-items: center; gap: 24px; }
+  .header-tools {
+    background: var(--accent);
+    color: var(--bg-primary);
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .header-tools:hover { background: #6EEEB5; }
+  .header-login {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    border: 1px solid var(--rule-strong);
+    padding: 9px 18px;
+    border-radius: 6px;
+    transition: border-color 0.2s, background 0.2s;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .header-login:hover { border-color: var(--accent); background: var(--accent-muted); }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+  .page-header { padding: 80px 0 40px; border-bottom: 1px solid var(--rule); }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .last-updated {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  .placeholder-banner {
+    background: var(--accent-muted);
+    border: 1px solid var(--accent-border);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin: 36px 0 0;
+    font-size: 0.92rem;
+    color: var(--text-primary);
+  }
+  .placeholder-banner strong { color: var(--accent); }
+
+  .prose { padding: 48px 0 80px; }
+  .prose h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 40px 0 14px;
+    line-height: 1.3;
+  }
+  .prose h2:first-child { margin-top: 0; }
+  .prose p { color: var(--text-secondary); margin-bottom: 1.1em; font-size: 0.98rem; }
+  .prose ul { padding-left: 22px; margin-bottom: 1.2em; }
+  .prose li { color: var(--text-secondary); margin-bottom: 0.5em; font-size: 0.98rem; }
+  .prose strong { color: var(--text-primary); font-weight: 600; }
+
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    padding: 36px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+  .site-footer a { color: var(--text-muted); text-decoration: none; }
+  .site-footer a:hover { color: var(--text-primary); }
+  .site-footer .footer-right { display: flex; gap: 24px; }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 14px 20px; }
+    .container { padding: 0 20px; }
+    .page-header { padding: 56px 0 28px; }
+    .prose { padding: 32px 0 56px; }
+    .site-footer { flex-direction: column; gap: 12px; padding: 28px 20px; text-align: center; }
+  }
+  @media (max-width: 380px) {
+    .site-header { padding: 10px 14px; }
+    .header-right { gap: 8px; }
+    .header-tools { padding: 9px 12px; font-size: 0.84rem; }
+    .header-login { padding: 9px 12px; font-size: 0.84rem; }
+  }
+.cohort-form { margin:28px 0; } .cohort-form label,.cohort-form legend { display:block; margin-top:20px; font-weight:600; } .cohort-form input:not([type=radio]),.cohort-form textarea,.cohort-form select { display:block; width:100%; padding:12px; margin-top:6px; font:inherit; color:#111; background:#fff; border:1px solid #999; border-radius:4px; } .cohort-form fieldset { padding:16px; margin:22px 0; border:1px solid #999; } .cohort-form .choice { margin:12px 0; font-weight:400; } .choice input { margin-right:8px; } .cohort-form button { margin:24px 0 12px; padding:14px 22px; background:var(--accent); color:var(--bg-primary); font:inherit; font-weight:600; border:0; border-radius:4px; cursor:pointer; } .cohort-form button:disabled { opacity:.6; cursor:wait; } details { margin:24px 0; } summary { cursor:pointer; } #request-status { overflow-wrap:anywhere; } #request-success { margin:28px 0; padding:24px; border:1px solid var(--accent); } :focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="/"><span class="logo-mark"><span class="logo-s">S</span></span><span class="logo-text">Sharke.ai</span></a>
+  <div class="header-right">
+    <a class="header-tools" href="https://sharke-app.netlify.app/free-tools">Resources</a>
+    <a class="header-login" href="https://sharke-app.netlify.app/login">Login</a>
+  </div>
+</header>
+
+<main class="container" style="padding-top:48px;padding-bottom:64px">
+<p class="eyebrow">A year of grant pipeline support</p><h1>Start with your cohort scope.</h1>
+<p>Choose five or ten organizations. Collin will email your personalized scope showing each organization's starting point, the work we will deliver and the payment terms. Reply &ldquo;I accept&rdquo; to approve them, and we begin. No call required.</p>
+<form id="cohort-form" class="cohort-form">
+<label for="audience">Who is funding the cohort?</label><select id="audience" name="audience" required><option value="foundation">Foundation</option><option value="association">Association or nonprofit center</option></select>
+<fieldset><legend>Choose your cohort</legend><label class="choice"><input type="radio" name="size" value="5" required> Five organizations: $5,025 for one year</label><label class="choice"><input type="radio" name="size" value="10" required> Ten organizations: $9,500 for one year</label></fieldset>
+<p>Participating organizations pay nothing. No invoice at acceptance. The invoice goes out with the week-one brief, within 10 business days of the agreed start, and is due in 30 days.</p>
+<label for="org-name">Your foundation or association</label><input id="org-name" name="org_name" autocomplete="organization" maxlength="200" required>
+<label for="contact-name">Your name</label><input id="contact-name" name="contact_name" autocomplete="name" maxlength="150" required>
+<label for="email">Your work email</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" required>
+<details><summary>Add organization details (optional)</summary><label for="website">Organization website</label><input id="website" name="org_website" type="url" placeholder="https://" maxlength="500"><label for="members">Organizations you would like to include</label><textarea id="members" name="members" rows="4" maxlength="5000" aria-describedby="members-help"></textarea><p id="members-help">Names or EINs are enough. You can send the list later. For a foundation, we can propose grantees from public filings. Please do not include private information about people you serve.</p><label for="notes">Anything you would like us to know?</label><textarea id="notes" name="notes" rows="3" maxlength="2000"></textarea></details>
+<p>Your information is used to prepare and follow up on this request. <a href="/privacy">Privacy policy</a>.</p>
+<p id="commitment-note"><strong>No payment or commitment at this step.</strong></p>
+<button type="submit" id="submit-scope" aria-describedby="commitment-note">Request my cohort scope</button><p id="request-status" role="status" tabindex="-1"></p>
+</form>
+<section id="request-success" hidden tabindex="-1"><h2>Your scope request is recorded.</h2><p>We will follow up at <strong id="confirmation-email"></strong> to prepare your scope. You have not been charged or enrolled.</p><p>Before you accept, you will see the proposed organizations and each one's starting point. If you did not supply a member list, we will ask for it by email. Sharke handles enrollment after the scope is agreed.</p><p id="request-reference"></p></section>
+<p>Questions first? <a href="https://calendly.com/collin-sharke?utm_source=website&amp;utm_campaign=cohort_start">Book an optional 15-minute call</a> or <a href="mailto:collin@sharke.ai">email Collin</a>.</p>
+<p><a id="back-link" href="/foundations">Back to the cohort offer</a></p>
+</main>
+<script src="/assets/cohort-start.js" defer></script>
+<footer class="site-footer">
+  <div><a href="mailto:angelica@sharke.ai">angelica@sharke.ai</a> &nbsp;&middot;&nbsp; &copy; 2026 Sharke.ai &nbsp;&middot;&nbsp; Member of the NVIDIA Inception Program</div>
+  <div class="footer-right">
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+  </div>
+</footer>
+
+</body>
+</html>
