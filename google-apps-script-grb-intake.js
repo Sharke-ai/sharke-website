@@ -111,6 +111,18 @@ function doPost(e) {
       data.notes || ""                    // Notes (dfy)
     ]);
 
+    if (String(data.plan || "") === "cohort_scope") {
+      try {
+        MailApp.sendEmail("collin@sharke.ai",
+          "Cohort scope request: " + (data.org_name || ""),
+          "Request " + sessionId + "\nOrganization: " + (data.org_name || "") +
+          "\nContact: " + (data.first_name || "") + " <" + (data.email || "") + ">" +
+          "\nOrganizations: " + (data.tier || "") +
+          "\nNamed: " + (data.grants_in_motion || "To follow") +
+          "\nNotes: " + (data.notes || ""));
+      } catch (mailErr) {}
+    }
+
     return ContentService
       .createTextOutput(JSON.stringify({ status: "success" }))
       .setMimeType(ContentService.MimeType.JSON);
