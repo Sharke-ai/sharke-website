@@ -144,15 +144,26 @@ th { background: #f3f6f9; color: #334155; letter-spacing: .01em; }
 .proof-quote .rec-quote { margin: 0; }
 .risk-reducers, .secondary-offer, .categorical-note, .hero-illus, .stat-source, .rec-quote cite, .route-links { font-size: 15px; line-height: 1.6; }
 .pipe-anim { background: #f3f6f9; border-color: #dce3eb; }
-#pipeFlow .pa-sub { font-size: 12px; letter-spacing: 0; }
+#pipeFlow .pa-sub { font-size: 14px; letter-spacing: 0; }
+#pipeFlow .pa-eyebrow, #pipeFlow .pa-head { font-size: 15px; letter-spacing: 0; }
+#pipeFlow text[y="196"] { font-size: 12px; }
 #pipeFlowM text { letter-spacing: 0; }
-#pipeFlowM text[x="68"] { font-size: 13px; }
-#pipeFlowM text[x="138"] { font-size: 12px; }
+#pipeFlowM text[x="68"] { font-size: 16px; }
+#pipeFlowM text[x="138"] { font-size: 14px; }
+#pipeFlowM text[text-anchor="middle"] { font-size: 12px; }
+#pipeFlowM text[x="74"] { font-size: 16px; }
 #pipeFlow text, #pipeFlowM text { fill: #142d4e; font-weight: 600; }
 #pipeFlow text[fill="#a3342b"], #pipeFlowM text[fill="#a3342b"] { fill: #8f2921; }
 #pipeFlowM text[fill="#D1D5DB"] { fill: #fff; }
 #pipeFlow rect, #pipeFlowM rect { stroke: #526176; stroke-width: 1.5px; }
 .compare-caption { font-size: 15px; line-height: 1.6; }
+.pipe-anim ~ .stat-source { max-width: 760px; }
+.hero-footnote .stat-token { font-size: inherit; }
+.additional-faq { padding-left: 20px; border-left: 2px solid #dce3eb; }
+@media (max-width: 1000px) {
+  #pipeFlow { display: none; }
+  #pipeFlowM { display: block; max-width: 500px; margin: auto; }
+}
 .support-options { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 28px 0; }
 .support-options article { padding: 28px; border: 1px solid #dce3eb; border-radius: 8px; }
 .support-options h3 { font-size: 1.35rem; }
