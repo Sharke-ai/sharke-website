@@ -156,6 +156,7 @@ th { background: #f3f6f9; color: #334155; letter-spacing: .01em; }
 #pipeFlow text[fill="#a3342b"], #pipeFlowM text[fill="#a3342b"] { fill: #8f2921; }
 #pipeFlowM text[fill="#D1D5DB"] { fill: #fff; }
 #pipeFlow rect, #pipeFlowM rect { stroke: #526176; stroke-width: 1.5px; }
+#pipeFlowM circle[stroke="#16a34a"] { fill: #16a34a; stroke: #15803d; }
 #pipeFlow .pa-sub { font-size: 13px; font-weight: 400; }
 #pipeFlowM text:is([y="60"],[y="78"],[y="146"],[y="164"],[y="260"]) { font-size: 14px; font-weight: 400; }
 #pipeFlowM text[y="217"] { font-size: 12px; font-weight: 400; }
