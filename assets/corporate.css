@@ -144,17 +144,11 @@ th { background: #f3f6f9; color: #334155; letter-spacing: .01em; }
 .proof-quote .rec-quote { margin: 0; }
 .risk-reducers, .secondary-offer, .categorical-note, .hero-illus, .stat-source, .rec-quote cite, .route-links { font-size: 15px; line-height: 1.6; }
 .pipe-anim { background: #f3f6f9; border-color: #dce3eb; }
-.workflow-mobile { display: none; }
 #pipeFlow .pa-sub { font-size: 12px; letter-spacing: 0; }
+#pipeFlowM text { letter-spacing: 0; }
+#pipeFlowM text[x="68"] { font-size: 13px; }
+#pipeFlowM text[x="138"] { font-size: 12px; }
 .compare-caption { font-size: 15px; line-height: 1.6; }
-@media (max-width: 760px) {
-  .pipe-anim:has(#pipeFlow) { display: none; }
-  .workflow-mobile { display: grid; gap: 20px; padding-left: 28px; margin-top: 28px; }
-  .workflow-mobile li { padding-left: 8px; }
-  .workflow-mobile li::marker { color: #236343; font-weight: 700; }
-  .workflow-mobile strong { color: #142d4e; }
-  .workflow-mobile p { margin-top: 6px; font-size: 1rem; }
-}
 .support-options { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 28px 0; }
 .support-options article { padding: 28px; border: 1px solid #dce3eb; border-radius: 8px; }
 .support-options h3 { font-size: 1.35rem; }
