@@ -2,7 +2,7 @@
 :root {
   --brand-navy: #142d4e;
   --brand-slate: #334155;
-  --brand-teal: #087f8c;
+  --brand-green: #236343;
   --brand-link: #185abd;
   --brand-font: 'Source Sans 3', 'Segoe UI', Arial, sans-serif;
   --sans: var(--brand-font); --serif: var(--brand-font); --mono: var(--brand-font);
@@ -20,8 +20,8 @@
   --border-subtle: #dce3eb; --border-light: #bcc9d7;
   --accent: #142d4e; --accent-dim: #203f65; --red: #142d4e; --btn-text: #fff;
   --accent-soft: #edf4f8; --accent-muted: #edf4f8; --accent-border: #bcc9d7;
-  --warm: #087f8c; --warm-soft: #edf7f7; --warm-muted: #edf7f7;
-  --cool: #087f8c; --cool-muted: #edf7f7;
+  --warm: #236343; --warm-soft: #edf5ef; --warm-muted: #edf5ef;
+  --cool: #236343; --cool-muted: #edf5ef;
   --pull-bg: #f3f6f9; --pull-fg: #142d4e;
   --shadow: 0 4px 16px rgb(20 45 78 / 5%);
 }
@@ -32,6 +32,7 @@ h1, h2, h3, h4 { color: var(--brand-navy); font-weight: 650; letter-spacing: -.0
 h1, .hero h1, .hook h1 { font-size: clamp(2rem, 4.4vw, 3.1rem); line-height: 1.12; font-weight: 650; max-width: 22ch; }
 h2 { font-size: clamp(1.55rem, 3vw, 2.1rem); line-height: 1.22; font-weight: 650; }
 h1 em, h2 em, h3 em, .hinge em, .final em { font-style: normal; color: inherit; }
+.hero h1 .mission-emphasis { color: var(--brand-green); font-weight: 700; }
 .lead, .hook-body, .hook-sub, .subhead { font-size: 1.1rem; line-height: 1.65; color: var(--brand-slate); }
 p { line-height: 1.65; }
 strong { font-weight: 650; }
@@ -47,7 +48,7 @@ header, .site-header { background: #fff; border-bottom: 1px solid var(--rule); }
 .stat-label, .dl-marker, .step-num, .label, .field-label {
   font-size: .78rem; font-weight: 650; letter-spacing: .02em; text-transform: none;
 }
-.eyebrow, .eyebrow.warm, .kicker, .dl-marker, .step-num { color: var(--brand-teal); }
+.eyebrow, .eyebrow.warm, .kicker, .dl-marker, .step-num { color: var(--brand-green); }
 .segment-tag, .header-tag { color: #526176; }
 .header-inner { align-items: center; }
 .cta-action-label, .report-sample h3, .cohort-example h3 { font-size: .8rem; line-height: 1.5; letter-spacing: .02em; }
@@ -95,7 +96,7 @@ fieldset { border-color: #bcc9d7; border-radius: 6px; }
 .bento-inner::before, .bento-inner::after { display: none; }
 .bento-text { color: #334155; font-size: 1rem; line-height: 1.65; }
 .bento-text strong { color: #142d4e; font-size: 1.1rem; line-height: 1.4; margin-bottom: 10px; }
-.bento-icon { color: #087f8c; }
+.bento-icon { color: var(--brand-green); }
 .trust-strip { background: #f3f6f9; padding: 18px 22px; }
 .trust-line, .hero-footnote { color: #334155; font-size: .9rem; line-height: 1.65; }
 .src-chip { background: #fff; color: #334155; font-size: .7rem; letter-spacing: .03em; }
