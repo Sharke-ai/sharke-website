@@ -212,3 +212,49 @@ th { background: #f3f6f9; color: #334155; letter-spacing: .01em; }
   body, .hero, .cta-section, .final, footer { background: #fff; color: #142d4e; }
   .cta-section :is(h2,h3,p,strong), .final :is(h2,h3,p,strong) { color: #142d4e; }
 }
+/* Landing pages use the same hierarchy and surfaces as the homepage. */
+.landing-page .hook { background: #f3f6f9; padding: 64px 0; border-bottom: 1px solid #dce3eb; }
+.landing-page .hook h1 { max-width: 25ch; margin-bottom: 24px; }
+.landing-page .mission-emphasis { color: #236343; font-weight: 700; }
+.landing-page .subhead { max-width: 68ch; font-size: 1.15rem; line-height: 1.6; }
+.landing-page .hook-solution { font-size: 1rem; line-height: 1.65; max-width: 68ch; }
+.landing-page :is(.hook-note,.example-context,.sample-label,.ss-tier-help,.ss-tier-hint,.tier-help,.tier-hint,.ss-stripe,.checkout-trust,.sc-note) { font-size: 15px; line-height: 1.6; letter-spacing: 0; text-transform: none; }
+.landing-page section > .container > h3:first-child { font-size: .8rem; color: #236343; font-weight: 650; letter-spacing: .02em; text-transform: none; margin-bottom: 14px; }
+.landing-page .cta-section > .container > h3:first-child { color: #fff; }
+.landing-page :is(.cohort-example-grid,.report-samples) { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; }
+.landing-page :is(.cohort-example-grid > article,.report-sample) { padding: 28px; margin-top: 0; background: #f3f6f9; border: 1px solid #dce3eb; border-radius: 8px; }
+.landing-page .report-sample h2 { font-size: 1.45rem; }
+.landing-page .cohort-example-grid h3 { font-size: 1.15rem; line-height: 1.4; }
+.landing-page .decision-dashboard { background: #fff; border-color: #dce3eb; }
+.landing-page :is(.dash-glyph,.dash-verdict-label,.dash-eyebrow,.dash-insight-label,.dash-insight-text .hl,.dash-verify) { color: #236343; }
+.landing-page .dash-ring { border-color: #236343; background: #edf5ef; }
+.landing-page .dash-insight { background: #edf5ef; border-color: #bdd5c5; }
+.landing-page .dash-insight-text { font-size: 17px; }
+.landing-page :is(.tier-card,.ss-tier-card) label { background: #fff; border: 1px solid #a6b5c7; border-radius: 6px; padding: 20px 16px; }
+.landing-page :is(.tier-card,.ss-tier-card) input:checked + label { background: #edf5ef; border-color: #236343; box-shadow: inset 0 0 0 1px #236343; }
+.landing-page :is(.tier-card,.ss-tier-card) input:focus-visible + label { outline: 3px solid #185abd; outline-offset: 4px; }
+.landing-page :is(.tier-share,.ss-tier-band) { color: #236343; font-size: 15px; letter-spacing: 0; text-transform: none; }
+.landing-page :is(.tier-price,.ss-tier-price) { color: #142d4e; font-size: 1.35rem; }
+.landing-page :is(.tier-price span,.ss-tier-price span,.tier-desc,.tier-vol,.ss-tier-note) { color: #334155; font-size: 15px; letter-spacing: 0; }
+.landing-page .tier-vol { border-color: #dce3eb; }
+.landing-page .cta-section :is(.tier-help,.tier-hint,.al-text,.honest-note p,.free-onramp,.scope-call) { color: #e2e8f0; }
+.landing-page .cta-section .al-when { color: #fff; font-size: 15px; letter-spacing: 0; }
+.landing-page .cta-section button.cta-btn { background: #fff; color: #142d4e; padding: 14px 22px; border: 1px solid #fff; border-radius: 6px; font-size: 1rem; font-weight: 650; }
+.landing-page .cta-section button.cta-btn:disabled { opacity: .5; background: #fff; color: #142d4e; }
+.landing-page .cta-section .dfy-checkout :is(p,button,strong) { color: #334155; }
+.landing-page .cta-section .review-details summary { color: #fff; }
+.landing-page .close-section { background: #142d4e; }
+.landing-page .close-section :is(h2,p) { color: #fff; }
+.landing-page .close-section .hook-cta { background: #fff !important; color: #142d4e !important; }
+.landing-page .cta-btn { background: #142d4e; color: #fff; border-radius: 6px; font-size: 1rem; font-weight: 650; text-transform: none; letter-spacing: 0; }
+.landing-page .cta-section .cta-btn { background: #fff; color: #142d4e; }
+.landing-page .cta-section :is(.after-pay,.after-list,.after-list li) { border-color: #52708f; }
+.landing-page .cta-section .after-pay :is(.ap-title,span,li) { color: #e2e8f0; }
+.landing-page .cta-section .after-pay .ap-title { font-size: 15px; letter-spacing: .02em; }
+@media (max-width: 760px) {
+  .landing-page .hook { padding: 44px 0; }
+  .landing-page .header-inner { flex-direction: row; justify-content: space-between; gap: 12px; }
+  .landing-page .header-inner .segment-tag { display: none; }
+  .landing-page :is(.cohort-example-grid,.report-samples) { grid-template-columns: 1fr; }
+  .landing-page :is(.cohort-example-grid > article,.report-sample) { padding: 22px; }
+}
