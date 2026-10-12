@@ -258,3 +258,18 @@ th { background: #f3f6f9; color: #334155; letter-spacing: .01em; }
   .landing-page :is(.cohort-example-grid,.report-samples) { grid-template-columns: 1fr; }
   .landing-page :is(.cohort-example-grid > article,.report-sample) { padding: 22px; }
 }
+
+/* Focused offer comparison and tangible work samples. */
+.pricing-page .plan-options[aria-label="Monthly plans"] { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.pricing-page .plan-options[aria-label="Monthly plans"] .rung-wrap { margin:0; padding:0; min-width:0; }
+.pricing-page .plan-options[aria-label="Monthly plans"] .rung { height:100%; box-sizing:border-box; display:flex; flex-direction:column; padding:28px; }
+.pricing-page .rung-cta { align-self:flex-start; margin-top:auto; }
+.pricing-page .w4 .rung-tiers { color:#e2e8f0; }
+.pricing-page .rung-name { font-size:1.7rem; }
+.work-preview { background:#f3f6f9; border:1px solid #bcc9d7; border-radius:8px; padding:28px; margin:28px 0 40px; }
+.work-preview h3 { color:#142d4e; font-size:1.35rem; letter-spacing:0; text-transform:none; }
+.work-preview p { color:#334155; }
+.work-preview .sample-label { color:#526176; font-size:15px; }
+.work-preview .hook-cta { margin-top:8px; }
+#office-package { scroll-margin-top:90px; }
+@media(max-width:760px) { .pricing-page .plan-options[aria-label="Monthly plans"] { grid-template-columns:1fr; } .work-preview { padding:22px; } }
