@@ -91,6 +91,14 @@ fieldset { border-color: #bcc9d7; border-radius: 6px; }
 .report-card, .pricing-card, .sample-card { border-radius: 8px; box-shadow: none; border-color: var(--rule); }
 .decision-dashboard { box-shadow: 0 8px 28px rgb(20 45 78 / 7%); }
 .bento-card { background: #fff; border: 1px solid var(--rule); }
+.bento-inner { background: #fff; padding: 24px; border-radius: 7px; gap: 14px; }
+.bento-inner::before, .bento-inner::after { display: none; }
+.bento-text { color: #334155; font-size: 1rem; line-height: 1.65; }
+.bento-text strong { color: #142d4e; font-size: 1.1rem; line-height: 1.4; margin-bottom: 10px; }
+.bento-icon { color: #087f8c; }
+.trust-strip { background: #f3f6f9; padding: 18px 22px; }
+.trust-line, .hero-footnote { color: #334155; font-size: .9rem; line-height: 1.65; }
+.src-chip { background: #fff; color: #334155; font-size: .7rem; letter-spacing: .03em; }
 .hero-chips li { background: #fff; color: #334155; border-color: #dce3eb; border-radius: 4px; }
 .dash-bar, .rec-header { background: #f3f6f9; }
 table { font-variant-numeric: tabular-nums; }
