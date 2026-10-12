@@ -115,10 +115,68 @@ th { background: #f3f6f9; color: #334155; letter-spacing: .01em; }
 .scope-options a { background: #fff; color: #142d4e; border-radius: 6px; }
 .cta-section .small, .cta-section .fine-print, .final .risk-reducers { color: #d6e1ee; }
 .final h2, .final .lead { margin-left: 0; }
+.final .final-inev { margin-left: 0; font-size: 1.1rem; }
 .site-footer, footer { background: #f3f6f9; color: #526176; border-color: #dce3eb; }
 .sticky-cta { background: #fff; color: #142d4e; border-color: #dce3eb; box-shadow: 0 -2px 12px rgb(20 45 78 / 6%); }
 .sticky-cta span, .sticky-cta p { color: #334155; }
 .reveal-up, .reveal { opacity: 1; transform: none; transition: none; }
+/* Homepage: readable evidence beside the offer, followed by a shorter story. */
+.hero-layout { display: grid; gap: 40px; align-items: center; }
+.hero-example { min-width: 0; }
+.hero-example .eyebrow { margin-bottom: 6px; }
+.example-label { font-size: .8rem; color: #526176; margin-bottom: 14px; }
+.hero-example .decision-dashboard { margin: 0; background: #fff; min-height: 560px; }
+.hero-example .dash-content { padding: 20px; }
+.hero-example .dash-top { flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.hero-example .dash-status { display: none; }
+.hero-example .dash-funder { text-align: left; padding: 16px 0; margin-bottom: 16px; }
+.hero-example .dash-insight { text-align: left; padding: 16px; }
+.hero-example .dash-insight-text { font-size: .95rem; }
+.hero-example .dash-ring { border-color: #236343; background: #edf5ef; }
+.hero-example :is(.dash-glyph,.dash-verdict-label,.dash-eyebrow,.dash-insight-label,.hl,.dash-verify) { color: #236343; }
+.dash-verdict-label { font-size: 11px; letter-spacing: 0; }
+.dash-title, .dash-source { font-size: 13px; letter-spacing: 0; }
+.dash-rank, .dash-funder-sub, .dash-verify { font-size: 15px; }
+.dash-preview { gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.dash-pip { box-sizing: border-box; width: auto; height: auto; min-height: 44px; padding: 8px 16px; border: 1px solid #bcc9d7; border-radius: 6px; background: #fff; color: #334155; font-size: 15px; }
+.dash-pip.active { background: #142d4e; color: #fff; border-color: #142d4e; }
+.proof-quote { padding-top: 36px; padding-bottom: 36px; }
+.proof-quote .rec-quote { margin: 0; }
+.risk-reducers, .secondary-offer, .categorical-note, .hero-illus, .stat-source, .rec-quote cite, .route-links { font-size: 15px; line-height: 1.6; }
+.pipe-anim { background: #f3f6f9; border-color: #dce3eb; }
+.workflow-mobile { display: none; }
+#pipeFlow .pa-sub { font-size: 12px; letter-spacing: 0; }
+.compare-caption { font-size: 15px; line-height: 1.6; }
+@media (max-width: 760px) {
+  .pipe-anim:has(#pipeFlow) { display: none; }
+  .workflow-mobile { display: grid; gap: 20px; padding-left: 28px; margin-top: 28px; }
+  .workflow-mobile li { padding-left: 8px; }
+  .workflow-mobile li::marker { color: #236343; font-weight: 700; }
+  .workflow-mobile strong { color: #142d4e; }
+  .workflow-mobile p { margin-top: 6px; font-size: 1rem; }
+}
+.support-options { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 28px 0; }
+.support-options article { padding: 28px; border: 1px solid #dce3eb; border-radius: 8px; }
+.support-options h3 { font-size: 1.35rem; }
+.support-options p { margin: 12px 0 20px; }
+.support-price { color: #236343; font-weight: 650; }
+.support-options a { font-weight: 650; }
+.founder-details { margin-top: 20px; }
+.founder-details summary { cursor: pointer; color: #142d4e; font-weight: 650; padding: 12px 0; }
+.founder-narrative { font-size: 1.15rem; line-height: 1.6; }
+.founder-nvidia b { color: #236343; }
+@media (min-width: 1100px) {
+  .hero-layout { grid-template-columns: 1fr 1fr; }
+  .hero-copy h1 { font-size: 2.5rem; }
+  .hero-copy .lead { font-size: 1.15rem !important; line-height: 1.6 !important; }
+}
+@media (max-width: 640px) {
+  .support-options { grid-template-columns: 1fr; }
+  .hero-example .dash-top { flex-direction: row; align-items: center; }
+  .hero-example .dash-ring { width: 62px; height: 62px; }
+  .hero-example .dash-content { padding: 16px; }
+  .hero-example .decision-dashboard { min-height: 650px; }
+}
 @media (min-width: 900px) {
   .cohort-example .example-grid { gap: 32px; }
 }
