@@ -215,7 +215,7 @@ export default async (req) => {
     ? `https://sharke.ai/check-intake?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`
     : isDfy
     ? `https://sharke.ai/office-intake?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`
-    : `https://sharke-app.netlify.app/signup?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`;
+    : `https://app.sharke.ai/signup?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`;
   params.append("return_url", returnUrl);
   params.append("metadata[plan]", plan);
   if (funnelSrc) params.append("metadata[src]", funnelSrc);

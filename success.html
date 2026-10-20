@@ -171,7 +171,7 @@
       <div class="setup-box">
         <h2>Next step</h2>
         <p>Set up your account to start running verification on your first grant. This takes about two minutes.</p>
-        <a id="setup-link" href="https://sharke-app.netlify.app/signup" class="setup-btn">Set Up Your Account</a>
+        <a id="setup-link" href="https://app.sharke.ai/signup" class="setup-btn">Set Up Your Account</a>
       </div>
 
       <p class="contact-line">Questions? <a href="mailto:collin@sharke.ai">collin@sharke.ai</a></p>
@@ -189,7 +189,7 @@
     const signupParams = new URLSearchParams();
     if (sessionId) signupParams.set('session_id', sessionId);
     if (plan) signupParams.set('plan', plan);
-    link.href = 'https://sharke-app.netlify.app/signup?' + signupParams.toString();
+    link.href = 'https://app.sharke.ai/signup?' + signupParams.toString();
   }
 </script>
 </body>
