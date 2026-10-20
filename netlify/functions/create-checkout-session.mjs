@@ -86,6 +86,17 @@ export default async (req) => {
   // office's floor instead of inside its range. The ladder is preserved by repricing
   // the office, not by refusing the tier.
   const SELF_SERVE_TIERS = { under_1m: 9900, one_to_three_m: 15900, over_3m: 24900 };
+  // R8 2026-10-20: ed and gw are retired plans. No page sells them (every CTA sends
+  // self_serve, dfy or gfvc), but their live price ids still accepted a hand-built
+  // request. They now reject exactly as grb does. Existing ed/gw subscribers are
+  // untouched: renewals never pass through this function.
+  const RETIRED_PLANS = ["ed", "gw"];
+  if (RETIRED_PLANS.includes(plan)) {
+    return new Response(JSON.stringify({ error: "Invalid plan" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
   const priceId = prices[plan];
   if (!priceId && !isSelfServe && !isGfvc && !isDfy) {
     return new Response(JSON.stringify({ error: "Invalid plan" }), {
@@ -123,10 +134,10 @@ export default async (req) => {
   // unpaid or non-Assessment session fails the checks. This needs no new datastore,
   // which is why it is the id and not the email that travels.
   //
-  // KNOWN BOUND, deliberately not solved here: nothing stops the same Assessment session
-  // being credited twice if a buyer subscribes, cancels and subscribes again. Detecting
-  // that needs a store of spent credits. The session id is stamped into the subscription
-  // metadata below so a duplicate is at least visible after the fact.
+  // KNOWN BOUND (until 2026-10-20): nothing stopped the same Assessment session being
+  // credited twice if a buyer subscribed, canceled and subscribed again. Closed by the
+  // R8 single-use search below, which reads the credit_session stamped on every
+  // credited subscription.
   const CREDIT_COUPON = "GFVA_CREDIT_79";
   let creditApplied = false;
   const creditSession = typeof body.credit_session === "string" ? body.credit_session.trim() : "";
@@ -142,6 +153,24 @@ export default async (req) => {
                         paid.mode === "payment" &&
                         paid.metadata &&
                         paid.metadata.plan === "gfvc";
+      }
+      // R8 2026-10-20: one Assessment credits one subscription, ever. Every credited
+      // subscription carries metadata.credit_session (stamped below), so a search for it
+      // finds any earlier use, active or canceled. Stripe Search is the store of spent
+      // credits the KNOWN BOUND above lacked. If the search cannot answer, no credit:
+      // a full-price checkout is recoverable, a repeated $79 is not.
+      if (creditApplied) {
+        const q = "metadata['credit_session']:'" + creditSession + "'";
+        const used = await fetch(
+          "https://api.stripe.com/v1/subscriptions/search?query=" + encodeURIComponent(q) + "&limit=1",
+          { headers: { Authorization: "Bearer " + STRIPE_SECRET_KEY } }
+        );
+        if (!used.ok) {
+          creditApplied = false;
+        } else {
+          const found = await used.json();
+          if (!found || !Array.isArray(found.data) || found.data.length > 0) creditApplied = false;
+        }
       }
     } catch {
       // A credit lookup must never block a sale. Full price is recoverable;
@@ -186,7 +215,7 @@ export default async (req) => {
     ? `https://sharke.ai/check-intake?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`
     : isDfy
     ? `https://sharke.ai/office-intake?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`
-    : `https://sharke-app.netlify.app/signup?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`;
+    : `https://app.sharke.ai/signup?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`;
   params.append("return_url", returnUrl);
   params.append("metadata[plan]", plan);
   if (funnelSrc) params.append("metadata[src]", funnelSrc);
