@@ -53,7 +53,7 @@
     } finally {
       clearTimeout(timer);
       submit.disabled = false;
-      submit.textContent = 'Request my cohort scope';
+      submit.textContent = 'Request my cohort proposal';
     }
   });
 })();
