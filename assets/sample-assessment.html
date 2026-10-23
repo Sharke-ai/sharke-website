@@ -1,0 +1,279 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grant Funding Viability Assessment (Sample)</title><style>
+:root{--ink:#13202b;--muted:#5b7184;--faint:#7a8a98;--rule:#e6eaef;--accent:#0f6e56}
+*{box-sizing:border-box}
+html{background:#e7ebf0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font:16px/1.62 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+color:var(--ink);max-width:720px;margin:38px auto;padding:0 26px;background:transparent;
+-webkit-font-smoothing:antialiased;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.doc-head{background:#13202b;color:#fff;border-radius:14px;padding:26px 28px;margin-bottom:18px;
+box-shadow:0 2px 10px rgba(19,32,43,.14)}
+.eyebrow{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:#7fd0b8;
+font-weight:700;margin:0 0 11px}
+h1.org{font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:700;
+letter-spacing:-.01em;line-height:1.13;margin:0 0 11px;color:#fff}
+.sub{color:#9fb2c2;font-size:12.5px;margin:0;line-height:1.5}
+h2{font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink);margin:0 0 13px;
+font-weight:700;border-left:3px solid var(--accent);padding-left:10px;line-height:1.1}
+h3{font-size:13.5px;font-weight:700;color:var(--ink);margin:18px 0 8px}
+section{background:#fff;border:1px solid var(--rule);border-radius:13px;padding:22px 24px;
+margin:0 0 16px;box-shadow:0 1px 3px rgba(19,32,43,.05)}
+section>p{margin:0 0 11px}
+section>p:last-child{margin-bottom:0}
+.lead-in{font-size:14px;color:#3a4a57;margin:0 0 14px;line-height:1.55}
+.note{font-size:12.5px;color:#5b6b86;font-style:italic;margin:12px 0 0;line-height:1.55}
+.exec{background:#fff;border:1px solid var(--rule)}
+.outlook{border-radius:10px;padding:15px 17px;margin:0 0 16px}
+.outlook .ol-level{display:block;font-size:15px;font-weight:700;letter-spacing:.01em}
+.outlook .ol-line{display:block;font-size:14px;margin-top:6px;line-height:1.55}
+.o-strong{background:#e1f0e9;color:#0f6e56} .o-strong .ol-line{color:#125c49}
+.o-stable{background:#eaf1f8;color:#2f5b8a} .o-stable .ol-line{color:#2f5b8a}
+.o-exposed{background:#faeeda;color:#854f0b} .o-exposed .ol-line{color:#6b3f08}
+.callouts{display:flex;gap:11px;flex-wrap:wrap;margin:2px 0 18px}
+.co{flex:1;min-width:150px;background:#f7f9fb;border:1px solid var(--rule);border-radius:11px;
+padding:17px 14px;text-align:center}
+.co-n{display:block;font-size:30px;font-weight:800;color:#13202b;line-height:1.04;letter-spacing:-.01em}
+.co-l{display:block;font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.3}
+.co-strong .co-n{color:#16715a}
+.co-neutral .co-n{color:#13202b}
+.co-resilient{background:#e1f0e9;border-color:#cfe6da} .co-resilient .co-n{color:#0f6e56}
+.co-building{background:#faeeda;border-color:#e3c489} .co-building .co-n{color:#854f0b}
+.co-exposed{background:#fbe7e4;border-color:#f0d3cd} .co-exposed .co-n{color:#a32d2d}
+.co-urgent{background:#fdf6ea;border-color:#e3c489;box-shadow:inset 0 0 0 1px #e3c489}
+.co-urgent .co-n{color:#9a6b16}
+.implies{background:#edf6f0;border:1px solid #cfe6da;border-radius:10px;padding:14px 16px;margin:6px 0 0}
+.implies .imp-k{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+color:#0f6e56;font-weight:700;margin:0 0 6px}
+.implies p{margin:0;font-size:14px;line-height:1.55;font-weight:550;color:#13202b}
+.funders-sec{background:#f6f4fb;border:1px solid #ddd5ee}
+.fcard{background:#fff;border:1px solid #e6e0f2;border-radius:10px;padding:12px 15px;margin:0 0 11px}
+.fc-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.fc-name{font-size:15px;font-weight:650}
+.fc-tag{font-size:11.5px;color:#7a6ca8;white-space:nowrap}
+.fc-status{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.03em;color:#3a4a57;background:#eef2f6;border:1px solid #dbe3ec;border-radius:20px;padding:2px 10px;margin:7px 0 0}
+.fc-proof{font-size:13.5px;color:var(--ink);margin:7px 0 0;line-height:1.5}
+.pipeline-sec{background:#f1f5f1;border:1px solid #d6e3d6}
+table.planmodel{width:100%;border-collapse:collapse;font-size:13.5px;margin:4px 0 12px}
+table.planmodel th{font-size:11px;color:var(--faint);font-weight:600;text-align:left;
+padding:6px 10px;border-bottom:1px solid #d6e3d6}
+table.planmodel td{padding:9px 10px;border-top:1px solid #e3ece3;vertical-align:top}
+table.planmodel td.num{text-align:right;white-space:nowrap}
+td.pm-t{font-weight:700;color:#0f6e56;white-space:nowrap}
+.scorecard{background:#f7f9fb;border:1px solid #e0e7ee}
+.appendix{background:#f7f9fb;border:1px solid #e0e7ee}
+.appendix h3{margin:18px 0 7px}
+table.meta{width:100%;border-collapse:collapse;font-size:13px;margin:0 0 14px}
+.cover-scope{font-size:12.5px;color:#5a6b7a;font-style:italic;margin:0 0 8px;line-height:1.5}
+table.meta td{padding:6px 8px;border-top:1px solid #eef2f5;vertical-align:top}
+table.meta tr:first-child td{border-top:none}
+td.mk{color:var(--muted);font-weight:600;white-space:nowrap;width:38%}
+.scope-sec{background:#f7f9fb;border:1px solid #e0e7ee}
+.scope{display:flex;gap:20px;flex-wrap:wrap;margin:2px 0 0}
+.sc-col{flex:1;min-width:240px}
+.sc-col h4{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 9px;font-weight:700}
+ul.scope-list{list-style:none;margin:0;padding:0}
+ul.scope-list li{font-size:13px;line-height:1.45;margin:0 0 8px;padding-left:16px;position:relative}
+ul.scope-list li:before{content:"";position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+ul.eco{list-style:none;margin:6px 0 0;padding:0}
+ul.eco li{font-size:13.5px;line-height:1.5;margin:0 0 9px}
+.closeq{font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:700;color:#13202b;line-height:1.42;margin:0 0 14px}
+.control{font-size:14.5px;line-height:1.55;margin:0 0 6px;font-weight:550;color:#13202b}
+.workcta{background:#eef6f1;border:1px solid #cfe6da;border-left:4px solid #0f6e56;border-radius:0 8px 8px 0;padding:12px 15px;margin:10px 0 0;font-size:14.5px;font-weight:700;color:#0f6e56;line-height:1.5}
+.decision-sec{background:#f6f8fa;border:1px solid #dbe3ec;border-left:4px solid #13202b}
+.rec-card{border:1px solid var(--rule);border-radius:11px;padding:13px 16px;margin:0 0 12px;background:#fff}
+.rec-h{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:650;color:var(--ink);margin:0 0 9px}
+.rec-n{flex:none;width:23px;height:23px;border-radius:50%;background:#13202b;color:#fff;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.rec-row{margin:0 0 6px;font-size:13px;line-height:1.5;color:#3a4a57}
+.rec-row:last-child{margin-bottom:0}
+.rec-row .rk{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 1px}
+.pitch{background:#0f2233;color:#eaf1f8;border-radius:10px;padding:15px 17px;margin:14px 0 0}
+.pitch p{margin:0 0 8px;font-size:14px;line-height:1.55}
+.pitch p:last-child{margin-bottom:0}
+.pitch .pitch-k{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#7fd0b8;font-weight:700;margin:0 0 8px}
+.band{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.b-strong{background:#e1f0e9;color:#0f6e56}
+.b-watch{background:#faeeda;color:#854f0b}
+.b-exposed{background:#fbe7e4;color:#a32d2d}
+.frn{display:flex;align-items:center;gap:18px;border-radius:12px;padding:18px 20px;margin:0 0 16px}
+.frn-n{font-size:46px;font-weight:800;line-height:1;letter-spacing:-.02em}
+.frn-lab{font-size:13px;line-height:1.4;font-weight:600}
+.frn-lab b{display:block;font-size:15px;text-transform:uppercase;letter-spacing:.04em;margin-top:3px}
+.frn-resilient{background:#e1f0e9} .frn-resilient .frn-n,.frn-resilient .frn-lab b{color:#0f6e56}
+.frn-building{background:#faeeda} .frn-building .frn-n,.frn-building .frn-lab b{color:#854f0b}
+.frn-exposed{background:#fbe7e4} .frn-exposed .frn-n,.frn-exposed .frn-lab b{color:#a32d2d}
+table.measures{width:100%;border-collapse:collapse;font-size:13.5px;margin:2px 0 10px}
+table.measures td{padding:10px 8px;border-top:1px solid #e7edf2;vertical-align:top}
+table.measures tr:first-child td{border-top:none}
+table.measures td.ml{font-weight:600;white-space:nowrap;width:27%}
+table.measures td.mb{text-align:right;white-space:nowrap;width:13%}
+.mpeer{display:inline-block;margin-top:3px;font-size:12px;color:var(--muted);font-style:italic}
+table.sc{width:100%;border-collapse:collapse;font-size:13.5px;margin:4px 0 6px}
+table.sc th{font-size:11px;color:var(--faint);font-weight:600;text-align:left;padding:6px 8px;
+border-bottom:1px solid #e0e7ee}
+table.sc th.num,table.sc td.num{text-align:right;white-space:nowrap}
+table.sc td{padding:9px 8px;border-top:1px solid #e7edf2;vertical-align:top}
+td.m{font-weight:600;white-space:nowrap}
+ul.reads{margin:6px 0 0;padding-left:20px}
+ul.reads li{font-size:14px;line-height:1.55;margin:0 0 9px}
+.degrade{font-size:12.5px;color:#6b3f08;background:#faf3e6;border-left:3px solid #e3c489;
+padding:9px 13px;border-radius:0 7px 7px 0;margin:12px 0 0;line-height:1.5}
+footer{color:var(--faint);font-size:12px;border-top:1px solid var(--rule);padding-top:16px;
+margin-top:26px;line-height:1.55}
+@media print{
+  @page{margin:12mm}
+  html,body{background:#fff}
+  body{margin:0;max-width:100%;padding:0;font-size:11.5pt}
+  section,.doc-head,.co,.fcard{box-shadow:none}
+  section{page-break-inside:auto;break-inside:auto}
+  .outlook,.callouts,.co,.implies,.fcard,table,tr,.degrade{page-break-inside:avoid;break-inside:avoid}
+  h2,h3{page-break-after:avoid;break-after:avoid}
+  footer{page-break-before:avoid}
+}
+@media (max-width:520px){
+  body{margin:20px auto}
+  h1.org{font-size:25px}
+  .callouts{flex-direction:column}
+}
+@media print{.rec-card{break-inside:avoid;page-break-inside:avoid}.appendix{break-before:page;page-break-before:always;font-size:11px;line-height:1.4}.appendix p,.appendix li{font-size:11px;line-height:1.4}.appendix table.sc{font-size:12px;line-height:1.35}.appendix table.sc td{padding:5px 8px}.appendix ul.reads li{font-size:12px;line-height:1.4;margin-bottom:6px}.appendix h3{margin:12px 0 6px}footer{font-size:10px;line-height:1.4}}
+</style></head><body>
+<p style="font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#666;margin:0 0 14px 0"><strong>Sample Assessment / Illustrative.</strong> Organization, funders, peers, and identifying details changed. A real Assessment is built from your organization's own public record.</p>
+<div class="doc-head"><p class="eyebrow">Grant Funding Viability Assessment</p><h1 class="org">Brightline Youth Services</h1><p class="sub">Understand your funding position, the pipeline you need and the next steps to build it.</p></div>
+<table class="meta"><tr><td class="mk">Prepared for</td><td>Brightline Youth Services</td></tr><tr><td class="mk">Prepared by</td><td>Sharke</td></tr><tr><td class="mk">Date</td><td>September 1, 2026</td></tr><tr><td class="mk">Organization</td><td>TX, human services, revenue $2,600,000</td></tr><tr><td class="mk">Evidence level</td><td>High</td></tr></table>
+<p class="cover-scope">Public-record funding and pipeline read. Not a financial-health verdict, win prediction, or tax advice.</p>
+<section class="exec"><h2>1. The Decision</h2>
+<div class="outlook o-stable"><span class="ol-level">Your starting point</span><span class="ol-line"><strong>Funding trend:</strong> Revenue fell about 14% a year in the reviewed filings, while similar organizations grew about 9%.<br><strong>Time to act:</strong> The filings show about 40 months of unrestricted runway.<br><strong>Funding options:</strong> Many funders support similar organizations, but typical foundation grants are too small to carry this plan alone.<br><strong>Next step:</strong> Confirm your funding goal and current pipeline, then check larger foundation and public funding opportunities.</span></div>
+<div class="callouts"><div class="co co-building"><span class="co-n">55</span><span class="co-l">Funding Viability Index, out of 100</span></div><div class="co co-strong"><span class="co-n">130</span><span class="co-l">funders have backed two or more organizations like yours</span></div><div class="co co-neutral"><span class="co-n">40</span><span class="co-l">months of unrestricted runway</span></div></div>
+<p class="lead-in">Section 4 explains the starting plan: about 20 applications and 11 funder relationships a year. Section 3 provides leads to check for current fit and availability.</p>
+<div class="implies"><span class="imp-k">What determined the Funding Viability Index</span><p>In your favor, holding the Index up: reserve runway, public support breadth and spending sustainability. Working against you, pulling it down: funding trajectory, grant pipeline and funder pipeline.</p></div>
+<div class="implies"><span class="imp-k">The grant path at your scale</span><p>Most foundation grants in your field fall below the size a meaningful grant needs at your scale; only the largest reach it. A foundation-only pipeline would take an impractical number of small grants, so the realistic path blends the larger foundations with other ecosystems: federal programs (the Administration for Children and Families and HHS) and the largest national funders carry the grants your field&#x27;s foundations cannot.</p></div>
+<p class="note">Confidence on this page: High. The page-1 read is only as strong as its weakest input, so it is gated to that level; every market line is scoped to the visible institutional grant record, and the position read is your own filing measured against organizations like you.</p>
+<div class="implies"><span class="imp-k">What this review shows, and what it cannot</span><p>This review shows the strongest public-record starting point. It does not decide which funders deserve staff time now. That requires live verification: current cycle behavior, current priorities, mission fit, and pursue / cultivate / remove decisions.</p></div>
+</section>
+<section class="scope-sec"><div class="scope"><div class="sc-col"><h4>This review answers</h4><ul class="scope-list"><li>How viable the funding behind your mission looks today</li><li>How much flexible runway leadership actually has</li><li>Whether revenue is moving with or against your field</li><li>Whether the visible funder market is broad enough to build against</li><li>What size pipeline a meaningful grant role would take</li></ul></div><div class="sc-col"><h4>The Verified Pipeline adds</h4><ul class="scope-list"><li>Which specific grants Sharke has surfaced for you to pursue</li><li>Which funders deserve your team&#x27;s time now -- pursue, cultivate, or remove</li><li>Which funders are active now, not just historically visible</li><li>A working pipeline leadership can manage week to week</li></ul></div></div></section>
+<section class="exec"><h2>Pipeline Funding Viability Assessment</h2>
+<div class="frn frn-building"><span class="frn-n">55</span><span class="frn-lab">Funding Viability Index, out of 100<b>Building</b></span></div>
+<p class="lead-in">Building means scores of 50 to 69: the funding base holds today, and the pipeline that protects it is still being built. The Index is built from the viability measures below, each read from your own filings and your field -- how viable the funding behind your mission looks today, not a verdict on your organization.</p>
+<table class="measures"><tr><th>Measure</th><th class="mb">Viability</th><th>What your filings show, and where peers sit</th></tr>
+<tr><td class="ml">Reserve runway</td><td class="mb"><span class="band b-strong">Strong</span></td><td>About 60 months of spending covered by net assets<br><span class="mpeer">Ahead of every one of the human-services nonprofits in the 1M-3M revenue range sampled (sample of 50).</span></td></tr>
+<tr><td class="ml">Funding trajectory</td><td class="mb"><span class="band b-exposed">Exposed</span></td><td>Total revenue is trending down, about -14% a year across 2020 to 2023<br><span class="mpeer">In the bottom 2% of human-services nonprofits in the 1M-3M revenue range on this measure (sample of 50).</span></td></tr>
+<tr><td class="ml">Public support breadth</td><td class="mb"><span class="band b-strong">Strong</span></td><td>Public-support test at 100%, 66 points above the 33% threshold<br><span class="mpeer">Stronger than 65% of human-services nonprofits in the 1M-3M revenue range (sample of 49).</span></td></tr>
+<tr><td class="ml">Spending sustainability</td><td class="mb"><span class="band b-strong">Strong</span></td><td>Spending is within revenue; reserves are not being drawn down</td></tr>
+<tr><td class="ml">Grant pipeline</td><td class="mb"><span class="band b-exposed">Exposed</span></td><td>about 2 of 20 grants toward a viable pipeline</td></tr>
+<tr><td class="ml">Funder pipeline</td><td class="mb"><span class="band b-exposed">Exposed</span></td><td>about 3 of 11 funder relationships toward a viable pipeline</td></tr>
+</table>
+<h3>The pipeline behind that number</h3>
+<p>A viable pipeline keeps enough grant applications moving to win about half your funding in grants, spread across a set of cultivated funder relationships, because most applications do not convert and over half of grant funding does not renew:</p>
+<table class="sc"><tr><th>Pipeline measure</th><th class="num">A viable target</th><th class="num">A typical starting point</th></tr><tr><td class="m">Grant Pipeline Size (grants in your pipeline a year)</td><td class="num">about 20</td><td class="num">about 2</td></tr><tr><td class="m">Funder Pipeline Size (funder relationships)</td><td class="num">about 11</td><td class="num">about 3</td></tr></table>
+<p class="note">Grants carry about half your funding when no single grant tops about 15%, so the goal is roughly 4 repeatable wins a year. At about 5 applications per win (the rate for an organization with a developing track record), that means keeping about <strong>20 grants moving</strong> in your pipeline, spread across about <strong>11 funder relationships</strong> (roughly 55% of the applications, since some funders back more than one). With about 2 grants and 3 funders on the radar today, most of that pipeline is still ahead; building it is what the next funding cycle is for. Sharing what you actually have in flight turns this from a typical baseline into your numbers.</p>
+</section>
+<section><h2>2. The Funder Market for Organizations Like You</h2>
+<p class="lead-in">This reads the funder market for human-services nonprofits in the 1M-3M revenue range as the public grant record shows it -- the field your grant pipeline would be built against.</p>
+<p>The visible institutional grant dollars going to organizations like yours are spread broadly across many funders, with no small group dominating. Diversification here is a numbers game you can actually play: the support is wide, and at least this wide (the public record under-captures the small-funder tail, so the real market is likely broader still).</p>
+<p class="note"><strong>Confidence: High.</strong> This read is stable and well covered (it holds across resamples of the public record).</p>
+<p>Across the visible institutional grant record, a broad set of funders have backed organizations like yours, and a meaningful share of them have backed more than one. Those repeat funders are the warmest place to start.</p>
+<p>Among organizations like yours, a typical institutional grant runs about $20K ($10K to $50K for the middle half), and a large grant in this field starts around $50K, reaching $132K at the top of the range. These are realistic targets drawn from the public record, not aspirations.</p>
+<p class="note">Every line in this section is scoped to the visible institutional grant dollars in the public record. The public record over-captures large grants and misses the small-funder and individual-gift tail, so a broad read is conservative and a concentrated read is the one to corroborate.</p></section>
+<section class="funders-sec"><h2>3. A Funder Shortlist to Verify</h2>
+<p class="lead-in">We found about 130 funders that have backed two or more organizations like yours in the public grant record -- the size of the field worth working. Below is a shortlist of 5 to start with, each shown with a real grant it made to an organization like yours. This is a starting shortlist to verify, not a vetted match list: the public record shows each one funds organizations in your field and accepts applications, but it cannot tell you they fit your mission or that they are giving right now. Confirming which actually fit, and which are giving today, is the work that comes next.</p>
+<div class="fcard"><div class="fc-h"><span class="fc-name">Kestrel Foundation</span><span class="fc-tag">National foundations, Open application</span></div><p class="fc-status">Verify first</p><p class="fc-proof">Backed Riverside Shelter Alliance, another TX human services nonprofit, with about $580,000 (most recent 2023). Has backed 1 organization like yours; typical grant about $290,000, in line with the roughly $330,000 grant your pipeline needs.</p></div>
+<div class="fcard"><div class="fc-h"><span class="fc-name">Cascade Foundation</span><span class="fc-tag">National foundations, Open application</span></div><p class="fc-status">Verify first</p><p class="fc-proof">Backed Northgate Family Services, another TX human services nonprofit, with about $500,000 (most recent 2024). Has backed 1 organization like yours; typical grant about $500,000, in line with the roughly $330,000 grant your pipeline needs.</p></div>
+<div class="fcard"><div class="fc-h"><span class="fc-name">The Hollis Foundation</span><span class="fc-tag">National foundations, Open application</span></div><p class="fc-status">Verify first</p><p class="fc-proof">Backed Northgate Family Services, another TX human services nonprofit, with about $250,000 (most recent 2023). Has backed 1 organization like yours; typical grant about $250,000, in line with the roughly $330,000 grant your pipeline needs.</p></div>
+<div class="fcard"><div class="fc-h"><span class="fc-name">Aldergate Fund</span><span class="fc-tag">National foundations, Open application</span></div><p class="fc-status">Verify first</p><p class="fc-proof">Backed Northgate Family Services, another TX human services nonprofit, with about $200,000 (most recent 2022). Has backed 1 organization like yours; typical grant about $200,000, in line with the roughly $330,000 grant your pipeline needs.</p></div>
+<div class="fcard"><div class="fc-h"><span class="fc-name">Meridian Charitable Foundation</span><span class="fc-tag">National foundations, Open application</span></div><p class="fc-status">Verify first</p><p class="fc-proof">Already a funder of yours, with about $240,000 (most recent 2023). Has backed 1 organization like yours; typical grant about $80,000, smaller than the roughly $330,000 grant your pipeline needs, so it reads as a fill-in rather than a lead.</p></div>
+<h3>What This Shortlist Cannot Tell You</h3>
+<p>Each card above carries a verification status -- Verify first, Verify but size-fit unclear, Cultivate before applying, Hold until live cycle is confirmed, or Public-record lead only -- and one the public record cannot assign on its own: Remove if live evidence does not hold. This is a starting shortlist to verify, not a vetted match list. The public record cannot tell you:</p><ul class="reads">
+<li>whether these funders are giving this year, not just historically</li>
+<li>whether your mission fits their current priorities</li>
+<li>whether the cycle is open now</li>
+<li>whether staff time should be committed before cultivation happens</li>
+</ul>
+<p class="control">Turning this shortlist into a verified pursuit path requires live verification of current cycle behavior, current priorities, mission fit, and pursue / cultivate / remove decisions.</p>
+<h3>The funding ecosystems Sharke would map</h3>
+<p>Your shortlist above is the verifiable slice of a wider landscape. One way to see that landscape is as a handful of ecosystems, not all worth pursuing, but together they show where the strongest opportunities tend to sit:</p>
+<ul class="eco">
+<li><strong>National foundations:</strong> Health, human services, family, and independent foundations that give nationally.</li>
+<li><strong>State funding:</strong> Texas state agencies and grant programs aligned with your work.</li>
+<li><strong>Federal funding:</strong> the Administration for Children and Families, HHS, and related programs that fund work in human services.</li>
+<li><strong>Community foundations:</strong> Regional funders aligned with your work. In Texas, the public grant record shows 5 community foundations that fund organizations like yours, including Lone Star Community Foundation.</li>
+<li><strong>Corporate giving:</strong> Corporate foundations and employee-giving programs. This read does not measure corporate giving, so treat it as a channel to check rather than a finding here.</li>
+<li><strong>Strategic relationships:</strong> Peer organizations, coalitions, and networks that open doors to invite-only funding, the opportunities that never appear in a public database.</li>
+</ul>
+</section>
+<section class="pipeline-sec"><h2>4. The Pipeline It Would Take</h2>
+<p>If grants are to carry about half of your roughly $2.6M in funding, the annual grant target is about $1.3M. Kept below the level where any single grant carries too much of the budget, that points to a handful of larger, repeatable grants a year, with the application and funder pipeline that feeds them running several times larger, because not every application converts and not every grant renews.</p>
+<table class="planmodel"><tr><th>Target</th><th>What it means</th></tr>
+<tr><td class="pm-t">About $1.3M a year from grants</td><td>Grants carrying about half of current funding</td></tr>
+<tr><td class="pm-t">About 4 grants won a year</td><td>Sized so no single grant tops about 15% of funding</td></tr>
+<tr><td class="pm-t">About 20 applications a year</td><td>At roughly 5 applications per win (a developing track record)</td></tr>
+<tr><td class="pm-t">About 5 applications a quarter</td><td>A planning cadence, not a prediction</td></tr>
+<tr><td class="pm-t">About 11 funder relationships in cultivation</td><td>About 55% of the grant pipeline, since some funders support more than one application</td></tr>
+</table>
+<p class="note">These are planning assumptions using typical grant-seeking odds, not a prediction of awards. The real pipeline is shaped by which funders have a documented fit for you right now -- the verification step that turns this plan into a pipeline.</p>
+<h3>Foundation grants alone, or other ecosystems?</h3>
+<p>Can foundation grants carry that on their own? A meaningful grant for an organization your size is about $78K to $392K -- 3% to 15% of your funding, large enough to matter without any one grant dominating. Foundation grants in your field typically run about $20K ($10K to $50K for the middle half), reaching about $132K at the top.</p>
+<p class="note">The "grant path at your scale" takeaway up top is the verdict these grant sizes point to.</p>
+</section>
+<section><h2>5. Where You Stand</h2>
+<p class="lead-in">How does your funding position compare to organizations like you, and which way are you trending? Each read below is your own filing measured against a sample of your field, and only the comparisons where you sit clearly off the field median are shown (a typical-for-your-field measure is left out rather than dressed up).</p>
+<ul class="reads">
+<li>Your reliance on contributed revenue has fallen about 6 points across your filing window (now about 93% of revenue), broadening your funding base.</li>
+<li>You are losing ground relative to your field: revenue is trending about -14% a year while human-services nonprofits in the 1M-3M revenue range are growing about +9% a year (you are below about 98% of them on this measure). That is not a verdict on the organization; it means the next funding cycle has to be built deliberately, not treated as a list of possible grants.</li>
+<li>Your flexible cushion is deeper than about 98% of human-services nonprofits in the 1M-3M revenue range: about 40 months of unrestricted runway, against a field median near 9 months. That cushion is the time you have to verify and build the next funding path before it is needed.</li>
+</ul>
+<p class="note">Comparisons are drawn from a sample of about 50 human-services nonprofits in the 1M-3M revenue range with multi-year public filings. A measure is suppressed where the field sample is too thin to be honest (fewer than 12 usable peers).</p>
+</section>
+<section class="scorecard"><h2>6. Your Real Cushion</h2>
+<p class="lead-in">How much real, flexible time do you have to act? Not all reserves are equal. This ladder moves from the widest read (everything on the balance sheet) to the narrowest (the money you could actually spend tomorrow), all from your own 2023 Form 990 (monthly operating cost about $172K). The unrestricted rung is usually the one that matters most: it is the cushion the board can actually redirect.</p>
+<table class="sc"><tr><th>Reserve</th><th class="num">Months of operating cost</th><th>What it is</th></tr>
+<tr><td class="m">Total reserves ($10.3M)</td><td class="num">about 60 months</td><td>everything on the balance sheet, including property and restricted funds (the widest, least-flexible read)</td></tr>
+<tr><td class="m">Unrestricted reserves ($7.0M)</td><td class="num">about 40 months</td><td>net assets without donor restrictions, the money the board can actually redirect</td></tr>
+<tr><td class="m">Cash on hand ($1.5M)</td><td class="num">about 9 months</td><td>cash and short-term investments, the strictest liquidity floor</td></tr>
+</table>
+<p>About <strong>33% of your reserves are restricted or locked</strong> and cannot absorb a sudden shock; the unrestricted rung above is the cushion that actually flexes. The gap between the total and unrestricted rungs is the part of the cushion you cannot freely redirect.</p>
+<div class="implies"><span class="imp-k">Read your runway as a decision clock, not a grade</span><p>About 40 months of unrestricted runway lets you act from strength: build the next funding path deliberately while decisions can still be made from a position of choice. And the clock is moving: revenue is trending down about 14% a year, so the window narrows on its own, before the cushion is even touched. The question is whether the funding path is being verified while leadership still has time to choose.</p></div>
+<p class="note">These figures are your own filing. Where you stand against organizations like you is Section 5 above.</p>
+</section>
+<section class="decision-sec"><h2>7. The Decision Before the Next Funding Cycle</h2>
+<p class="closeq">If your top one or two funders changed priorities tomorrow, how would your mission continue?</p>
+<p class="control">You cannot control whether your largest funders change priorities.</p>
+<p class="control">You can control whether your organization is already building the funding that comes next.</p>
+<p class="environment">About 93% of your revenue is contributed (gifts and grants) rather than earned -- the part of your funding most exposed when a funder or donor changes course. And they do: in 2025 the Chan Zuckerberg Initiative wound down entire grant programs, and organizations that had planned around those renewals were told the funding would not continue (across the sector, 69% of nonprofits reported funding cuts that year). The narrower the set of funders behind that contributed share, the more a single pivot matters -- which is exactly what the funder market read and the shortlist help you get ahead of.</p>
+<p>This review measures how prepared your organization&#x27;s funding appears to be today, and points to the verified grants and funders that strengthen tomorrow&#x27;s funding path. The strongest organizations reduce that uncertainty by continuously building and verifying the funding that comes next, before they need it.</p>
+<p class="lead-in"><strong>The decision the next cycle has to make:</strong></p><ul class="reads">
+<li>Which funders to pursue first</li>
+<li>Which funders to cultivate before an application is sent</li>
+<li>Which funders to remove if live evidence does not hold</li>
+</ul>
+<h3>Recommendations</h3>
+<div class="rec-card"><p class="rec-h"><span class="rec-n">1</span>Build the funder pipeline ahead of need</p><p class="rec-row"><span class="rk">Why it matters</span>Most applications do not convert and over half of grant funding does not renew, so a viable pipeline cultivates several times more funder relationships than the grants it wins.</p><p class="rec-row"><span class="rk">First action</span>Open conversations with the open-application funders in the shortlist that already back organizations like yours, then add relationships toward the funder-pipeline target in the Pipeline Funding Viability Assessment.</p><p class="rec-row"><span class="rk">Expected outcome</span>A warm, growing pipeline of funders who know you before the application window opens.</p></div>
+<div class="rec-card"><p class="rec-h"><span class="rec-n">2</span>Manage the grant pipeline to a number</p><p class="rec-row"><span class="rk">Why it matters</span>A grant target sized to about half your funding points to a handful of repeatable wins a year, fed by a planned application cadence.</p><p class="rec-row"><span class="rk">First action</span>Adopt the planning model in Section 4 as a working plan, owned by one person, and track applications against the quarterly cadence.</p><p class="rec-row"><span class="rk">Expected outcome</span>A predictable funding pipeline leadership can watch tracking against the next cycle.</p></div>
+<h3>From Assessment to a working pipeline</h3><p>First, confirm your funding goal, the applications already underway and your existing funder relationships. Sharke then checks current fit and availability so the pipeline focuses on opportunities worth pursuing.</p><p><strong>With Grant Office:</strong> in the first week, we identify three to five funders worth pursuing, explain why they fit and show the supporting evidence.</p><p><strong>With a sponsored cohort:</strong> the initial brief arrives within 10 business days of the agreed start. Your proposal names the first quarter covered and its pipeline delivery date. Each quarter's pipeline arrives during the month before that quarter starts.</p><p class="workcta">Your Assessment establishes the starting plan. Your selected service sets the delivery schedule.</p><div class="pitch"><span class="pitch-k">How Sharke helps</span><p>Sharke helps nonprofit leaders continuously strengthen the future funding behind their mission: verifying today&#x27;s funding path, identifying where it is vulnerable, and surfacing the verified grants and funders that make the organization less dependent on any single source over time, so the funding behind your mission is not dependent on hope.</p></div></section>
+<section class="appendix"><h2>Appendix: The Full Record</h2>
+<p class="lead-in">The body of this review is the synthesis. This appendix shows the underlying calculations in full, for the board members and finance staff who want to see the work.</p>
+<h3>Your own record (from your IRS Form 990)</h3><table class="sc">
+<tr><td class="m">Funding concentration</td><td>93% of revenue is contributed (donations, grants and events) rather than earned, typical for an organization funded mainly by philanthropy. The public-support test at 100% shows a broad base of support, not reliance on a few funders.</td></tr>
+<tr><td class="m">Funding trajectory</td><td>Total revenue is trending down, about -14% a year across 2020 to 2023</td></tr>
+<tr><td class="m">Financial resilience</td><td>About 60 months of spending covered by net assets</td></tr>
+<tr><td class="m">Fundraising return</td><td>About $15 raised for every $1 of fundraising expense</td></tr>
+<tr><td class="m">Public-charity standing</td><td>Public-support test at 100%, 66 points above the 33% threshold</td></tr>
+</table>
+<h3>The full peer comparison</h3>
+<p>Your filing against a sample of organizations like you on every measure, including the ones where you sit about typical (the body above only calls out where you are clearly off the field).</p>
+<table class="sc"><tr><th>Measure</th><th class="num">You</th><th class="num">Field median</th><th>Where you sit</th></tr>
+<tr><td class="m">Unrestricted runway</td><td class="num">about 40 months</td><td class="num">about 9 months</td><td>higher than about 98% of the field</td></tr>
+<tr><td class="m">Cash runway</td><td class="num">about 9 months</td><td class="num">about 3 months</td><td>higher than about 88% of the field</td></tr>
+<tr><td class="m">Contributed share of revenue</td><td class="num">about 93%</td><td class="num">about 83%</td><td>around the middle (56th percentile)</td></tr>
+<tr><td class="m">Revenue trend</td><td class="num">about -14% a year</td><td class="num">about +9% a year</td><td>lower than about 98% of the field</td></tr>
+</table>
+<h3>The funder market, in detail</h3><ul class="reads">
+<li><strong>Funders backing organizations like you:</strong> about 340 in the public grant record, of which about 130 have backed two or more (the repeat funders, the ones most worth pursuing).</li>
+<li><strong>Typical grant sizes in your field:</strong> $10K (25th percentile), $20K (median), $50K (75th), $132K (90th).</li>
+</ul>
+<h3>The peer set and what the public record can show</h3><ul class="reads">
+<li><strong>Your field cohort:</strong> human-services nonprofits in the 1M-3M revenue range, a sample of about 50 with multi-year public filings.</li>
+<li><strong>Sources:</strong> IRS Forms 990 (your filings and your peers'), and the public institutional grant record (IRS Schedule I).</li>
+<li><strong>What the public record CAN show:</strong> your own financial position, your field's distribution, and which funders have given to organizations like you.</li>
+<li><strong>What it CANNOT show:</strong> whether a funder fits your mission, whether a funder is giving this year (there is no current-year signal), or the small-funder and individual-gift tail (the record under-captures it). Funder names are candidates to verify, not vetted matches. None of this is tax advice.</li>
+</ul></section>
+<footer>Draft for review. Every figure is drawn from public IRS filings and the public institutional grant record. This is a funding-position and pipeline read, not a financial-health verdict, a win prediction, or tax advice. Funder names are funders you can research and approach, not a statement of mission fit or current giving.</footer></body></html>
