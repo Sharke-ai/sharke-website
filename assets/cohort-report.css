@@ -1,0 +1,15 @@
+.landing-page .report-samples .cohort-report-preview {
+  grid-column: 1 / -1;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+.cohort-report-preview .cohort-report-frame {
+  display: block;
+  width: 100%;
+  height: 960px;
+  border: 1px solid #dce2e7;
+  border-radius: 10px;
+  background: #f4f6f8;
+  margin-top: 24px;
+}
