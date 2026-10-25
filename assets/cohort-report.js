@@ -49,6 +49,18 @@ for (const preview of document.querySelectorAll('[data-cohort-report]')) {
     });
     select(0);
     preview.querySelector('.report-tab-mount').replaceChildren(tabs, content);
+    // Benefit cards open the matching sample tab; plain links remain a fallback.
+    for (const link of document.querySelectorAll('[data-report-tab]')) {
+      const index = Number(link.dataset.reportTab);
+      if (!Number.isInteger(index) || index < 0 || index >= sections.length) continue;
+      link.addEventListener('click', event => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        select(index);
+        buttons[index].focus({ preventScroll: true });
+        tabs.scrollIntoView({ block: 'start', behavior: 'auto' });
+      });
+    }
   };
   // The complete-report link also works if JavaScript is disabled or loading fails.
   load().catch(() => {
