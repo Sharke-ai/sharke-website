@@ -1,0 +1,78 @@
+/* Cohort offer presentation. No changes to terms, forms or report behavior. */
+.cohort-visual .cv-eyebrow, #start .cv-eyebrow { color:#236343; font-size:.78rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin:0 0 12px; }
+.cohort-visual .cv-intro { margin-bottom:32px; }
+.cv-audiences { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.cohort-visual .cv-panel { border:1px solid #dce3eb; border-radius:12px; padding:28px; display:flex; flex-direction:column; background:#fff; min-width:0; }
+.cohort-visual .cv-panel header { background:none; border:0; padding:0 0 24px; }
+.cohort-visual .cv-sponsor { background:#f3f6f9; }
+.cv-kicker { display:block; color:#236343; font-size:.85rem; font-weight:700; margin-bottom:10px; }
+.cohort-visual .cv-panel h3 { font-size:1.45rem; line-height:1.25; letter-spacing:-.02em; text-transform:none; margin:0; }
+.cv-track { list-style:none; padding:0; margin:0; display:grid; gap:24px; flex:1; }
+.cv-track li { display:grid; grid-template-columns:42px 1fr; gap:16px; position:relative; }
+.cv-icon { width:42px; height:42px; display:grid; place-items:center; border-radius:10px; background:#eaf1ec; color:#236343; position:relative; z-index:1; }
+.cv-icon svg { width:25px; height:25px; }
+.cv-track li:not(:last-child):before { content:""; position:absolute; top:43px; left:20px; bottom:-23px; width:1px; background:#cbd9d1; }
+.cv-step { color:#526176; font-size:.65rem; font-weight:700; letter-spacing:.05em; }
+.cohort-visual .cv-track h4 { font-size:1.05rem; margin:4px 0 8px; line-height:1.3; }
+.cohort-visual .cv-track p { margin:0; font-size:.92rem; line-height:1.55; }
+.cv-panel-note { border-top:1px solid #dce3eb; padding-top:18px; margin-top:24px; font-size:.82rem; line-height:1.5; }
+.cv-text-link { font-weight:650; color:#185abd; font-size:.9rem; text-decoration:underline; text-underline-offset:3px; }
+.cv-text-link span { display:inline-block; margin-left:5px; }
+.cv-together { padding-top:48px; scroll-margin-top:90px; }
+.cohort-visual .cv-fit-heading h3 { text-transform:none; font-size:1.45rem; letter-spacing:-.02em; line-height:1.3; max-width:38ch; margin:0 0 28px; }
+.cv-model-flow { display:grid; grid-template-columns:1fr 36px 1.2fr 36px 1fr; align-items:center; padding:28px; background:#f3f6f9; border:1px solid #dce3eb; border-radius:12px; }
+.cv-inputs { display:grid; gap:8px; }
+.cv-inputs span { background:#fff; border:1px solid #dce3eb; padding:8px 14px; border-radius:5px; font-size:.84rem; text-align:center; }
+.cv-arrow { text-align:center; font-size:1.5rem; color:#758999; }
+.cv-model, .cv-review { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px 12px; border-radius:8px; min-height:140px; }
+.cv-model { background:#0b1728; color:#fff; }
+.cv-model svg,.cv-review svg { width:28px; height:28px; margin-bottom:10px; }
+.cv-model strong { color:#fff; line-height:1.35; }
+.cv-review { color:#236343; background:#eaf1ec; }
+.cv-review strong { color:#236343; line-height:1.35; }
+.cv-review span { font-size:.75rem; margin-top:6px; }
+.cv-model-copy { margin:22px 0; max-width:85ch; font-size:.95rem; }
+.cv-roles { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid #dce3eb; border-bottom:1px solid #dce3eb; gap:28px; padding:18px 0; }
+.cv-roles p { margin:0; font-size:.92rem; }
+.cv-roles strong { display:block; color:#142d4e; margin-bottom:4px; }
+.cv-skills { display:grid; grid-template-columns:1.7fr 1fr; gap:32px; align-items:center; background:#edf5ef; padding:28px; border-radius:12px; margin:28px 0; }
+.cohort-visual .cv-skills h3 { text-transform:none; letter-spacing:-.02em; font-size:1.3rem; line-height:1.3; margin:0 0 16px; }
+.cv-skills p:last-child { font-size:.92rem; line-height:1.6; margin-bottom:0; }
+.cv-skills ul { list-style:none; padding:0; margin:0; display:grid; gap:14px; }
+.cv-skills li { display:flex; gap:12px; align-items:center; font-size:.9rem; font-weight:650; color:#236343; }
+.cv-skills li span { display:grid; place-items:center; width:30px; height:30px; flex:0 0 30px; background:#fff; border-radius:50%; font-size:.7rem; }
+#start .cv-eyebrow { color:#b6d6c2; }
+#start .cv-choice-label { color:#fff; text-transform:none; letter-spacing:0; font-size:1.05rem; margin:28px 0 16px; }
+.cv-cohort-options { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+#start .cv-cohort-card { background:#fff; color:#334155; border:1px solid #dce3eb; border-radius:12px; padding:26px; }
+#start .cv-cohort-card h3 { color:#142d4e; font-size:1.15rem; letter-spacing:0; text-transform:none; margin:18px 0 12px; }
+#start .cv-price { font-size:2.35rem; font-weight:700; letter-spacing:-.04em; color:#142d4e; line-height:1.15; margin:0; }
+#start .cv-price span { display:block; font-size:.8rem; font-weight:400; letter-spacing:0; color:#526176; margin-top:8px; }
+#start .cv-unit { color:#526176; font-size:.85rem; margin:12px 0 20px; }
+#start .cv-cohort-card .btn-primary { width:100%; box-sizing:border-box; background:#142d4e !important; color:#fff !important; border:1px solid #142d4e !important; }
+#start .cv-cohort-card .btn-primary:hover { background:#203f65 !important; }
+.cv-dots { display:grid; grid-template-columns:repeat(5,20px); gap:7px; height:47px; align-content:start; }
+.cv-dots span { display:block; height:20px; border-radius:50%; background:#236343; box-shadow:inset 0 0 0 5px #e1ece5; }
+#start .cv-funded { font-size:.88rem; margin:20px 0 28px; color:#e1e8ef; }
+.cv-start-steps { list-style:none; padding:24px 0 0; margin:0 0 28px; border-top:1px solid #526176; display:grid; grid-template-columns:1fr 1.35fr 1fr; gap:24px; }
+.cv-start-steps li { display:flex; gap:12px; align-items:flex-start; }
+.cv-start-steps li>span { display:grid; place-items:center; flex:0 0 25px; height:25px; background:#fff; color:#142d4e; border-radius:50%; font-size:.75rem; font-weight:700; }
+#start .cv-start-steps strong { color:#fff; font-size:.95rem; }
+#start .cv-start-steps p { color:#e1e8ef; font-size:.82rem; line-height:1.55; margin:8px 0 0; }
+@media(max-width:760px) {
+ .cv-audiences,.cv-skills,.cv-start-steps { grid-template-columns:1fr; }
+ .cv-model-flow { padding:20px 14px; grid-template-columns:1fr 24px 1fr; }
+ .cv-inputs { grid-column:1 / -1; grid-template-columns:repeat(3,1fr); margin-bottom:20px; }
+ .cv-inputs span { padding:8px 4px; font-size:.72rem; }
+ .cv-inputs+.cv-arrow { display:none; }
+ .cv-model,.cv-review { min-height:130px; }
+ .cv-skills { gap:24px; }
+ .cv-start-steps { gap:20px; }
+}
+@media(max-width:520px) {
+ .cohort-visual .cv-panel { padding:22px 18px; }
+ .cv-cohort-options,.cv-roles { grid-template-columns:1fr; }
+ .cv-roles { gap:16px; }
+ .cv-skills { padding:24px 20px; }
+ #start .cv-cohort-card { padding:24px; }
+}
