@@ -32,7 +32,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* â”€â”€ LAYOUT â”€â”€ */
+  /* ── LAYOUT ── */
   .container {
     max-width: 720px;
     margin: 0 auto;
@@ -42,7 +42,7 @@
   section { padding: 72px 0; border-bottom: 1px solid var(--rule); }
   section:last-of-type { border-bottom: none; }
 
-  /* â”€â”€ HEADER â”€â”€ */
+  /* ── HEADER ── */
   header {
     padding: 28px 0 24px;
     border-bottom: 2px solid var(--ink);
@@ -91,7 +91,7 @@
   }
   .header-cta:hover { background: var(--accent-dim); }
 
-  /* â”€â”€ HOOK â”€â”€ */
+  /* ── HOOK ── */
   .hook {
     padding-top: 80px;
     padding-bottom: 80px;
@@ -125,7 +125,7 @@
   .hook-body p + p { margin-top: 20px; }
   .hook-body strong { font-weight: 500; }
 
-  /* â”€â”€ DIVIDER â”€â”€ */
+  /* ── DIVIDER ── */
   .divider {
     width: 40px;
     height: 2px;
@@ -133,7 +133,7 @@
     margin: 40px 0;
   }
 
-  /* â”€â”€ SECTION HEADINGS â”€â”€ */
+  /* ── SECTION HEADINGS ── */
   h2 {
     font-family: 'Libre Baskerville', serif;
     font-size: clamp(22px, 3.5vw, 30px);
@@ -157,7 +157,7 @@
   p + p { margin-top: 18px; }
   p + h2 { margin-top: 52px; }
 
-  /* â”€â”€ CALLOUT BOX â”€â”€ */
+  /* ── CALLOUT BOX ── */
   .callout {
     background: var(--box-bg);
     border-left: 3px solid var(--accent);
@@ -179,7 +179,7 @@
     letter-spacing: 0.02em;
   }
 
-  /* â”€â”€ VERDICT ROW â”€â”€ */
+  /* ── VERDICT ROW ── */
   .verdict-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -215,7 +215,7 @@
   }
   .verdict-cell-out .verdict-label { color: #a06050; }
 
-  /* â”€â”€ DELIVERABLE LIST â”€â”€ */
+  /* ── DELIVERABLE LIST ── */
   .deliverable-list {
     list-style: none;
     margin: 28px 0;
@@ -245,7 +245,7 @@
   }
   .dl-text strong { font-weight: 500; }
 
-  /* â”€â”€ TRUTH TABLE â”€â”€ */
+  /* ── TRUTH TABLE ── */
   .truth-table {
     width: 100%;
     border-collapse: collapse;
@@ -275,7 +275,7 @@
   .cross { color: var(--accent); font-weight: 700; }
   .check { color: #1a6b3a; font-weight: 700; }
 
-  /* â”€â”€ CTA BLOCK â”€â”€ */
+  /* ── CTA BLOCK ── */
   .cta-section {
     background: var(--ink);
     color: var(--paper);
@@ -365,7 +365,7 @@
   }
   .cta-inline { margin-top: 36px; }
 
-  /* â”€â”€ NOT FOR â”€â”€ */
+  /* ── NOT FOR ── */
   .not-for-list {
     display: flex;
     flex-direction: column;
@@ -407,7 +407,7 @@
     flex-shrink: 0;
   }
 
-  /* â”€â”€ FOOTER â”€â”€ */
+  /* ── FOOTER ── */
   footer {
     padding: 40px 0 48px;
     border-top: 1px solid var(--rule);
@@ -426,7 +426,7 @@
     letter-spacing: 0.06em;
   }
 
-  /* â”€â”€ ANIMATION â”€â”€ */
+  /* ── ANIMATION ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -438,7 +438,7 @@
   .hook h1            { animation-delay: 0.15s; }
   .hook .hook-body    { animation-delay: 0.28s; }
 
-  /* â”€â”€ RESPONSIVE â”€â”€ */
+  /* ── RESPONSIVE ── */
   @media (max-width: 520px) {
     .verdict-grid { grid-template-columns: 1fr; gap: 4px; }
     .cta-box { padding: 28px 20px; }
